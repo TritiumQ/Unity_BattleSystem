@@ -2,7 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+public class PlayerDataManager : MonoBehaviour
+{
 
+}
+
+/*
 public class PlayerDataManager : MonoBehaviour
 {
     public CardStore cardStore;
@@ -70,4 +75,4 @@ public class PlayerDataManager : MonoBehaviour
         //保存数据
         File.WriteAllLines(path, datas);
     }
-}
+}*/

@@ -20,7 +20,7 @@ public class CardStore : MonoBehaviour
     {
         
     }
-
+    /*
     public void LoadCardData()
     {
         string[] dataRow = cardData.text.Split("\n");
@@ -70,4 +70,5 @@ public class CardStore : MonoBehaviour
         Card card = cardList[Random.Range(0, cardList.Count)];
         return card;
     }
+    */
 }

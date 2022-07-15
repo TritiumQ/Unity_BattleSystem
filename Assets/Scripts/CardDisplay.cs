@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CardDisplay : MonoBehaviour
 {
-    public CardAsset cardAsset;
+    public Card card;
     //public OneCardManager PreviewManager;
     [Header("Text Component References")]
     public TextMeshProUGUI NameText;// 卡牌名字
@@ -26,6 +26,10 @@ public class CardDisplay : MonoBehaviour
 	{
         LoadInf();
 	}
+	private void Update()
+	{
+        LoadInf();
+	}
 	private bool canBePlayedNow = false;
     public bool CanBePlayedNow
     {
@@ -41,28 +45,28 @@ public class CardDisplay : MonoBehaviour
     }
     public void LoadInf()
 	{
-        if(cardAsset != null)
+        if(card != null)
 		{
             // 更新卡牌信息
             // 添加图片
-            CardRarityImage.sprite = cardAsset.RarityImage;
-            CardGraphicImage.sprite = cardAsset.CardImage;
+            CardRarityImage.sprite = card.rarityImage;
+            CardGraphicImage.sprite = card.cardImage;
             // 添加卡牌名字
-            NameText.text = cardAsset.CardName;
+            NameText.text = card.cardName;
             // 添加卡牌费用
-            CostText.text = cardAsset.Cost.ToString();
+            CostText.text = card.cost.ToString();
             //Debug.Log(cardAsset.Cost);
             // 添加描述
-            DescriptionText.text = cardAsset.CardDescription;
-            CampText.text = cardAsset.CardCamp.ToString();
+            DescriptionText.text = card.cardDescription;
+            CampText.text = card.cardCamp.ToString();
 
             //卡牌光效默认关闭
             CardFaceGlowImage.enabled = false;
 
-            if (cardAsset.CardType == CardType.Survent)
+            if (card.cardType == CardType.Survent)
             {
-                AtkText.text = cardAsset.Atk.ToString();
-                HealthText.text = cardAsset.MaxHP.ToString();
+                AtkText.text = card.atk.ToString();
+                HealthText.text = card.maxHP.ToString();
             }
             else
             {

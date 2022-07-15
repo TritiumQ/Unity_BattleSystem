@@ -1350,7 +1350,7 @@ GameObject:
   - component: {fileID: 2634340889832455654}
   - component: {fileID: 2634340889832455655}
   m_Layer: 5
-  m_Name: Survent
+  m_Name: SurventUnit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

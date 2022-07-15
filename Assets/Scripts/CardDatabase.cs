@@ -5,7 +5,7 @@ using UnityEngine;
 public class CardDatabase : MonoBehaviour
 {
     public static List<Card> cardList = new List<Card> ();
-
+    /*
     void Awake()
     {
         cardList.Add(new Card(0, "None", 0, 0, 0, "None"));
@@ -14,4 +14,5 @@ public class CardDatabase : MonoBehaviour
         cardList.Add(new Card(3, "Human", 5, 0, 0, "Human"));
         cardList.Add(new Card(4, "Demon", 1, 0, 0, "Demon"));
     }
+    */
 }
