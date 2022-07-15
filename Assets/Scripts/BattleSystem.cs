@@ -34,11 +34,14 @@ public class BattleSystem : MonoBehaviour
 	private void Awake()
 	{
 		endButton = GameObject.Find("EndButton").GetComponent<Button>();
-
+		endButton.onClick.AddListener(GamePlay);
 
 		roundText.text = round.ToString();
 		
-		deck = new List<int>();
+		//deck = new List<int>();
+		//for test
+		deck = new List<int> { 1, 2, 3, 4, 5, -1, -2, -3, -4 ,-5 };
+
 		hands = new List<int>();
 		handCards = new List<Card>();
 		usedCards = new List<int>();
@@ -51,38 +54,37 @@ public class BattleSystem : MonoBehaviour
 	}
 	void GamePlay()
 	{
-		for(; ; )
-		{
-			RoundPlay();
-			round++;
-			roundText.text = round.ToString();
-		}
+		RoundPlay();
+		round++;
+		roundText.text = round.ToString();
 	}
 
 	void GetCard()
 	{
+		if (hands.Count == 10) return;
 		if(deck.Count == 0) //牌库空，触发洗牌以及抽空惩罚
 		{
 			RefreshDeck();
 			//TODO 洗牌惩罚 未实现
 		}
-		int rand = Random.Range(0, deck.Count);
-		hands.Add(deck[rand]);
+		int randPos = Random.Range(0, deck.Count);
+		hands.Add(deck[randPos]);
 
-		GameObject newCard = Instantiate(cardPrefab,playerHands.transform);
+		GameObject newCard = Instantiate(cardPrefab,playerHands.transform); //生成预制件实例
 
-		Debug.Log(Const.CARD_DATA_PATH(deck[rand]));
-		Card card = new Card(Resources.Load<CardAsset>(Const.CARD_DATA_PATH(deck[rand])));  //依据编号，从文件中读取卡牌数据
+		Debug.Log(Const.CARD_DATA_PATH(deck[randPos]));
+		Card card = new Card(Resources.Load<CardAsset>(Const.CARD_DATA_PATH(deck[randPos])));  //依据编号，从文件中读取卡牌数据
 		
 		handCards.Add(card);
 		//newCard.GetComponent<CardDisplay>().LoadInf();
 
-		deck.RemoveAt(rand);
+		deck.RemoveAt(randPos);
 	}
 	
 	void RefreshDeck()  //刷新牌堆
 	{
-		for(int i = 0; i < usedCards.Count; i++)
+		Debug.Log("刷新牌堆");
+		for (int i = 0; i < usedCards.Count; i++)
 		{
 			deck.Add(usedCards[i]);
 		}

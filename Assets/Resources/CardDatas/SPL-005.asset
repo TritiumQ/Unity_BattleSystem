@@ -16,7 +16,7 @@ MonoBehaviour:
   CardName: NULL
   CardDescription: NULL
   CardRarity: 0
-  CardType: 0
+  CardType: 2
   CardCamp: 0
   Cost: 5
   CardImage: {fileID: 21300000, guid: 85ce100ffe9422e44adce1e589a1d572, type: 3}

@@ -622,7 +622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e7050ea92132a4c90d12d174d94870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataManager: {fileID: 0}
+  dataManager: {fileID: 1601676020}
   surventPrefab: {fileID: 2634340889832455649, guid: 8187f8a4e218a7d42b3066821ce9cede, type: 3}
   cardPrefab: {fileID: 3081637641354913904, guid: f5c1e3b74d2c9494b80e011aab4d446c, type: 3}
   playerHands: {fileID: 417083207}
@@ -630,7 +630,7 @@ MonoBehaviour:
   surventArea: {fileID: 1970840485}
   playerBody: {fileID: 1549396311}
   bossBody: {fileID: 765428454}
-  roundText: {fileID: 0}
+  roundText: {fileID: 154960782}
 --- !u!1 &1074245402
 GameObject:
   m_ObjectHideFlags: 0
