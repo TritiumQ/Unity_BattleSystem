@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5260d0e1e557d924098f98884611e3f5, type: 3}
+  m_Name: SVN-005
+  m_EditorClassIdentifier: 
+  CardID: 5
+  CardName: 003
+  CardDescription: "\u65E0"
+  CardRarity: 3
+  CardType: 3
+  CardCamp: 0
+  Cost: 3
+  CardImage: {fileID: 21300000, guid: 32b8c5ed4a8c87d45868d1bbe068a207, type: 3}
+  RarityImage: {fileID: 21300000, guid: cf6b63cacd7382e4fbd5fddabc7e2fd4, type: 3}
+  MaxHP: 3
+  Atk: 3
+  AtksPerTurn: 1
+  IsTank: 0
+  IsCharged: 0
+  CreatureScriptName: 
+  SpecialCreatureAmount: 0
+  IsCopied: 0
+  SpellScriptName: 
+  SpellCreatureAmount: 0
+  Targets: 0

@@ -1,13 +1,17 @@
 public static class Const
 {
     //返回相应资源文件位置字符串
-    public static string SVN_CARD_DATA_PATH(int _id)
+    public static string CARD_DATA_PATH(int _id)
 	{
-        return "CardDatas/SVN-" + _id.ToString("D3");
-    }
-    public static string SPL_CARD_DATA_PATH(int _id)
-	{
-        return "Carddatas/SPL-" + _id.ToString("D3");
+        if (_id > 0)
+        {
+            return "Carddatas/SVN-" + _id.ToString("D3");
+        }
+        else if (_id < 0)
+        {
+            return "Carddatas/SPL-" + (-_id).ToString("D3");
+        }
+        else return null;
     }
     public static string BOSS_DATA_PATH(int _id)
 	{

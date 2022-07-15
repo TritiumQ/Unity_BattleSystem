@@ -64,17 +64,22 @@ public class BattleSystem : MonoBehaviour
 		if(deck.Count == 0) //牌库空，触发洗牌以及抽空惩罚
 		{
 			RefreshDeck();
-			//punish 未实现
+			//TODO 洗牌惩罚 未实现
 		}
 		int rand = Random.Range(0, deck.Count);
 		hands.Add(deck[rand]);
-		deck.RemoveAt(rand);
-	}
-	void ShowHandCard() // 展示所抽的的牌
-	{
+
 		GameObject newCard = Instantiate(cardPrefab,playerHands.transform);
 
+		Debug.Log(Const.CARD_DATA_PATH(deck[rand]));
+		Card card = new Card(Resources.Load<CardAsset>(Const.CARD_DATA_PATH(deck[rand])));  //依据编号，从文件中读取卡牌数据
+		
+		handCards.Add(card);
+		//newCard.GetComponent<CardDisplay>().LoadInf();
+
+		deck.RemoveAt(rand);
 	}
+	
 	void RefreshDeck()  //刷新牌堆
 	{
 		for(int i = 0; i < usedCards.Count; i++)

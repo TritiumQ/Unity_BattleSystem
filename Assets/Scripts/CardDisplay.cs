@@ -28,7 +28,7 @@ public class CardDisplay : MonoBehaviour
 	}
 	private void Update()
 	{
-        LoadInf();
+        //LoadInf();
 	}
 	private bool canBePlayedNow = false;
     public bool CanBePlayedNow
