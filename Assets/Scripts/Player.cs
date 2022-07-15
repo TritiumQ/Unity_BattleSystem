@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player
+public class Player : MonoBehaviour
 {
     int maxHP;
     int curentHP;
@@ -11,11 +11,11 @@ public class Player
 
     List<int> cardSet;
     int[] unlock;
-    
-    public Player()
+
+	private void Start()
 	{
         cardSet = new List<int>();
         unlock = new int[1000];
-	}
-    
+    }
+
 }

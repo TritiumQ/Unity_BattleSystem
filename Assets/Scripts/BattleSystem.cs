@@ -21,16 +21,20 @@ public class BattleSystem : MonoBehaviour
 	public GameObject playerHands; //玩家手牌区域
 	public GameObject enemyArea;  //敌方随从区域
 	public GameObject surventArea;  //玩家随从区域
-	
+
+	public GameObject playerBody;
+	public GameObject bossBody;
 
 	private void Awake()
 	{
 		endButton = GameObject.Find("EndButton").GetComponent<Button>();
 		endButton.onClick.AddListener(EndRound);
+		
 	}
-
 	void EndRound() // 结束当前回合
 	{
+		Debug.Log("Click EndRound");
 
 	}
+
 }

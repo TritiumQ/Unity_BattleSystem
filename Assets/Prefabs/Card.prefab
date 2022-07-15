@@ -171,10 +171,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3081637641354913904}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a833f00fa729f8e43954ee246bdcac60, type: 3}
+  m_Script: {fileID: 11500000, guid: 7640daa7ed2e8904ab3349bd00ce3aba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardAsset: {fileID: 11400000, guid: 153aed492aeab18449717ce220a55107, type: 2}
+  cardAsset: {fileID: 0}
   NameText: {fileID: 3081637641709498789}
   CostText: {fileID: 3849798340713557842}
   DescriptionText: {fileID: 3081637641367703335}
@@ -491,7 +491,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.08666667, y: 0.020000001}
   m_AnchorMax: {x: 0.20333333, y: 0.086}
-  m_AnchoredPosition: {x: -0.1000061, y: -1.000061}
+  m_AnchoredPosition: {x: -0.1000061, y: -0.9999695}
   m_SizeDelta: {x: 0, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3081637641885767694
@@ -1369,8 +1369,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.18418884, y: 0.14498901}
-  m_SizeDelta: {x: 48.8379, y: 49.9564}
+  m_AnchoredPosition: {x: 0.000020981, y: 0.00002861}
+  m_SizeDelta: {x: 0, y: 0.000061035}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &267762033123552502
 CanvasRenderer:
@@ -1393,7 +1393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5921569, g: 0.5921569, b: 0.5921569, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
