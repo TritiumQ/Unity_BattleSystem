@@ -4,7 +4,8 @@ using UnityEngine;
 using System.IO;
 public class PlayerDataManager : MonoBehaviour
 {
-
+    public Player player;
+    
 }
 
 /*

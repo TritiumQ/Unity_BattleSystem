@@ -5,8 +5,9 @@ using UnityEngine;
 public class BossAsset : ScriptableObject
 {
     public int ID;
-    public string BossName;
+    public string Name;
     public int MaxHP;
     public int ATK;
-    public string BossActionLogicName;
+    public string ActionLogicName;
+
 }

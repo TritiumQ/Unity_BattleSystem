@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class BossDataManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    readonly BossAsset asset;
+    Boss boss;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+	private void Start()
+	{
+		
+	}
+
+	void LoadBossAsset(int _bossID)
+	{
+		string path = Const.BOSS_DATA_PATH(_bossID);
+		
+	}
 }

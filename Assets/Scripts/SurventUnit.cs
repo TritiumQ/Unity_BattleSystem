@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SurventUnitAsset : MonoBehaviour
+public class SurventUnit : MonoBehaviour
 {
     CardAsset cardAsset;
     int curentHP;
