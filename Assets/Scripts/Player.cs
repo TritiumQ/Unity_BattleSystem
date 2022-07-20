@@ -7,7 +7,7 @@ public class Player
 {
     public int name;
     public int maxHP;
-    public int curentHP;
+    public int currentHP;
     public int mithrils; //√ÿ“¯
     public int tears;  //¿·µŒ
 
@@ -23,6 +23,23 @@ public class Player
 
     public void LoadData()
 	{
-        
+            
+	}
+
+	public PlayerBattleInformation GetBattleInf()
+	{
+        PlayerBattleInformation info = new PlayerBattleInformation();
+        info.maxHP = maxHP;
+        info.currentHP = currentHP;
+        info.cardSet = cardSet;
+        return info;
+	}
+    public void SetBattleInf(PlayerBattleInformation _info)
+	{
+        currentHP = _info.currentHP;
+	}
+    public void SetBattleInf(int _currentHP)
+	{
+        currentHP = _currentHP;
 	}
 }

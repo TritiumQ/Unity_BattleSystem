@@ -12,12 +12,11 @@ public class BattleSystem : MonoBehaviour
 	public GameObject dataManager; //游戏数据管理器
 
 	List<int> deck;  //牌堆
-	List<int> hands;  //手牌
-	List<Card> handCards;
+	List<GameObject> handCards;  //手牌  //max count = 10
 	List<int> usedCards;  //弃牌堆
 
-	List<SurventUnit> surventUnits;  //玩家随从实例
-	List<SurventUnit> enemyUnits;  //敌人随从实例
+	List<SurventUnit> surventUnits;
+	List<SurventUnit> enemyUnits;  //随从实例  //max count = 7
 
 	public GameObject surventPrefab;
 	public GameObject cardPrefab;  
@@ -26,8 +25,8 @@ public class BattleSystem : MonoBehaviour
 	public GameObject enemyArea;  //敌方随从区域
 	public GameObject surventArea;  //玩家随从区域
 
-	public GameObject playerBody;
-	public GameObject bossBody;
+	public GameObject playerUnit;
+	public GameObject bossUnit;
 
 	public TextMeshProUGUI roundText;
 
@@ -41,13 +40,11 @@ public class BattleSystem : MonoBehaviour
 		//deck = new List<int>();
 		//for test
 		deck = new List<int> { 1, 2, 3, 4, 5, -1, -2, -3, -4 ,-5 };
-
-		hands = new List<int>();
-		handCards = new List<Card>();
+		handCards = new List<GameObject>(10);
 		usedCards = new List<int>();
 
-		surventUnits = new List<SurventUnit>();
-		enemyUnits = new List<SurventUnit>();
+		surventUnits = new List<SurventUnit>(7);
+		enemyUnits = new List<SurventUnit>(7);
 
 		//TestLoadData();
 		GamePlay();
@@ -61,21 +58,24 @@ public class BattleSystem : MonoBehaviour
 
 	void GetCard()
 	{
-		if (hands.Count == 10) return;
+		if (handCards.Count == 10) return;
 		if(deck.Count == 0) //牌库空，触发洗牌以及抽空惩罚
 		{
 			RefreshDeck();
 			//TODO 洗牌惩罚 未实现
 		}
 		int randPos = Random.Range(0, deck.Count);
-		hands.Add(deck[randPos]);
 
-		GameObject newCard = Instantiate(cardPrefab,playerHands.transform); //生成预制件实例
+		GameObject newCard = Instantiate(cardPrefab, playerHands.transform); //生成预制件实例
 
 		Debug.Log(Const.CARD_DATA_PATH(deck[randPos]));
 		Card card = new Card(Resources.Load<CardAsset>(Const.CARD_DATA_PATH(deck[randPos])));  //依据编号，从文件中读取卡牌数据
 		
-		handCards.Add(card);
+		newCard.GetComponent<CardDisplay>().card = card;
+		newCard.GetComponent<CardDisplay>().LoadInf();
+		
+
+		handCards.Add(newCard);
 		//newCard.GetComponent<CardDisplay>().LoadInf();
 
 		deck.RemoveAt(randPos);

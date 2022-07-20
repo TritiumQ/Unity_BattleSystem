@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class SurventUnitDisplay : MonoBehaviour
 {
     //public CardAsset cardAsset;
     public CardDisplay previewManager;
-
+    
     [Header("Text Component References")]
     public TextMeshProUGUI atkText;
     public TextMeshProUGUI hpText;

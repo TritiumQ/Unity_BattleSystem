@@ -8,7 +8,8 @@ public class BossUnitDisplay : MonoBehaviour
 {
     Boss boss;
     public TextMeshProUGUI hpText;
-    public TextMeshProUGUI bossNameText;
+    //public TextMeshProUGUI bossNameText;
+	public TextMeshProUGUI atkText;
 
 	//public Image backGroungImage;
 	private void Start()
@@ -20,7 +21,7 @@ public class BossUnitDisplay : MonoBehaviour
 		if(boss != null)
 		{
 			hpText.text = boss.curentHP.ToString();
-			bossNameText.text = boss.name;
+			atkText.text = boss.ATK.ToString();
 
 		}
 	}

@@ -1,3 +1,4 @@
+
 public static class Const
 {
     //返回相应资源文件位置字符串
@@ -18,6 +19,14 @@ public static class Const
         return "BossDatas/MON-" + _id.ToString("D3");
     }
 
+}
+
+public struct PlayerBattleInformation
+{
+    public string name;
+    public int maxHP;
+    public int currentHP;
+    public System.Collections.Generic.List<int> cardSet;
 }
 
 public enum TargetOptions //卡牌目标选项

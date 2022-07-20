@@ -2,63 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class TestSystem : MonoBehaviour
 {
 	public GameObject prefab;
     Button btn;
-	Button hpp, atkp;
+	TextMeshProUGUI countText;
 	public GameObject sets;
-	List<Card> cards;
 	List<GameObject> gameObjects;
+	int idx = -5;
 	//TestStore store;
-	int cnt = 0;
 	private void Awake()
 	{
-		cards = new List<Card>();
 		gameObjects = new List<GameObject>();
 		btn = GameObject.Find("Load").GetComponent<Button>();
 		btn.onClick.AddListener(LoadCard);
-		hpp = GameObject.Find("HP+").GetComponent<Button>();
-		hpp.onClick.AddListener(ChangedHP);
-		atkp = GameObject.Find("ATK+").GetComponent<Button>();
-		atkp.onClick.AddListener(ChangedATK);
+		countText = GameObject.Find("Count").GetComponent<TextMeshProUGUI>();
 		//store = GetComponent<TestStore>();
 		//sets = GameObject.Find("Sets").GetComponent<GameObject>();
 	}
 
-	private void ChangedATK()
-	{
-		if(0 < cards.Count)
-		{
-			cards[0].atk++;
-		}
-	}
-	private void ChangedHP()
-	{
-		if (0 < cards.Count)
-		{
-			cards[0].maxHP++;
-		}
-	}
 
 	public void LoadCard()
 	{
-		if(cnt<3)
+		if(gameObjects.Count<10)
 		{
-			GameObject newCard = GameObject.Instantiate(prefab,sets.transform);
-			
-			int flg = Random.Range(-5,6);
+			//GameObject newCard = GameObject.Instantiate(prefab,sets.transform);
+			GameObject newCard = GameObject.Instantiate(prefab, sets.transform);
+
+			//int flg = Random.Range(-5,6);
+			int flg = idx++;
 			Debug.Log(Const.CARD_DATA_PATH(flg));
 			Card card = new Card(Resources.Load<CardAsset>(Const.CARD_DATA_PATH(flg)));
-			cards.Add(card);
-			gameObjects.Add(newCard);
 			newCard.GetComponent<CardDisplay>().card = card;
-			string msg = "Counts:" + cards.Count.ToString();
+			gameObjects.Add(newCard);
+
+			countText.text = gameObjects.Count.ToString();
+			string msg = "Counts:" + gameObjects.Count.ToString();
 			Debug.Log(msg);
-			cnt++;
 				
 		}
-		else
+		/*else
 		{
 			
 			GameObject oldCard = gameObjects[0];
@@ -76,6 +60,6 @@ public class TestSystem : MonoBehaviour
 			string msg = "Counts:" + cards.Count.ToString();
 			Debug.Log(msg);
 			cnt++;
-		}
+		}*/
 	}
 }
