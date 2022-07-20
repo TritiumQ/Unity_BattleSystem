@@ -7,9 +7,9 @@ using TMPro;
 public class BattleSystem : MonoBehaviour
 {
     int round;
-	Button endButton;
+	
 
-	public GameObject dataManager; //游戏数据管理器
+	//public GameObject dataManager; //游戏数据管理器
 
 	List<int> deck;  //牌堆
 	List<GameObject> handCards;  //手牌  //max count = 10
@@ -17,6 +17,8 @@ public class BattleSystem : MonoBehaviour
 
 	List<SurventUnit> surventUnits;
 	List<SurventUnit> enemyUnits;  //随从实例  //max count = 7
+
+	public Button endButton;
 
 	public GameObject surventPrefab;
 	public GameObject cardPrefab;  
@@ -32,8 +34,7 @@ public class BattleSystem : MonoBehaviour
 
 	private void Awake()
 	{
-		endButton = GameObject.Find("EndButton").GetComponent<Button>();
-		endButton.onClick.AddListener(GamePlay);
+		//endButton.onClick.AddListener(GamePlay);
 
 		roundText.text = round.ToString();
 		

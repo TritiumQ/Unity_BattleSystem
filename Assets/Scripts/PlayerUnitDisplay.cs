@@ -8,7 +8,7 @@ public class PlayerUnitDisplay : MonoBehaviour
     public Player player;
     public TextMeshProUGUI hpText;
     public TextMeshProUGUI actionPointText;
-
+	public Image headIcon;
 	private void Start()
 	{
 		Refresh(0);

@@ -245,6 +245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpText: {fileID: 2072024574225691357}
   actionPointText: {fileID: 3490028636455015585}
+  headIcon: {fileID: 1019666339039145652}
 --- !u!1 &2006077547151880230
 GameObject:
   m_ObjectHideFlags: 0

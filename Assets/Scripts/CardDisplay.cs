@@ -30,9 +30,9 @@ public class CardDisplay : MonoBehaviour
 	{
         //LoadInf();
 	}
-	private void OnMouseEnter()
+	public void OnMouse()
 	{
-        Debug.Log("Mouse Enter");
+        Debug.Log("Mouse!");
 	}
 	private bool canBePlayedNow = false;
     public bool CanBePlayedNow
