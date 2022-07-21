@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BossDataManager : MonoBehaviour
 {
-    readonly BossAsset asset;
-    Boss boss;
+    readonly BossSOAsset asset;
+    BossInBattle boss;
 
 
 	private void Start()

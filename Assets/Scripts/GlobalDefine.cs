@@ -1,4 +1,10 @@
-
+public enum BossActionType  //TODO
+{
+    Skip,
+    SingleRandomTargetAttack,
+    AoeAttack,
+    SummonSurvent,
+}
 public static class Const
 {
     //返回相应资源文件位置字符串
@@ -20,7 +26,6 @@ public static class Const
     }
 
 }
-
 public struct PlayerBattleInformation
 {
     public string name;
@@ -28,7 +33,6 @@ public struct PlayerBattleInformation
     public int currentHP;
     public System.Collections.Generic.List<int> cardSet;
 }
-
 public enum TargetOptions //卡牌目标选项
 {
     NoTarget,

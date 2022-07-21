@@ -6,13 +6,13 @@ using TMPro;
 
 public class BossUnitDisplay : MonoBehaviour
 {
-    Boss boss;
+    public BossInBattle boss;
     public TextMeshProUGUI hpText;
     //public TextMeshProUGUI bossNameText;
 	public TextMeshProUGUI atkText;
 	public Image headIcon;
 	//public Image backGroungImage;
-	private void Start()
+	private void Update()
 	{
 		Refresh();
 	}

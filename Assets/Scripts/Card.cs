@@ -4,7 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class Card 
 {
-    readonly CardAsset asset;
+    readonly CardSOAsset asset;
 
     public int cardID;
     public string cardName;
@@ -28,7 +28,7 @@ public class Card
     public string spellScriptName;
     public int spellCreatureAmount;
     public TargetOptions targets;
-    public Card(CardAsset _asset)
+    public Card(CardSOAsset _asset)
     {
         asset = _asset;
         if(asset != null)

@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss
+public class BossInBattle
 {
-    readonly BossAsset bossAsset;
+    readonly BossSOAsset bossAsset;
     public int id;
     public string name;
     public int maxHP;
     public int curentHP;
     public int ATK;
-    public string actionLogicName;
-    public Boss(BossAsset _bossAsset)
+    public List<BossActionType> actionCycle;
+    //public string actionLogicName;
+    public BossInBattle(BossSOAsset _bossAsset)
 	{
         bossAsset = _bossAsset;
         if(bossAsset != null)
@@ -20,7 +21,8 @@ public class Boss
             name = bossAsset.Name;
             curentHP = maxHP = bossAsset.MaxHP;
             ATK = bossAsset.ATK;
-            actionLogicName = bossAsset.ActionLogicName;
+            actionCycle = bossAsset.ActionCycle;
+            //actionLogicName = bossAsset.ActionLogicName;
 		}
 	}
 }

@@ -5,20 +5,20 @@ using UnityEngine.UI;
 using TMPro;
 public class PlayerUnitDisplay : MonoBehaviour
 {
-    public Player player;
+	PlayerInBattle player;
     public TextMeshProUGUI hpText;
     public TextMeshProUGUI actionPointText;
 	public Image headIcon;
-	private void Start()
+	private void Update()
 	{
-		Refresh(0);
+		Refresh();
 	}
-	void Refresh(int _actionPoint) //由于战术点并不记录在Player类中，故需要传参刷新
+	public void Refresh() //由于战术点并不记录在Player类中，故需要传参刷新
 	{
 		if(player != null)
 		{
-			hpText.text = player.currentHP.ToString();
-			actionPointText.text = _actionPoint.ToString();
+			hpText.text = player.playerCurrentHP.ToString();
+			actionPointText.text = player.playerCurrentActionPoint.ToString();
 		}
 	}
 }

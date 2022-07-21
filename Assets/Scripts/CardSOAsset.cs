@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardAsset : ScriptableObject
+public class CardSOAsset : ScriptableObject
 {
     [Header("基本信息")]
     //public CharacterAsset characterAsset;

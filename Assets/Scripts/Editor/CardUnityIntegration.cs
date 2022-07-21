@@ -8,11 +8,11 @@ static class CreateSOAssets
     [MenuItem("Assets/Create/SOAsset/CardAsset")]
     public static void CreateScriptableObject1()
     {
-        ScriptableObjectUtility.CreateAsset<CardAsset>();
+        ScriptableObjectUtility.CreateAsset<CardSOAsset>();
     }
     [MenuItem("Assets/Create/SOAsset/BossAsset")]
     public static void CreateScriptableObject2()
 	{
-        ScriptableObjectUtility.CreateAsset<BossAsset>();
+        ScriptableObjectUtility.CreateAsset<BossSOAsset>();
     }
 }
