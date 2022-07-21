@@ -156,6 +156,38 @@ public class BattleSystem : MonoBehaviour
 		}
 		//结束回合
 	}
+	public void UseCard(GameObject _cardObject)  //使用卡牌
+	{
+		Card _card = _cardObject.GetComponent<CardDisplay>().card;
+		if(_card.cardType == CardType.Spell)
+		{
+			SpellTrigger(_card); 
+		}
+		else
+		{
+			SurventSetup(_card);
+		}
+		Destroy(_cardObject);
+	}
+	void SpellTrigger(Card card)
+	{
+		Debug.Log("使用法术卡");
+		//
+	}
+	void SurventSetup(Card _card)
+	{
+		Debug.Log("使用随从卡");
+		if (_card.cardType == CardType.Monster)
+		{
+			GameObject newEnemy = GameObject.Instantiate(surventPrefab, enemyArea.transform);
+			newEnemy.GetComponent<SurventUnitDisplay>().Initial(_card);
+		}
+		else
+		{
+			GameObject newSurvent = Instantiate(surventPrefab, surventArea.transform);
+			newSurvent.GetComponent<SurventUnitDisplay>().Initial(_card);
+		}
+	}
 	void BossAction()  //Boss行动
 	{
 		//int flag = round % boss.actionCycle.Count;

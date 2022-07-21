@@ -54,11 +54,17 @@ public enum RarityRank  //Ï¡ÓÐ¶È
 }
 public enum CardType  
 {
-    Player, Monster, Spell, Survent
+    //Player, 
+    Monster, 
+    Spell, 
+    Survent
 }
 public enum CardCamp
 {
-    BlueOcean, Oddin, BaseSpeed, Fortress, Enemy, Player, Snake
+    BlueOcean, Oddin, BaseSpeed, Fortress, 
+    Enemy, 
+    //Player, 
+    Snake
 }
 public enum CardEffect
 {
