@@ -132,7 +132,7 @@ public class BattleSystem : MonoBehaviour
 		}
 		//2 玩家部署随从/使用法术牌
 		//3 玩家随从行动
-		if(player.CurrentActionPoint == 0) //战术点用完时自动进入随从行动
+		if(player.CurrentActionPoint == 0) //战术点用完时自动进入随从行动 (实现有困难，暂定废除)
 		{
 			Debug.Log("随从行动");
 			//
@@ -152,12 +152,6 @@ public class BattleSystem : MonoBehaviour
 			
 			playerActionCompleted = false;
 			getCardCompleted = false;
-		}
-		else
-		{
-			//检测玩家行动
-
-
 		}
 		//结束回合
 	}

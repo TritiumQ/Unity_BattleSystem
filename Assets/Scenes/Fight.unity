@@ -375,7 +375,7 @@ GameObject:
   - component: {fileID: 844842484}
   - component: {fileID: 844842483}
   m_Layer: 5
-  m_Name: Cost
+  m_Name: Rounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -842,7 +842,7 @@ GameObject:
   - component: {fileID: 1763938207}
   - component: {fileID: 1763938206}
   m_Layer: 5
-  m_Name: CostText
+  m_Name: RoundText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

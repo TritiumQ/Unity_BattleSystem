@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: SPL-001
   m_EditorClassIdentifier: 
   CardID: -1
-  CardName: NULL
-  CardDescription: NULL
+  CardName: SPL001
+  CardDescription: "\u5BC4\u5427"
   CardRarity: 0
-  CardType: 2
+  CardType: 1
   CardCamp: 0
   Cost: 5
   CardImage: {fileID: 21300000, guid: 85ce100ffe9422e44adce1e589a1d572, type: 3}

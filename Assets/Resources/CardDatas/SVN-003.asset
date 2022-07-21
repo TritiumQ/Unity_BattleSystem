@@ -16,7 +16,7 @@ MonoBehaviour:
   CardName: 003
   CardDescription: "\u65E0"
   CardRarity: 3
-  CardType: 3
+  CardType: 2
   CardCamp: 0
   Cost: 3
   CardImage: {fileID: 21300000, guid: 32b8c5ed4a8c87d45868d1bbe068a207, type: 3}
