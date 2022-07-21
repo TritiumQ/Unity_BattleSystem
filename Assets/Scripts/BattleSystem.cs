@@ -132,6 +132,11 @@ public class BattleSystem : MonoBehaviour
 		}
 		//2 玩家部署随从/使用法术牌
 		//3 玩家随从行动
+		if(player.CurrentActionPoint == 0) //战术点用完时自动进入随从行动
+		{
+			Debug.Log("随从行动");
+			//
+		}
 		if (playerActionCompleted)  //玩家行动完成后怪物行动,并结束回合
 		{
 			BossAction();       //4 Boss及其随从行动
@@ -159,15 +164,25 @@ public class BattleSystem : MonoBehaviour
 	public void UseCard(GameObject _cardObject)  //使用卡牌
 	{
 		Card _card = _cardObject.GetComponent<CardDisplay>().card;
-		if(_card.cardType == CardType.Spell)
+		if(player.CurrentActionPoint - _card.cost >= 0)
 		{
-			SpellTrigger(_card); 
+			player.CurrentActionPoint -= _card.cost;
+			if (_card.cardType == CardType.Spell)
+			{
+				SpellTrigger(_card);
+			}
+			else
+			{
+				SurventSetup(_card);
+			}
+			handCards.Remove(_cardObject);
+			usedCards.Add(_card.cardID);
+			Destroy(_cardObject);
 		}
-		else
+		else 
 		{
-			SurventSetup(_card);
+			Debug.Log("战士点不足");
 		}
-		Destroy(_cardObject);
 	}
 	void SpellTrigger(Card card)
 	{
@@ -179,16 +194,24 @@ public class BattleSystem : MonoBehaviour
 		Debug.Log("使用随从卡");
 		if (_card.cardType == CardType.Monster)
 		{
-			GameObject newEnemy = GameObject.Instantiate(surventPrefab, enemyArea.transform);
-			newEnemy.GetComponent<SurventUnitDisplay>().Initial(_card);
+			if(enemyUnits.Count < 7)
+			{
+				GameObject newEnemy = GameObject.Instantiate(surventPrefab, enemyArea.transform);
+				newEnemy.GetComponent<SurventUnitDisplay>().Initial(_card);
+				enemyUnits.Add(newEnemy);
+			}
 		}
 		else
 		{
-			GameObject newSurvent = Instantiate(surventPrefab, surventArea.transform);
-			newSurvent.GetComponent<SurventUnitDisplay>().Initial(_card);
+			if(surventUnits.Count < 7)
+			{
+				GameObject newSurvent = Instantiate(surventPrefab, surventArea.transform);
+				newSurvent.GetComponent<SurventUnitDisplay>().Initial(_card);
+				surventUnits.Add(newSurvent);
+			}
 		}
 	}
-	void BossAction()  //Boss行动
+	void BossAction()  //TODO Boss行动
 	{
 		//int flag = round % boss.actionCycle.Count;
 		//BossActionType action = boss.actionCycle[flag];

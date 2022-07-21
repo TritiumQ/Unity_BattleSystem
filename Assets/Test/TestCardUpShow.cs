@@ -21,7 +21,7 @@ public class TestCardUpShow : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnPointerEnter(PointerEventData eventData)
     {
         SaveCardSate();
-        Debug.Log("开始预览");
+        //Debug.Log("开始预览");
         if (EnablePreview)
         {
             StartPreView();
@@ -30,7 +30,7 @@ public class TestCardUpShow : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("退出预览");
+        //Debug.Log("退出预览");
         if (EnablePreview)
         {
             EndPreView();

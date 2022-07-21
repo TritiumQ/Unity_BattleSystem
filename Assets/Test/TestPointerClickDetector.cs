@@ -7,6 +7,6 @@ public class PointerClickDetector : MonoBehaviour, IPointerClickHandler
 {
 	public void OnPointerClick(PointerEventData eventData)
 	{
-		Debug.Log(eventData.clickCount.ToString());
+		//Debug.Log(eventData.clickCount.ToString());
 	}
 }
