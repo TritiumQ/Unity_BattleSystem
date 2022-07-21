@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public class CardDisplay : MonoBehaviour
 {
+
+    //
     public Card card;
     //public OneCardManager PreviewManager;
     [Header("Text Component References")]
@@ -24,16 +28,10 @@ public class CardDisplay : MonoBehaviour
     public Image CardFaceGlowImage;// 卡牌发光
 	private void Start()
 	{
+        Debug.Log("开始");
         LoadInf();
-	}
-	private void Update()
-	{
-        //LoadInf();
-	}
-	public void OnMouse()
-	{
-        Debug.Log("Mouse!");
-	}
+    }
+
 	private bool canBePlayedNow = false;
     public bool CanBePlayedNow
     {
@@ -77,9 +75,6 @@ public class CardDisplay : MonoBehaviour
                 AtkText.GetComponent<TextMeshProUGUI>().gameObject.SetActive(false);
                 HealthText.GetComponent<TextMeshProUGUI>().gameObject.SetActive(false);
             }
-
         }
 	}
-    
-
 }

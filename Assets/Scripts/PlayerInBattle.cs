@@ -4,12 +4,27 @@ using UnityEngine;
 
 public class PlayerInBattle
 {
-	public int playerMaxHP { get; }
-	public int playerCurrentHP { get; }
-	public int playerCurrentActionPoint { get; }
-	public int playerMaxActionPoint { get; }
+	public int MaxHP;
+	public int CurrentHP;
+	public int CurrentActionPoint;
+	public int MaxActionPoint;
+	public PlayerInBattle(int maxHP, int currentHP, int currentActionPoint, int maxActionPoint)
+	{
+		MaxHP = maxHP;
+		CurrentHP = currentHP;
+		CurrentActionPoint = currentActionPoint;
+		MaxActionPoint = maxActionPoint;
+	}
+	public PlayerInBattle(Player _player)
+	{
+		MaxHP = _player.maxHP;
+		CurrentHP = _player.currentHP;
+		CurrentActionPoint = MaxActionPoint = 1;
+
+	}
 	public void SetActionPoint(int _max, int _current)
 	{
-
+		MaxActionPoint = _max;
+		CurrentActionPoint = _current;
 	}
 }

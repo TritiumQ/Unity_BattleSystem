@@ -7,6 +7,7 @@ using TMPro;
 public class BossUnitDisplay : MonoBehaviour
 {
     public BossInBattle boss;
+
     public TextMeshProUGUI hpText;
     //public TextMeshProUGUI bossNameText;
 	public TextMeshProUGUI atkText;
@@ -22,7 +23,6 @@ public class BossUnitDisplay : MonoBehaviour
 		{
 			hpText.text = boss.curentHP.ToString();
 			atkText.text = boss.ATK.ToString();
-
 		}
 	}
 }

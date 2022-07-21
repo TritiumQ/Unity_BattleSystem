@@ -122,6 +122,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3081637641354913905}
   - component: {fileID: 3081637641354913902}
+  - component: {fileID: 6444780948324469419}
+  - component: {fileID: 2160025234595548361}
+  - component: {fileID: 6122763005637016706}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -174,7 +177,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7640daa7ed2e8904ab3349bd00ce3aba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardAsset: {fileID: 0}
+  card:
+    cardID: 0
+    cardName: 
+    cardDescription: 
+    cardRarity: 0
+    cardType: 0
+    cardCamp: 0
+    cost: 0
+    cardImage: {fileID: 0}
+    rarityImage: {fileID: 0}
+    maxHP: 0
+    atk: 0
+    atksPerTurn: 0
+    isTank: 0
+    isCharged: 0
+    creatureScriptName: 
+    specialCreatureAmount: 0
+    isCopied: 0
+    spellScriptName: 
+    spellCreatureAmount: 0
+    targets: 0
   NameText: {fileID: 3081637641709498789}
   CostText: {fileID: 3849798340713557842}
   DescriptionText: {fileID: 3081637641367703335}
@@ -186,6 +209,59 @@ MonoBehaviour:
   CardGraphicImage: {fileID: 3081637642730320298}
   CardRarityImage: {fileID: 7770002035693126024}
   CardFaceGlowImage: {fileID: 4354701690653425329}
+--- !u!223 &6444780948324469419
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3081637641354913904}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_SortingLayerID: 0
+  m_SortingOrder: 10
+  m_TargetDisplay: 0
+--- !u!114 &2160025234595548361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3081637641354913904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &6122763005637016706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3081637641354913904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d781b32f43449488571f0191f2ff72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  savePos: {x: 0, y: 0, z: 0}
+  upmove: 100
+  saveOrder: 0
 --- !u!1 &3081637641367703337
 GameObject:
   m_ObjectHideFlags: 0

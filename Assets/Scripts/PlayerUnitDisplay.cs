@@ -5,7 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 public class PlayerUnitDisplay : MonoBehaviour
 {
-	PlayerInBattle player;
+	public PlayerInBattle player;
+
     public TextMeshProUGUI hpText;
     public TextMeshProUGUI actionPointText;
 	public Image headIcon;
@@ -13,12 +14,12 @@ public class PlayerUnitDisplay : MonoBehaviour
 	{
 		Refresh();
 	}
-	public void Refresh() //由于战术点并不记录在Player类中，故需要传参刷新
+	public void Refresh()
 	{
 		if(player != null)
 		{
-			hpText.text = player.playerCurrentHP.ToString();
-			actionPointText.text = player.playerCurrentActionPoint.ToString();
+			hpText.text = player.CurrentHP.ToString();
+			actionPointText.text = player.CurrentActionPoint.ToString();
 		}
 	}
 }

@@ -1078,15 +1078,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e7050ea92132a4c90d12d174d94870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endButton: {fileID: 319512024}
-  surventPrefab: {fileID: 2634340889832455649, guid: 8187f8a4e218a7d42b3066821ce9cede, type: 3}
-  cardPrefab: {fileID: 3081637641354913904, guid: f5c1e3b74d2c9494b80e011aab4d446c, type: 3}
-  playerHands: {fileID: 1451720671}
-  enemyArea: {fileID: 1499416033}
-  surventArea: {fileID: 861619963}
   playerUnit: {fileID: 904716220}
   bossUnit: {fileID: 717433334}
   roundText: {fileID: 1763938206}
+  endButton: {fileID: 319512024}
+  playerHands: {fileID: 1451720671}
+  surventArea: {fileID: 861619963}
+  enemyArea: {fileID: 1499416033}
+  surventPrefab: {fileID: 2634340889832455649, guid: 8187f8a4e218a7d42b3066821ce9cede, type: 3}
+  cardPrefab: {fileID: 3081637641354913904, guid: f5c1e3b74d2c9494b80e011aab4d446c, type: 3}
 --- !u!4 &1920822143
 Transform:
   m_ObjectHideFlags: 0
@@ -1187,7 +1187,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 778905475051422001, guid: d53c57db8e765c242af32f94dea6f4e9, type: 3}
       propertyPath: m_Name
-      value: BossUnit
+      value: BossUnit1
       objectReference: {fileID: 0}
     - target: {fileID: 778905475051422002, guid: d53c57db8e765c242af32f94dea6f4e9, type: 3}
       propertyPath: m_Pivot.x
@@ -1292,7 +1292,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1461660974790238883, guid: 842f94635b4fa474fb79cb751c541767, type: 3}
       propertyPath: m_Name
-      value: PlayerUnit
+      value: PlayerUnit1
       objectReference: {fileID: 0}
     - target: {fileID: 6118274545728348367, guid: 842f94635b4fa474fb79cb751c541767, type: 3}
       propertyPath: m_Pivot.x

@@ -9,22 +9,20 @@ public class BattleSystem : MonoBehaviour
 
 	//玩家信息区
 	PlayerInBattle player;
-	int playerMaxHP;
-	int playerCurrentHP;
-	int playerCurrentActionPoint;
-	int playerMaxActionPoint;
+
 	List<int> deck;  //牌堆
-	List<GameObject> handCards;  //手牌  //max count = 10
+	List<GameObject> handCards;  //手牌堆  //max count = 10
 	List<int> usedCards;  //弃牌堆
-	List<GameObject> surventUnits; //玩家随从
+	List<GameObject> surventUnits; //玩家随从列表
 
 	[Header("玩家单位")]
 	public GameObject playerUnit;
 	PlayerUnitDisplay playerUnitDisplay;
+
 	//Boss信息区
 	BossInBattle boss;
 	//int actionCycleFlg = 0;
-	List<GameObject> enemyUnits;  //Boss随从  //max count = 7
+	List<GameObject> enemyUnits;  //Boss随从列表  //max count = 7
 	
 	[Header("Boss单位")]
 	public GameObject bossUnit;
@@ -54,7 +52,6 @@ public class BattleSystem : MonoBehaviour
 	private void Update()
 	{
 		GamePlay();
-		Refresh();
 	}
 	private void Awake()
 	{
@@ -69,11 +66,12 @@ public class BattleSystem : MonoBehaviour
 		enemyUnits = new List<GameObject>(7);
 		playerUnitDisplay = playerUnit.GetComponent<PlayerUnitDisplay>();
 		bossUnitDisplay = bossUnit.GetComponent<BossUnitDisplay>();
+
 		//
 		TestSetData();
 
 		//初始化显示
-		Refresh();
+		//
 	}
 
 	void GetCard(int _count)
@@ -86,11 +84,11 @@ public class BattleSystem : MonoBehaviour
 				RefreshDeck();
 				//TODO 洗牌惩罚 未实现
 			}
-			int randPos = Random.Range(0, deck.Count);
+			int randPos = Random.Range(0, deck.Count); //随机抽牌
 
 			GameObject newCard = Instantiate(cardPrefab, playerHands.transform); //生成预制件实例
 
-			Debug.Log(Const.CARD_DATA_PATH(deck[randPos]));
+			//Debug.Log(Const.CARD_DATA_PATH(deck[randPos]));
 			Card card = new Card(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(deck[randPos])));  //依据编号，从文件中读取卡牌数据
 
 			newCard.GetComponent<CardDisplay>().card = card;
@@ -141,11 +139,11 @@ public class BattleSystem : MonoBehaviour
 			round++;
 			roundText.text = round.ToString();
 
-			if(playerMaxActionPoint < 10)
+			if(player.MaxActionPoint < 10)
 			{
-				playerMaxActionPoint++; //每经过一回合,战术点上升1点,最大为10
+				player.MaxActionPoint++; //每经过一回合,战术点上升1点,最大为10
 			}
-			playerCurrentActionPoint = playerMaxActionPoint;
+			player.CurrentActionPoint = player.MaxActionPoint;
 			
 			playerActionCompleted = false;
 			getCardCompleted = false;
@@ -165,31 +163,27 @@ public class BattleSystem : MonoBehaviour
 		//TODO boss行动
 		Debug.Log("Boss行动");
 	}
-	void Refresh()
-	{
-		playerUnitDisplay.Refresh(playerCurrentActionPoint,playerCurrentHP);
-	}
 	//相关信息载入方法
-	public void GetBossInf(BossInBattle _boss)
+	public void SetBossInf(BossInBattle _boss)
 	{
 		boss = _boss;
 	}
-	public void GetPlayerInf(PlayerBattleInformation _info)
+	public void SetPlayerInf(PlayerBattleInformation _info)
 	{
-		playerMaxHP = _info.maxHP;
-		playerCurrentHP = _info.currentHP;
+		player.MaxHP = _info.maxHP;
+		player.CurrentHP = _info.currentHP;
 		deck = _info.cardSet;
 	}
-	void TestSetData()
+	void TestSetData() //测试载入数据
 	{
 		Debug.Log("Start Data Setting...");
-		playerMaxHP = 10;
-		playerCurrentHP = 10;
-		playerCurrentActionPoint = playerMaxActionPoint = 1;
-		playerUnitDisplay.Refresh(playerCurrentActionPoint, playerCurrentHP);
+		player = new PlayerInBattle(20, 10, 1, 1);
+		playerUnitDisplay.player = player;
 
-		BossInBattle bs = new BossInBattle(Resources.Load<BossSOAsset>(Const.BOSS_DATA_PATH(1)));
-		bossUnitDisplay.boss = bs;
+		boss = new BossInBattle(Resources.Load<BossSOAsset>(Const.BOSS_DATA_PATH(1)));
+		bossUnitDisplay.boss = boss;
+
+		Debug.Log("测试载入数据完成");
 	}
 
 }
