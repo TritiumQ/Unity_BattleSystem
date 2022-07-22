@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class SurventUnitDisplay : MonoBehaviour
+public class SurventUnitManager : MonoBehaviour
 {
     //public CardAsset cardAsset;
     Card card;
@@ -45,16 +45,23 @@ public class SurventUnitDisplay : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Update()
     {
         Refresh();
+        if(currentHP <= 0)
+		{
+            Die();
+		}
     }
+    void Die()
+	{
+
+	}
 
     void Refresh()  //刷新随从当前状态
 	{
         atkText.text = atk.ToString();
         hpText.text = currentHP.ToString();
-        
 	}
     public void Initial(Card _card)
 	{

@@ -17,7 +17,7 @@ public class BattleSystem : MonoBehaviour
 
 	[Header("玩家单位")]
 	public GameObject playerUnit;
-	PlayerUnitDisplay playerUnitDisplay;
+	PlayerUnitManager playerUnitDisplay;
 
 	//Boss信息区
 	BossInBattle boss;
@@ -26,7 +26,7 @@ public class BattleSystem : MonoBehaviour
 	
 	[Header("Boss单位")]
 	public GameObject bossUnit;
-	BossUnitDisplay bossUnitDisplay;
+	BossUnitManager bossUnitDisplay;
 
 	//控件
 	//bool roundEndFlag = false;  //回合结束标志
@@ -64,8 +64,8 @@ public class BattleSystem : MonoBehaviour
 		usedCards = new List<int>();
 		surventUnits = new List<GameObject>(7);
 		enemyUnits = new List<GameObject>(7);
-		playerUnitDisplay = playerUnit.GetComponent<PlayerUnitDisplay>();
-		bossUnitDisplay = bossUnit.GetComponent<BossUnitDisplay>();
+		playerUnitDisplay = playerUnit.GetComponent<PlayerUnitManager>();
+		bossUnitDisplay = bossUnit.GetComponent<BossUnitManager>();
 
 		//
 		TestSetData();
@@ -160,15 +160,20 @@ public class BattleSystem : MonoBehaviour
 		Card _card = _cardObject.GetComponent<CardDisplay>().card;
 		if(player.CurrentActionPoint - _card.cost >= 0)
 		{
-			player.CurrentActionPoint -= _card.cost;
 			if (_card.cardType == CardType.Spell)
 			{
 				SpellTrigger(_card);
 			}
 			else
 			{
-				SurventSetup(_card);
+				if ((_card.cardType == CardType.Survent && surventUnits.Count < 7)
+					|| (_card.cardType == CardType.Monster && enemyUnits.Count < 7))
+				{
+					SurventSetup(_card);
+				}
+				else return;
 			}
+			player.CurrentActionPoint -= _card.cost;
 			handCards.Remove(_cardObject);
 			usedCards.Add(_card.cardID);
 			Destroy(_cardObject);
@@ -191,7 +196,7 @@ public class BattleSystem : MonoBehaviour
 			if(enemyUnits.Count < 7)
 			{
 				GameObject newEnemy = GameObject.Instantiate(surventPrefab, enemyArea.transform);
-				newEnemy.GetComponent<SurventUnitDisplay>().Initial(_card);
+				newEnemy.GetComponent<SurventUnitManager>().Initial(_card);
 				enemyUnits.Add(newEnemy);
 			}
 		}
@@ -200,7 +205,7 @@ public class BattleSystem : MonoBehaviour
 			if(surventUnits.Count < 7)
 			{
 				GameObject newSurvent = Instantiate(surventPrefab, surventArea.transform);
-				newSurvent.GetComponent<SurventUnitDisplay>().Initial(_card);
+				newSurvent.GetComponent<SurventUnitManager>().Initial(_card);
 				surventUnits.Add(newSurvent);
 			}
 		}

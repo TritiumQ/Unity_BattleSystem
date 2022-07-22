@@ -31,6 +31,10 @@ public class CardDisplay : MonoBehaviour
         Debug.Log("开始");
         LoadInf();
     }
+	private void Update()
+	{
+        Refresh();
+	}
 
 	private bool canBePlayedNow = false;
     public bool CanBePlayedNow
@@ -45,23 +49,26 @@ public class CardDisplay : MonoBehaviour
             CardFaceGlowImage.enabled = value;
         }
     }
+    void Refresh()
+	{
+        // 更新卡牌信息
+        // 添加图片
+        CardRarityImage.sprite = card.rarityImage;
+        CardGraphicImage.sprite = card.cardImage;
+        // 添加卡牌名字
+        NameText.text = card.cardName;
+        // 添加卡牌费用
+        CostText.text = card.cost.ToString();
+        //Debug.Log(cardAsset.Cost);
+        // 添加描述
+        DescriptionText.text = card.cardDescription;
+        CampText.text = card.cardCamp.ToString();
+    }
     public void LoadInf()
 	{
         if(card != null)
 		{
-            // 更新卡牌信息
-            // 添加图片
-            CardRarityImage.sprite = card.rarityImage;
-            CardGraphicImage.sprite = card.cardImage;
-            // 添加卡牌名字
-            NameText.text = card.cardName;
-            // 添加卡牌费用
-            CostText.text = card.cost.ToString();
-            //Debug.Log(cardAsset.Cost);
-            // 添加描述
-            DescriptionText.text = card.cardDescription;
-            CampText.text = card.cardCamp.ToString();
-
+            Refresh();
             //卡牌光效默认关闭
             CardFaceGlowImage.enabled = false;
 
@@ -76,5 +83,13 @@ public class CardDisplay : MonoBehaviour
                 HealthText.GetComponent<TextMeshProUGUI>().gameObject.SetActive(false);
             }
         }
+	}
+    public void SetPreview()
+	{
+        CardFaceGlowImage.enabled = true;
+    }
+    public void EndPreview()
+	{
+        CardFaceGlowImage.enabled = false;
 	}
 }

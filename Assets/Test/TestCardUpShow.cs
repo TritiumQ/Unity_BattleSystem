@@ -41,6 +41,7 @@ public class TestCardUpShow : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         transform.DOLocalMoveY(upmove, 0.1f);
         transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         cv.sortingOrder += 100;
+        GetComponent<CardDisplay>().SetPreview();
     }
 
     private void EndPreView()
@@ -49,7 +50,7 @@ public class TestCardUpShow : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         transform.DOMove(savePos, 0.1f);
         transform.localScale = Vector3.one;
         cv.sortingOrder = saveOrder;
-
+        GetComponent<CardDisplay>().EndPreview();
     }
     private void SaveCardSate()
     {

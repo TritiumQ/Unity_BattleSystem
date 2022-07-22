@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class BossUnitDisplay : MonoBehaviour
+public class BossUnitManager : MonoBehaviour
 {
     public BossInBattle boss;
 

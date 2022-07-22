@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class PlayerUnitDisplay : MonoBehaviour
+public class PlayerUnitManager : MonoBehaviour
 {
 	public PlayerInBattle player;
 

@@ -66,15 +66,15 @@ public enum CardCamp
     //Player, 
     Snake
 }
-public enum CardEffect
+public enum CardActionType
 {
-    Attack,  //攻击
-    VampireAttack,  //吸血
-    Taunt,  //嘲讽
-    DeadWhisper, //亡语
-    Heal, //治疗
-    HPEnhance, //生命强化
-    Protect,  //加护
-    Inspire, //激励(临时攻击提升)
-    Waghhh, //Waghhhhhh!!!(永久攻击提升)
+    Attack,  //攻击->伤害值
+    VampireAttack,  //吸血->伤害值
+    Taunt,  //嘲讽->回合数
+    //DeadWhisper, //亡语
+    Heal, //治疗->回复量
+    HPEnhance, //生命强化->回复量
+    Protect,  //加护->回合数
+    Inspire, //激励(临时攻击提升)->数值+回合
+    Waghhh, //Waghhhhhh!!!(永久攻击提升)->数值
 }
