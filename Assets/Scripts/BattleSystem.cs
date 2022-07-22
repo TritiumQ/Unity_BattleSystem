@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using TMPro;
 public class BattleSystem : MonoBehaviour
 {
-
 	//玩家信息区
 	PlayerInBattle player;
 
@@ -60,6 +59,7 @@ public class BattleSystem : MonoBehaviour
 		roundText.text = round.ToString();
 		//deck = new List<int>();
 		deck = new List<int> { 1, 2, 3, 4, 5, -1, -2, -3, -4 ,-5 };
+
 		handCards = new List<GameObject>(10);
 		usedCards = new List<int>();
 		surventUnits = new List<GameObject>(7);
@@ -109,6 +109,7 @@ public class BattleSystem : MonoBehaviour
 			deck.Add(usedCards[i]);
 		}
 		usedCards.Clear();
+
 	}
 	void EndRound()
 	{
@@ -117,7 +118,7 @@ public class BattleSystem : MonoBehaviour
 	}
 	void GamePlay()
 	{
-		//1 抽牌
+		// 抽牌
 		if (getCardCompleted == false)
 		{
 			if (round == 0)
@@ -130,16 +131,18 @@ public class BattleSystem : MonoBehaviour
 			}
 			getCardCompleted = true;
 		}
-		//2 玩家部署随从/使用法术牌
-		//3 玩家随从行动
+		//玩家部署随从/使用法术牌
+		// 玩家随从行动
+		/*
 		if(player.CurrentActionPoint == 0) //战术点用完时自动进入随从行动 (实现有困难，暂定废除)
 		{
 			Debug.Log("随从行动");
 			//
 		}
+		*/
 		if (playerActionCompleted)  //玩家行动完成后怪物行动,并结束回合
 		{
-			BossAction();       //4 Boss及其随从行动
+			BossAction();       // Boss及其随从行动
 			
 			round++;
 			roundText.text = round.ToString();
@@ -152,6 +155,16 @@ public class BattleSystem : MonoBehaviour
 			
 			playerActionCompleted = false;
 			getCardCompleted = false;
+		}
+		//检查并刷新buff
+		bossUnitDisplay.CheckBuff();
+		foreach(var obj in surventUnits)
+		{
+			obj.GetComponent<SurventUnitManager>().CheckBuff();
+		}
+		foreach(var obj in enemyUnits)
+		{
+			obj.GetComponent<SurventUnitManager>().CheckBuff();
 		}
 		//结束回合
 	}
@@ -183,7 +196,7 @@ public class BattleSystem : MonoBehaviour
 			Debug.Log("战士点不足");
 		}
 	}
-	void SpellTrigger(Card card)
+	void SpellTrigger(Card _card)
 	{
 		Debug.Log("使用法术卡");
 		//
@@ -198,6 +211,7 @@ public class BattleSystem : MonoBehaviour
 				GameObject newEnemy = GameObject.Instantiate(surventPrefab, enemyArea.transform);
 				newEnemy.GetComponent<SurventUnitManager>().Initial(_card);
 				enemyUnits.Add(newEnemy);
+
 			}
 		}
 		else
@@ -207,6 +221,7 @@ public class BattleSystem : MonoBehaviour
 				GameObject newSurvent = Instantiate(surventPrefab, surventArea.transform);
 				newSurvent.GetComponent<SurventUnitManager>().Initial(_card);
 				surventUnits.Add(newSurvent);
+
 			}
 		}
 	}

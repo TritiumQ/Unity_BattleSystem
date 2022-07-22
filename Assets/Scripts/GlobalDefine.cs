@@ -24,7 +24,7 @@ public static class Const
 	{
         return "BossDatas/MON-" + _id.ToString("D3");
     }
-
+    public static int INF = 0x3f3f3f3f;
 }
 public struct PlayerBattleInformation
 {
@@ -73,8 +73,10 @@ public enum CardActionType
     Taunt,  //嘲讽->回合数
     //DeadWhisper, //亡语
     Heal, //治疗->回复量
-    HPEnhance, //生命强化->回复量
+    HPEnhance, //生命强化->强化量
     Protect,  //加护->回合数
     Inspire, //激励(临时攻击提升)->数值+回合
     Waghhh, //Waghhhhhh!!!(永久攻击提升)->数值
+
+    Silence, //沉默->回合数
 }

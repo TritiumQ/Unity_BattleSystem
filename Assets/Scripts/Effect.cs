@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Internal;
-
 public static class Effect
 {
 	//数值1代表效果数值,如伤害值,回复量
@@ -13,7 +11,38 @@ public static class Effect
 		{
 			if(_targetObject.GetComponent<BossUnitManager>() != null)
 			{
-				
+				BossUnitManager target = _targetObject.GetComponent<BossUnitManager>();
+				switch (_action)
+				{
+					case CardActionType.Attack:
+						target.BeAttacked(_value1);
+						break;
+					case CardActionType.VampireAttack: //吸血攻击未实现
+						target.boss.curentHP -= _value1;
+						//需要返回一个吸血值
+						break;
+					case CardActionType.Taunt:
+						//boss本体无法被嘲讽?
+						break;
+					case CardActionType.Protect:
+						//boss本体无法被加护?
+						break;
+					case CardActionType.Heal:
+						target.BeHealed(_value1);
+						break;
+					case CardActionType.HPEnhance:
+						target.BeEnhanced(_value1);
+						break;
+					case CardActionType.Inspire:
+						target.BeInspired(_value1,_value2);
+						break;
+					case CardActionType.Waghhh:
+						
+						break;
+					default:
+						break;
+						
+				}
 				
 			}
 			else if(_targetObject.GetComponent<SurventUnitManager>() != null)

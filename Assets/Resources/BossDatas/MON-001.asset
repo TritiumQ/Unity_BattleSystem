@@ -16,5 +16,4 @@ MonoBehaviour:
   Name: MON-001
   MaxHP: 10
   ATK: 10
-  ActionLogicName: NULL
   ActionCycle: 01000000020000000300000000000000

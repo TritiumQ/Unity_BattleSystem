@@ -14,6 +14,17 @@ public class SurventUnitManager : MonoBehaviour
     int currentHP;
     int maxHP;
 
+    //特殊效果区
+
+    public int inspireRounds;
+    public int inspireValue;
+
+    public int silenceRounds;
+
+    public int tauntRounds;
+
+    public int protectTimes;
+
     [Header("Text Component References")]
     public TextMeshProUGUI atkText;
     public TextMeshProUGUI hpText;
@@ -31,20 +42,6 @@ public class SurventUnitManager : MonoBehaviour
     public Image concealImage;
     public Image doubleHitImage;
 
-    private bool canAttackNow = false;
-    public bool CanAttackNow
-    {
-        get
-        {
-            return canAttackNow;
-        }
-        set
-        {
-            canAttackNow = value;
-            cardGlowImage.enabled = value;
-        }
-    }
-
     private void Update()
     {
         Refresh();
@@ -57,7 +54,61 @@ public class SurventUnitManager : MonoBehaviour
 	{
 
 	}
-
+    public void CheckBuff()
+	{
+        
+	}
+    public int BeVampireAttack(int _value)
+	{
+        return 0;
+	}
+    public void BeAttacked(int _value)
+	{
+        if(protectTimes == 0)
+		{
+            currentHP -= _value;
+		}
+        protectTimes--;
+	}
+    public void BeHealed(int _value)
+	{
+        if(currentHP + _value < maxHP)
+		{
+            currentHP += _value;
+		}
+        else
+		{
+            currentHP = maxHP;
+		}
+	}
+    public void BeEnhanced(int _value)
+	{
+        currentHP += _value;
+        maxHP += _value;
+	}
+    public void BeSilenced(int _rounds)
+	{
+        silenceRounds = _rounds;
+        
+	}
+    public void BeInspired(int _value, int _rounds)
+	{
+        atk += _value;
+        inspireRounds = _rounds;
+        inspireValue = _value;
+	}
+    public void Waghhh(int _value)
+	{
+        atk += _value;
+	}
+    public void BeProtected(int _times)
+	{
+        protectTimes = _times;
+	}
+    public void BeTaunted(int _rounds)
+	{
+        tauntRounds = _rounds;
+	}
     void Refresh()  //刷新随从当前状态
 	{
         atkText.text = atk.ToString();
@@ -68,7 +119,8 @@ public class SurventUnitManager : MonoBehaviour
         if(_card.cardType == CardType.Survent || _card.cardType == CardType.Monster)
 		{
             card = _card;
-            currentHP = maxHP = card.maxHP;
+            currentHP = card.maxHP;
+            maxHP = card.maxHP;
             atk = card.atk;
             cardImage.sprite = card.cardImage;
 
