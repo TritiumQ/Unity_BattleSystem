@@ -13,6 +13,11 @@ public class BossUnitManager : MonoBehaviour
 	public TextMeshProUGUI atkText;
 	public Image headIcon;
 	//public Image backGroungImage;
+	public void Initialized(BossSOAsset _asset)
+	{
+		BossInBattle _boss = new BossInBattle(_asset);
+		boss = _boss;
+	}
 	private void Update()
 	{
 		Refresh();

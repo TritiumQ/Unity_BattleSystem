@@ -19,8 +19,8 @@ public class Card
     public int maxHP;// 最大生命值
     public int atk;// 攻击力
     public int atksPerTurn = 1;// 每回合攻击次数
-    public bool isTank; // 是否嘲讽
-    public bool isCharged; // 是否突袭
+    public bool isTank; // 是否默认嘲讽
+    public bool isCharged; // 是否可突袭
     public string creatureScriptName;// 生物脚本名
     public int specialCreatureAmount;// 技能数值
 

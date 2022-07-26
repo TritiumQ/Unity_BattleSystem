@@ -24,7 +24,7 @@ public static class Const
 	{
         return "BossDatas/MON-" + _id.ToString("D3");
     }
-    public static int INF = 0x3f3f3f3f;
+    public static int Forever = -1;
 }
 public struct PlayerBattleInformation
 {
@@ -71,7 +71,7 @@ public enum CardActionType
     Attack,  //攻击->伤害值
     VampireAttack,  //吸血->伤害值
     Taunt,  //嘲讽->回合数
-    //DeadWhisper, //亡语
+    DeadWhisper, //亡语
     Heal, //治疗->回复量
     HPEnhance, //生命强化->强化量
     Protect,  //加护->回合数

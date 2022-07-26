@@ -24,8 +24,8 @@ MonoBehaviour:
   MaxHP: 0
   Atk: 0
   AtksPerTurn: 1
-  IsTank: 0
-  IsCharged: 0
+  IsTank: 1
+  IsCharged: 1
   CreatureScriptName: 
   SpecialCreatureAmount: 0
   IsCopied: 0

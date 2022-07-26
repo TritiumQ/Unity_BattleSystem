@@ -22,6 +22,12 @@ public class PlayerInBattle
 		CurrentActionPoint = MaxActionPoint = 1;
 
 	}
+	public PlayerInBattle(PlayerBattleInformation _info)
+	{
+		CurrentHP = _info.currentHP;
+		MaxHP = _info.maxHP;
+		CurrentActionPoint = MaxActionPoint = 1;
+	}
 	public void SetActionPoint(int _max, int _current)
 	{
 		MaxActionPoint = _max;

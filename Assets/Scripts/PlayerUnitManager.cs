@@ -14,6 +14,10 @@ public class PlayerUnitManager : MonoBehaviour
 	{
 		Refresh();
 	}
+	public void Initialized()
+	{
+		//
+	}
 	public void Refresh()
 	{
 		if(player != null)

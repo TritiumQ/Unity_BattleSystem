@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 2634340888066902962}
   - component: {fileID: 2634340888066902861}
   m_Layer: 5
-  m_Name: Guard
+  m_Name: Protected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -511,7 +511,7 @@ GameObject:
   - component: {fileID: 2634340888926320860}
   - component: {fileID: 2634340888926320863}
   m_Layer: 5
-  m_Name: Undead
+  m_Name: DeadWhisper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -706,7 +706,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 38.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1011,7 +1011,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5806595, y: 0}
   m_AnchorMax: {x: 1, y: 0.35310277}
-  m_AnchoredPosition: {x: 0, y: -2.359581}
+  m_AnchoredPosition: {x: 0, y: -2.3595886}
   m_SizeDelta: {x: 1.1814117, y: 2.5018387}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2634340889726076530
@@ -1145,7 +1145,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 38.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1298,7 +1298,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.018681107, y: 0}
   m_AnchorMax: {x: 0.37600002, y: 0.33563247}
-  m_AnchoredPosition: {x: -0.7585602, y: -1.9805202}
+  m_AnchoredPosition: {x: -0.7585602, y: -1.9805298}
   m_SizeDelta: {x: 0.46507263, y: 6.5018387}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2634340889787390325
@@ -1393,16 +1393,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13cacc7d9de22a148814618f9d455b60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardAsset: {fileID: 0}
-  previewManager: {fileID: 0}
+  inspireRounds: 0
+  inspireValue: 0
   atkText: {fileID: 2634340889731753358}
   hpText: {fileID: 2634340889170074197}
   cardImage: {fileID: 2634340889445956699}
   cardGlowImage: {fileID: 2634340888448459266}
   tauntImage: {fileID: 2634340888466187037}
   raidImage: {fileID: 2634340889234339468}
-  undeadImage: {fileID: 2634340888926320863}
+  deadWhisperImage: {fileID: 2634340888926320863}
   vampireImage: {fileID: 2634340887932683913}
-  guardImage: {fileID: 2634340888066902861}
+  protectedImage: {fileID: 2634340888066902861}
   concealImage: {fileID: 2634340889758175525}
   doubleHitImage: {fileID: 2634340887803885754}

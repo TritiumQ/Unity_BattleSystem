@@ -19,9 +19,9 @@ public class CardDisplay : MonoBehaviour
     public TextMeshProUGUI HealthText;// 卡牌最大生命
     public TextMeshProUGUI AtkText;// 卡牌攻击
     public TextMeshProUGUI CampText;
-    [Header("GameObject References")]
-    public GameObject HealthIcon;
-    public GameObject AtkIcon;
+    //[Header("GameObject References")]
+    //public GameObject HealthIcon;
+    //public GameObject AtkIcon;
     [Header("Image References")]
     public Image CardGraphicImage;// 卡牌图片
     public Image CardRarityImage;// 卡牌稀有度

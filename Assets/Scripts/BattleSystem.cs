@@ -11,7 +11,8 @@ public class BattleSystem : MonoBehaviour
 
 	List<int> deck;  //牌堆
 	List<GameObject> handCards;  //手牌堆  //max count = 10
-	List<int> usedCards;  //弃牌堆
+	//List<int> usedCards;  //弃牌堆
+	int usedFlag;
 	List<GameObject> surventUnits; //玩家随从列表
 
 	[Header("玩家单位")]
@@ -61,7 +62,8 @@ public class BattleSystem : MonoBehaviour
 		deck = new List<int> { 1, 2, 3, 4, 5, -1, -2, -3, -4 ,-5 };
 
 		handCards = new List<GameObject>(10);
-		usedCards = new List<int>();
+		//usedCards = new List<int>();
+		usedFlag = 0;
 		surventUnits = new List<GameObject>(7);
 		enemyUnits = new List<GameObject>(7);
 		playerUnitDisplay = playerUnit.GetComponent<PlayerUnitManager>();
@@ -70,7 +72,6 @@ public class BattleSystem : MonoBehaviour
 		//
 		TestSetData();
 
-		//初始化显示
 		//
 	}
 
@@ -79,7 +80,7 @@ public class BattleSystem : MonoBehaviour
 		for(int i = 0; i < _count; i++)
 		{
 			if (handCards.Count == 10) return;
-			if (deck.Count == 0) //牌库空，触发洗牌以及抽空惩罚
+			if (usedFlag == deck.Count) //牌库空，触发洗牌以及抽空惩罚
 			{
 				RefreshDeck();
 				//TODO 洗牌惩罚 未实现
@@ -89,7 +90,10 @@ public class BattleSystem : MonoBehaviour
 			GameObject newCard = Instantiate(cardPrefab, playerHands.transform); //生成预制件实例
 
 			//Debug.Log(Const.CARD_DATA_PATH(deck[randPos]));
-			Card card = new Card(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(deck[randPos])));  //依据编号，从文件中读取卡牌数据
+			//依据编号，从文件中读取卡牌数据
+			//Card card = new Card(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(deck[randPos])));
+			Card card = new Card(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(deck[usedFlag])));
+			usedFlag++;
 
 			newCard.GetComponent<CardDisplay>().card = card;
 			newCard.GetComponent<CardDisplay>().LoadInf();
@@ -98,18 +102,28 @@ public class BattleSystem : MonoBehaviour
 			handCards.Add(newCard);
 			//newCard.GetComponent<CardDisplay>().LoadInf();
 
-			deck.RemoveAt(randPos);
+			//deck.RemoveAt(randPos);
 		}
 	}
-	void RefreshDeck()  //刷新牌堆
+	void RefreshDeck()  //洗牌刷新牌堆
 	{
 		Debug.Log("刷新牌堆");
+		usedFlag = 0;
+		for(int i = 0; i < deck.Count; i++)
+		{
+			var rnd = Random.Range(0, deck.Count);
+			var swap = deck[rnd];
+			deck[rnd] = deck[i];
+			deck[i] = swap;
+		}
+		
+		/* //旧刷新方法，已弃用
 		for (int i = 0; i < usedCards.Count; i++)
 		{
 			deck.Add(usedCards[i]);
 		}
 		usedCards.Clear();
-
+		*/
 	}
 	void EndRound()
 	{
@@ -155,18 +169,20 @@ public class BattleSystem : MonoBehaviour
 			
 			playerActionCompleted = false;
 			getCardCompleted = false;
+
+			//检查并刷新buff
+			bossUnitDisplay.CheckBuff();
+			foreach (var obj in surventUnits)
+			{
+				obj.GetComponent<SurventUnitManager>().CheckBuff();
+			}
+			foreach (var obj in enemyUnits)
+			{
+				obj.GetComponent<SurventUnitManager>().CheckBuff();
+			}
+			//结束回合
 		}
-		//检查并刷新buff
-		bossUnitDisplay.CheckBuff();
-		foreach(var obj in surventUnits)
-		{
-			obj.GetComponent<SurventUnitManager>().CheckBuff();
-		}
-		foreach(var obj in enemyUnits)
-		{
-			obj.GetComponent<SurventUnitManager>().CheckBuff();
-		}
-		//结束回合
+		
 	}
 	public void UseCard(GameObject _cardObject)  //使用卡牌
 	{
@@ -188,7 +204,7 @@ public class BattleSystem : MonoBehaviour
 			}
 			player.CurrentActionPoint -= _card.cost;
 			handCards.Remove(_cardObject);
-			usedCards.Add(_card.cardID);
+			//usedCards.Add(_card.cardID);
 			Destroy(_cardObject);
 		}
 		else 
