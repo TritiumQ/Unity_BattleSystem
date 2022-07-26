@@ -37,13 +37,11 @@ public static class Effect
 						target.BeInspired(_value1,_value2);
 						break;
 					case CardActionType.Waghhh:
-						
+						target.Waghhh(_value1);
 						break;
 					default:
-						break;
-						
+						break;		
 				}
-				
 			}
 			else if(_targetObject.GetComponent<SurventUnitManager>() != null)
 			{
