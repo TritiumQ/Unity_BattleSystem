@@ -192,7 +192,17 @@ MonoBehaviour:
     atk: 0
     atksPerTurn: 0
     isTank: 0
-    isCharged: 0
+    isRaid: 0
+    IsVampire: 0
+    isUndead: 0
+    deadWhisperEffect: 0
+    deadWhisperEffectValue: 0
+    isAdvanced: 0
+    advancedEffect: 0
+    advancedEffectValue: 0
+    isSubsequent: 0
+    subsequentEffect: 0
+    subsequentEffectValue: 0
     creatureScriptName: 
     specialCreatureAmount: 0
     isCopied: 0
@@ -205,8 +215,6 @@ MonoBehaviour:
   HealthText: {fileID: 3081637641885767697}
   AtkText: {fileID: 4474710124448191774}
   CampText: {fileID: 3081637642419516679}
-  HealthIcon: {fileID: 0}
-  AtkIcon: {fileID: 0}
   CardGraphicImage: {fileID: 3081637642730320298}
   CardRarityImage: {fileID: 7770002035693126024}
   CardFaceGlowImage: {fileID: 5447768155776464921}
@@ -229,7 +237,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!114 &2160025234595548361
 MonoBehaviour:
@@ -255,14 +263,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3081637641354913904}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72d781b32f43449488571f0191f2ff72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   savePos: {x: 0, y: 0, z: 0}
   upmove: 100
-  saveOrder: 0
+  saveOrder: 5
 --- !u!114 &6135971171936873412
 MonoBehaviour:
   m_ObjectHideFlags: 0

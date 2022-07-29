@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class SurventInBattle
 {
-    Card card;
+    public Card card;
 
-    int atk;
-    int currentHP;
-    int maxHP;
+    public int atk;
+    public int currentHP;
+    public int maxHP;
 
     //特殊效果区
-    public int isRaid;
+    public bool isRaid;
     public int inspireRounds;
     public int inspireValue;
     public int concealRounds;
@@ -19,12 +19,67 @@ public class SurventInBattle
     public int tauntRounds;
     public int protectedTimes;
     public int doubleHitRounds;
+   
+    //public bool isVampire;
     public int vampireRounds;
 
+    public bool isUndead; //亡语
+    public CardActionType deadWhisperEffect;
+    public int deadWhisperEffectValue;
+
+    public bool isAdvanced; //先机
+    public CardActionType advancedEffect;
+    public int advancedEffectValue;
+
+    public bool isSubsequent; //后手
+    public CardActionType subsequentEffect;
+    public int subsequentEffectValue;
 
     public SurventInBattle(Card _card)
 	{
 		this.card = _card;
+        atk = card.atk;
+        maxHP = card.maxHP;
+        currentHP = maxHP;
+
+        isRaid = card.isRaid;
+
+        if(card.isTank == true)
+		{
+            //Debug.Log("坦克卡");
+            tauntRounds = Const.Forever;
+		}
+        else
+		{
+            tauntRounds = 0;
+		}
+
+        inspireRounds = 0;
+        inspireValue = 0;
+        concealRounds = 0;
+        protectedTimes = 0;
+        doubleHitRounds = 0;
+
+        if(card.IsVampire == true)
+		{
+            vampireRounds = Const.Forever;
+		}
+        else
+		{
+            vampireRounds = 0;
+        }
+
+        isUndead = card.isUndead;
+        deadWhisperEffect = card.deadWhisperEffect;
+        deadWhisperEffectValue = card.deadWhisperEffectValue;
+
+        isSubsequent = card.isSubsequent;
+        subsequentEffect = card.subsequentEffect;
+        subsequentEffectValue = card.subsequentEffectValue;
+
+        isAdvanced = card.isAdvanced;
+        advancedEffect = card.advancedEffect;
+        advancedEffectValue = card.advancedEffectValue;
 
 	}
 }

@@ -10,5 +10,6 @@ public class BossSOAsset : ScriptableObject
     public int ATK;
     //public string ActionLogicName;
     public List<BossActionType> ActionCycle;
+    public List<int> SummonList;
     //public Image HeadIcon;
 }

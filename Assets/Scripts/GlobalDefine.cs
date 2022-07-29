@@ -1,9 +1,26 @@
-public enum BossActionType  //TODO
+public enum BossActionType  //
 {
     Skip,
-    SingleRandomTargetAttack,
-    AoeAttack,
-    SummonSurvent,
+    Attack,
+    Summon
+}
+public enum BossAttack
+{
+    AOE,
+    ExcludePlayer,
+    PlayerTarget,
+    RandomTarget,
+    HighestHPTarget,
+    LowestHPTarget,
+    HigestATKTarget,
+    LowestATKTarget
+}
+public enum GetSurventInfomation
+{
+    ATK,
+    CurrentHP,
+    MaxHP,
+    Type
 }
 public static class Const
 {
@@ -12,14 +29,18 @@ public static class Const
 	{
         if (_id > 0)
         {
-            return "Carddatas/SVN-" + _id.ToString("D3");
+            return "CardDatas/SVN-" + _id.ToString("D3");
         }
         else if (_id < 0)
         {
-            return "Carddatas/SPL-" + (-_id).ToString("D3");
+            return "CardDatas/SPL-" + (-_id).ToString("D3");
         }
         else return null;
     }
+    public static string MONSTER_CARD_PATH(int _id)
+	{
+        return "CardDatas/MON-" + _id.ToString("D3");
+	}
     public static string BOSS_DATA_PATH(int _id)
 	{
         return "BossDatas/MON-" + _id.ToString("D3");
@@ -71,12 +92,15 @@ public enum CardActionType
     Attack,  //攻击->伤害值
     VampireAttack,  //吸血->伤害值
     Taunt,  //嘲讽->回合数
-    DeadWhisper, //亡语
     Heal, //治疗->回复量
     HPEnhance, //生命强化->强化量
     Protect,  //加护->回合数
     Inspire, //激励(临时攻击提升)->数值+回合
     Waghhh, //Waghhhhhh!!!(永久攻击提升)->数值
+    Conceal, //隐匿->回合
 
     Silence, //沉默->回合数
+
+    //*亡语*，*先机*，*每回合开始时*，*每回合结束时*的效果通用
 }
+

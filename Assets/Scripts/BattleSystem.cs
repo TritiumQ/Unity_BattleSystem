@@ -13,25 +13,26 @@ public class BattleSystem : MonoBehaviour
 	List<GameObject> handCards;  //手牌堆  //max count = 10
 	//List<int> usedCards;  //弃牌堆
 	int usedFlag;
-	List<GameObject> surventUnits; //玩家随从列表
+	public List<GameObject> PlayerSurventUnits; //玩家随从列表
 
 	[Header("玩家单位")]
 	public GameObject playerUnit;
-	PlayerUnitManager playerUnitDisplay;
+	public PlayerUnitManager playerUnitDisplay;
 
 	//Boss信息区
 	BossInBattle boss;
 	//int actionCycleFlg = 0;
-	List<GameObject> enemyUnits;  //Boss随从列表  //max count = 7
+	public List<GameObject> BossSurventUnits;  //Boss随从列表  //max count = 7
 	
 	[Header("Boss单位")]
 	public GameObject bossUnit;
-	BossUnitManager bossUnitDisplay;
+	public BossUnitManager bossUnitManager;
 
 	//控件
 	//bool roundEndFlag = false;  //回合结束标志
 	bool playerActionCompleted = false;
 	bool getCardCompleted = false;
+	bool roundStart;
 	int round;
 
 	[Header("回合数")]
@@ -64,10 +65,10 @@ public class BattleSystem : MonoBehaviour
 		handCards = new List<GameObject>(10);
 		//usedCards = new List<int>();
 		usedFlag = 0;
-		surventUnits = new List<GameObject>(7);
-		enemyUnits = new List<GameObject>(7);
+		PlayerSurventUnits = new List<GameObject>(7);
+		BossSurventUnits = new List<GameObject>(7);
 		playerUnitDisplay = playerUnit.GetComponent<PlayerUnitManager>();
-		bossUnitDisplay = bossUnit.GetComponent<BossUnitManager>();
+		bossUnitManager = bossUnit.GetComponent<BossUnitManager>();
 
 		//
 		TestSetData();
@@ -132,7 +133,7 @@ public class BattleSystem : MonoBehaviour
 	}
 	void GamePlay()
 	{
-		// 抽牌
+		//1 玩家抽牌
 		if (getCardCompleted == false)
 		{
 			if (round == 0)
@@ -145,19 +146,25 @@ public class BattleSystem : MonoBehaviour
 			}
 			getCardCompleted = true;
 		}
-		//玩家部署随从/使用法术牌
-		// 玩家随从行动
-		/*
-		if(player.CurrentActionPoint == 0) //战术点用完时自动进入随从行动 (实现有困难，暂定废除)
+		//2 回合开始,重置随从行动状态,触发随从先机效果
+		else if(roundStart == false)
 		{
-			Debug.Log("随从行动");
-			//
+			foreach (var obj in PlayerSurventUnits)
+			{
+				obj.SendMessage("CheckInStart");
+			}
+			foreach (var obj in BossSurventUnits)
+			{
+				obj.SendMessage("CheckInStart");
+			}
+			roundStart = true;
 		}
-		*/
-		if (playerActionCompleted)  //玩家行动完成后怪物行动,并结束回合
+		//3 玩家部署随从/使用法术牌
+		//4 玩家行动完成后怪物行动,并结束回合
+		else  if (playerActionCompleted)  
 		{
-			BossAction();       // Boss及其随从行动
-			
+			bossUnitManager.Action(round);// Boss行动
+			//boss随从行动
 			round++;
 			roundText.text = round.ToString();
 
@@ -169,84 +176,100 @@ public class BattleSystem : MonoBehaviour
 			
 			playerActionCompleted = false;
 			getCardCompleted = false;
-
-			//检查并刷新buff
-			bossUnitDisplay.CheckBuff();
-			foreach (var obj in surventUnits)
+			roundStart = true;
+			//检查并刷新buff,以及触发随从后手效果
+			bossUnitManager.CheckBuff();
+			foreach (var obj in PlayerSurventUnits)
 			{
-				obj.GetComponent<SurventUnitManager>().CheckBuff();
+				obj.SendMessage("CheckInEnd");
 			}
-			foreach (var obj in enemyUnits)
+			foreach (var obj in BossSurventUnits)
 			{
-				obj.GetComponent<SurventUnitManager>().CheckBuff();
+				obj.SendMessage("CheckInEnd");
 			}
 			//结束回合
 		}
 		
 	}
-	public void UseCard(GameObject _cardObject)  //使用卡牌
+	public void UseCardByPlayer(GameObject _cardObject)  //使用卡牌
 	{
 		Card _card = _cardObject.GetComponent<CardDisplay>().card;
 		if(player.CurrentActionPoint - _card.cost >= 0)
 		{
 			if (_card.cardType == CardType.Spell)
 			{
-				SpellTrigger(_card);
+				//使用法术卡
 			}
 			else
 			{
-				if ((_card.cardType == CardType.Survent && surventUnits.Count < 7)
-					|| (_card.cardType == CardType.Monster && enemyUnits.Count < 7))
+				if ((_card.cardType == CardType.Survent && PlayerSurventUnits.Count < 7))
 				{
-					SurventSetup(_card);
+					GameObject newSurvent = Instantiate(surventPrefab, surventArea.transform);
+					newSurvent.GetComponent<SurventUnitManager>().Initialized(_card);
+					PlayerSurventUnits.Add(newSurvent);
+
+					player.CurrentActionPoint -= _card.cost;
+					handCards.Remove(_cardObject);
+					//usedCards.Add(_card.cardID);
+					Destroy(_cardObject);
 				}
-				else return;
 			}
-			player.CurrentActionPoint -= _card.cost;
-			handCards.Remove(_cardObject);
-			//usedCards.Add(_card.cardID);
-			Destroy(_cardObject);
 		}
 		else 
 		{
-			Debug.Log("战士点不足");
+			Debug.Log("战术点不足");
 		}
 	}
-	void SpellTrigger(Card _card)
+	public void SetupSurventByBoss(Card _card)
 	{
-		Debug.Log("使用法术卡");
+		if(_card.cardType == CardType.Monster && BossSurventUnits.Count < 7)
+		{
+			GameObject newEnemy = Instantiate(surventPrefab, enemyArea.transform);
+			newEnemy.GetComponent<SurventUnitManager>().Initialized(_card);
+			BossSurventUnits.Add(newEnemy);
+		}
+	}
+	//
+	public void PlayerSurventDie(GameObject _obj)
+	{
+		PlayerSurventUnits.Remove(_obj);
+	}
+	public void BossSurventDie(GameObject _obj)
+	{
+		BossSurventUnits.Remove(_obj);
+	}
+	//一套随从攻击方法
+	GameObject attacker;
+	GameObject victim;
+	//1 随从发起攻击请求
+	public void AttackRequest(GameObject _request)
+	{
+		attacker = _request;
+	}
+	//2 目标确认受击
+	public void AttackConfirm(GameObject _confirm)
+	{
+		if(attacker != null)
+		{
+			victim = _confirm;
+			int damage = attacker.GetComponent<SurventUnitManager>().GetInf(GetSurventInfomation.ATK);
+			victim.SendMessage("BeAttacked", damage);
+			attacker.GetComponent<SurventUnitManager>().isActive = false;
+			victim = null;
+			attacker = null;
+		}
+	}
+	//2 或取消攻击
+	public void AttackCancel()
+	{
+		attacker = null;
+		victim = null;
+	}
+	//
+	public void Vectory()
+	{
+		Debug.Log("好耶~！");
 		//
-	}
-	void SurventSetup(Card _card)
-	{
-		Debug.Log("使用随从卡");
-		if (_card.cardType == CardType.Monster)
-		{
-			if(enemyUnits.Count < 7)
-			{
-				GameObject newEnemy = GameObject.Instantiate(surventPrefab, enemyArea.transform);
-				newEnemy.GetComponent<SurventUnitManager>().Initial(_card);
-				enemyUnits.Add(newEnemy);
-
-			}
-		}
-		else
-		{
-			if(surventUnits.Count < 7)
-			{
-				GameObject newSurvent = Instantiate(surventPrefab, surventArea.transform);
-				newSurvent.GetComponent<SurventUnitManager>().Initial(_card);
-				surventUnits.Add(newSurvent);
-
-			}
-		}
-	}
-	void BossAction()  //TODO Boss行动
-	{
-		//int flag = round % boss.actionCycle.Count;
-		//BossActionType action = boss.actionCycle[flag];
-		//TODO boss行动
-		Debug.Log("Boss行动");
 	}
 	//相关信息载入方法
 	public void SetBossInf(BossInBattle _boss)
@@ -266,7 +289,7 @@ public class BattleSystem : MonoBehaviour
 		playerUnitDisplay.player = player;
 
 		boss = new BossInBattle(Resources.Load<BossSOAsset>(Const.BOSS_DATA_PATH(1)));
-		bossUnitDisplay.boss = boss;
+		bossUnitManager.boss = boss;
 
 		Debug.Log("测试载入数据完成");
 	}

@@ -11,14 +11,15 @@ public class BossInBattle
     public int curentHP;
     public int ATK;
     public List<BossActionType> actionCycle;
+    public List<int> SurventList;
     //public string actionLogicName;
     //特殊效果区
     public int inspireRounds;
     public int inspireValue;
 
-    public int silenceRounds;
+    //public int silenceRounds;
 
-    public int tauntRounds;
+    //public int tauntRounds;
 
     public int protectTimes;
     
@@ -26,9 +27,8 @@ public class BossInBattle
     public BossInBattle(BossSOAsset _bossAsset)
 	{
         inspireRounds = 0;
-        silenceRounds = 0;
-        silenceRounds = 0;
-        tauntRounds = 0;
+       // silenceRounds = 0;
+        //tauntRounds = 0;
         protectTimes = 0;
 
         bossAsset = _bossAsset;
@@ -39,6 +39,7 @@ public class BossInBattle
             curentHP = maxHP = bossAsset.MaxHP;
             ATK = bossAsset.ATK;
             actionCycle = bossAsset.ActionCycle;
+            SurventList = _bossAsset.SummonList;
             //actionLogicName = bossAsset.ActionLogicName;
 		}
 	}

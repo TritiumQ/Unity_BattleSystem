@@ -20,11 +20,28 @@ public class CardSOAsset : ScriptableObject
     [Header("随从/敌人信息")]
     public int MaxHP;// 最大生命值
     public int Atk;// 攻击力
+
     public int AtksPerTurn = 1;// 每回合攻击次数
+
     public bool IsTank; // 是否嘲讽
-    public bool IsCharged; // 是否突袭
-    public string CreatureScriptName;// 生物脚本名
-    public int SpecialCreatureAmount;// 技能数值
+    public bool IsRaid; // 是否突袭
+    public bool IsVampire;
+	[Header("亡语信息")]
+    public bool IsUndead; //亡语
+    public CardActionType DeadWhisperEffect;
+    public int DeadWhisperEffectValue;
+	[Header("先机信息")]
+    public bool IsAdvanced; //先机
+    public CardActionType AdvancedEffect;
+    public int AdvancedEffectValue;
+	[Header("后手信息")]
+    public bool IsSubsequent; //后手
+    public CardActionType SubsequentEffect;
+    public int SubsequentEffectValue;
+
+    //此两项弃用
+    //public string CreatureScriptName;// 生物脚本名
+    //public int SpecialCreatureAmount;// 技能数值
 
     [Header("法术信息")]
     public bool IsCopied; //复制体标记

@@ -13,7 +13,7 @@ public class CardTrigger : MonoBehaviour, IPointerClickHandler
 		{
 			Debug.Log("≥¢ ‘ π”√ø®≈∆");
 			BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
-			sys.UseCard(thisCard);
+			sys.UseCardByPlayer(thisCard);
 		}
 	}
 }

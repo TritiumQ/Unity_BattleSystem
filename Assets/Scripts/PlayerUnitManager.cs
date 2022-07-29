@@ -26,4 +26,64 @@ public class PlayerUnitManager : MonoBehaviour
 			actionPointText.text = player.CurrentActionPoint.ToString();
 		}
 	}
+	//Κά»χ
+	public void BeAttacked(int _value)
+	{
+		if(player.protectedTimes>0)
+		{
+			player.protectedTimes--;
+		}
+		else
+		{
+			player.CurrentHP -= _value;
+		}
+	}
+	public int BeVampireAttacked(int _value)
+	{
+		if (player.protectedTimes > 0)
+		{
+			player.protectedTimes--;
+			return 0;
+		}
+		else
+		{
+			player.CurrentHP -= _value;
+			return _value;
+		}
+	}
+	public void BeHealed(int _value)
+	{
+		if(player.CurrentHP + _value <= player.MaxHP )
+		{
+			player.CurrentHP += _value;
+		}
+		else
+		{
+			player.CurrentHP = player.MaxHP;
+		}
+	}
+	/*public void BeConcealed(int _value)
+	{
+
+	}*/
+	/*public void BeEnhanced(int _value)
+	{
+
+	}*/
+	/*public void BeInspired(int _value, int _rounds)
+	{
+
+	}*/
+	/*public void Waghhh(int _value)
+	{
+
+	}*/
+	public void BeProtected(int _times)
+	{
+		player.protectedTimes += _times;
+	}
+	/*public void BeTaunted(int _rounds)
+	{
+
+	}*/
 }

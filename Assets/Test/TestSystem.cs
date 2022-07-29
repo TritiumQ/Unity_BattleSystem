@@ -16,12 +16,18 @@ public class TestSystem : MonoBehaviour
 	{
 		gameObjects = new List<GameObject>();
 		btn = GameObject.Find("Load").GetComponent<Button>();
-		btn.onClick.AddListener(LoadCard);
+		//btn.onClick.AddListener(LoadCard);
+		//btn.onClick.AddListener(Send);
 		countText = GameObject.Find("Count").GetComponent<TextMeshProUGUI>();
 		//store = GetComponent<TestStore>();
 		//sets = GameObject.Find("Sets").GetComponent<GameObject>();
 	}
 
+	void Send()
+	{
+		//SendMessage("YEYEYE");
+		SendMessageUpwards("YEYEYE");
+	}
 
 	public void LoadCard()
 	{

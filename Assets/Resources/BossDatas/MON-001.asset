@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 1
   Name: MON-001
-  MaxHP: 10
-  ATK: 10
-  ActionCycle: 01000000020000000300000000000000
+  MaxHP: 99
+  ATK: 99
+  ActionCycle: 01000000000000000200000000000000
+  SummonList: 0100000002000000

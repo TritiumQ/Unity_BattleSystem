@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 [System.Serializable]
 public class Card 
 {
@@ -20,9 +21,25 @@ public class Card
     public int atk;// 攻击力
     public int atksPerTurn = 1;// 每回合攻击次数
     public bool isTank; // 是否默认嘲讽
-    public bool isCharged; // 是否可突袭
-    public string creatureScriptName;// 生物脚本名
-    public int specialCreatureAmount;// 技能数值
+    public bool isRaid; // 是否可突袭
+    public bool IsVampire;
+
+    public bool isUndead; //亡语
+    public CardActionType deadWhisperEffect;
+    public int deadWhisperEffectValue;
+
+    public bool isAdvanced; //先机
+    public CardActionType advancedEffect;
+    public int advancedEffectValue;
+
+    public bool isSubsequent; //后手
+    public CardActionType subsequentEffect;
+    public int subsequentEffectValue;
+
+    //delete
+    //public string creatureScriptName;// 生物脚本名
+    //public int specialCreatureAmount;// 技能数值
+    
 
     public bool isCopied; //复制体标记
     public string spellScriptName;
@@ -46,9 +63,26 @@ public class Card
             maxHP = asset.MaxHP;
             atk = asset.Atk;
             atksPerTurn = asset.AtksPerTurn;
-            isCharged = asset.IsCharged;
-            creatureScriptName = asset.CreatureScriptName;
-            specialCreatureAmount = asset.SpecialCreatureAmount;
+            isRaid = asset.IsRaid;
+            isTank = asset.IsTank;
+            IsVampire = asset.IsVampire;
+
+            isUndead = asset.IsUndead;
+            deadWhisperEffect = asset.DeadWhisperEffect;
+            deadWhisperEffectValue = asset.DeadWhisperEffectValue;
+
+            isSubsequent = asset.IsSubsequent;
+            subsequentEffect = asset.SubsequentEffect;
+            subsequentEffectValue = asset.SubsequentEffectValue;
+
+            isAdvanced = asset.IsAdvanced;
+            advancedEffect = asset.AdvancedEffect;
+            advancedEffectValue = asset.AdvancedEffectValue;
+
+            //delete
+            //creatureScriptName = asset.CreatureScriptName;
+            //specialCreatureAmount = asset.SpecialCreatureAmount;
+
 
             isCopied = asset.IsCopied;
             spellScriptName = asset.SpellScriptName;
