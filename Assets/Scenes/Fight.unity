@@ -536,6 +536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -1078,15 +1079,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e7050ea92132a4c90d12d174d94870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerSurventUnits: []
   playerUnit: {fileID: 904716220}
+  playerUnitDisplay: {fileID: 0}
+  BossSurventUnits: []
   bossUnit: {fileID: 717433334}
+  bossUnitManager: {fileID: 0}
   roundText: {fileID: 1763938206}
   endButton: {fileID: 319512024}
   playerHands: {fileID: 1451720671}
   surventArea: {fileID: 861619963}
   enemyArea: {fileID: 1499416033}
   surventPrefab: {fileID: 2634340889832455649, guid: 8187f8a4e218a7d42b3066821ce9cede, type: 3}
+  enemyPrefab: {fileID: 2634340889832455649, guid: 97509514d9881cf499c277bc40de527d, type: 3}
   cardPrefab: {fileID: 3081637641354913904, guid: f5c1e3b74d2c9494b80e011aab4d446c, type: 3}
+  arrowPrefab: {fileID: 4752874742253137420, guid: 8cebe8035f76b724ba70e9576ac88557, type: 3}
+  arrow: {fileID: 0}
+  canvas: {fileID: 666489915}
 --- !u!4 &1920822143
 Transform:
   m_ObjectHideFlags: 0
@@ -1255,11 +1264,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 778905475051422002, guid: d53c57db8e765c242af32f94dea6f4e9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.6542969
+      value: 0.651001
       objectReference: {fileID: 0}
     - target: {fileID: 778905475051422002, guid: d53c57db8e765c242af32f94dea6f4e9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.6569824
+      value: -1.8430786
       objectReference: {fileID: 0}
     - target: {fileID: 778905475051422002, guid: d53c57db8e765c242af32f94dea6f4e9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

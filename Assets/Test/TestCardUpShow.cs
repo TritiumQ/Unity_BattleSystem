@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 //≤‚ ‘”√£¨”–bug
-public class TestCardUpShow : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class TestCardUpShow : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
 {
     public static bool EnablePreview = true;
 
@@ -61,7 +61,7 @@ public class TestCardUpShow : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         if (GetComponent<Canvas>() != null)
         {
-            Debug.Log("Canvas OK!");
+            //Debug.Log("Canvas OK!");
             cv = GetComponent<Canvas>();
         }
         else

@@ -27,18 +27,16 @@ public class BossUnitManager : MonoBehaviour
 	}
 	void Refresh()
 	{
-		if(boss.curentHP <= 0)
+		if(boss != null) //显示刷新
+		{
+			hpText.text = boss.currentHP.ToString();
+			atkText.text = boss.ATK.ToString();
+		}
+		if (boss.currentHP <= 0)
 		{
 			Debug.Log("Boss已击败，战斗胜利");
 			//胜利特效
 			GameObject.Find("BattleSystem").GetComponent<BattleSystem>().Vectory();
-			
-			return;
-		}
-		if(boss != null) //显示刷新
-		{
-			hpText.text = boss.curentHP.ToString();
-			atkText.text = boss.ATK.ToString();
 		}
 	}
 	public void CheckBuff() //每回合结束时调用
@@ -67,7 +65,8 @@ public class BossUnitManager : MonoBehaviour
 								sys.playerUnitDisplay.BeAttacked(boss.ATK);
 								foreach (var obj in sys.PlayerSurventUnits)
 								{
-									obj.SendMessage("BeAttck", boss.ATK);
+									//obj.SendMessage("BeAttck", boss.ATK);
+									Effect.Attack(obj, CardActionType.Attack, boss.ATK);
 								}
 							}
 							break;
@@ -193,19 +192,25 @@ public class BossUnitManager : MonoBehaviour
 	{
 		if(boss.protectTimes == 0)
 		{
-			boss.maxHP -= _value;
+			string msg = "受到" + _value.ToString() + "点伤害";
+			Debug.Log(msg);
+			boss.currentHP -= _value;
+
+		}
+		else
+		{
 			boss.protectTimes--;
 		}
 	}
 	public void BeHealed(int _value)
 	{
-		if(boss.curentHP + _value > boss.maxHP)
+		if(boss.currentHP + _value > boss.maxHP)
 		{
-			boss.curentHP = boss.maxHP;
+			boss.currentHP = boss.maxHP;
 		}
 		else
 		{
-			boss.curentHP += _value;
+			boss.currentHP += _value;
 		}
 	}
 	public void BeEnhanced(int _value)//HP永久提升

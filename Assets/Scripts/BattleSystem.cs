@@ -8,7 +8,6 @@ public class BattleSystem : MonoBehaviour
 {
 	//玩家信息区
 	PlayerInBattle player;
-
 	List<int> deck;  //牌堆
 	List<GameObject> handCards;  //手牌堆  //max count = 10
 	//List<int> usedCards;  //弃牌堆
@@ -35,6 +34,9 @@ public class BattleSystem : MonoBehaviour
 	bool roundStart;
 	int round;
 
+	//其他
+	
+
 	[Header("回合数")]
 	public TextMeshProUGUI roundText;
 	[Header("结束回合按钮")]
@@ -48,6 +50,7 @@ public class BattleSystem : MonoBehaviour
 	public GameObject enemyArea;
 	[Header("随从预制体")]
 	public GameObject surventPrefab;
+	public GameObject enemyPrefab;
 	[Header("卡牌预制体")]
 	public GameObject cardPrefab;  
 	private void Update()
@@ -149,6 +152,7 @@ public class BattleSystem : MonoBehaviour
 		//2 回合开始,重置随从行动状态,触发随从先机效果
 		else if(roundStart == false)
 		{
+			Debug.Log("回合开始");
 			foreach (var obj in PlayerSurventUnits)
 			{
 				obj.SendMessage("CheckInStart");
@@ -176,7 +180,7 @@ public class BattleSystem : MonoBehaviour
 			
 			playerActionCompleted = false;
 			getCardCompleted = false;
-			roundStart = true;
+			roundStart = false;
 			//检查并刷新buff,以及触发随从后手效果
 			bossUnitManager.CheckBuff();
 			foreach (var obj in PlayerSurventUnits)
@@ -199,6 +203,7 @@ public class BattleSystem : MonoBehaviour
 			if (_card.cardType == CardType.Spell)
 			{
 				//使用法术卡
+				//SpellAttackRequest(_cardObject, _cardObject.transform.position);
 			}
 			else
 			{
@@ -224,7 +229,7 @@ public class BattleSystem : MonoBehaviour
 	{
 		if(_card.cardType == CardType.Monster && BossSurventUnits.Count < 7)
 		{
-			GameObject newEnemy = Instantiate(surventPrefab, enemyArea.transform);
+			GameObject newEnemy = Instantiate(enemyPrefab, enemyArea.transform);
 			newEnemy.GetComponent<SurventUnitManager>().Initialized(_card);
 			BossSurventUnits.Add(newEnemy);
 		}
@@ -238,34 +243,65 @@ public class BattleSystem : MonoBehaviour
 	{
 		BossSurventUnits.Remove(_obj);
 	}
-	//一套随从攻击方法
-	GameObject attacker;
-	GameObject victim;
+	//一套攻击方法
+	public GameObject attacker { get; private set; }
+	public GameObject victim { get; private set; }
+	public GameObject arrowPrefab;
+	public GameObject arrow; //攻击箭头
+	public Transform canvas;
 	//1 随从发起攻击请求
-	public void AttackRequest(GameObject _request)
+	public void SurventAttackRequest(GameObject _request, Vector2 _startPoint)
 	{
-		attacker = _request;
+		if(arrow == null)
+		{
+			Debug.Log("攻击请求");
+			arrow = GameObject.Instantiate(arrowPrefab, canvas);
+			arrow.GetComponent<TestArrow>().SetStartPoint(_startPoint);
+			attacker = _request;
+		}
 	}
 	//2 目标确认受击
-	public void AttackConfirm(GameObject _confirm)
+	public void SurventAttackConfirm(GameObject _confirm)
 	{
 		if(attacker != null)
 		{
 			victim = _confirm;
-			int damage = attacker.GetComponent<SurventUnitManager>().GetInf(GetSurventInfomation.ATK);
-			victim.SendMessage("BeAttacked", damage);
+			Debug.Log("攻击成功");
 			attacker.GetComponent<SurventUnitManager>().isActive = false;
-			victim = null;
+			Effect.Attack(victim, CardActionType.Attack, attacker.GetComponent<SurventUnitManager>().survent.atk);
+
+			Destroy(arrow);
 			attacker = null;
+			victim = null;
 		}
 	}
-	//2 或取消攻击
+	
+	//法术卡攻击流程
+	public void SpellAttackRequest(GameObject _request, Vector2 _startPoint)
+	{
+		if (arrow == null)
+		{
+			arrow = GameObject.Instantiate(arrowPrefab, canvas);
+			arrow.GetComponent<TestArrow>().SetStartPoint(_startPoint);
+			attacker = _request;
+		}
+	}
+	public void SpellAttackConfirm()
+	{
+
+	}
+	//取消攻击请求
 	public void AttackCancel()
 	{
+		Debug.Log("Cancel");
+		if(arrow != null)
+		{
+			Destroy(arrow);
+		}
 		attacker = null;
 		victim = null;
 	}
-	//
+	//胜利
 	public void Vectory()
 	{
 		Debug.Log("好耶~！");

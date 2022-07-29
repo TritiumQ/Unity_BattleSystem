@@ -15,6 +15,6 @@ MonoBehaviour:
   ID: 1
   Name: MON-001
   MaxHP: 99
-  ATK: 99
+  ATK: 39
   ActionCycle: 01000000000000000200000000000000
   SummonList: 0100000002000000

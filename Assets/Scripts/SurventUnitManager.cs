@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class SurventUnitManager : MonoBehaviour
 {
     public GameObject thisSurvent;
-    SurventInBattle survent;
+    public SurventInBattle survent { get; private set; }
     public int GetInf(GetSurventInfomation _inf)
 	{
         switch (_inf)

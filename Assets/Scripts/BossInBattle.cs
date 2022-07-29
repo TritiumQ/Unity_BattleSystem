@@ -8,7 +8,7 @@ public class BossInBattle
     public int id;
     public string name;
     public int maxHP;
-    public int curentHP;
+    public int currentHP;
     public int ATK;
     public List<BossActionType> actionCycle;
     public List<int> SurventList;
@@ -36,7 +36,7 @@ public class BossInBattle
 		{
             id = bossAsset.ID;
             name = bossAsset.Name;
-            curentHP = maxHP = bossAsset.MaxHP;
+            currentHP = maxHP = bossAsset.MaxHP;
             ATK = bossAsset.ATK;
             actionCycle = bossAsset.ActionCycle;
             SurventList = _bossAsset.SummonList;

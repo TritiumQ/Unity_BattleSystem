@@ -28,7 +28,7 @@ public class CardDisplay : MonoBehaviour
     public Image CardFaceGlowImage;// 卡牌发光
 	private void Start()
 	{
-        Debug.Log("开始");
+        //Debug.Log("开始");
         LoadInf();
     }
 	private void Update()

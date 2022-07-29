@@ -5,10 +5,12 @@ public static class Effect
 {
 	//数值1代表效果数值,如伤害值,回复量
 	//数值2代表持续回合数,0为默认值
-    public static void SingleTargetAttack(GameObject _targetObject, CardActionType _action, int _value1, int _value2 = 0)
+    public static void Attack(GameObject _targetObject, CardActionType _action, int _value1, int _value2 = 0)
 	{
 		if( _targetObject != null )
 		{
+			string msg = "对" + _targetObject.name + "发起攻击";
+			Debug.Log(msg);
 			if(_targetObject.GetComponent<BossUnitManager>() != null)
 			{
 				BossUnitManager target = _targetObject.GetComponent<BossUnitManager>();
