@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SVN-003
   m_EditorClassIdentifier: 
   CardID: 3
-  CardName: 003
-  CardDescription: "\u65E0"
+  CardName: "\u62A4\u58EB"
+  CardDescription: "\u540E\u624B\u6CBB\u7597+10"
   CardRarity: 3
   CardType: 2
   CardCamp: 0
@@ -25,10 +25,26 @@ MonoBehaviour:
   Atk: 3
   AtksPerTurn: 1
   IsTank: 0
-  IsCharged: 0
-  CreatureScriptName: 
-  SpecialCreatureAmount: 0
+  IsRaid: 0
+  IsVampire: 0
+  IsSetupEffect: 0
+  SetupEffect: 0
+  SetupEffectValue: 0
+  SetupEffectTarget: 0
+  IsUndead: 0
+  DeadWhisperEffect: 0
+  DeadWhisperEffectValue: 0
+  DeadWhisperEffectTarget: 0
+  IsAdvanced: 0
+  AdvancedEffect: 0
+  AdvancedEffectValue: 0
+  AdvancedEffectTarget: 0
+  IsSubsequent: 1
+  SubsequentEffect: 3
+  SubsequentEffectValue: 10
+  SubsequentEffectTarget: 0
   IsCopied: 0
   SpellScriptName: 
-  SpellCreatureAmount: 0
+  CardActionType: 0
+  SpellActionValue: 0
   Targets: 0

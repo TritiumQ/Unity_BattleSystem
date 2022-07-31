@@ -11,9 +11,12 @@ public class TestSystem : MonoBehaviour
 	public GameObject sets;
 	List<GameObject> gameObjects;
 	int idx = -5;
+	public Button bbtn2;
 	//TestStore store;
 	private void Awake()
 	{
+		bbtn2.onClick.AddListener(set);
+		//bbtn2.enabled = false;
 		gameObjects = new List<GameObject>();
 		btn = GameObject.Find("Load").GetComponent<Button>();
 		//btn.onClick.AddListener(LoadCard);
@@ -22,7 +25,10 @@ public class TestSystem : MonoBehaviour
 		//store = GetComponent<TestStore>();
 		//sets = GameObject.Find("Sets").GetComponent<GameObject>();
 	}
-
+	private void set()
+	{
+		Debug.Log("±»µã»÷");
+	}
 	void Send()
 	{
 		//SendMessage("YEYEYE");

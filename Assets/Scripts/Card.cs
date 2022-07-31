@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+//计划弃用该类
 public class Card 
 {
     readonly CardSOAsset asset;
@@ -27,24 +28,32 @@ public class Card
     public bool isUndead; //亡语
     public CardActionType deadWhisperEffect;
     public int deadWhisperEffectValue;
+    public TargetOptions deadWhisperTarget;
 
     public bool isAdvanced; //先机
     public CardActionType advancedEffect;
     public int advancedEffectValue;
+    public TargetOptions advancedEffectTarget;
 
     public bool isSubsequent; //后手
     public CardActionType subsequentEffect;
     public int subsequentEffectValue;
-
+    public TargetOptions subsequentEffectTarget;
+    //随从放置时效果
+    public bool IsSetupEffect;
+    public CardActionType SetupEffect;
+    public int SetupEffectValue;
+    public TargetOptions SetupEffectTarget;
     //delete
     //public string creatureScriptName;// 生物脚本名
     //public int specialCreatureAmount;// 技能数值
-    
+
 
     public bool isCopied; //复制体标记
     public string spellScriptName;
-    public int spellCreatureAmount;
+    public int spellActionValue;
     public TargetOptions targets;
+    public CardActionType spellactionType;
     public Card(CardSOAsset _asset)
     {
         asset = _asset;
@@ -70,15 +79,22 @@ public class Card
             isUndead = asset.IsUndead;
             deadWhisperEffect = asset.DeadWhisperEffect;
             deadWhisperEffectValue = asset.DeadWhisperEffectValue;
+            deadWhisperTarget = asset.DeadWhisperEffectTarget;
 
             isSubsequent = asset.IsSubsequent;
             subsequentEffect = asset.SubsequentEffect;
             subsequentEffectValue = asset.SubsequentEffectValue;
+            subsequentEffectTarget = asset.SubsequentEffectTarget;
 
             isAdvanced = asset.IsAdvanced;
             advancedEffect = asset.AdvancedEffect;
             advancedEffectValue = asset.AdvancedEffectValue;
+            advancedEffectTarget = asset.SubsequentEffectTarget;
 
+            IsSetupEffect = asset.IsSetupEffect;
+            SetupEffect = asset.SetupEffect;
+            SetupEffectValue = asset.SetupEffectValue;
+            SetupEffectTarget = asset.SetupEffectTarget;
             //delete
             //creatureScriptName = asset.CreatureScriptName;
             //specialCreatureAmount = asset.SpecialCreatureAmount;
@@ -86,9 +102,9 @@ public class Card
 
             isCopied = asset.IsCopied;
             spellScriptName = asset.SpellScriptName;
-            spellCreatureAmount = asset.SpellCreatureAmount;
+            spellActionValue = asset.SpellActionValue;
             targets = asset.Targets;
-
+            spellactionType = asset.CardActionType;
 		}
     }
 }

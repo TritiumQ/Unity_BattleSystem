@@ -30,7 +30,7 @@ public class AttackRequest : MonoBehaviour, IPointerClickHandler
             {
                 if (sys.attacker == null)
                 {
-                    sys.SurventAttackRequest(thisObject, transform.position);
+                    sys.AttackRequest(thisObject, AttackType.SurventAttack, transform.position);
                 }
                 else
                 {

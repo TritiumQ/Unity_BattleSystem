@@ -66,7 +66,7 @@ public class BossUnitManager : MonoBehaviour
 								foreach (var obj in sys.PlayerSurventUnits)
 								{
 									//obj.SendMessage("BeAttck", boss.ATK);
-									Effect.Attack(obj, CardActionType.Attack, boss.ATK);
+									Effect.Set(obj, CardActionType.Attack, boss.ATK);
 								}
 							}
 							break;
@@ -75,27 +75,31 @@ public class BossUnitManager : MonoBehaviour
 								int random = Random.Range(0, sys.PlayerSurventUnits.Count + 1);
 								if(random == sys.PlayerSurventUnits.Count)
 								{
-									sys.playerUnitDisplay.BeAttacked(boss.ATK);
+									Effect.Set(sys.playerUnit, CardActionType.Attack, boss.ATK);
+									//sys.playerUnitDisplay.BeAttacked(boss.ATK);
 								}
 								else
 								{
 									foreach (var obj in sys.PlayerSurventUnits)
 									{
-										obj.SendMessage("BeAttacked", boss.ATK);
+										//obj.SendMessage("BeAttacked", boss.ATK);
+										Effect.Set(obj, CardActionType.Attack, boss.ATK);
 									}
 								}
 							}
 							break;
 						case BossAttack.PlayerTarget:
 							{
-								sys.playerUnitDisplay.BeAttacked(boss.ATK);
+								//sys.playerUnitDisplay.BeAttacked(boss.ATK);
+								Effect.Set(sys.playerUnit, CardActionType.Attack, boss.ATK);
 							}
 							break;
 						case BossAttack.ExcludePlayer:
 							{
 								foreach (var obj in sys.PlayerSurventUnits)
 								{
-									obj.SendMessage("BeAttacked", boss.ATK);
+									Effect.Set(obj, CardActionType.Attack, boss.ATK);
+									//obj.SendMessage("BeAttacked", boss.ATK);
 								}
 							}
 							break;
@@ -112,7 +116,8 @@ public class BossUnitManager : MonoBehaviour
 											target = obj;
 										}
 									}
-									target.SendMessage("BeAttacked", boss.ATK);
+									Effect.Set(target, CardActionType.Attack, boss.ATK);
+									//target.SendMessage("BeAttacked", boss.ATK);
 								}
 							}
 							break;
@@ -129,7 +134,8 @@ public class BossUnitManager : MonoBehaviour
 											target = obj;
 										}
 									}
-									target.SendMessage("BeAttacked", boss.ATK);
+									Effect.Set(target, CardActionType.Attack, boss.ATK);
+									//target.SendMessage("BeAttacked", boss.ATK);
 								}
 							}
 							break;
@@ -146,7 +152,8 @@ public class BossUnitManager : MonoBehaviour
 											target = obj;
 										}
 									}
-									target.SendMessage("BeAttacked", boss.ATK);
+									//target.SendMessage("BeAttacked", boss.ATK);
+									Effect.Set(target, CardActionType.Attack, boss.ATK);
 								}
 							}
 							break;
@@ -163,7 +170,8 @@ public class BossUnitManager : MonoBehaviour
 											target = obj;
 										}
 									}
-									target.SendMessage("BeAttacked", boss.ATK);
+									//target.SendMessage("BeAttacked", boss.ATK);
+									Effect.Set(target, CardActionType.Attack, boss.ATK);
 								}
 							}
 							break;
@@ -188,18 +196,19 @@ public class BossUnitManager : MonoBehaviour
 	}
 	
 	//受击
-	public void BeAttacked(int _value)
+	public int BeAttacked(int _value)
 	{
 		if(boss.protectTimes == 0)
 		{
 			string msg = "受到" + _value.ToString() + "点伤害";
 			Debug.Log(msg);
 			boss.currentHP -= _value;
-
+			return _value;
 		}
 		else
 		{
 			boss.protectTimes--;
+			return 0;
 		}
 	}
 	public void BeHealed(int _value)
@@ -216,6 +225,7 @@ public class BossUnitManager : MonoBehaviour
 	public void BeEnhanced(int _value)//HP永久提升
 	{
 		boss.maxHP += _value;
+		boss.currentHP += _value;
 	}
 	public void BeInspired(int _value, int _rounds)
 	{

@@ -13,22 +13,38 @@ MonoBehaviour:
   m_Name: SVN-005
   m_EditorClassIdentifier: 
   CardID: 5
-  CardName: WTF
-  CardDescription: "\u65E0"
-  CardRarity: 3
+  CardName: "\u6B7B\u8005"
+  CardDescription: "\u4EA1\u8BED \u5168\u5458\u653B\u52A0\u62A4+3"
+  CardRarity: 1
   CardType: 2
   CardCamp: 0
   Cost: 3
   CardImage: {fileID: 21300000, guid: 32b8c5ed4a8c87d45868d1bbe068a207, type: 3}
-  RarityImage: {fileID: 21300000, guid: cf6b63cacd7382e4fbd5fddabc7e2fd4, type: 3}
+  RarityImage: {fileID: 21300000, guid: d352133a8c1e1924f97cae3f2a11a737, type: 3}
   MaxHP: 3
   Atk: 3
   AtksPerTurn: 1
   IsTank: 0
-  IsCharged: 0
-  CreatureScriptName: 
-  SpecialCreatureAmount: 0
+  IsRaid: 0
+  IsVampire: 0
+  IsSetupEffect: 0
+  SetupEffect: 0
+  SetupEffectValue: 0
+  SetupEffectTarget: 0
+  IsUndead: 1
+  DeadWhisperEffect: 5
+  DeadWhisperEffectValue: 3
+  DeadWhisperEffectTarget: 0
+  IsAdvanced: 0
+  AdvancedEffect: 0
+  AdvancedEffectValue: 0
+  AdvancedEffectTarget: 0
+  IsSubsequent: 0
+  SubsequentEffect: 0
+  SubsequentEffectValue: 0
+  SubsequentEffectTarget: 0
   IsCopied: 0
   SpellScriptName: 
-  SpellCreatureAmount: 0
+  CardActionType: 0
+  SpellActionValue: 0
   Targets: 0

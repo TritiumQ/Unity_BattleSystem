@@ -5,6 +5,7 @@ using UnityEngine;
 public class SurventInBattle
 {
     public Card card;
+    //public CardSOAsset asset;
 
     public int atk;
     public int currentHP;
@@ -26,14 +27,23 @@ public class SurventInBattle
     public bool isUndead; //亡语
     public CardActionType deadWhisperEffect;
     public int deadWhisperEffectValue;
+    public TargetOptions deadWhisperTarget;
 
     public bool isAdvanced; //先机
     public CardActionType advancedEffect;
     public int advancedEffectValue;
+    public TargetOptions advancedEffectTarget;
 
     public bool isSubsequent; //后手
     public CardActionType subsequentEffect;
     public int subsequentEffectValue;
+    public TargetOptions subsequentEffectTarget;
+    //随从放置时效果
+    public bool IsSetupEffect;
+    public CardActionType SetupEffect;
+    public int SetupEffectValue;
+    public TargetOptions SetupEffectTarget;
+
 
     public SurventInBattle(Card _card)
 	{
@@ -81,5 +91,13 @@ public class SurventInBattle
         advancedEffect = card.advancedEffect;
         advancedEffectValue = card.advancedEffectValue;
 
+        IsSetupEffect = card.IsSetupEffect;
+        SetupEffect = card.SetupEffect;
+        SetupEffectValue = card.SetupEffectValue;
+        SetupEffectTarget = card.SetupEffectTarget;
+	}
+    public SurventInBattle(CardSOAsset _asset)
+	{
+        //TODO 改用CardSOAsset创建对象
 	}
 }

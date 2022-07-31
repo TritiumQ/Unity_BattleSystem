@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SPL-004
   m_EditorClassIdentifier: 
   CardID: -4
-  CardName: SPL004
-  CardDescription: NULL
+  CardName: "\u52A0\u62A43"
+  CardDescription: "\u52A0\u62A4+3"
   CardRarity: 0
   CardType: 1
   CardCamp: 0
@@ -25,10 +25,26 @@ MonoBehaviour:
   Atk: 0
   AtksPerTurn: 1
   IsTank: 0
-  IsCharged: 0
-  CreatureScriptName: 
-  SpecialCreatureAmount: 0
+  IsRaid: 0
+  IsVampire: 0
+  IsSetupEffect: 0
+  SetupEffect: 0
+  SetupEffectValue: 0
+  SetupEffectTarget: 0
+  IsUndead: 0
+  DeadWhisperEffect: 0
+  DeadWhisperEffectValue: 0
+  DeadWhisperEffectTarget: 0
+  IsAdvanced: 0
+  AdvancedEffect: 0
+  AdvancedEffectValue: 0
+  AdvancedEffectTarget: 0
+  IsSubsequent: 0
+  SubsequentEffect: 0
+  SubsequentEffectValue: 0
+  SubsequentEffectTarget: 0
   IsCopied: 0
   SpellScriptName: 
-  SpellCreatureAmount: 0
-  Targets: 0
+  CardActionType: 5
+  SpellActionValue: 3
+  Targets: 4

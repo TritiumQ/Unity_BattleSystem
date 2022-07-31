@@ -145,30 +145,56 @@ public class SurventUnitManager : MonoBehaviour
         Destroy(thisSurvent);
         
 	}
-    public void Action() //随从行动
-	{
-        if(isActive == true)
+    public void SetupEffect() //设置时调用，触发放置效果
+    {
+        if(survent.IsSetupEffect)
 		{
-            //TODO 随从行动
+            //TODO 目标选择问题需要解决
+            /*
+            
+            switch (survent.subsequentEffectTarget)
+			{
+                
+			}
 
-
-            isActive = false;
-		}
-        else
-		{
-            return;
-		}
-	}
+            */
+        }
+    }
 
     public void CheckInStart() //每回合开始调用,重置活动状态,触发先机效果
 	{
         isActive = true;
-        //
+        if(survent.isAdvanced)
+		{
+            //TODO 目标选择问题需要解决
+            /*
+            
+            switch (survent.subsequentEffectTarget)
+			{
+                
+			}
 
-	}
+            */
+        }
+
+    }
     public void CheckInEnd() //每回合结束调用,刷新buff并触发后手效果
 	{
-        if(survent.isRaid == true)
+        //
+        if(survent.isSubsequent)
+		{
+            //TODO 目标选择问题需要解决
+            /*
+            
+            switch (survent.subsequentEffectTarget)
+			{
+                
+			}
+
+            */
+        }
+        //刷新buff
+        if (survent.isRaid == true)
 	    {
             survent.isRaid = false;
 	    }
@@ -207,15 +233,17 @@ public class SurventUnitManager : MonoBehaviour
 	{
         survent.vampireRounds += _value;
 	}
-    public void BeAttacked(int _value)
+    public int BeAttacked(int _value)
 	{
         if(survent.protectedTimes > 0)
 		{
             survent.protectedTimes--;
+            return 0;
 		}
         else
 		{
             survent.currentHP -= _value;
+            return _value;
 		}
 	}
     public void BeHealed(int _value)
@@ -236,6 +264,7 @@ public class SurventUnitManager : MonoBehaviour
     public void BeEnhanced(int _value)
 	{
         survent.maxHP += _value;
+        survent.currentHP += _value;
     }
     public void BeInspired(int _value, int _rounds) //可延长叠加
 	{
@@ -249,10 +278,10 @@ public class SurventUnitManager : MonoBehaviour
 	}
     public void BeProtected(int _times)
 	{
-        
+        survent.protectedTimes += _times;
 	}
     public void BeTaunted(int _rounds)
 	{
-        
+        survent.tauntRounds += _rounds;
 	}
 }

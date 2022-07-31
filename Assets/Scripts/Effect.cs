@@ -5,7 +5,7 @@ public static class Effect
 {
 	//数值1代表效果数值,如伤害值,回复量
 	//数值2代表持续回合数,0为默认值
-    public static void Attack(GameObject _targetObject, CardActionType _action, int _value1, int _value2 = 0)
+    public static void Set(GameObject _targetObject, CardActionType _action, int _value1, int _value2 = 0, GameObject _requester = null)
 	{
 		if( _targetObject != null )
 		{
@@ -19,9 +19,16 @@ public static class Effect
 					case CardActionType.Attack:
 						target.BeAttacked(_value1);
 						break;
-					case CardActionType.VampireAttack: //吸血攻击未实现
-						//
-						//需要返回一个吸血值
+					case CardActionType.VampireAttack: //吸血攻击
+						if(_requester != null)
+						{
+							int damage = target.BeAttacked( _value1);
+							Set(_requester,CardActionType.Heal,damage);
+						}
+						else
+						{
+							Debug.LogWarning("错误调用吸血攻击，吸血攻击需主体对象");
+						}
 						break;
 					case CardActionType.Heal:
 						target.BeHealed(_value1);
@@ -53,9 +60,16 @@ public static class Effect
 					case CardActionType.Attack:
 						target.BeAttacked(_value1);
 						break;
-					case CardActionType.VampireAttack: //吸血攻击未实现
-						//
-						//需要返回一个吸血值
+					case CardActionType.VampireAttack:
+						if (_requester != null)
+						{
+							int damage = target.BeAttacked(_value1);
+							Set(_requester, CardActionType.Heal, damage);
+						}
+						else
+						{
+							Debug.LogWarning("错误调用吸血攻击，吸血攻击需主体对象");
+						}
 						break;
 					case CardActionType.Heal:
 						target.BeHealed(_value1);
@@ -90,10 +104,16 @@ public static class Effect
 					case CardActionType.Attack:
 						target.BeAttacked(_value1);
 						break;
-					case CardActionType.VampireAttack: 
-						//吸血攻击未实现						   
-						//					   
-						//需要返回一个吸血值
+					case CardActionType.VampireAttack:
+						if (_requester != null)
+						{
+							int damage = target.BeAttacked(_value1);
+							Set(_requester, CardActionType.Heal, damage);
+						}
+						else
+						{
+							Debug.LogWarning("错误调用吸血攻击，吸血攻击需主体对象");
+						}
 						break;
 					case CardActionType.Protect:
 						target.BeProtected(_value1);

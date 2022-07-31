@@ -27,20 +27,9 @@ public class PlayerUnitManager : MonoBehaviour
 		}
 	}
 	//Κά»χ
-	public void BeAttacked(int _value)
+	public int BeAttacked(int _value)
 	{
 		if(player.protectedTimes>0)
-		{
-			player.protectedTimes--;
-		}
-		else
-		{
-			player.CurrentHP -= _value;
-		}
-	}
-	public int BeVampireAttacked(int _value)
-	{
-		if (player.protectedTimes > 0)
 		{
 			player.protectedTimes--;
 			return 0;

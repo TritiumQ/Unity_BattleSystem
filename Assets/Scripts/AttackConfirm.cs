@@ -9,9 +9,9 @@ public class AttackConfirm : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
-        if (sys != null)
+        if (sys != null && thisObject != sys.attacker)
         {
-            sys.SurventAttackConfirm(thisObject);
+            sys.AttackConfirm(thisObject);
         }
     }
 }

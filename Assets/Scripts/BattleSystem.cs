@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 public class BattleSystem : MonoBehaviour
 {
+
 	//玩家信息区
 	PlayerInBattle player;
 	List<int> deck;  //牌堆
@@ -30,8 +31,8 @@ public class BattleSystem : MonoBehaviour
 	//控件
 	//bool roundEndFlag = false;  //回合结束标志
 	bool playerActionCompleted = false;
-	bool getCardCompleted = false;
-	bool roundStart;
+	//bool getCardCompleted = false;
+	bool roundStart = false;
 	int round;
 
 	//其他
@@ -59,6 +60,7 @@ public class BattleSystem : MonoBehaviour
 	}
 	private void Awake()
 	{
+		vectory.SetActive(false);
 		//初始化实例
 		endButton.onClick.AddListener(EndRound);
 		roundText.text = round.ToString();
@@ -87,7 +89,9 @@ public class BattleSystem : MonoBehaviour
 			if (usedFlag == deck.Count) //牌库空，触发洗牌以及抽空惩罚
 			{
 				RefreshDeck();
-				//TODO 洗牌惩罚 未实现
+
+				//洗牌惩罚,扣玩家5点血
+				Effect.Set(playerUnit, CardActionType.Attack, 5);
 			}
 			int randPos = Random.Range(0, deck.Count); //随机抽牌
 
@@ -136,10 +140,10 @@ public class BattleSystem : MonoBehaviour
 	}
 	void GamePlay()
 	{
-		//1 玩家抽牌
-		if (getCardCompleted == false)
+		//1 玩家抽牌,回合开始,重置随从行动状态,触发随从先机效果
+		if (roundStart == false)
 		{
-			if (round == 0)
+			if(round == 0)
 			{
 				GetCard(3);
 			}
@@ -147,11 +151,6 @@ public class BattleSystem : MonoBehaviour
 			{
 				GetCard(1);
 			}
-			getCardCompleted = true;
-		}
-		//2 回合开始,重置随从行动状态,触发随从先机效果
-		else if(roundStart == false)
-		{
 			Debug.Log("回合开始");
 			foreach (var obj in PlayerSurventUnits)
 			{
@@ -163,12 +162,18 @@ public class BattleSystem : MonoBehaviour
 			}
 			roundStart = true;
 		}
-		//3 玩家部署随从/使用法术牌
-		//4 玩家行动完成后怪物行动,并结束回合
+		//2 玩家部署随从/使用法术牌
+		//3 玩家行动完成后怪物行动,并结束回合
 		else  if (playerActionCompleted)  
 		{
-			bossUnitManager.Action(round);// Boss行动
+			// Boss行动
+			bossUnitManager.Action(round);
 			//boss随从行动
+			foreach(var obj in BossSurventUnits)
+			{
+
+				obj.SendMessage("Action");
+			}
 			round++;
 			roundText.text = round.ToString();
 
@@ -179,7 +184,6 @@ public class BattleSystem : MonoBehaviour
 			player.CurrentActionPoint = player.MaxActionPoint;
 			
 			playerActionCompleted = false;
-			getCardCompleted = false;
 			roundStart = false;
 			//检查并刷新buff,以及触发随从后手效果
 			bossUnitManager.CheckBuff();
@@ -203,7 +207,7 @@ public class BattleSystem : MonoBehaviour
 			if (_card.cardType == CardType.Spell)
 			{
 				//使用法术卡
-				//SpellAttackRequest(_cardObject, _cardObject.transform.position);
+				AttackRequest(_cardObject, AttackType.SpellAttack, _cardObject.transform.position);
 			}
 			else
 			{
@@ -245,12 +249,14 @@ public class BattleSystem : MonoBehaviour
 	}
 	//一套攻击方法
 	public GameObject attacker { get; private set; }
+	public AttackType attackType { get; private set; }
 	public GameObject victim { get; private set; }
+
 	public GameObject arrowPrefab;
 	public GameObject arrow; //攻击箭头
 	public Transform canvas;
-	//1 随从发起攻击请求
-	public void SurventAttackRequest(GameObject _request, Vector2 _startPoint)
+	//1 攻击请求
+	public void AttackRequest(GameObject _request, AttackType _type, Vector2 _startPoint)
 	{
 		if(arrow == null)
 		{
@@ -258,37 +264,37 @@ public class BattleSystem : MonoBehaviour
 			arrow = GameObject.Instantiate(arrowPrefab, canvas);
 			arrow.GetComponent<TestArrow>().SetStartPoint(_startPoint);
 			attacker = _request;
+			attackType = _type;
 		}
 	}
 	//2 目标确认受击
-	public void SurventAttackConfirm(GameObject _confirm)
+	public void AttackConfirm(GameObject _confirm)
 	{
 		if(attacker != null)
 		{
-			victim = _confirm;
-			Debug.Log("攻击成功");
-			attacker.GetComponent<SurventUnitManager>().isActive = false;
-			Effect.Attack(victim, CardActionType.Attack, attacker.GetComponent<SurventUnitManager>().survent.atk);
+			if(attackType == AttackType.SurventAttack)
+			{
+				//TODO 检查敌方是否有嘲讽对象
+				victim = _confirm;
+				Debug.Log("攻击成功");
+				attacker.GetComponent<SurventUnitManager>().isActive = false;
+				Effect.Set(victim, CardActionType.Attack, attacker.GetComponent<SurventUnitManager>().survent.atk);
+			}
+			else if(attackType == AttackType.SpellAttack)
+			{
+				//TODO 检查敌方是否有嘲讽对象
+				victim = _confirm;
+				Card spellCard = attacker.GetComponent<CardDisplay>().card;
+				Effect.Set(victim, spellCard.spellactionType, spellCard.spellActionValue);
+				player.CurrentActionPoint -= spellCard.cost;
+				handCards.Remove(attacker);
+				Destroy(attacker);
+			}
 
 			Destroy(arrow);
 			attacker = null;
 			victim = null;
 		}
-	}
-	
-	//法术卡攻击流程
-	public void SpellAttackRequest(GameObject _request, Vector2 _startPoint)
-	{
-		if (arrow == null)
-		{
-			arrow = GameObject.Instantiate(arrowPrefab, canvas);
-			arrow.GetComponent<TestArrow>().SetStartPoint(_startPoint);
-			attacker = _request;
-		}
-	}
-	public void SpellAttackConfirm()
-	{
-
 	}
 	//取消攻击请求
 	public void AttackCancel()
@@ -302,10 +308,12 @@ public class BattleSystem : MonoBehaviour
 		victim = null;
 	}
 	//胜利
+	public GameObject vectory;
 	public void Vectory()
 	{
 		Debug.Log("好耶~！");
-		//
+		vectory.SetActive(true);
+		//TODO 胜利后结算
 	}
 	//相关信息载入方法
 	public void SetBossInf(BossInBattle _boss)
@@ -318,6 +326,7 @@ public class BattleSystem : MonoBehaviour
 		player.CurrentHP = _info.currentHP;
 		deck = _info.cardSet;
 	}
+
 	void TestSetData() //测试载入数据
 	{
 		Debug.Log("Start Data Setting...");

@@ -22,6 +22,12 @@ public enum GetSurventInfomation
     MaxHP,
     Type
 }
+public enum AttackType
+{
+    SpellAttack,
+    SurventAttack,
+    other
+}
 public static class Const
 {
     //返回相应资源文件位置字符串
@@ -99,7 +105,7 @@ public enum CardActionType
     Waghhh, //Waghhhhhh!!!(永久攻击提升)->数值
     Conceal, //隐匿->回合
 
-    Silence, //沉默->回合数
+    //Silence, //沉默->回合数
 
     //*亡语*，*先机*，*每回合开始时*，*每回合结束时*的效果通用
 }

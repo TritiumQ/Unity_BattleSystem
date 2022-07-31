@@ -26,19 +26,26 @@ public class CardSOAsset : ScriptableObject
     public bool IsTank; // 是否嘲讽
     public bool IsRaid; // 是否突袭
     public bool IsVampire;
-	[Header("亡语信息")]
+    [Header("放置时效果")]
+    public bool IsSetupEffect;
+    public CardActionType SetupEffect;
+    public int SetupEffectValue;
+    public TargetOptions SetupEffectTarget;
+    [Header("亡语信息")]
     public bool IsUndead; //亡语
     public CardActionType DeadWhisperEffect;
     public int DeadWhisperEffectValue;
+    public TargetOptions DeadWhisperEffectTarget;
 	[Header("先机信息")]
     public bool IsAdvanced; //先机
     public CardActionType AdvancedEffect;
     public int AdvancedEffectValue;
+    public TargetOptions AdvancedEffectTarget;
 	[Header("后手信息")]
     public bool IsSubsequent; //后手
     public CardActionType SubsequentEffect;
     public int SubsequentEffectValue;
-
+    public TargetOptions SubsequentEffectTarget;
     //此两项弃用
     //public string CreatureScriptName;// 生物脚本名
     //public int SpecialCreatureAmount;// 技能数值
@@ -46,7 +53,8 @@ public class CardSOAsset : ScriptableObject
     [Header("法术信息")]
     public bool IsCopied; //复制体标记
     public string SpellScriptName;
-    public int SpellCreatureAmount;
+    public CardActionType CardActionType;
+    public int SpellActionValue;
     public TargetOptions Targets;
 
 }

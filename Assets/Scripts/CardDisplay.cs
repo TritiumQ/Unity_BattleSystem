@@ -26,6 +26,7 @@ public class CardDisplay : MonoBehaviour
     public Image CardGraphicImage;// 卡牌图片
     public Image CardRarityImage;// 卡牌稀有度
     public Image CardFaceGlowImage;// 卡牌发光
+    public Image CardBackImage;
 	private void Start()
 	{
         //Debug.Log("开始");
@@ -71,7 +72,8 @@ public class CardDisplay : MonoBehaviour
             Refresh();
             //卡牌光效默认关闭
             CardFaceGlowImage.enabled = false;
-
+            //默认关闭卡背
+            CardBackImage.enabled = false;
             if (card.cardType == CardType.Survent)
             {
                 AtkText.text = card.atk.ToString();

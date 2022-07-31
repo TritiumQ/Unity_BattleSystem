@@ -31,7 +31,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3081637641354913905}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -105,7 +105,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3081637641354913905}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -141,7 +141,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6697115885235095563}
   - {fileID: 7904850785136751054}
   - {fileID: 5460122223081570996}
   - {fileID: 3081637642730320301}
@@ -154,6 +153,7 @@ RectTransform:
   - {fileID: 7842768385580940158}
   - {fileID: 5529541466838681736}
   - {fileID: 4586482108665665279}
+  - {fileID: 6697115885235095563}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -188,24 +188,39 @@ MonoBehaviour:
     atk: 0
     atksPerTurn: 0
     isTank: 0
-    isCharged: 0
-    creatureScriptName: 
-    specialCreatureAmount: 0
+    isRaid: 0
+    IsVampire: 0
+    isUndead: 0
+    deadWhisperEffect: 0
+    deadWhisperEffectValue: 0
+    deadWhisperTarget: 0
+    isAdvanced: 0
+    advancedEffect: 0
+    advancedEffectValue: 0
+    advancedEffectTarget: 0
+    isSubsequent: 0
+    subsequentEffect: 0
+    subsequentEffectValue: 0
+    subsequentEffectTarget: 0
+    IsSetupEffect: 0
+    SetupEffect: 0
+    SetupEffectValue: 0
+    SetupEffectTarget: 0
     isCopied: 0
     spellScriptName: 
-    spellCreatureAmount: 0
+    spellActionValue: 0
     targets: 0
+    spellactionType: 0
   NameText: {fileID: 3081637641709498789}
   CostText: {fileID: 3849798340713557842}
   DescriptionText: {fileID: 3081637641367703335}
   HealthText: {fileID: 3081637641885767697}
   AtkText: {fileID: 4474710124448191774}
   CampText: {fileID: 3081637642419516679}
-  HealthIcon: {fileID: 0}
-  AtkIcon: {fileID: 0}
   CardGraphicImage: {fileID: 3081637642730320298}
   CardRarityImage: {fileID: 7770002035693126024}
   CardFaceGlowImage: {fileID: 5447768155776464921}
+  CardBackImage: {fileID: 4624895078509891710}
 --- !u!1 &3081637641367703337
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,7 +252,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3081637641354913905}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.060000002, y: 0.112}
   m_AnchorMax: {x: 0.9433334, y: 0.31800002}
@@ -372,7 +387,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3081637641354913905}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.25, y: 0.91200006}
   m_AnchorMax: {x: 0.75000006, y: 0.97}
@@ -507,7 +522,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3081637641354913905}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.08666667, y: 0.020000001}
   m_AnchorMax: {x: 0.20333333, y: 0.086}
@@ -642,7 +657,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3081637641354913905}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.3, y: 0.020000001}
   m_AnchorMax: {x: 0.70000005, y: 0.082}
@@ -777,7 +792,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3081637641354913905}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -853,7 +868,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3081637641354913905}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1005,7 +1020,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3081637641354913905}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.08666667, y: 0.90000004}
   m_AnchorMax: {x: 0.20333333, y: 0.97}
@@ -1139,7 +1154,7 @@ RectTransform:
   m_Children:
   - {fileID: 139686300816198830}
   m_Father: {fileID: 3081637641354913905}
-  m_RootOrder: 0
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1175,7 +1190,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3081637641354913905}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1212,7 +1227,7 @@ RectTransform:
   m_Children:
   - {fileID: 2987190732008701570}
   m_Father: {fileID: 3081637641354913905}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1250,7 +1265,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3081637641354913905}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.8, y: 0.016}
   m_AnchorMax: {x: 0.9166667, y: 0.086}

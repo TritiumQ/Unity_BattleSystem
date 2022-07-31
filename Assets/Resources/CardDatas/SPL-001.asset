@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SPL-001
   m_EditorClassIdentifier: 
   CardID: -1
-  CardName: SPL001
-  CardDescription: "\u5BC4\u5427"
+  CardName: "\u706B\u7403"
+  CardDescription: "\u706B\u7403 10"
   CardRarity: 0
   CardType: 1
   CardCamp: 0
@@ -27,16 +27,24 @@ MonoBehaviour:
   IsTank: 0
   IsRaid: 0
   IsVampire: 0
+  IsSetupEffect: 0
+  SetupEffect: 0
+  SetupEffectValue: 0
+  SetupEffectTarget: 0
   IsUndead: 0
   DeadWhisperEffect: 0
   DeadWhisperEffectValue: 0
+  DeadWhisperEffectTarget: 0
   IsAdvanced: 0
   AdvancedEffect: 0
   AdvancedEffectValue: 0
+  AdvancedEffectTarget: 0
   IsSubsequent: 0
   SubsequentEffect: 0
   SubsequentEffectValue: 0
+  SubsequentEffectTarget: 0
   IsCopied: 0
   SpellScriptName: 
-  SpellCreatureAmount: 0
-  Targets: 0
+  CardActionType: 0
+  SpellActionValue: 10
+  Targets: 5
