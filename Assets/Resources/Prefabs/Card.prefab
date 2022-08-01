@@ -122,8 +122,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3081637641354913905}
   - component: {fileID: 3081637641354913902}
+  - component: {fileID: 6444780948324469419}
+  - component: {fileID: 2160025234595548361}
+  - component: {fileID: 6122763005637016706}
+  - component: {fileID: 6135971171936873412}
   m_Layer: 5
-  m_Name: CardInHub
+  m_Name: Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -188,24 +192,105 @@ MonoBehaviour:
     atk: 0
     atksPerTurn: 0
     isTank: 0
-    isCharged: 0
-    creatureScriptName: 
-    specialCreatureAmount: 0
+    isRaid: 0
+    IsVampire: 0
+    isUndead: 0
+    deadWhisperEffect: 0
+    deadWhisperEffectValue: 0
+    deadWhisperTarget: 0
+    isAdvanced: 0
+    advancedEffect: 0
+    advancedEffectValue: 0
+    advancedEffectTarget: 0
+    isSubsequent: 0
+    subsequentEffect: 0
+    subsequentEffectValue: 0
+    subsequentEffectTarget: 0
+    IsSetupEffect: 0
+    SetupEffect: 0
+    SetupEffectValue: 0
+    SetupEffectTarget: 0
     isCopied: 0
     spellScriptName: 
-    spellCreatureAmount: 0
+    spellActionValue: 0
     targets: 0
+    spellactionType: 0
   NameText: {fileID: 3081637641709498789}
   CostText: {fileID: 3849798340713557842}
   DescriptionText: {fileID: 3081637641367703335}
   HealthText: {fileID: 3081637641885767697}
   AtkText: {fileID: 4474710124448191774}
   CampText: {fileID: 3081637642419516679}
-  HealthIcon: {fileID: 0}
-  AtkIcon: {fileID: 0}
   CardGraphicImage: {fileID: 3081637642730320298}
   CardRarityImage: {fileID: 7770002035693126024}
   CardFaceGlowImage: {fileID: 5447768155776464921}
+  CardBackImage: {fileID: 4624895078509891710}
+--- !u!223 &6444780948324469419
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3081637641354913904}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_SortingLayerID: 0
+  m_SortingOrder: 5
+  m_TargetDisplay: 0
+--- !u!114 &2160025234595548361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3081637641354913904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &6122763005637016706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3081637641354913904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d781b32f43449488571f0191f2ff72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  savePos: {x: 0, y: 0, z: 0}
+  upmove: 100
+  saveOrder: 0
+--- !u!114 &6135971171936873412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3081637641354913904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65c803bc556d6864881393d953c5af0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisCard: {fileID: 3081637641354913904}
 --- !u!1 &3081637641367703337
 GameObject:
   m_ObjectHideFlags: 0

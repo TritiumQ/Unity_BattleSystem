@@ -7,13 +7,13 @@ using UnityEngine;
 public class Player
 {
     
-    public int name;
+    public string name;
     public int maxHP;
     public int currentHP;
     public int mithrils; //秘银
     public int tears;  //泪滴
 
-    List<int> cardSet; //牌组
+    public List<int> cardSet { get; private set; } //牌组
     //0~199  200~299
     bool[] unlock; //记录已解锁的卡牌
 
