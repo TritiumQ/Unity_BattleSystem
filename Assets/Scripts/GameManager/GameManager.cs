@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement; 
 //专门用来管理局内游戏数据的类对象
 public class GameManager : MonoBehaviour
@@ -103,6 +104,7 @@ public class GameManager : MonoBehaviour
                     InitGameEvent(level); //刷新事件
                 }
             }
+            //进度条加载动画
         }
         else if (judge == -1 || player.currentHP <= 0)
         {
