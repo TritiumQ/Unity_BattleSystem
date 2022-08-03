@@ -25,8 +25,8 @@ public class Player
     }
 
     public string name;
-    public int maxHP;
-    public int currentHP;
+    public int maxHP=1;
+    public int currentHP=1;
     public int mithrils; //ÃØÒø
     public int tears;  //ÀáµÎ
 

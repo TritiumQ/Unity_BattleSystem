@@ -921,7 +921,8 @@ MonoBehaviour:
   loadScreen: {fileID: 816890105}
   slider: {fileID: 350234941}
   text: {fileID: 1880339833}
-  time: 2000
+  scene: Shop
+  time: 1500
 --- !u!4 &840747714
 Transform:
   m_ObjectHideFlags: 0
@@ -935,7 +936,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2092457002}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1143356959
 GameObject:
@@ -1247,7 +1248,7 @@ RectTransform:
   - {fileID: 1936877395}
   - {fileID: 1548731011}
   m_Father: {fileID: 2092457002}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1606,7 +1607,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2092457002}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1880339832
 GameObject:
@@ -1797,6 +1798,7 @@ MonoBehaviour:
   level: 0
   eventPrefab: {fileID: 6631936606037531286, guid: 17f860132511fa541ad3f62e45d785c0, type: 3}
   levelUI: {fileID: 2005561918}
+  LoadManager: {fileID: 840747712}
   eventUnit: []
 --- !u!1 &1987129184
 GameObject:
@@ -2000,9 +2002,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 840747714}
   - {fileID: 1266571133}
   - {fileID: 1685081182}
+  - {fileID: 840747714}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

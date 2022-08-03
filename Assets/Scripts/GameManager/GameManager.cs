@@ -2,19 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
 //专门用来管理局内游戏数据的类对象
 public class GameManager : MonoBehaviour
 {
     Player player;       //设置为单例模式
 
     public int step;     //关卡步骤
-    public int[] GameEventCount;
+    public int[] GameEventCount; //每层关卡数量
     public int level;     //层数
     List<int> GameEvent; //游戏事件
 
     public GameObject eventPrefab;
     public GameObject levelUI;
+    public GameObject LoadManager;
 
     public List<GameObject> eventUnit; //事件对象链表
     private void Awake()
@@ -44,13 +45,13 @@ public class GameManager : MonoBehaviour
         InitGameEvent();
         //加载关卡进度数据（重新进入游戏的进度加载）
     }
-    void InitGameEvent(int _level = 1)   //初始化游戏事件 (GameEventCount改成数组，下标为level)
+    void InitGameEvent(int _level = 1)   //初始化/设置 游戏事件
     {
         level = _level; //初始化所在层数
         step = 0;//初始化所在事件
         GameEvent = new List<int>();
         levelUI.GetComponent<LevelUI>().SetLevel(level); //刷新层区UI
-        for (int i= eventUnit.Count-1; i>=0;i--) //销毁原有事件UI对象
+        for (int i = eventUnit.Count - 1; i >= 0; i--) //销毁原有事件UI对象
         {
             Destroy(eventUnit[i]);
         }
@@ -65,12 +66,13 @@ public class GameManager : MonoBehaviour
         //Debug.Log(GameEventCount);
         for (int i = 0; i < GameEventCount[_level]; i++)//初始化事件预制体对象链表
         {
-            GameObject newEvent = Instantiate(eventPrefab,transform); //生成事件预制件
-            newEvent.GetComponent<Transform>().position = new Vector3(SetPosition(i, 375, 1725),500,0);
+            GameObject newEvent = Instantiate(eventPrefab, transform); //生成事件预制件
+            newEvent.GetComponent<Transform>().position = new Vector3(SetPosition(i, 375, 1725), 500, 0);
             if (newEvent != null)
                 newEvent.GetComponent<EventUI>().SetEventSign(GameEvent[i]); //设置事件对象的类型
             eventUnit.Add(newEvent);
         }
+        LoadManager.GetComponent<LoadManager>().NextScene(GameEvent[step]);//设置下一关场景加载
     }
     void RefreshScenes() //更新游戏局内场景
     {
@@ -87,24 +89,7 @@ public class GameManager : MonoBehaviour
         int judge = PlayDataTF.GetResult();
         if (judge == 1)//通过当前事件
         {
-            eventUnit[step].GetComponent<EventUI>().SetPass();
-            step++;
-            if (step == GameEventCount[level]) //通过当前层区
-            {
-                step = 0;
-                level++;
-                if(level>4) //游戏通关
-                {
-                    Gameover(1);
-                    //进入结算页面
-                }
-                else //进入下一层
-                {
-                    //levelUI.GetComponent<LevelUI>().SetLevel(level); //刷新层区UI
-                    InitGameEvent(level); //刷新事件
-                }
-            }
-            //进度条加载动画
+            AddStep();
         }
         else if (judge == -1 || player.currentHP <= 0)
         {
@@ -116,9 +101,37 @@ public class GameManager : MonoBehaviour
         //_result控制结局走向,暂定 0是失败，1是胜利......
         Debug.Log("游戏失败");
     }
-    
-    
+
+
     //以下是工具方法
+
+    void AddStep()
+    {
+        eventUnit[step].GetComponent<EventUI>().SetPass();//事件图标更新
+        step++;
+        if (step < GameEventCount[level])
+        {
+            LoadManager.GetComponent<LoadManager>().NextScene(GameEvent[step]);//设置下一关场景加载
+        }
+        else//通过当前层区
+        {
+            AddLevel();
+        }
+    }
+    void AddLevel()
+    {
+        step = 0;
+        level++;
+        if(level<=4)
+        {
+            InitGameEvent(level); //刷新事件
+        }
+        else//游戏通关
+        {
+            Gameover(1);
+            //进入结算页面
+        }
+    }
     float SetPosition(int i,float low,float up)//设置x轴位置
     {
         float len,x;
@@ -128,8 +141,4 @@ public class GameManager : MonoBehaviour
         return x;
     }
 
-    void PlayDataTran() //玩家数据传出
-    {
-
-    }
 }
