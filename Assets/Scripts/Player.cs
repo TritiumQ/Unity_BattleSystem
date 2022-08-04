@@ -7,12 +7,7 @@ using UnityEngine;
 public class Player
 {
     //单例模式
-    private Player() 
-    {
-        cardSet = new List<int>();
-        unlock = new bool[400];
-        //LoadData(); //不缺定这个方这里会不会有bug
-    }
+    private Player() { }
     private static Player instance;//全局唯一实例
     public static Player Instance //获取实例的属性
     {
@@ -25,19 +20,13 @@ public class Player
     }
 
     public string name;
-    public int maxHP=1;
-    public int currentHP=1;
+    public int maxHP;
+    public int currentHP;
     public int mithrils; //秘银
     public int tears;  //泪滴
-
     public List<int> cardSet  { get; private set; } //牌组
-    //0~199  200~299
-    bool[] unlock=new bool[400]; //记录已解锁的卡牌
-
-    public void LoadData()
-	{
-        
-	} //从数据存储文件加载数据
+    //0~199  200~399
+    bool[] unlock; //记录已解锁的卡牌
 
     //战斗系统所用的三个方法（没动过）
 	public PlayerBattleInformation GetBattleInf()
@@ -119,5 +108,29 @@ public class Player
             if (unlock[cardSet[i]] == false)
                 unlock[cardSet[i]] = true;
         }
+    }
+}
+
+//用于json测试
+public class DefaultPlayer
+{
+    public string name;
+    public int maxHP;
+    public int currentHP;
+    public int mithrils; //秘银
+    public int tears;  //泪滴
+    public List<int> cardSet { get; private set; } //牌组
+    public bool[] unlock;
+    public DefaultPlayer()
+    {
+        name = "none";
+        maxHP = 23333;
+        currentHP = 114514;
+        mithrils = 1919810;
+        tears = 361433;
+        cardSet = new List<int>();
+
+        unlock = new bool[401];
+        System.Array.Fill(unlock, false);
     }
 }

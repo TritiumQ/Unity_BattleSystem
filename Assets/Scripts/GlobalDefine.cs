@@ -51,7 +51,14 @@ public static class Const
 	{
         return "BossDatas/MON-" + _id.ToString("D3");
     }
+    public static string PLAYER_DATAS_PATH(int _id)
+	{
+        return UnityEngine.Application.dataPath + "/PlayerDatas/" + _id.ToString("D2") + ".json";
+	}
+    //³£Á¿
     public static int Forever = -1;
+    public static int MaxSaveCount = 10;
+    
 }
 public struct PlayerBattleInformation
 {
