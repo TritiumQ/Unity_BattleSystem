@@ -35,10 +35,7 @@ public static class PlayDataTF
         {
             for (int i = 0; i < cardSet.Count; i++)
             {
-                if (cardSet[i] >= 0)
-                {
                     _player.cardSet[i] = cardSet[i];
-                }
             }
             cardAllow = false;
         }
@@ -97,8 +94,8 @@ public static class PlayDataTF
         playerAllow = true;
     }
     
-    //两个修改卡组的方法
-    public static void SetCard(List<int> _newCardSet)
+    //两个修改卡组的方法（设置为私有，取消这两种修改卡组方法）
+    private static void SetCard(List<int> _newCardSet)
     {
         //暂时无法修改使得卡组数量减少
         for(int i=0;i<_newCardSet.Count;i++)
@@ -109,7 +106,7 @@ public static class PlayDataTF
         }
         cardAllow = true;
     }
-    public static void AddCard(int _newCard)
+    private static void AddCard(int _newCard)
     {
         cardSet.Add(_newCard);
         cardAllow = true;
