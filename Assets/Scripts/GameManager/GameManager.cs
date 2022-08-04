@@ -100,6 +100,7 @@ public class GameManager : MonoBehaviour
     {
         //_result控制结局走向,暂定 0是失败，1是胜利......
         Debug.Log("游戏失败");
+        //切换End场景
     }
 
 

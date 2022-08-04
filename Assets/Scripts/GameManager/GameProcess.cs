@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class GameProcess : MonoBehaviour
 {
-    void Start()
+    private static GameProcess instance=null;
+
+    void Awake()
     {
-        DontDestroyOnLoad(this);//切换场景不销毁
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this);//切换场景不销毁
+            return;
+        }
+        Destroy(this.gameObject);
     }
 
     void Update()
