@@ -1,13 +1,14 @@
 public enum BossActionType  //
 {
     Skip,
-    Attack,
-    Summon
+    AOEAttack,
+    AOEAttackExcludePlayer,
+    SingleAttack,
+    Summon,
+
 }
 public enum BossAttack
 {
-    AOE,
-    ExcludePlayer,
     PlayerTarget,
     RandomTarget,
     HighestHPTarget,
@@ -22,12 +23,7 @@ public enum GetSurventInfomation
     MaxHP,
     Type
 }
-public enum AttackType
-{
-    SpellAttack,
-    SurventAttack,
-    other
-}
+
 public static class Const
 {
     //返回相应资源文件位置字符串
@@ -70,7 +66,7 @@ public struct PlayerBattleInformation
 public enum TargetOptions //卡牌目标选项
 {
     NoTarget,
-
+    
     AllCreatures, //所有单位
     AllPlayerCreatures,  //所有玩家单位（包括玩家本体）
     AllEnemyCreatures,  //所有敌方单位（包括boss本体）
@@ -79,8 +75,8 @@ public enum TargetOptions //卡牌目标选项
     SingleEnemyCreature, //单个敌方目标
 
     AllCharacters,  //所有随从（不包括玩家和boss）
-    PlayerCharacters, //玩家随从
-    EnemyCharacters  //敌方随从
+    PlayerCharacter, //所有玩家随从 （不包括玩家）
+    EnemyCharacter  //所有敌方随从（不包括boss）
 }
 public enum RarityRank  //稀有度
 {
@@ -95,9 +91,8 @@ public enum CardType
 }
 public enum CardCamp
 {
-    BlueOcean, Oddin, BaseSpeed, Fortress, 
-    Enemy, 
-    //Player, 
+    蓝海医疗, 奥丁工业, 基速物流, 福特斯安保, 
+    Enemy,
     Snake
 }
 public enum CardActionType

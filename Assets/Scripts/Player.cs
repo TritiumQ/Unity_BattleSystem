@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-
 using UnityEngine;
-
+[SerializeField]
 public class Player
 {
     //µ¥ÀýÄ£Ê½

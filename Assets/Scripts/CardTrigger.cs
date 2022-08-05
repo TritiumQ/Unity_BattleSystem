@@ -22,7 +22,7 @@ public class CardTrigger : MonoBehaviour, IPointerClickHandler
 				}
 				else
 				{
-					sys.AttackCancel();
+					sys.AttackOver();
 				}
 			}
 			else

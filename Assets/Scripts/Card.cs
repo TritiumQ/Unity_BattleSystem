@@ -104,7 +104,7 @@ public class Card
             spellScriptName = asset.SpellScriptName;
             spellActionValue = asset.SpellActionValue;
             targets = asset.Targets;
-            spellactionType = asset.CardActionType;
+            spellactionType = asset.SpellActionType;
 		}
     }
 }

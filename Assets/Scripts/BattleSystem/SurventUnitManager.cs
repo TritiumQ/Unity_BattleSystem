@@ -42,17 +42,17 @@ public class SurventUnitManager : MonoBehaviour
     public Image protectedImage;  //加护
     public Image concealImage;  //隐匿
     public Image doubleHitImage;  //连击
-    public void Initialized(Card _card)
+    public void Initialized(CardSOAsset _card)
     {
         if(_card != null)
 		{
             survent = new SurventInBattle(_card);
-            if (_card.cardType == CardType.Survent || _card.cardType == CardType.Monster)
+            if (_card.CardType == CardType.Survent || _card.CardType == CardType.Monster)
             {
-                type = _card.cardType;
-                cardImage.sprite = _card.cardImage;
+                type = _card.CardType;
+                cardImage.sprite = _card.CardImage;
                 //
-                isActive = _card.isRaid;
+                isActive = _card.IsRaid;
 
                 //所有随从效果的Icon默认关闭
                 tauntImage.enabled = false;
@@ -94,7 +94,7 @@ public class SurventUnitManager : MonoBehaviour
                 tauntImage.enabled = false;
             }
             raidImage.enabled = survent.isRaid;
-            deadWhisperImage.enabled = survent.card.isUndead;
+            deadWhisperImage.enabled = survent.isUndead;
             if (survent.vampireRounds > 0 || survent.vampireRounds == Const.Forever)
             {
                 vampireImage.enabled = true;
@@ -132,9 +132,17 @@ public class SurventUnitManager : MonoBehaviour
     void Die()
 	{
         //死亡动画
-        string msg = survent.card.cardName + "死亡";
-        Debug.Log(msg);
-        if(type == CardType.Survent)
+        //string msg = survent..cardName + "死亡";
+        //Debug.Log(msg);
+        //亡语效果
+        if(survent.isUndead)
+		{
+            switch (survent.deadWhisperTarget)
+			{
+
+			}
+		}
+        if (type == CardType.Survent)
 		{
             GameObject.Find("BattleSystem").GetComponent<BattleSystem>().PlayerSurventDie(thisSurvent);
 		}
@@ -147,17 +155,49 @@ public class SurventUnitManager : MonoBehaviour
 	}
     public void SetupEffect() //设置时调用，触发放置效果
     {
-        if(survent.IsSetupEffect)
+        BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
+        if(sys != null && survent.IsSetupEffect)
 		{
             //TODO 目标选择问题需要解决
-            /*
-            
+            CardActionType action = survent.SetupEffect;
+            int value1 = survent.subsequentEffectValue1;
+            int value2 = survent.subsequentEffectValue2;
+
             switch (survent.subsequentEffectTarget)
 			{
-                
-			}
+                case TargetOptions.AllCreatures:
+					{
+                        Effect.Set(sys.bossUnit, action, value1, value2);
+                        
+                        foreach (var obj in sys.BossSurventUnits)
+                        {
+                            //obj.SendMessage("BeAttck", boss.ATK);
+                            Effect.Set(obj, action, value1, value2);
+                        }
+                    }
+                    break;
+                case TargetOptions.AllPlayerCreatures:
+					{
 
-            */
+					}
+                    break;
+                case TargetOptions.AllEnemyCreatures:
+					break;
+                case TargetOptions.AllCharacters:
+                    break;
+                case TargetOptions.PlayerCharacter:
+					break;
+                case TargetOptions.EnemyCharacter:
+                    break;
+                case TargetOptions.SinglePlayerCreatures:
+                    break;
+                case TargetOptions.SingleEnemyCreature:
+                    break;
+                case TargetOptions.NoTarget:
+                    break;
+                default:
+                    break;
+			}
         }
     }
 

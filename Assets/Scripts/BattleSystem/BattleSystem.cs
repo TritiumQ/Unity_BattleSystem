@@ -100,10 +100,10 @@ public class BattleSystem : MonoBehaviour
 			//Debug.Log(Const.CARD_DATA_PATH(deck[randPos]));
 			//依据编号，从文件中读取卡牌数据
 			//Card card = new Card(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(deck[randPos])));
-			Card card = new Card(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(deck[usedFlag])));
+			CardSOAsset card = Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(deck[usedFlag]));
 			usedFlag++;
 
-			newCard.GetComponent<CardDisplay>().card = card;
+			newCard.GetComponent<CardDisplay>().Initialized(card);
 			newCard.GetComponent<CardDisplay>().LoadInf();
 
 
@@ -201,23 +201,25 @@ public class BattleSystem : MonoBehaviour
 	}
 	public void UseCardByPlayer(GameObject _cardObject)  //使用卡牌
 	{
-		Card _card = _cardObject.GetComponent<CardDisplay>().card;
-		if(player.CurrentActionPoint - _card.cost >= 0)
+		CardSOAsset _card = _cardObject.GetComponent<CardDisplay>().card;
+		if(player.CurrentActionPoint - _card.Cost >= 0)
 		{
-			if (_card.cardType == CardType.Spell)
+			if (_card.CardType == CardType.Spell)
 			{
 				//使用法术卡
-				AttackRequest(_cardObject, AttackType.SpellAttack, _cardObject.transform.position);
+				//AttackRequest(_cardObject, EffectType.SpellAttack, _cardObject.transform.position);
 			}
 			else
 			{
-				if ((_card.cardType == CardType.Survent && PlayerSurventUnits.Count < 7))
+				if ((_card.CardType == CardType.Survent && PlayerSurventUnits.Count < 7))
 				{
 					GameObject newSurvent = Instantiate(surventPrefab, surventArea.transform);
 					newSurvent.GetComponent<SurventUnitManager>().Initialized(_card);
 					PlayerSurventUnits.Add(newSurvent);
+					//触发放置效果
+					newSurvent.GetComponent<SurventUnitManager>().SetupEffect();
 
-					player.CurrentActionPoint -= _card.cost;
+					player.CurrentActionPoint -= _card.Cost;
 					handCards.Remove(_cardObject);
 					//usedCards.Add(_card.cardID);
 					Destroy(_cardObject);
@@ -229,9 +231,9 @@ public class BattleSystem : MonoBehaviour
 			Debug.Log("战术点不足");
 		}
 	}
-	public void SetupSurventByBoss(Card _card)
+	public void SetupBossSurvent(CardSOAsset _card)
 	{
-		if(_card.cardType == CardType.Monster && BossSurventUnits.Count < 7)
+		if(_card.CardType == CardType.Monster && BossSurventUnits.Count < 7)
 		{
 			GameObject newEnemy = Instantiate(enemyPrefab, enemyArea.transform);
 			newEnemy.GetComponent<SurventUnitManager>().Initialized(_card);
@@ -249,14 +251,16 @@ public class BattleSystem : MonoBehaviour
 	}
 	//一套攻击方法
 	public GameObject attacker { get; private set; }
-	public AttackType attackType { get; private set; }
+	public CardType attackerType { get; private set; }
+	public TargetOptions attackTarget { get; private set; }
+	public CardActionType actionType { get; private set; }
 	public GameObject victim { get; private set; }
 
 	public GameObject arrowPrefab;
 	public GameObject arrow; //攻击箭头
 	public Transform canvas;
 	//1 攻击请求
-	public void AttackRequest(GameObject _request, AttackType _type, Vector2 _startPoint)
+	public void AttackRequest(GameObject _request, CardType _atkerType , TargetOptions _target,CardActionType _action , Vector2 _startPoint)
 	{
 		if(arrow == null)
 		{
@@ -264,7 +268,9 @@ public class BattleSystem : MonoBehaviour
 			arrow = GameObject.Instantiate(arrowPrefab, canvas);
 			arrow.GetComponent<TestArrow>().SetStartPoint(_startPoint);
 			attacker = _request;
-			attackType = _type;
+			attackerType = _atkerType;
+			attackTarget = _target;
+			actionType = _action;
 		}
 	}
 	//2 目标确认受击
@@ -272,32 +278,42 @@ public class BattleSystem : MonoBehaviour
 	{
 		if(attacker != null)
 		{
-			if(attackType == AttackType.SurventAttack)
+			victim = _confirm;
+			//检查是否误攻击
+			if(attackTarget == TargetOptions.SinglePlayerCreatures)
 			{
-				//TODO 检查敌方是否有嘲讽对象
-				victim = _confirm;
-				Debug.Log("攻击成功");
+
+			}
+			else if(attackTarget == TargetOptions.SingleEnemyCreature)
+			{
+
+			}
+			else
+			{
+				AttackOver();
+			}
+			//TODO 检查敌方是否有嘲讽或隐匿对象
+			if (attackerType == CardType.Survent)
+			{	
+
+				//Debug.Log("攻击成功");
 				attacker.GetComponent<SurventUnitManager>().isActive = false;
 				Effect.Set(victim, CardActionType.Attack, attacker.GetComponent<SurventUnitManager>().survent.atk);
 			}
-			else if(attackType == AttackType.SpellAttack)
+			else if(attackerType == CardType.Spell)
 			{
-				//TODO 检查敌方是否有嘲讽对象
-				victim = _confirm;
-				Card spellCard = attacker.GetComponent<CardDisplay>().card;
-				Effect.Set(victim, spellCard.spellactionType, spellCard.spellActionValue);
-				player.CurrentActionPoint -= spellCard.cost;
+				CardSOAsset spellCard = attacker.GetComponent<CardDisplay>().card;
+				Effect.Set(victim, spellCard.SpellActionType, spellCard.SpellActionValue);
+				player.CurrentActionPoint -= spellCard.Cost;
 				handCards.Remove(attacker);
 				Destroy(attacker);
 			}
 
-			Destroy(arrow);
-			attacker = null;
-			victim = null;
+			AttackOver();
 		}
 	}
-	//取消攻击请求
-	public void AttackCancel()
+	//结束攻击
+	public void AttackOver()
 	{
 		Debug.Log("Cancel");
 		if(arrow != null)

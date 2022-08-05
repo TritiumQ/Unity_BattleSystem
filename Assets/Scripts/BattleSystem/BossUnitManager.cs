@@ -54,22 +54,31 @@ public class BossUnitManager : MonoBehaviour
 		int mod = _CurrentRound % boss.actionCycle.Count;
 		switch (boss.actionCycle[mod])
 		{
-			case BossActionType.Attack:
+			case BossActionType.AOEAttack:
+				{
+					sys.playerUnitDisplay.BeAttacked(boss.ATK);
+					foreach (var obj in sys.PlayerSurventUnits)
+					{
+						//obj.SendMessage("BeAttck", boss.ATK);
+						Effect.Set(obj, CardActionType.Attack, boss.ATK);
+					}
+				}
+				break;
+			case BossActionType.AOEAttackExcludePlayer:
+				{
+					foreach (var obj in sys.PlayerSurventUnits)
+					{
+						Effect.Set(obj, CardActionType.Attack, boss.ATK);
+						//obj.SendMessage("BeAttacked", boss.ATK);
+					}
+				}
+				break;
+			case BossActionType.SingleAttack:
 				{
 					Debug.Log("Boss攻击");
 					BossAttack rnd = (BossAttack)Random.Range(0,7); //需要更好的方法从枚举中随机选取
 					switch (rnd)
 					{
-						case BossAttack.AOE:
-							{
-								sys.playerUnitDisplay.BeAttacked(boss.ATK);
-								foreach (var obj in sys.PlayerSurventUnits)
-								{
-									//obj.SendMessage("BeAttck", boss.ATK);
-									Effect.Set(obj, CardActionType.Attack, boss.ATK);
-								}
-							}
-							break;
 						case BossAttack.RandomTarget:
 							{
 								int random = Random.Range(0, sys.PlayerSurventUnits.Count + 1);
@@ -92,15 +101,6 @@ public class BossUnitManager : MonoBehaviour
 							{
 								//sys.playerUnitDisplay.BeAttacked(boss.ATK);
 								Effect.Set(sys.playerUnit, CardActionType.Attack, boss.ATK);
-							}
-							break;
-						case BossAttack.ExcludePlayer:
-							{
-								foreach (var obj in sys.PlayerSurventUnits)
-								{
-									Effect.Set(obj, CardActionType.Attack, boss.ATK);
-									//obj.SendMessage("BeAttacked", boss.ATK);
-								}
 							}
 							break;
 						case BossAttack.LowestATKTarget:

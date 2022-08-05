@@ -10,7 +10,8 @@ public class CardDisplay : MonoBehaviour
 {
 
     //
-    public Card card;
+    //public Card card;
+    public CardSOAsset card { get; private set; }
     //public OneCardManager PreviewManager;
     [Header("Text Component References")]
     public TextMeshProUGUI NameText;// 卡牌名字
@@ -50,20 +51,24 @@ public class CardDisplay : MonoBehaviour
             CardFaceGlowImage.enabled = value;
         }
     }
-    void Refresh()
+	public void Initialized(CardSOAsset _card)
+	{
+        card = _card;
+	}
+	void Refresh()
 	{
         // 更新卡牌信息
         // 添加图片
-        CardRarityImage.sprite = card.rarityImage;
-        CardGraphicImage.sprite = card.cardImage;
+        CardRarityImage.sprite = card.RarityImage;
+        CardGraphicImage.sprite = card.CardImage;
         // 添加卡牌名字
-        NameText.text = card.cardName;
+        NameText.text = card.CardName;
         // 添加卡牌费用
-        CostText.text = card.cost.ToString();
+        CostText.text = card.Cost.ToString();
         //Debug.Log(cardAsset.Cost);
         // 添加描述
-        DescriptionText.text = card.cardDescription;
-        CampText.text = card.cardCamp.ToString();
+        DescriptionText.text = card.CardDescription;
+        CampText.text = card.CardCamp.ToString();
     }
     public void LoadInf()
 	{
@@ -74,10 +79,10 @@ public class CardDisplay : MonoBehaviour
             CardFaceGlowImage.enabled = false;
             //默认关闭卡背
             CardBackImage.enabled = false;
-            if (card.cardType == CardType.Survent)
+            if (card.CardType == CardType.Survent)
             {
-                AtkText.text = card.atk.ToString();
-                HealthText.text = card.maxHP.ToString();
+                AtkText.text = card.Atk.ToString();
+                HealthText.text = card.MaxHP.ToString();
             }
             else
             {

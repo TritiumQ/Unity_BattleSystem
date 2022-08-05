@@ -14,6 +14,7 @@ public class AttackRequest : MonoBehaviour, IPointerClickHandler
     void Start()
     {
         sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
+        
     }
 
     // Update is called once per frame
@@ -30,11 +31,11 @@ public class AttackRequest : MonoBehaviour, IPointerClickHandler
             {
                 if (sys.attacker == null)
                 {
-                    sys.AttackRequest(thisObject, AttackType.SurventAttack, transform.position);
+                    sys.AttackRequest(thisObject, CardType.Survent, TargetOptions.SingleEnemyCreature, CardActionType.Attack, transform.position);
                 }
                 else
                 {
-                    sys.AttackCancel();
+                    sys.AttackOver();
                 }
             }
         }
