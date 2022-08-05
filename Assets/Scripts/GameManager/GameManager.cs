@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     {
         InitGameManager();
         player = Player.Instance;
-        PlayDataTF.GetData(player);
+        PlayerDataTF.GetData(player);
     }
     void Start()
     {
@@ -84,9 +84,9 @@ public class GameManager : MonoBehaviour
     void RefreshData() //更新游戏局内数据
     {
         //自身的玩家数据更新
-        PlayDataTF.GetData(player);
+        PlayerDataTF.GetData(player);
         //局内游戏数据更新
-        int judge = PlayDataTF.GetResult();
+        int judge = PlayerDataTF.GetResult();
         if (judge == 1)//通过当前事件
         {
             AddStep();

@@ -5,22 +5,23 @@ using UnityEngine;
 
 public class TestJSONLoader
 {
-	
+
     public static void LoadPlayerData(int _saveID)
 	{
 		if (_saveID > 0 && _saveID <= Const.MaxSaveCount)
 		{
 			string json = null;
-			FileStream fs = new FileStream(Const.PLAYER_DATAS_PATH(_saveID), FileMode.Open, FileAccess.Read);
+			FileStream fs = new FileStream(Const.PLAYER_DATA_PATH(_saveID), FileMode.Open, FileAccess.Read);
 			if(fs != null)
 			{
 				json = new StreamReader(fs).ReadToEnd();
 			}
-			JsonUtility.FromJsonOverwrite(json, Player.Instance);	
+			JsonUtility.FromJsonOverwrite(json, Player.Instance);
+			
 		}
 	}
 
-	public static void SavePlayerData(Player _player)
+	public static void SavePlayerData()
 	{
 
 	}

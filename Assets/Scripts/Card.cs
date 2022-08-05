@@ -59,7 +59,7 @@ public class Card
         asset = _asset;
         if(asset != null)
 		{
-            cardID = asset.CardID;
+            /*cardID = asset.CardID;
             cardName = asset.CardName;
             cardDescription = asset.CardDescription;
             cardRarity = asset.CardRarity;
@@ -105,6 +105,7 @@ public class Card
             spellActionValue = asset.SpellActionValue;
             targets = asset.Targets;
             spellactionType = asset.SpellActionType;
+            */
 		}
     }
 }

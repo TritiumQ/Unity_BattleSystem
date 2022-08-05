@@ -32,24 +32,28 @@ public class CardSOAsset : ScriptableObject
     public int SetupEffectValue1;
     public int SetupEffectValue2;
     public TargetOptions SetupEffectTarget;
+    public int SetupEffectTargetCount;
     [Header("亡语信息")]
     public bool IsUndead; //亡语
     public CardActionType DeadWhisperEffect;
     public int DeadWhisperEffectValue1;
     public int DeadWhisperEffectValue2;
     public TargetOptions DeadWhisperEffectTarget;
-	[Header("先机信息")]
+    public int DeadWhisperEffectTargetCount;
+    [Header("先机信息")]
     public bool IsAdvanced; //先机
     public CardActionType AdvancedEffect;
     public int AdvancedEffectValue1;
     public int AdvancedEffectValue2;
     public TargetOptions AdvancedEffectTarget;
-	[Header("后手信息")]
+    public int AdvancedEffectTargetCount;
+    [Header("后手信息")]
     public bool IsSubsequent; //后手
     public CardActionType SubsequentEffect;
     public int SubsequentEffectValue1;
     public int SubsequentEffectValue2;
     public TargetOptions SubsequentEffectTarget;
+    public int SubsequentEffectTargetCount;
     //此两项弃用
     //public string CreatureScriptName;// 生物脚本名
     //public int SpecialCreatureAmount;// 技能数值
@@ -58,7 +62,8 @@ public class CardSOAsset : ScriptableObject
     public bool IsCopied; //复制体标记
     //public string SpellScriptName;
     public CardActionType SpellActionType;
-    public int SpellActionValue;
+    public int SpellActionValue1;
+    public int SpellActionValue2;
     public TargetOptions Targets;
-
+    public int TargetCount;
 }

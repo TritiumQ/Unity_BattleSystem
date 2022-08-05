@@ -13,7 +13,7 @@ public class CardTrigger : MonoBehaviour, IPointerClickHandler
 		{
 
 			BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
-			if (thisCard.GetComponent<CardDisplay>().card.cardType == CardType.Spell)
+			if (thisCard.GetComponent<CardDisplay>().card.CardType == CardType.Spell)
 			{
 				if (sys.attacker == null)
 				{

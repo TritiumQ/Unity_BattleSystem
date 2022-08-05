@@ -47,7 +47,7 @@ public static class Const
 	{
         return "BossDatas/MON-" + _id.ToString("D3");
     }
-    public static string PLAYER_DATAS_PATH(int _id)
+    public static string PLAYER_DATA_PATH(int _id)
 	{
         return UnityEngine.Application.dataPath + "/PlayerDatas/" + _id.ToString("D2") + ".json";
 	}
@@ -73,6 +73,8 @@ public enum TargetOptions //卡牌目标选项
 
     SinglePlayerCreatures, //单个玩家目标
     SingleEnemyCreature, //单个敌方目标
+
+
 
     AllCharacters,  //所有随从（不包括玩家和boss）
     PlayerCharacter, //所有玩家随从 （不包括玩家）

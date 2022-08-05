@@ -303,7 +303,7 @@ public class BattleSystem : MonoBehaviour
 			else if(attackerType == CardType.Spell)
 			{
 				CardSOAsset spellCard = attacker.GetComponent<CardDisplay>().card;
-				Effect.Set(victim, spellCard.SpellActionType, spellCard.SpellActionValue);
+				Effect.Set(victim, spellCard.SpellActionType, spellCard.SpellActionValue1, spellCard.SpellActionValue2);
 				player.CurrentActionPoint -= spellCard.Cost;
 				handCards.Remove(attacker);
 				Destroy(attacker);
@@ -325,24 +325,28 @@ public class BattleSystem : MonoBehaviour
 	}
 	//胜利
 	public GameObject vectory;
-	public void Vectory()
+	public void Victory()
 	{
 		Debug.Log("好耶~！");
 		vectory.SetActive(true);
 		//TODO 胜利后结算
+		PlayerDataTF.EventContinue();
+		SceneManager.LoadScene("GameProcess");
+
 	}
 	//相关信息载入方法
-	public void SetBossInf(BossInBattle _boss)
+	public void SetBossInf(int _bossID)
 	{
-		boss = _boss;
+		boss = new BossInBattle(Resources.Load<BossSOAsset>(Const.BOSS_DATA_PATH(_bossID)));
 	}
 	public void SetPlayerInf(PlayerBattleInformation _info)
 	{
-		player.MaxHP = _info.maxHP;
-		player.CurrentHP = _info.currentHP;
-		deck = _info.cardSet;
+		player = new PlayerInBattle(_info);
+		//player.MaxHP = _info.maxHP;
+		//player.CurrentHP = _info.currentHP;
+		//deck = _info.cardSet;
 	}
-
+	
 	void TestSetData() //测试载入数据
 	{
 		Debug.Log("Start Data Setting...");

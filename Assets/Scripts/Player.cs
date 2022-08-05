@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 [SerializeField]
+
 public class Player
 {
     //单例模式
@@ -26,7 +27,10 @@ public class Player
     public List<int> cardSet  { get; private set; } //牌组
     //0~199  200~399
     bool[] unlock; //记录已解锁的卡牌
+    public void Initialized(DefaultPlayer _info) //载入数据
+	{
 
+	}
     //战斗系统所用的三个方法（没动过）
 	public PlayerBattleInformation GetBattleInf()
 	{

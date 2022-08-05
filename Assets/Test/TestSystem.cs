@@ -48,7 +48,7 @@ public class TestSystem : MonoBehaviour
 			int flg = idx++;
 			Debug.Log(Const.CARD_DATA_PATH(flg));
 			Card card = new Card(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(flg)));
-			newCard.GetComponent<CardDisplay>().card = card;
+			//newCard.GetComponent<CardDisplay>().card = card;
 			gameObjects.Add(newCard);
 
 			countText.text = gameObjects.Count.ToString();

@@ -29,29 +29,35 @@ public class SurventInBattle
     public int deadWhisperEffectValue1;
     public int deadWhisperEffectValue2;
     public TargetOptions deadWhisperTarget;
+    public int DeadWhisperEffectTargetCount;
 
     public bool isAdvanced; //先机
     public CardActionType advancedEffect;
     public int advancedEffectValue1;
     public int advancedEffectValue2;
     public TargetOptions advancedEffectTarget;
+    public int AdvancedEffectTargetCount;
 
     public bool isSubsequent; //后手
     public CardActionType subsequentEffect;
     public int subsequentEffectValue1;
     public int subsequentEffectValue2;
     public TargetOptions subsequentEffectTarget;
+    public int SubsequentEffectTargetCount;
+
     //随从放置时效果
     public bool IsSetupEffect;
     public CardActionType SetupEffect;
     public int SetupEffectValue1;
     public int SetupEffectValue2;
     public TargetOptions SetupEffectTarget;
+    public int SetupEffectTargetCount;
 
 
     public SurventInBattle(Card _card)
     //弃用
     {
+        /*
         this.card = _card;
         atk = card.atk;
         maxHP = card.maxHP;
@@ -100,7 +106,7 @@ public class SurventInBattle
         SetupEffect = card.SetupEffect;
         SetupEffectValue = card.SetupEffectValue;
         SetupEffectTarget = card.SetupEffectTarget;
-        
+        */
 	}
     public SurventInBattle(CardSOAsset _asset)
 	{
@@ -138,25 +144,28 @@ public class SurventInBattle
         deadWhisperEffectValue1 = _asset.DeadWhisperEffectValue1;
         deadWhisperEffectValue2 = _asset.DeadWhisperEffectValue2;
         deadWhisperTarget = _asset.DeadWhisperEffectTarget;
+        DeadWhisperEffectTargetCount = _asset.DeadWhisperEffectTargetCount;
 
         isAdvanced = _asset.IsAdvanced;
         advancedEffect = _asset.AdvancedEffect;
         advancedEffectTarget = _asset.AdvancedEffectTarget;
         advancedEffectValue1 = _asset.AdvancedEffectValue1;
         advancedEffectValue2 = _asset.AdvancedEffectValue2;
+        AdvancedEffectTargetCount = _asset.AdvancedEffectTargetCount;
 
         isSubsequent = _asset.IsSubsequent;
         subsequentEffect = _asset.SubsequentEffect;
         subsequentEffectTarget = _asset.SubsequentEffectTarget;
         subsequentEffectValue1 = _asset.SubsequentEffectValue1;
         subsequentEffectValue2 = _asset.SubsequentEffectValue2;
+        SubsequentEffectTargetCount = _asset.SubsequentEffectTargetCount;
 
         IsSetupEffect = _asset.IsSetupEffect;
         SetupEffect = _asset.SetupEffect;
         SetupEffectTarget = _asset.SetupEffectTarget;
         SetupEffectValue1 = _asset.SetupEffectValue1;
         SetupEffectValue2 = _asset.SetupEffectValue2;
-
+        SetupEffectTargetCount = _asset.SetupEffectTargetCount;
 
     }
 }

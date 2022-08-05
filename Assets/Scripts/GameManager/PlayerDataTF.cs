@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class PlayDataTF
+public static class PlayerDataTF
 {
     //游戏局内数据与局内各事件结束后玩家数据交互中转站
     private static bool playerAllow = false; //是否允许获取玩家数据
