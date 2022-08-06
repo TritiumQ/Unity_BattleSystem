@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public int step;     //关卡步骤
     public int[] GameEventCount; //每层关卡数量
     public int level;     //层数
+    public int result=-1;    //游戏结局
     List<int> GameEvent; //游戏事件
 
     public GameObject eventPrefab;
@@ -74,13 +75,7 @@ public class GameManager : MonoBehaviour
         }
         LoadManager.GetComponent<LoadManager>().NextScene(GameEvent[step]);//设置下一关场景加载
     }
-    void RefreshScenes() //更新游戏局内场景
-    {
-        //玩家数据显示更新
-        //游戏进程显示更新
-        //事件按钮显示更新
-        //
-    }
+    
     void RefreshData() //更新游戏局内数据
     {
         //自身的玩家数据更新
@@ -91,16 +86,19 @@ public class GameManager : MonoBehaviour
         {
             AddStep();
         }
-        else if (judge == -1 || player.currentHP <= 0)
+        else if (judge == -1 /*|| player.currentHP <= 0*/)
         {
             Gameover(0);//游戏失败
         }
     }
     void Gameover(int _result) //局内游戏结束
     {
+        result = _result;
+        player.AddMoney(2 * step, 0); //游戏奖励
         //_result控制结局走向,暂定 0是失败，1是胜利......
-        Debug.Log("游戏失败");
+        //Debug.Log("游戏失败");
         //切换End场景
+        SceneManager.LoadScene("EndScene");
     }
 
 
@@ -118,10 +116,11 @@ public class GameManager : MonoBehaviour
         {
             AddLevel();
         }
+        //TODO
+        //数据保存
     }
     void AddLevel()
     {
-        step = 0;
         level++;
         if(level<=4)
         {
@@ -129,9 +128,9 @@ public class GameManager : MonoBehaviour
         }
         else//游戏通关
         {
-            Gameover(1);
-            //进入结算页面
+            Gameover(1); //进入结算页面
         }
+        step = 0;
     }
     float SetPosition(int i,float low,float up)//设置x轴位置
     {
