@@ -114,3 +114,11 @@ public enum CardActionType
     //*亡语*，*先机*，*每回合开始时*，*每回合结束时*的效果通用
 }
 
+public static class LevelEvent
+{
+    public static int[] GameEventCount = { 0, 5, 6, 7, 8 };//初始化每层关卡数量（1-4）
+    public static int[] level_1 = { 1, 1, 3, 3, 4 };
+    public static int[] level_2 = { 1, 1, 3, 3, 4, 2 };
+    public static int[] level_3 = { 1, 1, 1, 2, 3, 3, 5 };
+    public static int[] level_4 = { 1, 1, 1, 13, 3, 4, 2, 5 };
+}

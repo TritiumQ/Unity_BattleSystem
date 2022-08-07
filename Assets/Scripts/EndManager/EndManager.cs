@@ -20,6 +20,7 @@ public class EndManager : MonoBehaviour
         GameObject _object= GameObject.Find("GameManager");
         if (_object != null) 
         {
+            //stepº∆À„”–ŒÛ
             step = _object.GetComponent<GameManager>().step;
             level= _object.GetComponent<GameManager>().level;
             result= _object.GetComponent<GameManager>().result;

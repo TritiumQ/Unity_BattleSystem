@@ -8,11 +8,13 @@ public class GameManager : MonoBehaviour
 {
     Player player;       //设置为单例模式
 
+    //TODO
+    //结构优化
     public int step;     //关卡步骤
     public int[] GameEventCount; //每层关卡数量
     public int level;     //层数
     public int result=-1;    //游戏结局
-    List<int> GameEvent; //游戏事件
+    public List<int> GameEvent; //游戏事件
 
     public GameObject eventPrefab;
     public GameObject levelUI;
@@ -36,13 +38,14 @@ public class GameManager : MonoBehaviour
     {
         RefreshData(); //数据更新
     }
-    public void InitGameManager() //初始化游戏管理者对象
+    void InitGameManager() //初始化游戏管理者对象
     {
 
         //Player数据加载
 
         //关卡数据初始化
-        GameEventCount = new int[5] { 0, 5, 6, 7, 8 }; //初始化每层关卡数量（1-4）
+        //GameEventCount = new int[5] { 0, 5, 6, 7, 8 }; 
+        GameEventCount = LevelEvent.GameEventCount;//初始化每层关卡数量
         InitGameEvent();
         //加载关卡进度数据（重新进入游戏的进度加载）
     }
