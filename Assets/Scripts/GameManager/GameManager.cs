@@ -52,22 +52,24 @@ public class GameManager : MonoBehaviour
     void InitGameEvent(int _level = 1)   //初始化/设置 游戏事件
     {
         level = _level; //初始化所在层数
-        step = 0;//初始化所在事件
+        if(level==1)//初始化所在事件
+            step = 0;
         GameEvent = new List<int>();
-        levelUI.GetComponent<LevelUI>().SetLevel(level); //刷新层区UI
-        for (int i = eventUnit.Count - 1; i >= 0; i--) //销毁原有事件UI对象
+
+        //刷新层区UI
+        levelUI.GetComponent<LevelUI>().SetLevel(level);
+        
+        //销毁原有事件UI对象
+        for (int i = eventUnit.Count - 1; i >= 0; i--)
         {
             Destroy(eventUnit[i]);
         }
         eventUnit.Clear();
-        //Debug.Log(GameEventCount[_level]);
-        for (int i = 0; i < GameEventCount[_level]; i++) //随机生成事件的类型
-        {
-            if (i == GameEventCount[_level] - 1) //最后一个事件，非随机
-                GameEvent.Add(5);
-            else GameEvent.Add(Random.Range(1, 5));
-        }
-        //Debug.Log(GameEventCount);
+        
+        //伪随机生成事件的类型
+        GetComponent<GetRandom>().GetRandomEvent(GameEvent,level);
+        
+        //初始化事件预制体对象链表
         for (int i = 0; i < GameEventCount[_level]; i++)//初始化事件预制体对象链表
         {
             GameObject newEvent = Instantiate(eventPrefab, transform); //生成事件预制件
@@ -76,7 +78,9 @@ public class GameManager : MonoBehaviour
                 newEvent.GetComponent<EventUI>().SetEventSign(GameEvent[i]); //设置事件对象的类型
             eventUnit.Add(newEvent);
         }
-        LoadManager.GetComponent<LoadManager>().NextScene(GameEvent[step]);//设置下一关场景加载
+        
+        //设置下一关场景加载
+        LoadManager.GetComponent<LoadManager>().NextScene(GameEvent[step]);
     }
     
     void RefreshData() //更新游戏局内数据
@@ -133,7 +137,7 @@ public class GameManager : MonoBehaviour
         {
             Gameover(1); //进入结算页面
         }
-        step = 0;
+        step = 0;//重置步数
     }
     float SetPosition(int i,float low,float up)//设置x轴位置
     {

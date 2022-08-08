@@ -120,5 +120,11 @@ public static class LevelEvent
     public static int[] level_1 = { 1, 1, 3, 3, 4 };
     public static int[] level_2 = { 1, 1, 3, 3, 4, 2 };
     public static int[] level_3 = { 1, 1, 1, 2, 3, 3, 5 };
-    public static int[] level_4 = { 1, 1, 1, 13, 3, 4, 2, 5 };
+    public static int[] level_4 = { 1, 1, 1, 3, 3, 4, 2, 5 };
+
+    public static int[] GetArrray(int[] _target)
+    {
+        int[] copy = (int[])_target.Clone();
+        return copy;
+    }
 }

@@ -7,7 +7,11 @@ using UnityEngine;
 public class Player
 {
     //单例模式
-    private Player() { }
+    private Player() 
+    {
+        cardSet = new List<int>();
+        unlock = new bool[400];
+    }
     private static Player instance;//全局唯一实例
     public static Player Instance //获取实例的属性
     {
@@ -31,7 +35,7 @@ public class Player
 	{
 
 	}
-    //战斗系统所用的三个方法（没动过）
+    //战斗系统所用的三个方法
 	public PlayerBattleInformation GetBattleInf()
 	{
         PlayerBattleInformation info = new PlayerBattleInformation();
