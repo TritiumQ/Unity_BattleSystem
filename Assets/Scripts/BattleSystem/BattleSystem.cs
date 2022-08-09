@@ -330,10 +330,11 @@ public class BattleSystem : MonoBehaviour
 		Debug.Log("好耶~！");
 		vectory.SetActive(true);
 		//TODO 胜利后结算
-		PlayerDataTF.EventContinue();
-		SceneManager.LoadScene("GameProcess");
+		//PlayerDataTF.EventContinue();
+		//SceneManager.LoadScene("GameProcess");
 
 	}
+
 	//相关信息载入方法
 	public void SetBossInf(int _bossID)
 	{
@@ -350,11 +351,12 @@ public class BattleSystem : MonoBehaviour
 	void TestSetData() //测试载入数据
 	{
 		Debug.Log("Start Data Setting...");
-		player = new PlayerInBattle(20, 10, 1, 1);
+		Save.LoadPlayerData(1);
+
+		player = new PlayerInBattle(Player.Instance);
 		playerUnitDisplay.player = player;
 
-		boss = new BossInBattle(Resources.Load<BossSOAsset>(Const.BOSS_DATA_PATH(1)));
-		bossUnitManager.boss = boss;
+		bossUnitManager.Initialized(Resources.Load<BossSOAsset>(Const.BOSS_DATA_PATH(1)));
 
 		Debug.Log("测试载入数据完成");
 	}

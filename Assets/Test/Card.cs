@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
-[System.Serializable]
-//计划弃用该类
+/// <summary>
+/// 已弃用，请勿使用该类
+/// </summary>
+/// <return></return>
 public class Card 
 {
+    /*
     readonly CardSOAsset asset;
 
     public int cardID;
@@ -105,7 +107,7 @@ public class Card
             spellActionValue = asset.SpellActionValue;
             targets = asset.Targets;
             spellactionType = asset.SpellActionType;
-            */
+            
 		}
-    }
+    }*/
 }

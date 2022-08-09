@@ -53,61 +53,6 @@ public class SurventInBattle
     public TargetOptions SetupEffectTarget;
     public int SetupEffectTargetCount;
 
-
-    public SurventInBattle(Card _card)
-    //弃用
-    {
-        /*
-        this.card = _card;
-        atk = card.atk;
-        maxHP = card.maxHP;
-        currentHP = maxHP;
-
-        isRaid = card.isRaid;
-
-        if(card.isTank == true)
-		{
-            //Debug.Log("坦克卡");
-            tauntRounds = Const.Forever;
-		}
-        else
-		{
-            tauntRounds = 0;
-		}
-
-        inspireRounds = 0;
-        inspireValue = 0;
-        concealRounds = 0;
-        protectedTimes = 0;
-        doubleHitRounds = 0;
-
-        if(card.IsVampire == true)
-		{
-            vampireRounds = Const.Forever;
-		}
-        else
-		{
-            vampireRounds = 0;
-        }
-
-        isUndead = card.isUndead;
-        deadWhisperEffect = card.deadWhisperEffect;
-        deadWhisperEffectValue = card.deadWhisperEffectValue;
-
-        isSubsequent = card.isSubsequent;
-        subsequentEffect = card.subsequentEffect;
-        subsequentEffectValue = card.subsequentEffectValue;
-
-        isAdvanced = card.isAdvanced;
-        advancedEffect = card.advancedEffect;
-        advancedEffectValue = card.advancedEffectValue;
-
-        IsSetupEffect = card.IsSetupEffect;
-        SetupEffect = card.SetupEffect;
-        SetupEffectValue = card.SetupEffectValue;
-        SetupEffectTarget = card.SetupEffectTarget;
-        */
-	}
     public SurventInBattle(CardSOAsset _asset)
 	{
         //改用CardSOAsset创建对象

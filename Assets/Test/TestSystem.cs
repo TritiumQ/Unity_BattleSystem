@@ -8,6 +8,6 @@ public class TestSystem : MonoBehaviour
 	public Button func1;
 	public void Awake()
 	{
-		func1.onClick.AddListener(TestJSONLoader.ResetPlayerDataFile);
+		func1.onClick.AddListener(Save.ResetPlayerDataFile);
 	}
 }

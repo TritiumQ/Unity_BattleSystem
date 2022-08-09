@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-public class CardHub : MonoBehaviour
+public class TestCardHub : MonoBehaviour
 {
 	Button save, start;
 

@@ -10,16 +10,18 @@ public class DeckManager : MonoBehaviour
     public GameObject deckPrefab;//卡组卡牌预制体；
     public GameObject cardPrefab;//仓库卡牌预制体；
     public GameObject DataManager;//挂载的预制体；
-    private PlayerData playerData;//玩家数据；
-    private CardStore CardStore;//仓库卡牌；
+    //private PlayerData playerData;//玩家数据；
+
+    //private CardStore CardStore;//仓库卡牌；
+
     private List<GameObject> cardPool = new List<GameObject>();
     private Dictionary<int, GameObject> libraryDic = new Dictionary<int, GameObject>();//记录卡库卡牌预制体与卡牌id信息；
     private Dictionary<int, GameObject> deckDic = new Dictionary<int, GameObject>();//记录卡组卡牌与卡牌id信息；
     // Start is called before the first frame update
     void Start()
     {
-        playerData = DataManager.GetComponent<PlayerData>();
-        CardStore = playerData.GetComponent<CardStore>();
+        //playerData = DataManager.GetComponent<PlayerData>();
+        //CardStore = playerData.GetComponent<CardStore>();
         UpdateLibrary();
     }
 
@@ -32,13 +34,15 @@ public class DeckManager : MonoBehaviour
     //将卡库卡牌展现出来；
     public void UpdateLibrary()
     {
-         for (int i = 0; i < playerData.playerCards.Length; i++)
-        {
-         if (playerData.playerDeck[i] != 0)
+        /*
+        for (int i = 0; i < playerData.playerCards.Length; i++)
+		{
+            if (playerData.playerDeck[i] != 0)
             {
                 CreatCard(i, CardState.Library);
             }
-         }
+        }
+        */
     }
     /*
     public void UpdataDeck()
@@ -53,6 +57,7 @@ public class DeckManager : MonoBehaviour
     }*/
     public void UpdataCard(CardState _state,int _id)
     {
+        /*
         //若是点击了卡组牌，卡组牌减1回到卡库；
         if (_state == CardState.Deck)
         {
@@ -99,9 +104,11 @@ public class DeckManager : MonoBehaviour
             Text.text = count.ToString();//类型string转int再转回string显示；
            
         }
+        */
     }
    public void CreatCard(int _id,CardState _cardState)
     {
+        /*
         Transform targetPanel= libraryPanel;
         GameObject targetPrefab = cardPrefab;
         var reData = playerData.playerCards;
@@ -121,6 +128,7 @@ public class DeckManager : MonoBehaviour
         //TODO
         //newCard.GetComponent<CardDisplay>().card = CardStore.cardList[_id];
         deckDic.Add(_id, newCard);
+        */
     }
 }
    

@@ -21,23 +21,20 @@ public class BossUnitManager : MonoBehaviour
 	{
 		Refresh();
 	}
-	public void Vectory()
-	{
-
-	}
 	void Refresh()
 	{
 		if(boss != null) //显示刷新
 		{
 			hpText.text = boss.currentHP.ToString();
 			atkText.text = boss.ATK.ToString();
+			if (boss.currentHP <= 0)
+			{
+				Debug.Log("Boss已击败，战斗胜利");
+				//胜利特效
+				GameObject.Find("BattleSystem").GetComponent<BattleSystem>().Victory();
+			}
 		}
-		if (boss.currentHP <= 0)
-		{
-			Debug.Log("Boss已击败，战斗胜利");
-			//胜利特效
-			GameObject.Find("BattleSystem").GetComponent<BattleSystem>().Victory();
-		}
+		
 	}
 	public void CheckBuff() //每回合结束时调用
 	{
@@ -184,7 +181,7 @@ public class BossUnitManager : MonoBehaviour
 				{
 					Debug.Log("Boss设置随从");
 					int rnd = Random.Range(0, boss.SurventList.Count);
-					sys.SetupBossSurvent(Resources.Load<CardSOAsset>(Const.MONSTER_CARD_PATH(boss.SurventList[rnd])));
+					sys.SetupBossSurvent(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(boss.SurventList[rnd])));
 
 				}
 				break;

@@ -7,10 +7,10 @@ public class CardInDeck
 	public string cardName;
 	public int cardID;
 	public int cardCost;
-    public CardInDeck(Card _card)
+    public CardInDeck(CardSOAsset _card)
 	{
-		cardName = _card.cardName;
-		cardID = _card.cardID;
-		cardCost = _card.cost;
+		cardName = _card.CardName;
+		cardID = _card.CardID;
+		cardCost = _card.Cost;
 	}
 }

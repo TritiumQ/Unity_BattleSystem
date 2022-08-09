@@ -12,7 +12,7 @@ public class CardInDeckManager : MonoBehaviour
 	public TextMeshProUGUI cardCountText;
 
 	public int currentCount;
-	public void Initialized(Card _card)
+	public void Initialized(CardSOAsset _card)
 	{
 		cardInDeck = new CardInDeck(_card);
 	}

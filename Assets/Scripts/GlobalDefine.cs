@@ -30,32 +30,49 @@ public enum GetSurventInfomation
 /// <returns></returns>
 public static class Const
 {
-    //返回相应资源文件位置字符串
+    //这只是糖
+    /// <summary>
+    /// 范围判断，左闭右闭
+    /// </summary>
+    /// <returns></returns>
+    static bool IsInRange(int value, int left, int right)
+	{
+        return value >= left && value <= right;
+	}
+
+    /// <summary>
+    /// 获取卡牌信息文件储存路径
+    /// </summary>
+    /// <returns></returns>
     public static string CARD_DATA_PATH(int _id)
 	{
-        if (_id > 0)
+        if (IsInRange(_id,0,199))
         {
             return "CardDatas/SVN-" + _id.ToString("D3");
         }
-        else if (_id < 0)
+        else if (IsInRange(_id,200,399))
         {
-            return "CardDatas/SPL-" + (-_id).ToString("D3");
+            return "CardDatas/SPL-" + _id.ToString("D3");
         }
-        else return null;
+        else if(IsInRange(_id,500,699))
+		{
+            return "CardDatas/MON-" + _id.ToString("D3");
+        }
+        else
+		{
+            return null;
+		}
     }
-    public static string MONSTER_CARD_PATH(int _id)
-	{
-        return "CardDatas/MON-" + _id.ToString("D3");
-	}
     public static string BOSS_DATA_PATH(int _id)
 	{
         return "BossDatas/MON-" + _id.ToString("D3");
     }
     public static string PLAYER_DATA_PATH(int _id)
 	{
-        return UnityEngine.Application.dataPath + "/PlayerDatas/" + _id.ToString("D2") + ".json";
+        return UnityEngine.Application.dataPath + "/PlayerDatas/Save" + _id.ToString("D2") + ".json";
 	}
-    //常量
+
+    
     public static int Forever = -1;
     public static int MaxSaveCount = 10;
     public static string InitialCode = "mikufans";
@@ -73,6 +90,7 @@ public struct PlayerBattleInformation
 /// 目标选择
 /// </summary>
 /// <returns></returns>
+/// 
 public enum TargetOptions
 {
     NoTarget,

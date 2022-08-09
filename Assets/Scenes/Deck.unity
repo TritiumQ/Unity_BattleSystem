@@ -920,7 +920,7 @@ GameObject:
   - component: {fileID: 1462306206}
   - component: {fileID: 1462306205}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: CardHub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
