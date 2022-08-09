@@ -5,6 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class CardHubSystem : MonoBehaviour
 {
+	List<GameObject> cardDeck;
+	List<GameObject> cards;
+
 	public GameObject CardHubContent;
 	public GameObject CardDeckContent;
 	List<GameObject> currentCardSet;
@@ -13,15 +16,6 @@ public class CardHubSystem : MonoBehaviour
 	{
 		
 
-	}
-	public List<int> GetCardSetInformation()
-	{
-		List<int> cardSetInformation = new List<int>();
-		for(int i = 0; i < currentCardSet.Count; i++)
-		{
-			//
-		}
-		return cardSetInformation;
 	}
 	
 }

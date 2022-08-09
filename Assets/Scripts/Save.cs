@@ -3,6 +3,7 @@ using UnityEngine;
 
 public static class Save
 {
+
 	/// <summary>
 	/// ∂¡»°¥Êµµ
 	/// </summary>

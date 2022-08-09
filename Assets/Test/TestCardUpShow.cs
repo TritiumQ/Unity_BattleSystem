@@ -56,6 +56,7 @@ public class TestCardUpShow : MonoBehaviour, IPointerExitHandler, IPointerEnterH
     {
         savePos = transform.position;
         saveOrder = cv.sortingOrder;
+        
     }
     void Start()
     {

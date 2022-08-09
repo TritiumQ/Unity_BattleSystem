@@ -121,7 +121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3081637641354913905}
-  - component: {fileID: 3081637641354913902}
+  - component: {fileID: -435671400692423294}
   m_Layer: 5
   m_Name: CardInHub
   m_TagString: Untagged
@@ -162,7 +162,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3081637641354913902
+--- !u!114 &-435671400692423294
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

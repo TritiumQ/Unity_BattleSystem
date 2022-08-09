@@ -37,23 +37,10 @@ public class CardDisplay : MonoBehaviour
 	{
         Refresh();
 	}
-
-	private bool canBePlayedNow = false;
-    public bool CanBePlayedNow
-    {
-        get
-        {
-            return canBePlayedNow;
-        }
-        set
-        {
-            canBePlayedNow = value;
-            CardFaceGlowImage.enabled = value;
-        }
-    }
 	public void Initialized(CardSOAsset _card)
 	{
         card = _card;
+        LoadInf();
 	}
 	void Refresh()
 	{
@@ -91,6 +78,7 @@ public class CardDisplay : MonoBehaviour
             }
         }
 	}
+
     public void SetPreview()
 	{
         CardFaceGlowImage.enabled = true;
