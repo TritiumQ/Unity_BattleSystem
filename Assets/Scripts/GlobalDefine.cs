@@ -68,17 +68,18 @@ public enum TargetOptions //卡牌目标选项
     NoTarget,
     
     AllCreatures, //所有单位
-    AllPlayerCreatures,  //所有玩家单位（包括玩家本体）
-    AllEnemyCreatures,  //所有敌方单位（包括boss本体）
+    PlayerCreatures,  //所有玩家单位（包括玩家本体）
+    EnemyCreatures,  //所有敌方单位（包括boss本体）
 
-    SinglePlayerCreatures, //单个玩家目标
-    SingleEnemyCreature, //单个敌方目标
+    SinglePlayerTarget, //单个玩家目标
+    SingleEnemyTarget, //单个敌方目标
 
-
+    MultiPlayerTargets,
+    MultiEnemyTargets,
 
     AllCharacters,  //所有随从（不包括玩家和boss）
     PlayerCharacter, //所有玩家随从 （不包括玩家）
-    EnemyCharacter  //所有敌方随从（不包括boss）
+    EnemyCharacters  //所有敌方随从（不包括boss）
 }
 public enum RarityRank  //稀有度
 {

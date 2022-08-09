@@ -280,11 +280,11 @@ public class BattleSystem : MonoBehaviour
 		{
 			victim = _confirm;
 			//¼ì²éÊÇ·ñÎó¹¥»÷
-			if(attackTarget == TargetOptions.SinglePlayerCreatures)
+			if(attackTarget == TargetOptions.SinglePlayerTarget)
 			{
 
 			}
-			else if(attackTarget == TargetOptions.SingleEnemyCreature)
+			else if(attackTarget == TargetOptions.SingleEnemyTarget)
 			{
 
 			}

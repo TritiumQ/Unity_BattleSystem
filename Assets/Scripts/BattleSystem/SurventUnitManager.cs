@@ -140,6 +140,8 @@ public class SurventUnitManager : MonoBehaviour
             switch (survent.deadWhisperTarget)
 			{
 
+                default:
+                    break;
 			}
 		}
         if (type == CardType.Survent)
@@ -163,6 +165,7 @@ public class SurventUnitManager : MonoBehaviour
             int value1 = survent.subsequentEffectValue1;
             int value2 = survent.subsequentEffectValue2;
 
+
             switch (survent.subsequentEffectTarget)
 			{
                 case TargetOptions.AllCreatures:
@@ -176,22 +179,22 @@ public class SurventUnitManager : MonoBehaviour
                         }
                     }
                     break;
-                case TargetOptions.AllPlayerCreatures:
+                case TargetOptions.PlayerCreatures:
 					{
 
 					}
                     break;
-                case TargetOptions.AllEnemyCreatures:
+                case TargetOptions.EnemyCreatures:
 					break;
                 case TargetOptions.AllCharacters:
                     break;
                 case TargetOptions.PlayerCharacter:
 					break;
-                case TargetOptions.EnemyCharacter:
+                case TargetOptions.EnemyCharacters:
                     break;
-                case TargetOptions.SinglePlayerCreatures:
+                case TargetOptions.SinglePlayerTarget:
                     break;
-                case TargetOptions.SingleEnemyCreature:
+                case TargetOptions.SingleEnemyTarget:
                     break;
                 case TargetOptions.NoTarget:
                     break;
