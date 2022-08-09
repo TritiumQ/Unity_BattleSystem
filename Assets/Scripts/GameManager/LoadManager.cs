@@ -55,7 +55,7 @@ public class LoadManager : MonoBehaviour
                 break;
             case 2:
                 {
-                    scene = "°²È«ÎÝ";
+                    scene = "SafeHouse";
                 }
                 break;
             case 3:
