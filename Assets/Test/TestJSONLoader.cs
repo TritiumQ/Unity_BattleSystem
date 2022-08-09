@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class TestJSONLoader
 {
-
-    public static void LoadPlayerData(int _saveID)
+	/// <summary>
+	/// ∂¡»°¥Êµµ
+	/// </summary>
+	/// <returns></returns>
+	public static void LoadPlayerData(int _saveID)
 	{
 		if (_saveID > 0 && _saveID <= Const.MaxSaveCount)
 		{
@@ -16,22 +19,42 @@ public class TestJSONLoader
 			{
 				json = new StreamReader(fs).ReadToEnd();
 			}
-			JsonUtility.FromJsonOverwrite(json, Player.Instance);
-			
+			PlayerJSONInformation save = new PlayerJSONInformation();
+			JsonUtility.FromJsonOverwrite(json, save);
+			if(save.Name != null)
+			{
+				Player.Instance.Initialized(save);
+			}
 		}
 	}
-
-	public static void SavePlayerData()
+	/// <summary>
+	/// ±£¥Ê¥Êµµ
+	/// </summary>
+	/// <returns></returns>
+	public static void SavePlayerData(int _saveID)
 	{
-
+		PlayerJSONInformation save = new PlayerJSONInformation(Player.Instance);
+		string json = null;
+		json = JsonUtility.ToJson(save);
+		FileStream fs = new FileStream(Const.PLAYER_DATA_PATH(_saveID), FileMode.OpenOrCreate, FileAccess.Write);
+		if(fs != null)
+		{
+			StreamWriter sw = new StreamWriter(fs);
+			sw.Write(json);
+			sw.Flush();
+			sw.Close();
+		}
+		fs.Close();
 	}
+
 	public static void ResetPlayerDataFile()
 	{
-		DefaultPlayer prePlayer = new DefaultPlayer();
+		Debug.Log("≥ı ºªØ¥Êµµ");
+		PlayerJSONInformation prePlayer = new PlayerJSONInformation(Const.InitialCode);
 		string json = JsonUtility.ToJson(prePlayer);
-		for(int i = 1; i <= 10; i++)
+		for(int i = 1; i <= Const.MaxSaveCount; i++)
 		{
-			string path = Application.dataPath + "/PlayerDatas/" + i.ToString("D2") + ".json";
+			string path = Application.dataPath + "/PlayerDatas/Save" + i.ToString("D2") + ".json";
 			FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
 			StreamWriter sw = new StreamWriter(fs);
 			sw.Write(json);

@@ -9,20 +9,7 @@ public class SurventUnitManager : MonoBehaviour
 {
     public GameObject thisSurvent;
     public SurventInBattle survent { get; private set; }
-    public int GetInf(GetSurventInfomation _inf)
-	{
-        switch (_inf)
-		{
-            case GetSurventInfomation.MaxHP:
-                return survent.maxHP;
-            case GetSurventInfomation.ATK:
-                return survent.atk;
-            case GetSurventInfomation.CurrentHP:
-                return survent.currentHP;
-            default:
-                return 0;
-		}
-	}
+    
     public CardType type;
     public bool isActive;
 

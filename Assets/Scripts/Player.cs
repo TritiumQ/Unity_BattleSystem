@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 [SerializeField]
@@ -7,11 +8,7 @@ using UnityEngine;
 public class Player
 {
     //单例模式
-    private Player() 
-    {
-        cardSet = new List<int>();
-        unlock = new bool[400];
-    }
+    private Player() { }
     private static Player instance;//全局唯一实例
     public static Player Instance //获取实例的属性
     {
@@ -26,15 +23,35 @@ public class Player
     public string name;
     public int maxHP;
     public int currentHP;
-    public int mithrils; //秘银
-    public int tears;  //泪滴
+    public int mithrils;//秘银
+    public int tears;//泪滴
     public List<int> cardSet  { get; private set; } //牌组
-    //0~199  200~399
-    bool[] unlock; //记录已解锁的卡牌
-    public void Initialized(DefaultPlayer _info) //载入数据
-	{
+    //0~199：随从  200~399：法术
+    public bool[] unlock { get; private set; } //记录已解锁的卡牌
 
+    /// <summary>
+    ///  初始化信息, 载入储存信息用
+    /// </summary>
+    /// <returns></returns>
+    public void Initialized(PlayerJSONInformation _info)
+	{
+        name = _info.Name;
+        maxHP = _info.MaxHP;
+        currentHP = _info.CurrentHP;
+        tears = _info.Tears;
+        mithrils = _info.Mithrils;
+
+        cardSet = new List<int>(_info.CardSet);
+
+        unlock = new bool[401];
+        Array.Fill(unlock, false);
+        foreach(var id in _info.UnlockCard)
+		{
+            unlock[id] = true;
+		}
 	}
+    
+    
     //战斗系统所用的三个方法
 	public PlayerBattleInformation GetBattleInf()
 	{
@@ -119,25 +136,3 @@ public class Player
 }
 
 //用于json测试
-public class DefaultPlayer
-{
-    public string name;
-    public int maxHP;
-    public int currentHP;
-    public int mithrils; //秘银
-    public int tears;  //泪滴
-    public List<int> cardSet { get; private set; } //牌组
-    public bool[] unlock;
-    public DefaultPlayer()
-    {
-        name = "none";
-        maxHP = 23333;
-        currentHP = 114514;
-        mithrils = 1919810;
-        tears = 361433;
-        cardSet = new List<int>();
-
-        unlock = new bool[401];
-        System.Array.Fill(unlock, false);
-    }
-}

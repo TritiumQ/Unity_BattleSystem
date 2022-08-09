@@ -76,10 +76,10 @@ public class BossUnitManager : MonoBehaviour
 			case BossActionType.SingleAttack:
 				{
 					Debug.Log("Boss攻击");
-					BossAttack rnd = (BossAttack)Random.Range(0,7); //需要更好的方法从枚举中随机选取
+					BossSingleAttack rnd = (BossSingleAttack)Random.Range(0,7); //需要更好的方法从枚举中随机选取
 					switch (rnd)
 					{
-						case BossAttack.RandomTarget:
+						case BossSingleAttack.RandomTarget:
 							{
 								int random = Random.Range(0, sys.PlayerSurventUnits.Count + 1);
 								if(random == sys.PlayerSurventUnits.Count)
@@ -97,21 +97,21 @@ public class BossUnitManager : MonoBehaviour
 								}
 							}
 							break;
-						case BossAttack.PlayerTarget:
+						case BossSingleAttack.PlayerTarget:
 							{
 								//sys.playerUnitDisplay.BeAttacked(boss.ATK);
 								Effect.Set(sys.playerUnit, CardActionType.Attack, boss.ATK);
 							}
 							break;
-						case BossAttack.LowestATKTarget:
+						case BossSingleAttack.LowestATKTarget:
 							{
 								if(sys.PlayerSurventUnits.Count > 0)
 								{
 									var target = sys.PlayerSurventUnits[0];
 									foreach (var obj in sys.PlayerSurventUnits)
 									{
-										if (obj != null && obj.GetComponent<SurventUnitManager>().GetInf(GetSurventInfomation.ATK)
-											< target.GetComponent<SurventUnitManager>().GetInf(GetSurventInfomation.ATK))
+										if (obj != null && obj.GetComponent<SurventUnitManager>().survent.atk
+											< target.GetComponent<SurventUnitManager>().survent.atk)
 										{
 											target = obj;
 										}
@@ -121,15 +121,15 @@ public class BossUnitManager : MonoBehaviour
 								}
 							}
 							break;
-						case BossAttack.HigestATKTarget:
+						case BossSingleAttack.HigestATKTarget:
 							{
 								if (sys.PlayerSurventUnits.Count > 0)
 								{
 									var target = sys.PlayerSurventUnits[0];
 									foreach (var obj in sys.PlayerSurventUnits)
 									{
-										if (obj != null && obj.GetComponent<SurventUnitManager>().GetInf(GetSurventInfomation.ATK)
-											> target.GetComponent<SurventUnitManager>().GetInf(GetSurventInfomation.ATK))
+										if (obj != null && obj.GetComponent<SurventUnitManager>().survent.atk
+											> target.GetComponent<SurventUnitManager>().survent.atk)
 										{
 											target = obj;
 										}
@@ -139,15 +139,15 @@ public class BossUnitManager : MonoBehaviour
 								}
 							}
 							break;
-						case BossAttack.LowestHPTarget:
+						case BossSingleAttack.LowestHPTarget:
 							{
 								if (sys.PlayerSurventUnits.Count > 0)
 								{
 									var target = sys.PlayerSurventUnits[0];
 									foreach (var obj in sys.PlayerSurventUnits)
 									{
-										if (obj != null && obj.GetComponent<SurventUnitManager>().GetInf(GetSurventInfomation.CurrentHP)
-											< target.GetComponent<SurventUnitManager>().GetInf(GetSurventInfomation.CurrentHP))
+										if (obj != null && obj.GetComponent<SurventUnitManager>().survent.currentHP
+											< target.GetComponent<SurventUnitManager>().survent.currentHP)
 										{
 											target = obj;
 										}
@@ -157,15 +157,15 @@ public class BossUnitManager : MonoBehaviour
 								}
 							}
 							break;
-						case BossAttack.HighestHPTarget:
+						case BossSingleAttack.HighestHPTarget:
 							{
 								if (sys.PlayerSurventUnits.Count > 0)
 								{
 									var target = sys.PlayerSurventUnits[0];
 									foreach (var obj in sys.PlayerSurventUnits)
 									{
-										if (obj != null && obj.GetComponent<SurventUnitManager>().GetInf(GetSurventInfomation.CurrentHP)
-											> target.GetComponent<SurventUnitManager>().GetInf(GetSurventInfomation.CurrentHP))
+										if (obj != null && obj.GetComponent<SurventUnitManager>().survent.currentHP
+											> target.GetComponent<SurventUnitManager>().survent.currentHP)
 										{
 											target = obj;
 										}

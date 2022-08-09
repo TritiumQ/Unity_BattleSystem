@@ -1,4 +1,5 @@
-public enum BossActionType  //
+
+public enum BossActionType
 {
     Skip,
     AOEAttack,
@@ -7,7 +8,7 @@ public enum BossActionType  //
     Summon,
 
 }
-public enum BossAttack
+public enum BossSingleAttack
 {
     PlayerTarget,
     RandomTarget,
@@ -23,7 +24,10 @@ public enum GetSurventInfomation
     MaxHP,
     Type
 }
-
+/// <summary>
+/// 常量类
+/// </summary>
+/// <returns></returns>
 public static class Const
 {
     //返回相应资源文件位置字符串
@@ -54,6 +58,7 @@ public static class Const
     //常量
     public static int Forever = -1;
     public static int MaxSaveCount = 10;
+    public static string InitialCode = "mikufans";
     
 }
 public struct PlayerBattleInformation
@@ -63,7 +68,12 @@ public struct PlayerBattleInformation
     public int currentHP;
     public System.Collections.Generic.List<int> cardSet;
 }
-public enum TargetOptions //卡牌目标选项
+
+/// <summary>
+/// 目标选择
+/// </summary>
+/// <returns></returns>
+public enum TargetOptions
 {
     NoTarget,
     
@@ -87,7 +97,6 @@ public enum RarityRank  //稀有度
 }
 public enum CardType  
 {
-    //Player, 
     Monster, 
     Spell, 
     Survent
@@ -98,6 +107,11 @@ public enum CardCamp
     Enemy,
     Snake
 }
+
+/// <summary>
+/// 随从/法术效果
+/// </summary>
+/// <returns></returns>
 public enum CardActionType
 {
     Attack,  //攻击->伤害值
@@ -127,5 +141,76 @@ public static class LevelEvent
     {
         int[] copy = (int[])_target.Clone();
         return copy;
+	}
+}
+
+/// <summary>
+/// 用于玩家信息和JSON储存文件之间转换使用
+/// </summary>
+/// <returns></returns>
+public class PlayerJSONInformation
+{
+    public string Name;
+    public int MaxHP;
+    public int CurrentHP;
+    public int Mithrils; //秘银
+    public int Tears;  //泪滴
+    public int[] CardSet;
+    public int[] UnlockCard;
+
+    public PlayerJSONInformation(string InitialCode = "null")
+    {
+        if(InitialCode == "mikufans")
+		{
+            Name = "MIKU";
+            MaxHP = 39;
+            CurrentHP = 16;
+            Mithrils = 20070831;
+            Tears = 0x39C5BB;
+
+            CardSet = new int[2];
+            CardSet[0] = 0;
+            CardSet[1] = 200;
+
+            UnlockCard = new int[2];
+            UnlockCard[0] = 0;
+            UnlockCard[1] = 200;
+        }
+        else
+		{
+            Name = null;
+            MaxHP = -1;
+            CurrentHP = -1;
+            Mithrils= -1;
+            Tears = -1;
+            CardSet = null;
+            UnlockCard = null;
+		}
     }
+
+    /// <summary>
+    /// 从Player类初始化
+    /// </summary>
+    /// <returns></returns>
+    public PlayerJSONInformation(Player _player)
+	{
+        Name = _player.name;
+        MaxHP = _player.maxHP;
+        CurrentHP = _player.currentHP;
+        Mithrils = _player.mithrils;
+        Tears = _player.tears;
+
+        CardSet = _player.cardSet.ToArray();
+
+        System.Collections.Generic.List<int> tmpList = new System.Collections.Generic.List<int>();
+        for(int i = 0; i < _player.unlock.Length; i++)
+		{
+			if (_player.unlock[i] == true)
+			{
+                tmpList.Add(i);
+			}
+		}
+        UnlockCard = tmpList.ToArray();
+        tmpList.Clear();
+	}
 }

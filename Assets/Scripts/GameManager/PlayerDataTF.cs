@@ -20,22 +20,23 @@ public static class PlayerDataTF
     //事件结局
     private static bool eventgo = false;
 
-    public static void GetData(Player _player) //Player类对象获取玩家信息
+
+    public static void GetData(Player _player) //Player类对象获取玩家信息 //建议弃用
     {
         if(playerAllow==true)
         {
-            _player.name = name;
+            /*_player.name = name;
             _player.maxHP = maxHP;
             _player.currentHP = currentHP;
             _player.mithrils = mithrils;
             _player.tears = tears;
-            playerAllow = false;
+            playerAllow = false;*/
         }
         if (cardAllow == true)
         {
             for (int i = 0; i < cardSet.Count; i++)
             {
-                    _player.cardSet[i] = cardSet[i];
+                //_player.cardSet[i] = cardSet[i];
             }
             cardAllow = false;
         }
