@@ -69,7 +69,6 @@ public class CardInDeckManager : MonoBehaviour,IPointerEnterHandler,IPointerExit
 		Debug.Log("Preview");
 		Invoke("StartPreview", 0.8f);
 	}
-
 	public void OnPointerExit(PointerEventData eventData)
 	{
 		CancelInvoke();

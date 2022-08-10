@@ -20,90 +20,97 @@ public class Player
         }
     }
 
-    public string name;
-    public int maxHP;
-    public int currentHP;
-    public int mithrils;//秘银
-    public int tears;//泪滴
+    public string Name { get; private set; }
+    public int MaxHP { get; private set; }
+    public int CurrentHP { get; private set; }
+    public int Mithrils { get; private set; }//秘银
+    public int Tears { get; private set; }//泪滴
     public List<int> cardSet  { get; private set; } //牌组
     //0~199：随从  200~399：法术
-    public bool[] unlock { get; private set; } //记录已解锁的卡牌
+    public bool[] Unlocked { get; private set; } //记录已解锁的卡牌
 
     /// <summary>
-    ///  初始化信息, 载入储存信息用
+    ///  初始化信息, 载入储存信息用, 请勿直接调用
     /// </summary>
     /// <returns></returns>
     public void Initialized(PlayerJSONInformation _info)
 	{
-        name = _info.Name;
-        maxHP = _info.MaxHP;
-        currentHP = _info.CurrentHP;
-        tears = _info.Tears;
-        mithrils = _info.Mithrils;
+        Name = _info.Name;
+        MaxHP = _info.MaxHP;
+        CurrentHP = _info.CurrentHP;
+        Tears = _info.Tears;
+        Mithrils = _info.Mithrils;
 
         cardSet = new List<int>(_info.CardSet);
 
-        unlock = new bool[401];
-        Array.Fill(unlock, false);
+        Unlocked = new bool[401];
+        Array.Fill(Unlocked, false);
         foreach(var id in _info.UnlockCard)
 		{
-            unlock[id] = true;
+            Unlocked[id] = true;
 		}
 	}
     
     
-    //战斗系统所用的三个方法
+    //(弃用)战斗系统所用的三个方法
 	public PlayerBattleInformation GetBattleInf()
 	{
         PlayerBattleInformation info = new PlayerBattleInformation();
-        info.maxHP = maxHP;
-        info.currentHP = currentHP;
+        info.maxHP = MaxHP;
+        info.currentHP = CurrentHP;
         info.cardSet = cardSet;
         return info;
 	}
     public void SetBattleInf(PlayerBattleInformation _info)
 	{
-        currentHP = _info.currentHP;
+        CurrentHP = _info.currentHP;
 	}
     public void SetBattleInf(int _currentHP)
 	{
-        currentHP = _currentHP;
+        CurrentHP = _currentHP;
 	}
 
     //新增多种数据修改方法
     public void SetData(string _name, int _maxHP, int _currentHp, int _mithrils, int _tears)
     {
-        name = _name;
-        maxHP = _maxHP;
-        currentHP = _currentHp;
-        mithrils = _mithrils;
-        tears = _tears;
+        Name = _name;
+        MaxHP = _maxHP;
+        CurrentHP = _currentHp;
+        Mithrils = _mithrils;
+        Tears = _tears;
     }
     public void SetCurrentHP(int _value)
     {
-        currentHP = _value;
+        CurrentHP = _value;
     }
     public void SetMaxHP(int _value)
     {
-        maxHP = _value;
+        MaxHP = _value;
     }
     public void AddCurrentHp(int _value)
     {
-        currentHP += _value;
+        if(CurrentHP + _value <= MaxHP)
+		{
+            CurrentHP += _value;
+		}
+        else
+		{
+            CurrentHP = MaxHP;
+		}
     }
     public void AddMaxHp(int _value)
     {
-        maxHP += _value;
+        MaxHP += _value;
     }
     public void SetMoney(int _mithrils, int _tears)
     {
-        mithrils = _mithrils;
-        tears = _tears;
+        Mithrils = _mithrils;
+        Tears = _tears;
     }
     public void AddMoney(int _mithrils, int _tears)
     {
-        mithrils += _mithrils;
-        tears += _tears;
+        Mithrils += _mithrils;
+        Tears += _tears;
     }
 
     //卡组的修改推荐使用下面这两种方法
@@ -116,21 +123,46 @@ public class Player
                 cardSet[i] = _newCardSet[i];
             else cardSet.Add(_newCardSet[i]);
         }
-        CheckCard();
+        CheckUnlockedCard();
     }
     public void AddCard(int _newCard)
     {
         cardSet.Add(_newCard);
-        CheckCard();
+        CheckUnlockedCard();
     }
 
+    /// <summary>
+    /// 卡组修改
+    /// </summary>
+    /// <return></return>
+    public void SetCardSet(List<int> _list)
+	{
+        cardSet.Clear();
+        cardSet = _list;
+        CheckUnlockedCard();
+	}
 
-    public void CheckCard() //检测卡牌解锁
+    /// <summary>
+    /// 卡组以及解锁卡牌修改
+    /// </summary>
+    /// <return></return>
+    public void SetCardSet(List<int> _list, bool[] _unlock)
     {
-        for(int i=0;i<cardSet.Count;i++)
+        cardSet.Clear();
+        cardSet = _list;
+        Unlocked = _unlock;
+        CheckUnlockedCard();
+    }
+
+    /// <summary>
+    /// 刷新卡牌解锁情况
+    /// </summary>
+    public void CheckUnlockedCard()
+    {
+        for (int i = 0; i < cardSet.Count; i++)
         {
-            if (unlock[cardSet[i]] == false)
-                unlock[cardSet[i]] = true;
+            if (Unlocked[cardSet[i]] == false)
+                Unlocked[cardSet[i]] = true;
         }
     }
 }

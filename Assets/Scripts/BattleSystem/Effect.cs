@@ -33,15 +33,15 @@ public static class Effect
 					case CardActionType.Heal:
 						target.BeHealed(_value1);
 						break;
-					case CardActionType.HPEnhance:
-						target.BeEnhanced(_value1);
-						break;
+					//case CardActionType.HPEnhance:
+						//target.BeEnhanced(_value1);
+						//break;
 					case CardActionType.Inspire:
 						target.BeInspired(_value1,_value2);
 						break;
-					case CardActionType.Waghhh:
-						target.Waghhh(_value1);
-						break;
+					//case CardActionType.Waghhh:
+						//target.Waghhh(_value1);
+						//break;
 					case CardActionType.Conceal:
 						//boss本体无法被隐匿
 					case CardActionType.Taunt:
@@ -74,15 +74,15 @@ public static class Effect
 					case CardActionType.Heal:
 						target.BeHealed(_value1);
 						break;
-					case CardActionType.HPEnhance:
-						target.BeEnhanced(_value1);
-						break;
+					//case CardActionType.HPEnhance:
+						//target.BeEnhanced(_value1);
+						//break;
 					case CardActionType.Inspire:
 						target.BeInspired(_value1, _value2);
 						break;
-					case CardActionType.Waghhh:
-						target.Waghhh(_value1);
-						break;
+					//case CardActionType.Waghhh:
+						//target.Waghhh(_value1);
+						//break;
 					case CardActionType.Conceal:
 						target.BeConcealed(_value1);
 						break;
@@ -121,9 +121,9 @@ public static class Effect
 					case CardActionType.Heal:
 						target.BeHealed(_value1);
 						break;
-					case CardActionType.HPEnhance:
+					//case CardActionType.HPEnhance:
 					case CardActionType.Inspire:
-					case CardActionType.Waghhh:
+					//case CardActionType.Waghhh:
 					case CardActionType.Conceal:
 					case CardActionType.Taunt:
 					default:

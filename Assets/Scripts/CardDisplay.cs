@@ -78,7 +78,12 @@ public class CardDisplay : MonoBehaviour
             }
         }
 	}
-
+    //控制卡背
+    public void CardBackActive(bool isActive)
+	{
+        CardBackImage.enabled = isActive;
+	}
+    //控制预览
     public void SetPreview()
 	{
         CardFaceGlowImage.enabled = true;

@@ -21,8 +21,8 @@ public class PlayerInBattle
 	}
 	public PlayerInBattle(Player _player)
 	{
-		MaxHP = _player.maxHP;
-		CurrentHP = _player.currentHP;
+		MaxHP = _player.MaxHP;
+		CurrentHP = _player.CurrentHP;
 		CurrentActionPoint = MaxActionPoint = 1;
 		protectedTimes = 0;
 	}

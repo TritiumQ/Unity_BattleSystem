@@ -303,7 +303,7 @@ public class BattleSystem : MonoBehaviour
 			else if(attackerType == CardType.Spell)
 			{
 				CardSOAsset spellCard = attacker.GetComponent<CardDisplay>().card;
-				Effect.Set(victim, spellCard.SpellActionType, spellCard.SpellActionValue1, spellCard.SpellActionValue2);
+				//Effect.Set(victim, spellCard.SpellActionType, spellCard.SpellActionValue1, spellCard.SpellActionValue2);
 				player.CurrentActionPoint -= spellCard.Cost;
 				handCards.Remove(attacker);
 				Destroy(attacker);

@@ -132,20 +132,37 @@ public enum CardCamp
 /// <returns></returns>
 public enum CardActionType
 {
-    Attack,  //攻击->伤害值
-    VampireAttack,  //吸血->伤害值
-    Taunt,  //嘲讽->回合数
-    Heal, //治疗->回复量
-    HPEnhance, //生命强化->强化量
-    Protect,  //加护->回合数
-    Inspire, //激励(临时攻击提升)->数值+回合
-    Waghhh, //Waghhhhhh!!!(永久攻击提升)->数值
-    Conceal, //隐匿->回合
+    Attack,
+    VampireAttack,
+    Heal,
+    Taunt,
+    Protect,
+    Conceal,
+    /// <summary>
+    /// 永久强化，数值1->生命，数值2->攻击
+    /// </summary>
+    Enhance,
+    /// <summary>
+    /// 临时强化，数值1->生命，数值2->攻击, 数值3->持续回合数
+    /// </summary>
+    Inspire,
 
     //Silence, //沉默->回合数
 
     //*亡语*，*先机*，*每回合开始时*，*每回合结束时*的效果通用
 }
+[System.Serializable]
+public struct EffectPackage
+{
+
+    public CardActionType EffectType;
+    public int EffectValue1;
+    public int EffectValue2;
+    public int EffectRounds;
+    public TargetOptions EffectTarget;
+    public int TargetCount;
+}
+
 
 public static class LevelEvent
 {
@@ -212,18 +229,18 @@ public class PlayerJSONInformation
     /// <returns></returns>
     public PlayerJSONInformation(Player _player)
 	{
-        Name = _player.name;
-        MaxHP = _player.maxHP;
-        CurrentHP = _player.currentHP;
-        Mithrils = _player.mithrils;
-        Tears = _player.tears;
+        Name = _player.Name;
+        MaxHP = _player.MaxHP;
+        CurrentHP = _player.CurrentHP;
+        Mithrils = _player.Mithrils;
+        Tears = _player.Tears;
 
         CardSet = _player.cardSet.ToArray();
 
         System.Collections.Generic.List<int> tmpList = new System.Collections.Generic.List<int>();
-        for(int i = 0; i < _player.unlock.Length; i++)
+        for(int i = 0; i < _player.Unlocked.Length; i++)
 		{
-			if (_player.unlock[i] == true)
+			if (_player.Unlocked[i] == true)
 			{
                 tmpList.Add(i);
 			}
@@ -232,3 +249,4 @@ public class PlayerJSONInformation
         tmpList.Clear();
 	}
 }
+

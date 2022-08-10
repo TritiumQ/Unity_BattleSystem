@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5260d0e1e557d924098f98884611e3f5, type: 3}
-  m_Name: SPL-003
+  m_Name: SVN-016
   m_EditorClassIdentifier: 
-  CardID: -3
-  CardName: "\u751F\u547D+10"
-  CardDescription: "\u751F\u547D\u589E\u5F3A"
+  CardID: 16
+  CardName: NULL
+  CardDescription: NULL
   CardRarity: 0
-  CardType: 1
+  CardType: 0
   CardCamp: 0
-  Cost: 5
-  CardImage: {fileID: 21300000, guid: 85ce100ffe9422e44adce1e589a1d572, type: 3}
-  RarityImage: {fileID: 21300000, guid: cf6b63cacd7382e4fbd5fddabc7e2fd4, type: 3}
+  Cost: 0
+  CardImage: {fileID: 0}
+  RarityImage: {fileID: 0}
   MaxHP: 0
   Atk: 0
   AtksPerTurn: 1
@@ -29,22 +29,31 @@ MonoBehaviour:
   IsVampire: 0
   IsSetupEffect: 0
   SetupEffect: 0
-  SetupEffectValue: 0
+  SetupEffectValue1: 0
+  SetupEffectValue2: 0
   SetupEffectTarget: 0
+  SetupEffectTargetCount: 0
   IsUndead: 0
   DeadWhisperEffect: 0
-  DeadWhisperEffectValue: 0
+  DeadWhisperEffectValue1: 0
+  DeadWhisperEffectValue2: 0
   DeadWhisperEffectTarget: 0
+  DeadWhisperEffectTargetCount: 0
   IsAdvanced: 0
   AdvancedEffect: 0
-  AdvancedEffectValue: 0
+  AdvancedEffectValue1: 0
+  AdvancedEffectValue2: 0
   AdvancedEffectTarget: 0
+  AdvancedEffectTargetCount: 0
   IsSubsequent: 0
   SubsequentEffect: 0
-  SubsequentEffectValue: 0
+  SubsequentEffectValue1: 0
+  SubsequentEffectValue2: 0
   SubsequentEffectTarget: 0
+  SubsequentEffectTargetCount: 0
   IsCopied: 0
-  SpellScriptName: 
-  CardActionType: 4
-  SpellActionValue: 10
-  Targets: 4
+  SpellActionType: 0
+  SpellActionValue1: 0
+  SpellActionValue2: 0
+  Targets: 0
+  TargetCount: 0

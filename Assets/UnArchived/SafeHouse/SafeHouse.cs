@@ -24,7 +24,9 @@ public class SafeHouse : MonoBehaviour
     //选择秘银；
     public void selectTear()
     {
-        Player.Instance.tears += 20;
+        //Player.Instance.Tears += 20;
+        Player.Instance.AddMoney(0, 20);
+
         GameObject button = this.gameObject.transform.Find("Button").gameObject;
         button.SetActive(false);
         PlayerDataTF.EventContinue();
@@ -52,15 +54,9 @@ public class SafeHouse : MonoBehaviour
     //选择恢复；
     public void selectCur()
     {
-        if (Player.Instance.currentHP - Player.Instance.maxHP >= 2)
-        {
-            Player.Instance.currentHP += 2;
-        }
-        else
-        {
-            Player.Instance.currentHP = Player.Instance.maxHP;
-        }
-            GameObject button = this.gameObject.transform.Find("Button (1)").gameObject;
+        Player.Instance.AddCurrentHp(2);
+
+        GameObject button = this.gameObject.transform.Find("Button (1)").gameObject;
         button.SetActive(false);
         ShowTip("您获得了2点血量恢复", Color.red);
         Destroy(this.gameObject, 1);

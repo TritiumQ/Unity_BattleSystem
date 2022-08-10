@@ -83,34 +83,15 @@ public class SurventInBattle
         {
             vampireRounds = 0;
         }
-
+        //TODO Ëæ´ÓÐ§¹û
         isUndead = _asset.IsUndead;
-        deadWhisperEffect = _asset.DeadWhisperEffect;
-        deadWhisperEffectValue1 = _asset.DeadWhisperEffectValue1;
-        deadWhisperEffectValue2 = _asset.DeadWhisperEffectValue2;
-        deadWhisperTarget = _asset.DeadWhisperEffectTarget;
-        DeadWhisperEffectTargetCount = _asset.DeadWhisperEffectTargetCount;
+        
 
         isAdvanced = _asset.IsAdvanced;
-        advancedEffect = _asset.AdvancedEffect;
-        advancedEffectTarget = _asset.AdvancedEffectTarget;
-        advancedEffectValue1 = _asset.AdvancedEffectValue1;
-        advancedEffectValue2 = _asset.AdvancedEffectValue2;
-        AdvancedEffectTargetCount = _asset.AdvancedEffectTargetCount;
 
         isSubsequent = _asset.IsSubsequent;
-        subsequentEffect = _asset.SubsequentEffect;
-        subsequentEffectTarget = _asset.SubsequentEffectTarget;
-        subsequentEffectValue1 = _asset.SubsequentEffectValue1;
-        subsequentEffectValue2 = _asset.SubsequentEffectValue2;
-        SubsequentEffectTargetCount = _asset.SubsequentEffectTargetCount;
 
         IsSetupEffect = _asset.IsSetupEffect;
-        SetupEffect = _asset.SetupEffect;
-        SetupEffectTarget = _asset.SetupEffectTarget;
-        SetupEffectValue1 = _asset.SetupEffectValue1;
-        SetupEffectValue2 = _asset.SetupEffectValue2;
-        SetupEffectTargetCount = _asset.SetupEffectTargetCount;
 
     }
 }
