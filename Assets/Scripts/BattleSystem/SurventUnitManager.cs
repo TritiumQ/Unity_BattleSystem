@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class SurventUnitManager : MonoBehaviour
+public class SurventUnitManager : MonoBehaviour, IEffectRunner
 {
     public GameObject thisSurvent;
     public SurventInBattle survent { get; private set; }
@@ -148,7 +148,7 @@ public class SurventUnitManager : MonoBehaviour
         if(sys != null && survent.IsSetupEffect)
 		{
             //TODO 目标选择问题需要解决
-            CardActionType action = survent.SetupEffect;
+            EffectType action = survent.SetupEffect;
             int value1 = survent.subsequentEffectValue1;
             int value2 = survent.subsequentEffectValue2;
 
@@ -190,7 +190,6 @@ public class SurventUnitManager : MonoBehaviour
 			}
         }
     }
-
     public void CheckInStart() //每回合开始调用,重置活动状态,触发先机效果
 	{
         isActive = true;
@@ -255,6 +254,9 @@ public class SurventUnitManager : MonoBehaviour
             survent.vampireRounds--;
 		}
 	}
+
+
+
     public int BeVampireAttack(int _value)
 	{
         return 0;
@@ -313,5 +315,15 @@ public class SurventUnitManager : MonoBehaviour
     public void BeTaunted(int _rounds)
 	{
         survent.tauntRounds += _rounds;
+	}
+
+	public void AcceptEffect(object[] _parameterList)
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public void UpdateEffect()
+	{
+		throw new System.NotImplementedException();
 	}
 }

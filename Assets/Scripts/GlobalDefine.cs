@@ -6,7 +6,7 @@ public enum BossActionType
     AOEAttackExcludePlayer,
     SingleAttack,
     Summon,
-
+    Skill,
 }
 public enum BossSingleAttack
 {
@@ -30,7 +30,7 @@ public enum GetSurventInfomation
 /// <returns></returns>
 public static class Const
 {
-    //这只是糖
+    //偷懒
     /// <summary>
     /// 范围判断，左闭右闭
     /// </summary>
@@ -72,7 +72,6 @@ public static class Const
         return UnityEngine.Application.dataPath + "/PlayerDatas/Save" + _id.ToString("D2") + ".json";
 	}
 
-    
     public static int Forever = -1;
     public static int MaxSaveCount = 10;
     public static string InitialCode = "mikufans";
@@ -130,10 +129,14 @@ public enum CardCamp
 /// 随从/法术效果
 /// </summary>
 /// <returns></returns>
-public enum CardActionType
+public enum EffectType
 {
     Attack,
     VampireAttack,
+    /// <summary>
+    /// 自爆攻击，数值1->对自身伤害值, 数值2->对敌方伤害值
+    /// </summary>
+    SuicideAttack,
     Heal,
     Taunt,
     Protect,
@@ -146,23 +149,17 @@ public enum CardActionType
     /// 临时强化，数值1->生命，数值2->攻击, 数值3->持续回合数
     /// </summary>
     Inspire,
+    /// <summary>
+    /// 特定抽牌, 数值1->卡牌id, 数值2->卡牌数量
+    /// </summary>
+    DrawSpecificCard,
+    /// <summary>
+    /// 随机抽牌, 数值1->抽牌数量
+    /// </summary>
+    DrawRandomCard
 
-    //Silence, //沉默->回合数
-
-    //*亡语*，*先机*，*每回合开始时*，*每回合结束时*的效果通用
+    //*亡语*，*先机*，*每回合开始时*，*每回合结束时*, boss的特殊技能
 }
-[System.Serializable]
-public struct EffectPackage
-{
-
-    public CardActionType EffectType;
-    public int EffectValue1;
-    public int EffectValue2;
-    public int EffectRounds;
-    public TargetOptions EffectTarget;
-    public int TargetCount;
-}
-
 
 public static class LevelEvent
 {
@@ -249,4 +246,3 @@ public class PlayerJSONInformation
         tmpList.Clear();
 	}
 }
-

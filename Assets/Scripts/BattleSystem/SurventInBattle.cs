@@ -25,21 +25,21 @@ public class SurventInBattle
     public int vampireRounds;
 
     public bool isUndead; //亡语
-    public CardActionType deadWhisperEffect;
+    public EffectType deadWhisperEffect;
     public int deadWhisperEffectValue1;
     public int deadWhisperEffectValue2;
     public TargetOptions deadWhisperTarget;
     public int DeadWhisperEffectTargetCount;
 
     public bool isAdvanced; //先机
-    public CardActionType advancedEffect;
+    public EffectType advancedEffect;
     public int advancedEffectValue1;
     public int advancedEffectValue2;
     public TargetOptions advancedEffectTarget;
     public int AdvancedEffectTargetCount;
 
     public bool isSubsequent; //后手
-    public CardActionType subsequentEffect;
+    public EffectType subsequentEffect;
     public int subsequentEffectValue1;
     public int subsequentEffectValue2;
     public TargetOptions subsequentEffectTarget;
@@ -47,7 +47,7 @@ public class SurventInBattle
 
     //随从放置时效果
     public bool IsSetupEffect;
-    public CardActionType SetupEffect;
+    public EffectType SetupEffect;
     public int SetupEffectValue1;
     public int SetupEffectValue2;
     public TargetOptions SetupEffectTarget;
@@ -84,14 +84,16 @@ public class SurventInBattle
             vampireRounds = 0;
         }
         //TODO 随从效果
+
+        /*
         isUndead = _asset.IsUndead;
-        
 
         isAdvanced = _asset.IsAdvanced;
 
         isSubsequent = _asset.IsSubsequent;
 
         IsSetupEffect = _asset.IsSetupEffect;
+        */
 
     }
 }

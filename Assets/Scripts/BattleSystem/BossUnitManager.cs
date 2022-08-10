@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class BossUnitManager : MonoBehaviour
+public class BossUnitManager : MonoBehaviour, IEffectRunner
 {
     public BossInBattle boss;
 
@@ -34,15 +34,6 @@ public class BossUnitManager : MonoBehaviour
 				GameObject.Find("BattleSystem").GetComponent<BattleSystem>().Victory();
 			}
 		}
-		
-	}
-	public void CheckBuff() //每回合结束时调用
-	{
-		//检查buff
-		if (boss.inspireRounds > 0)
-		{
-			boss.inspireRounds--;
-		}
 	}
 	//Boss行动
 	public void Action(int _CurrentRound)
@@ -57,7 +48,7 @@ public class BossUnitManager : MonoBehaviour
 					foreach (var obj in sys.PlayerSurventUnits)
 					{
 						//obj.SendMessage("BeAttck", boss.ATK);
-						Effect.Set(obj, CardActionType.Attack, boss.ATK);
+						Effect.Set(obj, EffectType.Attack, boss.ATK);
 					}
 				}
 				break;
@@ -65,7 +56,7 @@ public class BossUnitManager : MonoBehaviour
 				{
 					foreach (var obj in sys.PlayerSurventUnits)
 					{
-						Effect.Set(obj, CardActionType.Attack, boss.ATK);
+						Effect.Set(obj, EffectType.Attack, boss.ATK);
 						//obj.SendMessage("BeAttacked", boss.ATK);
 					}
 				}
@@ -81,7 +72,7 @@ public class BossUnitManager : MonoBehaviour
 								int random = Random.Range(0, sys.PlayerSurventUnits.Count + 1);
 								if(random == sys.PlayerSurventUnits.Count)
 								{
-									Effect.Set(sys.playerUnit, CardActionType.Attack, boss.ATK);
+									Effect.Set(sys.playerUnit, EffectType.Attack, boss.ATK);
 									//sys.playerUnitDisplay.BeAttacked(boss.ATK);
 								}
 								else
@@ -89,7 +80,7 @@ public class BossUnitManager : MonoBehaviour
 									foreach (var obj in sys.PlayerSurventUnits)
 									{
 										//obj.SendMessage("BeAttacked", boss.ATK);
-										Effect.Set(obj, CardActionType.Attack, boss.ATK);
+										Effect.Set(obj, EffectType.Attack, boss.ATK);
 									}
 								}
 							}
@@ -97,7 +88,7 @@ public class BossUnitManager : MonoBehaviour
 						case BossSingleAttack.PlayerTarget:
 							{
 								//sys.playerUnitDisplay.BeAttacked(boss.ATK);
-								Effect.Set(sys.playerUnit, CardActionType.Attack, boss.ATK);
+								Effect.Set(sys.playerUnit, EffectType.Attack, boss.ATK);
 							}
 							break;
 						case BossSingleAttack.LowestATKTarget:
@@ -113,7 +104,7 @@ public class BossUnitManager : MonoBehaviour
 											target = obj;
 										}
 									}
-									Effect.Set(target, CardActionType.Attack, boss.ATK);
+									Effect.Set(target, EffectType.Attack, boss.ATK);
 									//target.SendMessage("BeAttacked", boss.ATK);
 								}
 							}
@@ -131,7 +122,7 @@ public class BossUnitManager : MonoBehaviour
 											target = obj;
 										}
 									}
-									Effect.Set(target, CardActionType.Attack, boss.ATK);
+									Effect.Set(target, EffectType.Attack, boss.ATK);
 									//target.SendMessage("BeAttacked", boss.ATK);
 								}
 							}
@@ -150,7 +141,7 @@ public class BossUnitManager : MonoBehaviour
 										}
 									}
 									//target.SendMessage("BeAttacked", boss.ATK);
-									Effect.Set(target, CardActionType.Attack, boss.ATK);
+									Effect.Set(target, EffectType.Attack, boss.ATK);
 								}
 							}
 							break;
@@ -168,7 +159,7 @@ public class BossUnitManager : MonoBehaviour
 										}
 									}
 									//target.SendMessage("BeAttacked", boss.ATK);
-									Effect.Set(target, CardActionType.Attack, boss.ATK);
+									Effect.Set(target, EffectType.Attack, boss.ATK);
 								}
 							}
 							break;
@@ -194,45 +185,86 @@ public class BossUnitManager : MonoBehaviour
 	}
 	
 	//受击
-	public int BeAttacked(int _value)
+	public void AcceptEffect(object[] _parameterList)
 	{
-		if(boss.protectTimes == 0)
+		GameObject initiator = (GameObject)_parameterList[0];
+		EffectPackage effect = (EffectPackage)_parameterList[1];
+		switch (effect.EffectType)
 		{
-			string msg = "受到" + _value.ToString() + "点伤害";
-			Debug.Log(msg);
-			boss.currentHP -= _value;
-			return _value;
-		}
-		else
-		{
-			boss.protectTimes--;
-			return 0;
+			case EffectType.Attack:
+				{
+					if(boss.protectTimes > 0)
+					{
+						boss.protectTimes--;
+					}
+					else
+					{
+						boss.currentHP -= effect.EffectValue1;
+					}
+				}
+				break;
+			case EffectType.VampireAttack:
+				{
+					EffectPackage returnEffect = new EffectPackage();
+					returnEffect.EffectType = EffectType.Heal;
+					if (boss.protectTimes > 0)
+					{
+						boss.protectTimes--;
+						returnEffect.EffectValue1 = 0;
+					}
+					else
+					{
+						boss.currentHP -= effect.EffectValue1;
+						returnEffect.EffectValue1 = effect.EffectValue1;
+					}
+					if(initiator != null)
+					{
+						object[] parameterTable = { null, returnEffect };
+						initiator.SendMessage("AcceptEffect", parameterTable);
+					}
+				}
+				break;
+			case EffectType.Heal:
+				{
+					if(boss.currentHP + effect.EffectValue1 <= boss.maxHP)
+					{
+						boss.currentHP += effect.EffectValue1;
+					}
+					else
+					{
+						boss.currentHP = boss.maxHP;
+					}
+				}
+				break;
+			case EffectType.Enhance:
+				{
+					boss.maxHP += effect.EffectValue1;
+					boss.currentHP += effect.EffectValue1;
+					boss.ATK += effect.EffectValue2;
+				}
+				break;
+			case EffectType.Inspire:
+				{
+					boss.inspireList.Add(effect);
+					boss.maxHP += effect.EffectValue1;
+					boss.currentHP += effect.EffectValue1;
+					boss.ATK += effect.EffectValue2;
+				}
+				break;
+			default:
+				break;
 		}
 	}
-	public void BeHealed(int _value)
+
+	public void UpdateEffect()
 	{
-		if(boss.currentHP + _value > boss.maxHP)
+		for (int i = boss.inspireList.Count - 1; i >= 0; i--)
 		{
-			boss.currentHP = boss.maxHP;
+			boss.inspireList[i].EffectRounds--;
+			if (boss.inspireList[i].EffectRounds <= 0)
+			{
+				boss.inspireList.RemoveAt(i);
+			}
 		}
-		else
-		{
-			boss.currentHP += _value;
-		}
-	}
-	public void BeEnhanced(int _value)//HP永久提升
-	{
-		boss.maxHP += _value;
-		boss.currentHP += _value;
-	}
-	public void BeInspired(int _value, int _rounds)
-	{
-		boss.ATK += _value;
-		boss.inspireValue = _value;
-		boss.inspireRounds = _rounds;
-	}
-	public void Waghhh(int _value)
-	{
-		boss.ATK += _value;
 	}
 }

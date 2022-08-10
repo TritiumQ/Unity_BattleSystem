@@ -27,6 +27,10 @@ public class CardSOAsset : ScriptableObject
     public bool IsTank; // 是否嘲讽
     public bool IsRaid; // 是否突袭
     public bool IsVampire;
+
+    [Header("随从特殊效果列表")]
+    public List<SpecialSkillPackage> SpecialSkillList;
+    /*
     [Header("放置时效果")]
     public bool IsSetupEffect;
     public List<EffectPackage> SetupEffectList;
@@ -39,14 +43,11 @@ public class CardSOAsset : ScriptableObject
     [Header("后手信息")]
     public bool IsSubsequent; //后手
     public List<EffectPackage> SubsequentEffectList;
-
-    //此两项弃用
-    //public string CreatureScriptName;// 生物脚本名
-    //public int SpecialCreatureAmount;// 技能数值
+    */
 
     [Header("法术信息")]
     public bool IsCopied; //复制体标记
     //public string SpellScriptName;
-    public CardActionType SpellActionType;
+    public EffectType SpellActionType;
     public List<EffectPackage> SpellEffectList;
 }

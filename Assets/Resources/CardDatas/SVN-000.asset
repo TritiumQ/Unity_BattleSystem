@@ -27,33 +27,7 @@ MonoBehaviour:
   IsTank: 0
   IsRaid: 0
   IsVampire: 0
-  IsSetupEffect: 0
-  SetupEffect: 0
-  SetupEffectValue1: 0
-  SetupEffectValue2: 0
-  SetupEffectTarget: 0
-  SetupEffectTargetCount: 0
-  IsUndead: 0
-  DeadWhisperEffect: 0
-  DeadWhisperEffectValue1: 0
-  DeadWhisperEffectValue2: 0
-  DeadWhisperEffectTarget: 0
-  DeadWhisperEffectTargetCount: 0
-  IsAdvanced: 0
-  AdvancedEffect: 0
-  AdvancedEffectValue1: 0
-  AdvancedEffectValue2: 0
-  AdvancedEffectTarget: 0
-  AdvancedEffectTargetCount: 0
-  IsSubsequent: 0
-  SubsequentEffect: 0
-  SubsequentEffectValue1: 0
-  SubsequentEffectValue2: 0
-  SubsequentEffectTarget: 0
-  SubsequentEffectTargetCount: 0
+  SpecialSkillList: []
   IsCopied: 0
   SpellActionType: 0
-  SpellActionValue1: 0
-  SpellActionValue2: 0
-  Targets: 0
-  TargetCount: 0
+  SpellEffectList: []

@@ -27,14 +27,7 @@ MonoBehaviour:
   IsTank: 0
   IsRaid: 0
   IsVampire: 0
-  IsSetupEffect: 0
-  SetupEffectList: []
-  IsUndead: 0
-  UndeadEffectList: []
-  IsAdvanced: 0
-  AdvancedEffectList: []
-  IsSubsequent: 0
-  SubsequentEffectList: []
+  SpecialSkillList: []
   IsCopied: 0
   SpellActionType: 0
   SpellEffectList: []

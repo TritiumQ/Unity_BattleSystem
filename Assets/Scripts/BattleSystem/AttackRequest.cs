@@ -31,7 +31,7 @@ public class AttackRequest : MonoBehaviour, IPointerClickHandler
             {
                 if (sys.attacker == null)
                 {
-                    sys.AttackRequest(thisObject, CardType.Survent, TargetOptions.SingleEnemyTarget, CardActionType.Attack, transform.position);
+                    sys.AttackRequest(thisObject, CardType.Survent, TargetOptions.SingleEnemyTarget, EffectType.Attack, transform.position);
                 }
                 else
                 {

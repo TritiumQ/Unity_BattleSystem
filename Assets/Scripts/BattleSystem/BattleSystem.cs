@@ -91,7 +91,7 @@ public class BattleSystem : MonoBehaviour
 				RefreshDeck();
 
 				//洗牌惩罚,扣玩家5点血
-				Effect.Set(playerUnit, CardActionType.Attack, 5);
+				Effect.Set(playerUnit, EffectType.Attack, 5);
 			}
 			int randPos = Random.Range(0, deck.Count); //随机抽牌
 
@@ -186,7 +186,7 @@ public class BattleSystem : MonoBehaviour
 			playerActionCompleted = false;
 			roundStart = false;
 			//检查并刷新buff,以及触发随从后手效果
-			bossUnitManager.CheckBuff();
+			//bossUnitManager.CheckBuff();
 			foreach (var obj in PlayerSurventUnits)
 			{
 				obj.SendMessage("CheckInEnd");
@@ -253,14 +253,15 @@ public class BattleSystem : MonoBehaviour
 	public GameObject attacker { get; private set; }
 	public CardType attackerType { get; private set; }
 	public TargetOptions attackTarget { get; private set; }
-	public CardActionType actionType { get; private set; }
+	public EffectType actionType { get; private set; }
+	public EffectPackage effect { get; private set; }
 	public GameObject victim { get; private set; }
 
 	public GameObject arrowPrefab;
 	public GameObject arrow; //攻击箭头
 	public Transform canvas;
 	//1 攻击请求
-	public void AttackRequest(GameObject _request, CardType _atkerType , TargetOptions _target,CardActionType _action , Vector2 _startPoint)
+	public void AttackRequest(GameObject _request, CardType _atkerType , TargetOptions _target,EffectType _action , Vector2 _startPoint)
 	{
 		if(arrow == null)
 		{
@@ -298,7 +299,7 @@ public class BattleSystem : MonoBehaviour
 
 				//Debug.Log("攻击成功");
 				attacker.GetComponent<SurventUnitManager>().isActive = false;
-				Effect.Set(victim, CardActionType.Attack, attacker.GetComponent<SurventUnitManager>().survent.atk);
+				Effect.Set(victim, EffectType.Attack, attacker.GetComponent<SurventUnitManager>().survent.atk);
 			}
 			else if(attackerType == CardType.Spell)
 			{

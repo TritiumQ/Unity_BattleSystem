@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public static class Effect
 {
-	//数值1代表效果数值,如伤害值,回复量
-	//数值2代表持续回合数,0为默认值
-    public static void Set(GameObject _targetObject, CardActionType _action, int _value1, int _value2 = 0, GameObject _requester = null)
+	/// <summary>
+	/// 优化版方法已实现，该方法弃用
+	/// </summary>
+	/// <return></return>
+    public static void Set(GameObject _targetObject, EffectType _action, int _value1, int _value2 = 0, GameObject _requester = null)
 	{
-		if( _targetObject != null )
+		/*if( _targetObject != null )
 		{
 			string msg = "对" + _targetObject.name + "发起攻击";
 			Debug.Log(msg);
@@ -16,37 +19,37 @@ public static class Effect
 				BossUnitManager target = _targetObject.GetComponent<BossUnitManager>();
 				switch (_action)
 				{
-					case CardActionType.Attack:
+					case EffectType.Attack:
 						target.BeAttacked(_value1);
 						break;
-					case CardActionType.VampireAttack: //吸血攻击
+					case EffectType.VampireAttack: //吸血攻击
 						if(_requester != null)
 						{
 							int damage = target.BeAttacked( _value1);
-							Set(_requester,CardActionType.Heal,damage);
+							Set(_requester,EffectType.Heal,damage);
 						}
 						else
 						{
 							Debug.LogWarning("错误调用吸血攻击，吸血攻击需主体对象");
 						}
 						break;
-					case CardActionType.Heal:
+					case EffectType.Heal:
 						target.BeHealed(_value1);
 						break;
 					//case CardActionType.HPEnhance:
 						//target.BeEnhanced(_value1);
 						//break;
-					case CardActionType.Inspire:
+					case EffectType.Inspire:
 						target.BeInspired(_value1,_value2);
 						break;
 					//case CardActionType.Waghhh:
 						//target.Waghhh(_value1);
 						//break;
-					case CardActionType.Conceal:
+					case EffectType.Conceal:
 						//boss本体无法被隐匿
-					case CardActionType.Taunt:
+					case EffectType.Taunt:
 						//boss本体无法被嘲讽
-					case CardActionType.Protect:
+					case EffectType.Protect:
 						//boss本体无法被加护
 					default:
 						break;		
@@ -57,39 +60,39 @@ public static class Effect
 				SurventUnitManager target = _targetObject.GetComponent<SurventUnitManager>();
 				switch (_action)
 				{
-					case CardActionType.Attack:
+					case EffectType.Attack:
 						target.BeAttacked(_value1);
 						break;
-					case CardActionType.VampireAttack:
+					case EffectType.VampireAttack:
 						if (_requester != null)
 						{
 							int damage = target.BeAttacked(_value1);
-							Set(_requester, CardActionType.Heal, damage);
+							Set(_requester, EffectType.Heal, damage);
 						}
 						else
 						{
 							Debug.LogWarning("错误调用吸血攻击，吸血攻击需主体对象");
 						}
 						break;
-					case CardActionType.Heal:
+					case EffectType.Heal:
 						target.BeHealed(_value1);
 						break;
 					//case CardActionType.HPEnhance:
 						//target.BeEnhanced(_value1);
 						//break;
-					case CardActionType.Inspire:
+					case EffectType.Inspire:
 						target.BeInspired(_value1, _value2);
 						break;
 					//case CardActionType.Waghhh:
 						//target.Waghhh(_value1);
 						//break;
-					case CardActionType.Conceal:
+					case EffectType.Conceal:
 						target.BeConcealed(_value1);
 						break;
-					case CardActionType.Taunt:
+					case EffectType.Taunt:
 						target.BeTaunted(_value1);
 						break;
-					case CardActionType.Protect:
+					case EffectType.Protect:
 						target.BeProtected(_value1);
 						break;
 					default:
@@ -101,41 +104,51 @@ public static class Effect
 				PlayerUnitManager target = _targetObject.GetComponent<PlayerUnitManager>();
 				switch (_action)
 				{
-					case CardActionType.Attack:
+					case EffectType.Attack:
 						target.BeAttacked(_value1);
 						break;
-					case CardActionType.VampireAttack:
+					case EffectType.VampireAttack:
 						if (_requester != null)
 						{
 							int damage = target.BeAttacked(_value1);
-							Set(_requester, CardActionType.Heal, damage);
+							Set(_requester, EffectType.Heal, damage);
 						}
 						else
 						{
 							Debug.LogWarning("错误调用吸血攻击，吸血攻击需主体对象");
 						}
 						break;
-					case CardActionType.Protect:
+					case EffectType.Protect:
 						target.BeProtected(_value1);
 						break;
-					case CardActionType.Heal:
+					case EffectType.Heal:
 						target.BeHealed(_value1);
 						break;
 					//case CardActionType.HPEnhance:
-					case CardActionType.Inspire:
+					case EffectType.Inspire:
 					//case CardActionType.Waghhh:
-					case CardActionType.Conceal:
-					case CardActionType.Taunt:
+					case EffectType.Conceal:
+					case EffectType.Taunt:
 					default:
 						break;
 				}
 			}
-		}
-	}
-	public static void MultiTargetAttack(List<GameObject> _targets, CardActionType _action, int _value1, int _value2 = 0)
-	{
-		
+		}*/
 	}
 	
-
+	/// <summary>
+	/// 释放效果的通用方法
+	/// </summary>
+	/// <param name="_target">效果目标</param>
+	/// <param name="_initiator">效果发起者</param>
+	/// <param name="_effect">效果传递器</param>
+	public static void ApplyTo(GameObject _target, GameObject _initiator, EffectPackage _effect)
+	{
+		if(_target != null && _initiator != null)
+		{
+			//效果发送
+			object[] ParameterList = { _initiator, _effect };
+			_target.SendMessage("AcceptEffect", ParameterList);
+		}
+	}
 }
