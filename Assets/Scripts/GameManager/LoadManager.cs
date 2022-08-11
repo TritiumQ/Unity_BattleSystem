@@ -12,7 +12,7 @@ public class LoadManager : MonoBehaviour
     public TextMeshProUGUI text;
     public string scene;
 
-    public int time = 2000;
+    public int time = 1000;
 
     public void LoadNextLevel()
     {
@@ -40,6 +40,22 @@ public class LoadManager : MonoBehaviour
                 }
 
                 yield return null;//跳出协程
+            }
+            System.Threading.Thread.Sleep(time);
+            if (scene == "Fight")
+            {
+                GameObject obj = GameObject.Find("GameManager");
+                int level = obj.GetComponent<GameManager>().level;
+                int step = obj.GetComponent<GameManager>().step;
+                int enemy = GetRandom.GetRandomEnemy(level, step);
+                Debug.Log(enemy);
+                GameObject _battle = GameObject.Find("BattleSystem");
+                if (_battle != null)
+                {
+                    Debug.Log("find");
+                    _battle.GetComponent<BattleSystem>().SetBossInf(enemy);
+                    Debug.Log("敌人信息载入成功");
+                }
             }
         }
     }

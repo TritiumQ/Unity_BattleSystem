@@ -44,8 +44,7 @@ public class GameManager : MonoBehaviour
         //Player数据加载
 
         //关卡数据初始化
-        //GameEventCount = new int[5] { 0, 5, 6, 7, 8 }; 
-        GameEventCount = LevelEvent.GameEventCount;//初始化每层关卡数量
+        GameEventCount = GameConst.GameEventCount;//初始化每层关卡数量
         InitGameEvent();
         //加载关卡进度数据（重新进入游戏的进度加载）
     }
@@ -67,7 +66,7 @@ public class GameManager : MonoBehaviour
         eventUnit.Clear();
         
         //伪随机生成事件的类型
-        GetComponent<GetRandom>().GetRandomEvent(GameEvent,level);
+        GetRandom.GetRandomEvent(GameEvent,level);
         
         //初始化事件预制体对象链表
         for (int i = 0; i < GameEventCount[_level]; i++)//初始化事件预制体对象链表
@@ -80,7 +79,7 @@ public class GameManager : MonoBehaviour
         }
         
         //设置下一关场景加载
-        LoadManager.GetComponent<LoadManager>().NextScene(GameEvent[step]);
+        LoadManager.GetComponent<LoadManager>().NextScene(GameEvent[0]);
     }
     
     void RefreshData() //更新游戏局内数据
@@ -144,7 +143,6 @@ public class GameManager : MonoBehaviour
         float len,x;
         len = (up - low) / GameEventCount[level];
         x = i * len + len / 2 + low;
-        //Debug.Log(x);
         return x;
     }
 

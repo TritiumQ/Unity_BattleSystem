@@ -1754,7 +1754,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1936877395}
   - component: {fileID: 1936877396}
-  - component: {fileID: 1936877397}
   m_Layer: 5
   m_Name: GameManager
   m_TagString: Untagged
@@ -1803,21 +1802,6 @@ MonoBehaviour:
   levelUI: {fileID: 2005561918}
   LoadManager: {fileID: 840747712}
   eventUnit: []
---- !u!114 &1936877397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1936877394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb505ee401022ef4ba36f487274f55c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  step: 0
-  level: 0
-  GameEventCount: 
 --- !u!1 &1987129184
 GameObject:
   m_ObjectHideFlags: 0
