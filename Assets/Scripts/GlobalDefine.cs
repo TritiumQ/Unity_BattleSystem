@@ -1,4 +1,3 @@
-
 public enum BossActionType
 {
     Skip,
