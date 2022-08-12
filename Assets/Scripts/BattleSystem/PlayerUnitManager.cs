@@ -10,10 +10,7 @@ public class PlayerUnitManager : MonoBehaviour, IEffectRunner
     public TextMeshProUGUI hpText;
     public TextMeshProUGUI actionPointText;
 	public Image headIcon;
-	private void Update()
-	{
-		Refresh();
-	}
+
 	/// <summary>
 	/// ≥ı ºªØ
 	/// </summary>
@@ -27,6 +24,10 @@ public class PlayerUnitManager : MonoBehaviour, IEffectRunner
 	public void Settle()
 	{
 		Player.Instance.SetCurrentHP(player.CurrentHP);
+	}
+	private void Update()
+	{
+		Refresh();
 	}
 	public void Refresh()
 	{

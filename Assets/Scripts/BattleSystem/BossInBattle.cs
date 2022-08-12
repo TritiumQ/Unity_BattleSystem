@@ -29,7 +29,7 @@ public class BossInBattle : UnitInBattle
         SurventList = asset.SummonList;
         Icon = asset.Icon;
         SpecialAbilityList = asset.SpecialAbilityList;
-        ActionPackage = asset.ActionPackage;
+        ActionPackage = asset.ActionPackages;
         Cycle = asset.Cycle;
 	}
 

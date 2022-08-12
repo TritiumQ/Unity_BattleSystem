@@ -15,7 +15,7 @@ public class BossSOAsset : ScriptableObject
     [Header("特殊效果列表")]
     public List<SpecialAbilityPackage> SpecialAbilityList;
     [Header("新版行动循环")]
-    public List<BossActionPackage> ActionPackage;
+    public List<BossActionPackage> ActionPackages;
     public List<BossAction> Cycle;
 	[Header("旧版行动循环")]
     public List<BossActionType> ActionCycle;
@@ -24,6 +24,5 @@ public class BossSOAsset : ScriptableObject
 [System.Serializable]
 public class BossAction
 {
-    public int ActionIndex;
-    public int ActionTimes;
+    public List<int> ActionIndex;
 }

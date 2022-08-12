@@ -19,19 +19,6 @@ MonoBehaviour:
   Icon: {fileID: 0}
   SummonList: 0100000002000000
   SpecialAbilityList: []
-  ActionPackage:
-  - Effect:
-      EffectType: 0
-      EffectValue1: 0
-      EffectValue2: 0
-      EffectRounds: 0
-      EffectTarget: 0
-      TargetCount: 0
-    SkillScriptName: 
-    TargetOptions: 0
-    SkillTargetCount: 0
-    SummonMode: 0
-    SummonCount: 0
-    SummonSurventID: 0
+  ActionPackages: []
   Cycle: []
   ActionCycle: 01000000020000000400000003000000
