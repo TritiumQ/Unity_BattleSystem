@@ -25,18 +25,19 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 		{
 			HpText.text = Boss.CurrentHP.ToString();
 			AtkText.text = Boss.ATK.ToString();
+			HeadIcon.sprite = Boss.Icon;
 			if (Boss.CurrentHP <= 0)
 			{
-				Debug.Log("Boss已击败，战斗胜利");
-				//胜利特效
-				GameObject.Find("BattleSystem").SendMessage("GameEnd", GameResult.Success);
+				Die();
 			}
 		}
 	}
 
 	public void Die()
 	{
-		
+		Debug.Log("Boss已击败，战斗胜利");
+		//胜利特效
+		GameObject.Find("BattleSystem").GetComponent<BattleSystem>().GameEnd(GameResult.Success);
 	}
 
 	public void AutoAction(int currentRound)
@@ -44,6 +45,41 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 		BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
 		int mode = currentRound % Boss.Cycle.Count;
 		//TODO 新版行动适配
+		foreach(var idx in Boss.Cycle[mode].ActionIndex)
+		{
+			var packages = Boss.ActionPackages[idx];
+			if (packages.ActionEffect != null)
+			{
+				sys.EffectDirectSetup(gameObject, packages.ActionEffect);
+			}
+			if (packages.SummonCount != 0)
+			{
+				switch (packages.SummonMode)
+				{
+					case BossSummonMode.Specific:
+						{
+							for(int i = 0; i < packages.SummonCount; i++)
+							{
+								sys.SetupSurvent(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(packages.SummonSurventID)), CardType.Monster);
+							}
+						}
+						break;
+					case BossSummonMode.Random:
+						{
+							for(int i =0; i < packages.SummonCount; i++)
+							{
+								var rnd = Random.Range(0, Boss.SurventList.Count);
+								sys.SetupSurvent(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(rnd)), CardType.Monster);
+							}
+						}
+						break;
+					default:
+						break;
+				}
+
+			}
+		}
+
 	}
 
 	#region 自动行动接口(旧版boss行动循环)
@@ -56,13 +92,13 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 		{
 			case BossActionType.AOEAttack:
 				{
-					EffectPackageWithTargetOption package = new EffectPackageWithTargetOption(EffectType.Attack, Boss.ATK, 0, 0, TargetOptions.AllPlayerCreatures, 0);
+					EffectPackageWithTargetOption package = new EffectPackageWithTargetOption(EffectType.Attack, Boss.ATK, 0, 0, null, TargetOptions.AllPlayerCreatures, 0);
 					sys.EffectDirectSetup(this.gameObject, package);
 				}
 				break;
 			case BossActionType.AOEAttackExcludePlayer:
 				{
-					EffectPackageWithTargetOption package = new EffectPackageWithTargetOption(EffectType.Attack, Boss.ATK, 0, 0, TargetOptions.ALlPlayerCharacter, 0);
+					EffectPackageWithTargetOption package = new EffectPackageWithTargetOption(EffectType.Attack, Boss.ATK, 0, 0, null, TargetOptions.ALlPlayerCharacter, 0);
 					sys.EffectDirectSetup(this.gameObject, package);
 				}
 				break;
@@ -166,7 +202,7 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 				{
 					Debug.Log("Boss设置随从");
 					int rnd = Random.Range(0, Boss.SurventList.Count);
-					sys.SetupBossSurvent(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(Boss.SurventList[rnd])));
+					//sys.SetupBossSurvent(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(Boss.SurventList[rnd])));
 
 				}
 				break;

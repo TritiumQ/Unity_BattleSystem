@@ -13,12 +13,13 @@ public class EffectPackage
 	[Header("特殊效果区")]
 	public string SpecialEffectScriptName;
 
-	public EffectPackage(EffectType effectType, int effectValue1, int effectValue2, int effectRounds)
+	public EffectPackage(EffectType effectType, int effectValue1, int effectValue2, int effectRounds, string specialEffectScriptName)
 	{
 		EffectType = effectType;
 		EffectValue1 = effectValue1;
 		EffectValue2 = effectValue2;
 		EffectRounds = effectRounds;
+		SpecialEffectScriptName = specialEffectScriptName;
 	}
 	public EffectPackage() { }
 }
@@ -31,8 +32,8 @@ public class EffectPackageWithTargetOption : EffectPackage
     public TargetOptions EffectTarget;
     public int TargetCount;
 
-    public EffectPackageWithTargetOption(EffectType effectType, int effectValue1, int effectValue2, int effectRounds, TargetOptions effectTarget, int targetCount)
-			: base(effectType, effectValue1, effectValue2, effectRounds)
+    public EffectPackageWithTargetOption(EffectType effectType, int effectValue1, int effectValue2, int effectRounds, string specialEffectScriptName, TargetOptions effectTarget, int targetCount)
+			: base(effectType, effectValue1, effectValue2, effectRounds, specialEffectScriptName)
 	{
 		EffectTarget = effectTarget;
 		TargetCount = targetCount;

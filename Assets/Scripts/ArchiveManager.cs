@@ -18,7 +18,7 @@ public static class ArchiveManager
 			{
 				json = new StreamReader(fs).ReadToEnd();
 			}
-			PlayerJSONInformation save = new PlayerJSONInformation();
+			SerializablePlayerData save = new SerializablePlayerData();
 			JsonUtility.FromJsonOverwrite(json, save);
 			if(save.Name != null)
 			{
@@ -32,7 +32,7 @@ public static class ArchiveManager
 	/// <returns></returns>
 	public static void SavePlayerData(int _saveID)
 	{
-		PlayerJSONInformation save = new PlayerJSONInformation(Player.Instance);
+		SerializablePlayerData save = new SerializablePlayerData(Player.Instance);
 		string json = null;
 		json = JsonUtility.ToJson(save);
 		FileStream fs = new FileStream(Const.PLAYER_DATA_PATH(_saveID), FileMode.OpenOrCreate, FileAccess.Write);
@@ -49,7 +49,7 @@ public static class ArchiveManager
 	public static void ResetPlayerDataFile()
 	{
 		Debug.Log("≥ı ºªØ¥Êµµ");
-		PlayerJSONInformation prePlayer = new PlayerJSONInformation(Const.InitialCode);
+		SerializablePlayerData prePlayer = new SerializablePlayerData(Const.InitialCode);
 		string json = JsonUtility.ToJson(prePlayer);
 		for(int i = 1; i <= Const.MaxSaveCount; i++)
 		{

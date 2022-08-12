@@ -1396,19 +1396,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisSurvent: {fileID: 2634340889832455649}
-  type: 0
-  isActive: 0
   atkText: {fileID: 2634340889731753358}
   hpText: {fileID: 2634340889170074197}
   cardImage: {fileID: 2634340889445956699}
   activeGlowImage: {fileID: 2634340888448459266}
-  tauntImage: {fileID: 2634340888466187037}
-  raidImage: {fileID: 2634340889234339468}
-  deadWhisperImage: {fileID: 2634340888926320863}
-  vampireImage: {fileID: 2634340887932683913}
-  protectedImage: {fileID: 2634340888066902861}
-  concealImage: {fileID: 2634340889758175525}
-  doubleHitImage: {fileID: 2634340887803885754}
+  TauntImage: {fileID: 2634340888466187037}
+  RaidImage: {fileID: 2634340889234339468}
+  UndeadImage: {fileID: 2634340888926320863}
+  VampireImage: {fileID: 2634340887932683913}
+  ProtectedImage: {fileID: 2634340888066902861}
+  ConcealImage: {fileID: 2634340889758175525}
+  DoubleHitImage: {fileID: 2634340887803885754}
 --- !u!114 &7033243564263325779
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -39,8 +39,11 @@ public class PlayerUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner
 			hpText.text = player.CurrentHP.ToString();
 			actionPointText.text = player.CurrentActionPoint.ToString();
 		}
+		if(player.CurrentHP <= 0)
+		{
+			Die();
+		}
 	}
-
 	public void Die()
 	{
 		GameObject.Find("BattleSystem").GetComponent<BattleSystem>().GameEnd(GameResult.Failure);
@@ -84,4 +87,17 @@ public class PlayerUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner
 		player.UpdateEffect();
 	}
 
+	#region 行动点使用接口
+	public bool CanUseActionPoint(int cost)
+	{
+		return (player.CurrentActionPoint - cost >= 0) ?  true : false;
+	}
+	public void UseActionPoint(int cost)
+	{
+		if(CanUseActionPoint(cost))
+		{
+			player.CurrentActionPoint -= cost;
+		}
+	}
+	#endregion
 }

@@ -8,10 +8,8 @@ using DG.Tweening;
 
 public class CardDisplay : MonoBehaviour
 {
-
-    //
     //public Card card;
-    public CardSOAsset card { get; private set; }
+    public CardSOAsset Asset { get; private set; }
     //public OneCardManager PreviewManager;
     [Header("Text Component References")]
     public TextMeshProUGUI NameText;// 卡牌名字
@@ -28,48 +26,38 @@ public class CardDisplay : MonoBehaviour
     public Image CardRarityImage;// 卡牌稀有度
     public Image CardFaceGlowImage;// 卡牌发光
     public Image CardBackImage;
-	private void Start()
-	{
-        //Debug.Log("开始");
-        LoadInf();
-    }
 	private void Update()
 	{
-        Refresh();
+        
 	}
 	public void Initialized(CardSOAsset _card)
 	{
-        card = _card;
+        Asset = _card;
         LoadInf();
 	}
-	void Refresh()
-	{
-        // 更新卡牌信息
-        // 添加图片
-        CardRarityImage.sprite = card.RarityImage;
-        CardGraphicImage.sprite = card.CardImage;
-        // 添加卡牌名字
-        NameText.text = card.CardName;
-        // 添加卡牌费用
-        CostText.text = card.Cost.ToString();
-        //Debug.Log(cardAsset.Cost);
-        // 添加描述
-        DescriptionText.text = card.CardDescription;
-        CampText.text = card.CardCamp.ToString();
-    }
     public void LoadInf()
 	{
-        if(card != null)
+        if(Asset != null)
 		{
-            Refresh();
+            // 添加图片
+            CardRarityImage.sprite = Asset.RarityImage;
+            CardGraphicImage.sprite = Asset.CardImage;
+            // 添加卡牌名字
+            NameText.text = Asset.CardName;
+            // 添加卡牌费用
+            CostText.text = Asset.Cost.ToString();
+            //Debug.Log(cardAsset.Cost);
+            // 添加描述
+            DescriptionText.text = Asset.CardDescription;
+            CampText.text = Asset.CardCamp.ToString();
             //卡牌光效默认关闭
             CardFaceGlowImage.enabled = false;
             //默认关闭卡背
             CardBackImage.enabled = false;
-            if (card.CardType == CardType.Survent)
+            if (Asset.CardType == CardType.Survent)
             {
-                AtkText.text = card.Atk.ToString();
-                HealthText.text = card.MaxHP.ToString();
+                AtkText.text = Asset.Atk.ToString();
+                HealthText.text = Asset.MaxHP.ToString();
             }
             else
             {

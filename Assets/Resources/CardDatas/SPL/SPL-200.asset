@@ -19,7 +19,7 @@ MonoBehaviour:
   CardType: 1
   CardCamp: 5
   Cost: 0
-  CardImage: {fileID: 0}
+  CardImage: {fileID: 21300000, guid: e7b5fa6c9df00f141820163c3c626101, type: 3}
   RarityImage: {fileID: 21300000, guid: d352133a8c1e1924f97cae3f2a11a737, type: 3}
   MaxHP: 0
   Atk: 0
@@ -27,8 +27,8 @@ MonoBehaviour:
   IsTank: 0
   IsRaid: 0
   IsVampire: 0
-  SpecialSkillList: []
+  IsDoubleHit: 0
+  SpecialAbilityList: []
   IsCopidedEffect: 1
   IsCopied: 0
-  SpellActionType: 1
   SpellEffectList: []

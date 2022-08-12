@@ -4,7 +4,7 @@
 internal interface IUnitRunner
 {
 	/// <summary>
-	/// 自动行动接口，仅供非玩家单位使用
+	/// 自动行动接口,每回合调用一次,仅供非玩家单位使用
 	/// </summary>
 	/// <param name="currentRound">当前回合数</param>
 	public void AutoAction(int currentRound);

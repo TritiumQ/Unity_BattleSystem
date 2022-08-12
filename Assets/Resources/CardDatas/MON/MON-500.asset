@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5260d0e1e557d924098f98884611e3f5, type: 3}
-  m_Name: MON-003
+  m_Name: MON-500
   m_EditorClassIdentifier: 
-  CardID: 3
-  CardName: "\u5566\u5566\u961F"
-  CardDescription: "\u533B\u751F"
-  CardRarity: 3
+  CardID: 500
+  CardName: "\u86C7\u4E4B\u773C"
+  CardDescription: "\u5766\u514B"
+  CardRarity: 0
   CardType: 0
-  CardCamp: 4
+  CardCamp: 5
   Cost: 0
-  CardImage: {fileID: 21300000, guid: 85ce100ffe9422e44adce1e589a1d572, type: 3}
+  CardImage: {fileID: 21300000, guid: 476cb58a6c5f7e84e8d7c20e32697fa4, type: 3}
   RarityImage: {fileID: 0}
-  MaxHP: 5
+  MaxHP: 39
   Atk: 1
   AtksPerTurn: 1
-  IsTank: 0
-  IsRaid: 0
+  IsTank: 1
+  IsRaid: 1
   IsVampire: 0
-  SpecialSkillList: []
+  IsDoubleHit: 0
+  SpecialAbilityList: []
   IsCopidedEffect: 0
   IsCopied: 0
-  SpellActionType: 0
   SpellEffectList: []

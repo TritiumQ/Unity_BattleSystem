@@ -102,7 +102,7 @@ public class UnitInBattle
 	}
 	public void SetInspire(int hp, int atk, int rounds)
 	{
-		EffectPackage isp = new EffectPackage(EffectType.Inspire, hp, atk, rounds);
+		EffectPackage isp = new EffectPackage(EffectType.Inspire, hp, atk, rounds, null);
 		Inspire.Add(isp);
 		MaxHP += hp;
 		CurrentHP += hp;

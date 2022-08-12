@@ -33,7 +33,7 @@ public class Player
     ///  初始化信息, 仅供ArchiveManager类载入储存信息用, 请勿直接调用
     /// </summary>
     /// <returns></returns>
-    public void Initialized(PlayerJSONInformation _info)
+    public void Initialized(SerializablePlayerData _info)
 	{
         Name = _info.Name;
         MaxHP = _info.MaxHP;

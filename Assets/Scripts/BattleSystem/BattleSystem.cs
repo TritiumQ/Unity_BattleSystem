@@ -8,30 +8,24 @@ public class BattleSystem : MonoBehaviour
 {
 	[Header("玩家单位")]
 	public GameObject playerUnit;
-	//玩家信息区
-	PlayerInBattle player;
 	List<int> deck;  //牌堆
 	List<GameObject> handCards;  //手牌堆  //max count = 10
 	//List<int> usedCards;  //弃牌堆
 	int cardUsedFlag;
 	public List<GameObject> PlayerSurventUnitsList { get; private set; } //玩家随从列表
 
-
 	[Header("Boss单位")]
 	public GameObject bossUnit;
-	public BossUnitManager bossUnitManager;
 	public List<GameObject> BossSurventUnitsList { get; private set; } //Boss随从列表  //max count = 7
 
 	//控件
-	//bool roundEndFlag = false;  //回合结束标志
+	//回合结束标志
 	bool playerActionCompleted = false;
-	//bool getCardCompleted = false;
+	//回合开始标志
 	bool roundStart = false;
 	int round;
 
 	//其他
-	
-
 	[Header("回合数")]
 	public TextMeshProUGUI roundText;
 	[Header("结束回合按钮")]
@@ -45,7 +39,6 @@ public class BattleSystem : MonoBehaviour
 	public GameObject enemyArea;
 	[Header("随从预制体")]
 	public GameObject surventPrefab;
-	public GameObject enemyPrefab;
 	[Header("卡牌预制体")]
 	public GameObject cardPrefab;  
 	private void Update()
@@ -54,12 +47,12 @@ public class BattleSystem : MonoBehaviour
 	}
 	private void Awake()
 	{
-		vectory.SetActive(false);
+		victory.SetActive(false);
 		//初始化实例
 		endButton.onClick.AddListener(EndRound);
 		roundText.text = round.ToString();
 		//deck = new List<int>();
-		deck = new List<int> { 1, 2, 3, 4, 5, -1, -2, -3, -4 ,-5 };
+		deck = new List<int> { 0,200 };
 
 		handCards = new List<GameObject>(10);
 		//usedCards = new List<int>();
@@ -69,8 +62,6 @@ public class BattleSystem : MonoBehaviour
 
 		//
 		TestSetData();
-
-		//
 	}
 	void GetCard(int _count)
 	{
@@ -80,33 +71,27 @@ public class BattleSystem : MonoBehaviour
 			if (cardUsedFlag == deck.Count) //牌库空，触发洗牌以及抽空惩罚
 			{
 				RefreshDeck();
+				Debug.Log("洗牌惩罚");
+				//TODO 洗牌惩罚,扣玩家5点血
+				//Effect.Set(playerUnit, EffectType.Attack, 5);
+				
 
-				//洗牌惩罚,扣玩家5点血
-				Effect.Set(playerUnit, EffectType.Attack, 5);
 			}
-			int randPos = Random.Range(0, deck.Count); //随机抽牌
-
+			//抽牌
 			GameObject newCard = Instantiate(cardPrefab, playerHands.transform); //生成预制件实例
-
-			//Debug.Log(Const.CARD_DATA_PATH(deck[randPos]));
 			//依据编号，从文件中读取卡牌数据
-			//Card card = new Card(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(deck[randPos])));
 			CardSOAsset card = Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(deck[cardUsedFlag]));
 			cardUsedFlag++;
 
 			newCard.GetComponent<CardDisplay>().Initialized(card);
 			newCard.GetComponent<CardDisplay>().LoadInf();
 
-
 			handCards.Add(newCard);
-			//newCard.GetComponent<CardDisplay>().LoadInf();
-
-			//deck.RemoveAt(randPos);
 		}
 	}
 	void RefreshDeck()  //洗牌刷新牌堆
 	{
-		Debug.Log("刷新牌堆");
+		Debug.Log("洗牌");
 		cardUsedFlag = 0;
 		for(int i = 0; i < deck.Count; i++)
 		{
@@ -115,18 +100,9 @@ public class BattleSystem : MonoBehaviour
 			deck[rnd] = deck[i];
 			deck[i] = swap;
 		}
-		
-		/* //旧刷新方法，已弃用
-		for (int i = 0; i < usedCards.Count; i++)
-		{
-			deck.Add(usedCards[i]);
-		}
-		usedCards.Clear();
-		*/
 	}
 	void EndRound()
 	{
-		//roundEndFlag = true;
 		playerActionCompleted = true;
 	}
 	void GamePlay()
@@ -143,49 +119,46 @@ public class BattleSystem : MonoBehaviour
 				GetCard(1);
 			}
 			Debug.Log("回合开始");
-			foreach (var obj in PlayerSurventUnitsList)
-			{
-				obj.SendMessage("CheckInStart");
-			}
-			foreach (var obj in BossSurventUnitsList)
-			{
-				obj.SendMessage("CheckInStart");
-			}
 			roundStart = true;
+			//触发玩家随从先机效果
+			foreach (var unit in PlayerSurventUnitsList)
+			{
+				unit.SendMessage("AdvancedEffectTrigger");
+			}
 		}
 		//2 玩家部署随从/使用法术牌
 		//3 玩家行动完成后怪物行动,并结束回合
 		else  if (playerActionCompleted)  
 		{
-			// Boss行动
-			
-
-			//boss随从行动
-			foreach(var obj in BossSurventUnitsList)
+			//触发玩家随从后手效果
+			foreach(var unit in PlayerSurventUnitsList)
 			{
-
-				obj.SendMessage("Action");
+				unit.SendMessage("SubsequentEffectTrigger");
 			}
+
+			// Boss以及敌人随从，先机效果和行动
+			bossUnit.SendMessage("AdvancedEffectTrigger");
+			bossUnit.SendMessage("AutoAction", round);
+			foreach (var unit in BossSurventUnitsList)
+			{
+				unit.SendMessage("AdvancedEffectTrigger");
+			}
+			foreach(var unit in BossSurventUnitsList)
+			{
+				unit.SendMessage("AutoAction", round);
+			}
+
+			//刷新回合
 			round++;
 			roundText.text = round.ToString();
-
-			if(player.MaxActionPoint < 10)
-			{
-				player.MaxActionPoint++; //每经过一回合,战术点上升1点,最大为10
-			}
-			player.CurrentActionPoint = player.MaxActionPoint;
-			
 			playerActionCompleted = false;
 			roundStart = false;
-			//检查并刷新buff,以及触发随从后手效果
-			//bossUnitManager.CheckBuff();
-			foreach (var obj in PlayerSurventUnitsList)
+
+			//检查并刷新buff,以及触发boss和敌人随从后手效果
+			bossUnit.SendMessage("SubsequentEffectTrigger");
+			foreach(var unit in BossSurventUnitsList)
 			{
-				obj.SendMessage("CheckInEnd");
-			}
-			foreach (var obj in BossSurventUnitsList)
-			{
-				obj.SendMessage("CheckInEnd");
+				unit.SendMessage("SubsequentEffectTrigger");
 			}
 			//结束回合
 		}
@@ -193,43 +166,58 @@ public class BattleSystem : MonoBehaviour
 	}
 	public void UseCardByPlayer(GameObject _cardObject)  //使用卡牌
 	{
-		CardSOAsset _card = _cardObject.GetComponent<CardDisplay>().card;
-		if(player.CurrentActionPoint - _card.Cost >= 0)
+		if(_cardObject != null)
 		{
-			if (_card.CardType == CardType.Spell)
+			CardSOAsset card = _cardObject.GetComponent<CardDisplay>().Asset;
+			if (card != null && playerUnit.GetComponent<PlayerUnitManager>().CanUseActionPoint(card.Cost))
 			{
-				//使用法术卡
-				//AttackRequest(_cardObject, EffectType.SpellAttack, _cardObject.transform.position);
-			}
-			else
-			{
-				if ((_card.CardType == CardType.Survent && PlayerSurventUnitsList.Count < 7))
+				if (card.CardType == CardType.Spell)
 				{
-					GameObject newSurvent = Instantiate(surventPrefab, surventArea.transform);
-					newSurvent.GetComponent<SurventUnitManager>().Initialized(_card);
-					PlayerSurventUnitsList.Add(newSurvent);
-					//触发放置效果
-					
-
-					player.CurrentActionPoint -= _card.Cost;
+					//TODO 使用法术卡
+				}
+				else if ((card.CardType == CardType.Survent && PlayerSurventUnitsList.Count < 7))
+				{
+					SetupSurvent(card, CardType.Survent);
+					playerUnit.GetComponent<PlayerUnitManager>().UseActionPoint(card.Cost);
 					handCards.Remove(_cardObject);
-					//usedCards.Add(_card.cardID);
 					Destroy(_cardObject);
 				}
 			}
-		}
-		else 
-		{
-			Debug.Log("战术点不足");
+			else
+			{
+				Debug.Log("战术点不足");
+			}
 		}
 	}
-	public void SetupBossSurvent(CardSOAsset _card)
+	public void SetupSurvent(CardSOAsset _card, CardType _type)
 	{
-		if(_card.CardType == CardType.Monster && BossSurventUnitsList.Count < 7)
+		if (_card != null) 
 		{
-			GameObject newEnemy = Instantiate(enemyPrefab, enemyArea.transform);
-			newEnemy.GetComponent<SurventUnitManager>().Initialized(_card);
-			BossSurventUnitsList.Add(newEnemy);
+			GameObject newSurvent = null;
+			switch (_type)
+			{
+				case CardType.Survent:
+					{
+						newSurvent = Instantiate(surventPrefab, surventArea.transform);
+						newSurvent.GetComponent<SurventUnitManager>().Initialized(_card);
+						PlayerSurventUnitsList.Add(newSurvent);
+					}
+					break;
+				case CardType.Monster:
+					{
+						if (BossSurventUnitsList.Count < 7)
+						{
+							GameObject newEnemy = Instantiate(surventPrefab, enemyArea.transform);
+							newEnemy.GetComponent<SurventUnitManager>().Initialized(_card);
+							BossSurventUnitsList.Add(newEnemy);
+						}
+					}
+					break;
+				default:
+					break;
+			}
+			//触发放置效果
+			newSurvent.SendMessage("SetupEffectTrigger");
 		}
 	}
 
@@ -246,6 +234,7 @@ public class BattleSystem : MonoBehaviour
 	}
 
 	#region 新版-效果的释放和接收调度函数
+	//TODO 新版效果调度
 	public GameObject EffectInitiator { get; private set; }
 	public GameObject EffectTarget { get; private set; }
 	public EffectPackage Package { get; private set; }
@@ -277,6 +266,7 @@ public class BattleSystem : MonoBehaviour
 		EffectTarget = null;
 		Package = null;
 	}
+	//TODO 直接设置效果
 	/// <summary>
 	/// 对特定单个目标直接释放效果
 	/// </summary>
@@ -285,7 +275,7 @@ public class BattleSystem : MonoBehaviour
 	/// <param name="package">效果信息</param>
 	public void EffectDirectSetup(GameObject initiator, GameObject Target, EffectPackage package)
 	{
-		//TODO 
+		
 
 	}
 	/// <summary>
@@ -295,7 +285,7 @@ public class BattleSystem : MonoBehaviour
 	/// <param name="package">效果信息包（有目标信息）</param>
 	public void EffectDirectSetup(GameObject initiator, EffectPackageWithTargetOption package)
 	{
-		//TODO
+		
 
 	}
 	#endregion
@@ -350,14 +340,14 @@ public class BattleSystem : MonoBehaviour
 			{	
 
 				//Debug.Log("攻击成功");
-				attacker.GetComponent<SurventUnitManager>().isActive = false;
+				//attacker.GetComponent<SurventUnitManager>().isActive = false;
 				Effect.Set(victim, EffectType.Attack, attacker.GetComponent<SurventUnitManager>().survent.ATK);
 			}
 			else if(attackerType == CardType.Spell)
 			{
-				CardSOAsset spellCard = attacker.GetComponent<CardDisplay>().card;
+				CardSOAsset spellCard = attacker.GetComponent<CardDisplay>().Asset;
 				//Effect.Set(victim, spellCard.SpellActionType, spellCard.SpellActionValue1, spellCard.SpellActionValue2);
-				player.CurrentActionPoint -= spellCard.Cost;
+				//player.CurrentActionPoint -= spellCard.Cost;
 				handCards.Remove(attacker);
 				Destroy(attacker);
 			}
@@ -378,8 +368,8 @@ public class BattleSystem : MonoBehaviour
 	}
 	#endregion
 
-	//胜利
-	public GameObject vectory;
+	//TODO 胜利
+	public GameObject victory;
 
 	public void GameEnd(GameResult result)
 	{
@@ -415,9 +405,10 @@ public class BattleSystem : MonoBehaviour
 	}
 	public void LoadPlayerInformation()
 	{
-		if(playerUnit != null)
+		if(playerUnit != null && Player.Instance != null)
 		{
 			playerUnit.SendMessage("Initialized");
+			deck = Player.Instance.cardSet;
 		}
 	}
 	
@@ -425,10 +416,11 @@ public class BattleSystem : MonoBehaviour
 	{
 		Debug.Log("Start Data Setting...");
 		ArchiveManager.LoadPlayerData(1);
-
+		
 		playerUnit.SendMessage("Initialized");
 
-		bossUnit.SendMessage("Initialized", Resources.Load<BossSOAsset>(Const.BOSS_DATA_PATH(1)));
+		bossUnit.SendMessage("Initialized", Resources.Load<BossSOAsset>(Const.BOSS_DATA_PATH(0)));
+		Debug.Log(Const.BOSS_DATA_PATH(0));
 
 		Debug.Log("测试载入数据完成");
 	}

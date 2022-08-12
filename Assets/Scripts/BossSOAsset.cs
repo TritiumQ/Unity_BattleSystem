@@ -9,7 +9,7 @@ public class BossSOAsset : ScriptableObject
     public string Name;
     public int MaxHP;
     public int ATK;
-    public Image Icon;
+    public Sprite Icon;
     [Header("可召唤随从列表")]
     public List<int> SummonList;
     [Header("特殊效果列表")]

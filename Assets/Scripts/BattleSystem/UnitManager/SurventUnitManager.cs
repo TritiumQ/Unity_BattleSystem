@@ -7,7 +7,7 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
     public GameObject thisSurvent;
     public SurventInBattle survent { get; private set; }
 
-    public bool isActive;
+    public bool isActive { get; private set; }
 
     [Header("Text Component References")]
     public TextMeshProUGUI atkText;
@@ -69,12 +69,16 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
             ProtectedImage.enabled = survent.IsProtected;
             RaidImage.enabled = survent.IsRaid;
         }
+        if (survent.CurrentHP <= 0) 
+		{
+            Die();
+		}
     }
     public void AutoAction(int currentRound)
     {
         if(survent.SurventType == CardType.Monster)
 		{
-
+            //TODO 敌方随从自动行动
 		}
     }
     public void Die()
@@ -88,6 +92,7 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
         Destroy(gameObject);
 	}
 
+    //TODO 随从接口组
     public void AcceptEffect(object[] _parameterList)
     {
 
@@ -101,7 +106,7 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
     #region 特殊能力效果接口组
     public void AdvancedEffectTrigger()
     {
-        
+        isActive = true;
     }
 
     public void FeedbackEffectTrigger()
