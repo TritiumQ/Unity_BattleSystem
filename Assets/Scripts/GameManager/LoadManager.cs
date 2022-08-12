@@ -12,8 +12,6 @@ public class LoadManager : MonoBehaviour
     public TextMeshProUGUI text;
     public string scene;
 
-    public int time = 1000;
-
     public void LoadNextLevel()
     {
         StartCoroutine(LoadLevel());//开启协程
@@ -35,13 +33,13 @@ public class LoadManager : MonoBehaviour
                 {
                     slider.value = 1.0f;
                     text.text = "100%";
-                    System.Threading.Thread.Sleep(time);
+                    System.Threading.Thread.Sleep(300);
                     operation.allowSceneActivation = true;//允许场景自动跳转
                 }
 
                 yield return null;//跳出协程
             }
-            System.Threading.Thread.Sleep(time);
+            System.Threading.Thread.Sleep(500);
             if (scene == "Fight")
             {
                 GameObject obj = GameObject.Find("GameManager");
@@ -57,6 +55,8 @@ public class LoadManager : MonoBehaviour
                     Debug.Log("敌人信息载入成功");
                 }
             }
+            GameObject _obj = GameObject.Find("Panel");
+            _obj.SetActive(false);
         }
     }
 

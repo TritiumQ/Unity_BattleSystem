@@ -23,14 +23,6 @@ public class EventUI : MonoBehaviour
     public GameObject iconMeet;
     public GameObject iconStore;
     public GameObject iconBoss;
-    void Start()
-    {
-
-    }
-    void Update()
-    {
-        //Refresh();
-    }
     public void SetEventSign(int _value)//设置事件类型
     {
         eventSign = _value;
@@ -72,17 +64,7 @@ public class EventUI : MonoBehaviour
     public void SetPass() //事件通过设置
     {
         isPass = true;
-        //GetComponent<EventBgUI>().SetColor();
         GetComponentInChildren<EventBgUI>().SetColor();
     }
 
-    //void Refresh()
-    //{
-    //    if(isPass==true)
-    //    {
-    //        
-
-    //    }
-        
-    //}
 }

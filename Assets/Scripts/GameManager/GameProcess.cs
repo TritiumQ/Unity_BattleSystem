@@ -18,8 +18,4 @@ public class GameProcess : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    void Update()
-    {
-        
-    }
 }
