@@ -25,12 +25,12 @@ public class GameManager : MonoBehaviour
     {
         InitGameManager();
         player = Player.Instance;
-        PlayerDataTF.GetData(player);
     }
     void Start()
     {
         //测试区
-        //PlayDataTF.EventEnd();
+        //step = 4; level = 2;
+        //PlayerDataTF.EventEnd();
         //InitGameEvent(4);
     }
 
@@ -51,8 +51,7 @@ public class GameManager : MonoBehaviour
     void InitGameEvent(int _level = 1)   //初始化/设置 游戏事件
     {
         level = _level; //初始化所在层数
-        if(level==1)//初始化所在事件
-            step = 0;
+        step = 0;
         GameEvent = new List<int>();
 
         //刷新层区UI
@@ -69,7 +68,7 @@ public class GameManager : MonoBehaviour
         GetRandom.GetRandomEvent(GameEvent,level);
         
         //初始化事件预制体对象链表
-        for (int i = 0; i < GameEventCount[_level]; i++)//初始化事件预制体对象链表
+        for (int i = 0; i < GameEventCount[level]; i++)//初始化事件预制体对象链表
         {
             GameObject newEvent = Instantiate(eventPrefab, transform); //生成事件预制件
             newEvent.GetComponent<Transform>().position = new Vector3(SetPosition(i, 375, 1725), 500, 0);
@@ -84,8 +83,6 @@ public class GameManager : MonoBehaviour
     
     void RefreshData() //更新游戏局内数据
     {
-        //自身的玩家数据更新
-        PlayerDataTF.GetData(player);
         //局内游戏数据更新
         int judge = PlayerDataTF.GetResult();
         if (judge == 1)//通过当前事件
@@ -100,9 +97,8 @@ public class GameManager : MonoBehaviour
     void Gameover(int _result) //局内游戏结束
     {
         result = _result;
-        player.AddMoney(2 * step, 0); //游戏奖励
+        GetReward();
         //_result控制结局走向,暂定 0是失败，1是胜利......
-        //Debug.Log("游戏失败");
         //切换End场景
         SceneManager.LoadScene("EndScene");
     }
@@ -128,7 +124,8 @@ public class GameManager : MonoBehaviour
     void AddLevel()
     {
         level++;
-        if(level<=4)
+        step = 0;//重置步数
+        if (level<GameConst.GameEventCount.Length)
         {
             InitGameEvent(level); //刷新事件
         }
@@ -136,7 +133,6 @@ public class GameManager : MonoBehaviour
         {
             Gameover(1); //进入结算页面
         }
-        step = 0;//重置步数
     }
     float SetPosition(int i,float low,float up)//设置x轴位置
     {
@@ -144,6 +140,18 @@ public class GameManager : MonoBehaviour
         len = (up - low) / GameEventCount[level];
         x = i * len + len / 2 + low;
         return x;
+    }
+
+    void GetReward()
+    {
+        int value=0;
+        for(int i=1;i<level;i++)
+        {
+            value += GameEventCount[i];
+        }
+        value += step;
+        value *= 2;
+        player.AddMoney(value, 0);
     }
 
 }

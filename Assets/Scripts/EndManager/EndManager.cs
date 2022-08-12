@@ -33,13 +33,16 @@ public class EndManager : MonoBehaviour
     
     public void SetDisplayBox(int _key, int _step)//设置数据显示
     {
+        int value = step;
+        for (int i = 1; i < level; i++)
+            value += GameConst.GameEventCount[i];
         if (_key == 1)
         {
-            displayBox_1.GetComponent<DisplayBoxUI>().InitSet("步数:", _step);
+            displayBox_1.GetComponent<DisplayBoxUI>().InitSet("步数:", value);
         }
         else if (_key == 2)
         {
-            displayBox_2.GetComponent<DisplayBoxUI>().InitSet("获得秘银:", _step);
+            displayBox_2.GetComponent<DisplayBoxUI>().InitSet("获得秘银:", value*2);
         }
     }
 }

@@ -12,11 +12,11 @@ public class DisplayBoxUI : MonoBehaviour
     {
         
     }
-    public void InitSet(string _explain,int _step)
+    public void InitSet(string _explain,int _v)
     {
         explain.text = _explain;
-        string _value = string.Format("{ 0:0,0}",_step * 2);
-        value.text = _value;
+        //string _value = string.Format("{ 0:0,0}",_v);
+        value.text = _v.ToString();
     }
     
 }

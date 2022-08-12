@@ -21,9 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Shop.unity
     guid: ccac8e2948ea5034ab059543835a393e
   - enabled: 0
-    path: Assets/Scenes/EndScenes.unity
-    guid: 90b00bc74c8fe1e408ff0ab20bd1e176
-  - enabled: 0
     path: Assets/Scenes/ShopInGame.unity
     guid: 5f0f7f6120cef5c49af68329199eb10c
+  - enabled: 1
+    path: Assets/Scenes/EndScene.unity
+    guid: 63a89caee4fe4424784e6ed688dd171b
   m_configObjects: {}
