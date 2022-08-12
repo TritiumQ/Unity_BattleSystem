@@ -14,9 +14,19 @@ public class PlayerUnitManager : MonoBehaviour, IEffectRunner
 	{
 		Refresh();
 	}
+	/// <summary>
+	/// ≥ı ºªØ
+	/// </summary>
 	public void Initialized()
 	{
 		player = new PlayerInBattle(Player.Instance);
+	}
+	/// <summary>
+	/// Ω·À„
+	/// </summary>
+	public void Settle()
+	{
+		Player.Instance.SetCurrentHP(player.CurrentHP);
 	}
 	public void Refresh()
 	{

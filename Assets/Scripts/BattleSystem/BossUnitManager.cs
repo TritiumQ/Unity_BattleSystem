@@ -29,7 +29,7 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner, ISpecialAbilityRunn
 			{
 				Debug.Log("Boss已击败，战斗胜利");
 				//胜利特效
-				GameObject.Find("BattleSystem").GetComponent<BattleSystem>().Victory();
+				GameObject.Find("BattleSystem").SendMessage("GameEnd", GameResult.Success);
 			}
 		}
 	}

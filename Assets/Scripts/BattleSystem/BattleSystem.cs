@@ -377,30 +377,46 @@ public class BattleSystem : MonoBehaviour
 
 	//胜利
 	public GameObject vectory;
-	public void Victory()
+
+	public void GameEnd(GameResult result)
 	{
-		Debug.Log("好耶~！");
-		vectory.SetActive(true);
-		//TODO 胜利后结算
-		//PlayerDataTF.EventContinue();
-		//SceneManager.LoadScene("GameProcess");
+		switch (result)
+		{
+			case GameResult.Success:
+				{
+					Debug.Log("游戏胜利");
+				}
+				break;
+			case GameResult.Failure:
+				{
+					Debug.Log("游戏失败");
+				}
+				break;
+			case GameResult.Escape:
+				{
+					Debug.Log("临阵脱逃");
+				}
+				break;
+			default:
+				break;
+		}
 
 	}
 
 	//相关信息载入方法
-	public void SetBossInf(int _bossID)
+	public void LoadBossInformation(int _bossID)
 	{
 		if(bossUnit != null)
 		{
 			bossUnit.SendMessage("Initialized", Resources.Load<BossSOAsset>(Const.BOSS_DATA_PATH(_bossID)));
 		}
 	}
-	public void SetPlayerInf(PlayerBattleInformation _info)
+	public void LoadPlayerInformation()
 	{
-		player = new PlayerInBattle(_info);
-		//player.MaxHP = _info.maxHP;
-		//player.CurrentHP = _info.currentHP;
-		//deck = _info.cardSet;
+		if(playerUnit != null)
+		{
+			playerUnit.SendMessage("Initialized");
+		}
 	}
 	
 	void TestSetData() //测试载入数据

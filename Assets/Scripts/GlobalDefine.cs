@@ -61,7 +61,12 @@ public enum CardCamp
     Enemy,
     Snake
 }
-
+public enum GameResult
+{
+    Success,
+    Failure,
+    Escape,
+}
 /// <summary>
 /// 随从/法术效果
 /// </summary>

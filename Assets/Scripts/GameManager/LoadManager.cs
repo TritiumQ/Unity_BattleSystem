@@ -53,7 +53,7 @@ public class LoadManager : MonoBehaviour
                 if (_battle != null)
                 {
                     Debug.Log("find");
-                    _battle.GetComponent<BattleSystem>().SetBossInf(enemy);
+                    _battle.GetComponent<BattleSystem>().LoadBossInformation(enemy);
                     Debug.Log("敌人信息载入成功");
                 }
             }
