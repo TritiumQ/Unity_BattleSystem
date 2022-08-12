@@ -1,36 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 /// <summary>
 /// 储存和管理场上单位信息的统一父类
 /// </summary>
-public  class UnitInBattle
+public class UnitInBattle
 {
 	public int MaxHP;
 	public int CurrentHP;
 	public int ATK;
 	public int DEF;
 
-	public int ProtectedTimes;
-	public int TauntRounds;
-	public int ConcealRounds;
-	public List<EffectPackage> Inspire;
-	public int SilenceRounds;
+	protected int ProtectedTimes;
+	public bool IsProtected;
 
-	public UnitInBattle(int maxHP, int currentHP, int aTK, int dEF, int protectedTimes, int tauntRounds, int concealRounds, int silenceRounds)
+	protected int TauntRounds;
+	public bool IsTank;
+
+	protected int ConcealRounds;
+	public bool IsConcealed;
+
+	protected List<EffectPackage> Inspire;
+	public bool IsInspired;
+
+	protected int SilenceRounds;
+	public bool IsSilenced;
+
+	protected int VampireRounds;
+	public bool IsVampire;
+
+
+	public UnitInBattle(int maxHP, int currentHP, int aTK, int dEF, int protectedTimes, bool isProtected, int tauntRounds, bool isTank, int concealRounds, bool isConcealed, bool isInspired, int silenceRounds, bool isSilenced, int vampireRounds, bool isVampire)
 	{
 		MaxHP = maxHP;
 		CurrentHP = currentHP;
 		ATK = aTK;
 		DEF = dEF;
 		ProtectedTimes = protectedTimes;
+		IsProtected = isProtected;
 		TauntRounds = tauntRounds;
+		IsTank = isTank;
 		ConcealRounds = concealRounds;
-		SilenceRounds = silenceRounds;
+		IsConcealed = isConcealed;
 		Inspire = new List<EffectPackage>();
+		IsInspired = isInspired;
+		SilenceRounds = silenceRounds;
+		IsSilenced = isSilenced;
+		VampireRounds = vampireRounds;
+		IsVampire = isVampire;
 	}
+
 	public UnitInBattle()
 	{
 		MaxHP = 0;
@@ -43,7 +60,6 @@ public  class UnitInBattle
 		SilenceRounds = 0;
 		Inspire = new List<EffectPackage>();
 	}
-
 
 	#region 效果接收接口
 	public int BeAttacked(int damage)
@@ -114,27 +130,63 @@ public  class UnitInBattle
 		if(TauntRounds > 0)
 		{
 			TauntRounds--;
+			IsTank = true;
+		}
+		else
+		{
+			IsTank = false;
 		}
 		if(ConcealRounds > 0)
 		{
 			ConcealRounds--;
+			IsConcealed = true;
+		}
+		else
+		{
+			IsConcealed = false;
 		}
 		if(SilenceRounds > 0)
 		{
 			SilenceRounds--;
+			IsSilenced = true;
 		}
-		for(int i = Inspire.Count - 1; i >= 0; i--)
+		else
 		{
-			if(Inspire[i] != null)
+			IsSilenced = false;
+		}
+		if(Inspire.Count > 0)
+		{
+			IsInspired = true;
+			for (int i = Inspire.Count - 1; i >= 0; i--)
 			{
-				Inspire[i].EffectRounds--;
-				if (Inspire[i].EffectRounds <= 0)
+				if (Inspire[i] != null)
 				{
-					MaxHP -= Inspire[i].EffectValue1;
-					ATK -= Inspire[i].EffectValue2;
-					Inspire.RemoveAt(i);
+					Inspire[i].EffectRounds--;
+					if (Inspire[i].EffectRounds <= 0)
+					{
+						MaxHP -= Inspire[i].EffectValue1;
+						ATK -= Inspire[i].EffectValue2;
+						Inspire.RemoveAt(i);
+					}
 				}
 			}
+		}
+		else
+		{
+			IsInspired = false;
+		}
+		if(VampireRounds > 0)
+		{
+			IsVampire = true;
+			VampireRounds--;
+		}
+		else
+		{
+			IsVampire = false;
+		}
+		if(this is IUpdateEffectCustom)
+		{
+			((IUpdateEffectCustom)this).UpdateEffectCustom();
 		}
 	}
 	#endregion

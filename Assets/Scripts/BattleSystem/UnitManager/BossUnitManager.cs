@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class BossUnitManager : MonoBehaviour, IEffectRunner, ISpecialAbilityRunner, IAutoActionRunner
+public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbilityRunner
 {
     public BossInBattle Boss;
     public TextMeshProUGUI HpText;
@@ -17,11 +17,11 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner, ISpecialAbilityRunn
 	}
 	private void Update()
 	{
-		Refresh();
+		RefreshState();
 	}
-	void Refresh()
+	public void RefreshState()
 	{
-		if(Boss != null) //显示刷新
+		if (Boss != null) //显示刷新
 		{
 			HpText.text = Boss.CurrentHP.ToString();
 			AtkText.text = Boss.ATK.ToString();
@@ -34,8 +34,20 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner, ISpecialAbilityRunn
 		}
 	}
 
-	#region 自动行动接口(旧版boss行动循环)
+	public void Die()
+	{
+		
+	}
+
 	public void AutoAction(int currentRound)
+	{
+		BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
+		int mode = currentRound % Boss.Cycle.Count;
+		//TODO 新版行动适配
+	}
+
+	#region 自动行动接口(旧版boss行动循环)
+	public void _Action(int currentRound)
 	{
 		BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
 		int mod = currentRound % Boss.ActionCycle.Count;
@@ -64,7 +76,7 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner, ISpecialAbilityRunn
 					{
 						case SingleTargetOption.RandomTarget:
 							{
-								
+
 							}
 							break;
 						case SingleTargetOption.PlayerTarget:
@@ -80,8 +92,8 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner, ISpecialAbilityRunn
 									var target = sys.PlayerSurventUnitsList[0];
 									foreach (var obj in sys.PlayerSurventUnitsList)
 									{
-										if (obj != null && obj.GetComponent<SurventUnitManager>().survent.atk
-											< target.GetComponent<SurventUnitManager>().survent.atk)
+										if (obj != null && obj.GetComponent<SurventUnitManager>().survent.ATK
+											< target.GetComponent<SurventUnitManager>().survent.ATK)
 										{
 											target = obj;
 										}
@@ -98,8 +110,8 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner, ISpecialAbilityRunn
 									var target = sys.PlayerSurventUnitsList[0];
 									foreach (var obj in sys.PlayerSurventUnitsList)
 									{
-										if (obj != null && obj.GetComponent<SurventUnitManager>().survent.atk
-											> target.GetComponent<SurventUnitManager>().survent.atk)
+										if (obj != null && obj.GetComponent<SurventUnitManager>().survent.ATK
+											> target.GetComponent<SurventUnitManager>().survent.ATK)
 										{
 											target = obj;
 										}
@@ -116,8 +128,8 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner, ISpecialAbilityRunn
 									var target = sys.PlayerSurventUnitsList[0];
 									foreach (var obj in sys.PlayerSurventUnitsList)
 									{
-										if (obj != null && obj.GetComponent<SurventUnitManager>().survent.currentHP
-											< target.GetComponent<SurventUnitManager>().survent.currentHP)
+										if (obj != null && obj.GetComponent<SurventUnitManager>().survent.CurrentHP
+											< target.GetComponent<SurventUnitManager>().survent.CurrentHP)
 										{
 											target = obj;
 										}
@@ -134,8 +146,8 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner, ISpecialAbilityRunn
 									var target = sys.PlayerSurventUnitsList[0];
 									foreach (var obj in sys.PlayerSurventUnitsList)
 									{
-										if (obj != null && obj.GetComponent<SurventUnitManager>().survent.currentHP
-											> target.GetComponent<SurventUnitManager>().survent.currentHP)
+										if (obj != null && obj.GetComponent<SurventUnitManager>().survent.CurrentHP
+											> target.GetComponent<SurventUnitManager>().survent.CurrentHP)
 										{
 											target = obj;
 										}
@@ -167,15 +179,6 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner, ISpecialAbilityRunn
 	}
 	#endregion
 
-	#region 自动行动接口(新版行动循环)
-	public void NewAction(int currentRound)
-	{
-		BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
-		int mode = currentRound % Boss.Cycle.Count;
-		//TODO 新版行动适配
-	}
-	#endregion
-
 	#region 效果接收和运行接口
 	public void AcceptEffect(object[] _parameterList)
 	{
@@ -184,7 +187,9 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner, ISpecialAbilityRunn
 		switch (effect.EffectType)
 		{
 			case EffectType.Attack:
-				Boss.BeAttacked(effect.EffectValue1);
+				{
+					Boss.BeAttacked(effect.EffectValue1);
+				}
 				break;
 			case EffectType.VampireAttack:
 				{
@@ -223,7 +228,7 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner, ISpecialAbilityRunn
 	{
 		foreach (var effect in Boss.SpecialAbilityList)
 		{
-			if(effect.SkillType == SpecialSkillType.先机效果)
+			if(effect.SkillType == AbilityType.先机效果)
 			{
 				BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
 				if(sys != null)
@@ -237,7 +242,7 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner, ISpecialAbilityRunn
 	{
 		foreach (var effect in Boss.SpecialAbilityList)
 		{
-			if (effect.SkillType == SpecialSkillType.后手效果)
+			if (effect.SkillType == AbilityType.后手效果)
 			{
 				BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
 				if (sys != null)
@@ -251,7 +256,7 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner, ISpecialAbilityRunn
 	{
 		foreach (var effect in Boss.SpecialAbilityList)
 		{
-			if (effect.SkillType == SpecialSkillType.受击反馈)
+			if (effect.SkillType == AbilityType.受击反馈)
 			{
 				BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
 				if (sys != null)
@@ -262,6 +267,5 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner, ISpecialAbilityRunn
 		}
 	}
 	public void UndeadEffectTrigger() { }
-
 	#endregion
 }

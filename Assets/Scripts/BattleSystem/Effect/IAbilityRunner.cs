@@ -1,7 +1,7 @@
 ﻿/// <summary>
 /// 用于触发特殊效果的接口组
 /// </summary>
-internal interface ISpecialAbilityRunner
+internal interface IAbilityRunner
 {
 	/// <summary>
 	/// 放置效果触发接口, 单位放置于场上时调用

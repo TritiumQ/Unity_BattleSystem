@@ -11,7 +11,7 @@ public class BossInBattle : UnitInBattle
     public Image Icon;
     public List<int> SurventList;
 
-    public List<SpecialAbilityPackage> SpecialAbilityList;
+    public List<AbilityPackage> SpecialAbilityList;
 
     public List<BossActionType> ActionCycle;
 
@@ -20,7 +20,7 @@ public class BossInBattle : UnitInBattle
     public List<BossAction> Cycle;
 
     //
-    public BossInBattle(BossSOAsset asset):base(asset.MaxHP, asset.MaxHP, asset.ATK, 0, 0, 0, 0, 0)
+    public BossInBattle(BossSOAsset asset) : base(asset.MaxHP, asset.MaxHP, asset.ATK, 0, 0, false, 0, false, 0, false, false, 0, false, 0, false)
 	{
         Asset = asset;
         ID = asset.ID;

@@ -23,32 +23,16 @@ public class CardSOAsset : ScriptableObject
     public int Atk;// 攻击力
 
     public int AtksPerTurn = 1;// 每回合攻击次数
-
     public bool IsTank; // 是否嘲讽
     public bool IsRaid; // 是否突袭
     public bool IsVampire;
+    public bool IsDoubleHit;
 
     [Header("随从特殊效果列表")]
-    public List<SpecialAbilityPackage> SpecialSkillList;
-    /*
-    [Header("放置时效果")]
-    public bool IsSetupEffect;
-    public List<EffectPackage> SetupEffectList;
-    [Header("亡语信息")]
-    public bool IsUndead; //亡语
-    public List<EffectPackage> UndeadEffectList;
-    [Header("先机信息")]
-    public bool IsAdvanced; //先机
-    public List<EffectPackage> AdvancedEffectList;
-    [Header("后手信息")]
-    public bool IsSubsequent; //后手
-    public List<EffectPackage> SubsequentEffectList;
-    */
+    public List<AbilityPackage> SpecialAbilityList;
 
     [Header("法术信息")]
     public bool IsCopidedEffect;
     public bool IsCopied; //复制体标记
-    //public string SpellScriptName;
-    public EffectType SpellActionType;
-    public List<EffectPackage> SpellEffectList;
+    public List<EffectPackageWithTargetOption> SpellEffectList;
 }

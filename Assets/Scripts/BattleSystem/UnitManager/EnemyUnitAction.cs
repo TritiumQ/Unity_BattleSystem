@@ -12,7 +12,7 @@ public class EnemyUnitAction : MonoBehaviour
 
     public void Action()
 	{
-        int atk = manager.survent.atk;
+        int atk = manager.survent.ATK;
         BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
         if(sys != null)
 		{

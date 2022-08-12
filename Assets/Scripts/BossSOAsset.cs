@@ -13,13 +13,12 @@ public class BossSOAsset : ScriptableObject
     [Header("可召唤随从列表")]
     public List<int> SummonList;
     [Header("特殊效果列表")]
-    public List<SpecialAbilityPackage> SpecialAbilityList;
+    public List<AbilityPackage> SpecialAbilityList;
     [Header("新版行动循环")]
     public List<BossActionPackage> ActionPackages;
     public List<BossAction> Cycle;
 	[Header("旧版行动循环")]
     public List<BossActionType> ActionCycle;
-    
 }
 [System.Serializable]
 public class BossAction

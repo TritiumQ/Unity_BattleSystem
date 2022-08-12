@@ -6,13 +6,8 @@ using System.Collections.Generic;
 [System.Serializable]
 public class BossActionPackage
 {
-	//public NewBossActionType ActionType;
-	[Header("效果（包括普通攻击）")]
-	public EffectPackageWithTargetOption Effect;
-	[Header("技能")]
-	public string SkillScriptName;
-	public TargetOptions TargetOptions;
-	public int SkillTargetCount;
+	[Header("效果或技能（包括普通攻击）")]
+	public EffectPackageWithTargetOption ActionEffect;
 	[Header("召唤")]
 	public BossSummonMode SummonMode;
 	public int SummonCount;

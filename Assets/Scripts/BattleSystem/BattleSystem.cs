@@ -209,7 +209,7 @@ public class BattleSystem : MonoBehaviour
 					newSurvent.GetComponent<SurventUnitManager>().Initialized(_card);
 					PlayerSurventUnitsList.Add(newSurvent);
 					//触发放置效果
-					newSurvent.GetComponent<SurventUnitManager>().SetupEffect();
+					
 
 					player.CurrentActionPoint -= _card.Cost;
 					handCards.Remove(_cardObject);
@@ -232,14 +232,17 @@ public class BattleSystem : MonoBehaviour
 			BossSurventUnitsList.Add(newEnemy);
 		}
 	}
-	//
-	public void PlayerSurventDie(GameObject _obj)
+
+	public void SurventUnitDie(GameObject unitObject)
 	{
-		PlayerSurventUnitsList.Remove(_obj);
-	}
-	public void BossSurventDie(GameObject _obj)
-	{
-		BossSurventUnitsList.Remove(_obj);
+		if(PlayerSurventUnitsList.Contains(unitObject))
+		{
+			PlayerSurventUnitsList.Remove(unitObject);
+		}
+		else if(BossSurventUnitsList.Contains(unitObject))
+		{
+			BossSurventUnitsList.Remove(unitObject);
+		}
 	}
 
 	#region 新版-效果的释放和接收调度函数
@@ -348,7 +351,7 @@ public class BattleSystem : MonoBehaviour
 
 				//Debug.Log("攻击成功");
 				attacker.GetComponent<SurventUnitManager>().isActive = false;
-				Effect.Set(victim, EffectType.Attack, attacker.GetComponent<SurventUnitManager>().survent.atk);
+				Effect.Set(victim, EffectType.Attack, attacker.GetComponent<SurventUnitManager>().survent.ATK);
 			}
 			else if(attackerType == CardType.Spell)
 			{
@@ -400,7 +403,6 @@ public class BattleSystem : MonoBehaviour
 			default:
 				break;
 		}
-
 	}
 
 	//相关信息载入方法

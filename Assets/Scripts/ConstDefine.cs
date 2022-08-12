@@ -1,5 +1,4 @@
-﻿
-/// <summary>
+﻿/// <summary>
 /// 常量类
 /// </summary>
 /// <returns></returns>
@@ -47,7 +46,7 @@ public static class Const
         return UnityEngine.Application.dataPath + "/PlayerDatas/Save" + _id.ToString("D2") + ".json";
     }
 
-    public static int Forever = -1;
+    public static int INF = 0x7fffffff;
     public static int MaxSaveCount = 10;
     public static string InitialCode = "mikufans";
 

@@ -2,98 +2,68 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SurventInBattle
+public class SurventInBattle : UnitInBattle, IUpdateEffectCustom
 {
-    //public Card card;
-    //public CardSOAsset asset;
+    //readonly CardSOAsset asset;
+    public int CardID;
+    public string CardName;
 
-    public int atk;
-    public int currentHP;
-    public int maxHP;
+    public bool IsRaid;
+	public bool IsUndead;
+	public bool IsDoubleHit;
 
-    //特殊效果区
-    public bool isRaid;
-    public int inspireRounds;
-    public int inspireValue;
-    public int concealRounds;
-    //public int silenceRounds;
-    public int tauntRounds;
-    public int protectedTimes;
-    public int doubleHitRounds;
-   
-    //public bool isVampire;
-    public int vampireRounds;
+	public bool IsSubsequent;
+	public bool IsFeedback;
+	public bool IsAdvanced;
 
-    public bool isUndead; //亡语
-    public EffectType deadWhisperEffect;
-    public int deadWhisperEffectValue1;
-    public int deadWhisperEffectValue2;
-    public TargetOptions deadWhisperTarget;
-    public int DeadWhisperEffectTargetCount;
-
-    public bool isAdvanced; //先机
-    public EffectType advancedEffect;
-    public int advancedEffectValue1;
-    public int advancedEffectValue2;
-    public TargetOptions advancedEffectTarget;
-    public int AdvancedEffectTargetCount;
-
-    public bool isSubsequent; //后手
-    public EffectType subsequentEffect;
-    public int subsequentEffectValue1;
-    public int subsequentEffectValue2;
-    public TargetOptions subsequentEffectTarget;
-    public int SubsequentEffectTargetCount;
-
-    //随从放置时效果
-    public bool IsSetupEffect;
-    public EffectType SetupEffect;
-    public int SetupEffectValue1;
-    public int SetupEffectValue2;
-    public TargetOptions SetupEffectTarget;
-    public int SetupEffectTargetCount;
-
-    public SurventInBattle(CardSOAsset _asset)
+	public CardType SurventType;
+	public SurventInBattle(CardSOAsset _asset) 
+		: base(_asset.MaxHP, _asset.MaxHP, _asset.Atk, 0, 0, false, 0, _asset.IsTank, 0, false, false, 0, false, 0, _asset.IsVampire)
 	{
-        //改用CardSOAsset创建对象
-        atk = _asset.Atk;
-        currentHP =  maxHP = _asset.MaxHP;
-        isRaid = _asset.IsRaid;
-
-        if(_asset.IsTank)
+       if(_asset != null)
 		{
-            tauntRounds = Const.Forever;
+            CardID = _asset.CardID;
+            CardName = _asset.CardName;
+            if(_asset.IsTank)
+			{
+                TauntRounds = Const.INF;
+			}
+            IsRaid = _asset.IsRaid;
+			IsDoubleHit = _asset.IsDoubleHit;
+			SurventType = _asset.CardType;
+			if(_asset.IsVampire)
+			{
+				VampireRounds = Const.INF;
+			}
+			IsUndead = IsSubsequent = IsAdvanced = IsFeedback = false;
+			foreach(var ability in _asset.SpecialAbilityList)
+			{
+				switch(ability.SkillType)
+				{
+					case AbilityType.受击反馈:
+						IsFeedback = true;
+						break;
+					case AbilityType.先机效果:
+						IsAdvanced = true;
+						break;
+					case AbilityType.后手效果:
+						IsSubsequent = true;
+						break;
+					case AbilityType.亡语效果:
+						IsUndead = true;
+						break;
+					default:
+						break;
+				}
+			}
 		}
-        else
-		{
-            tauntRounds = 0;
-		}
-
-        inspireRounds = 0;
-        inspireValue = 0;
-        concealRounds = 0;
-        protectedTimes = 0;
-        doubleHitRounds = 0;
-
-        if (_asset.IsVampire == true)
-        {
-            vampireRounds = Const.Forever;
-        }
-        else
-        {
-            vampireRounds = 0;
-        }
-        //TODO 随从效果
-
-        /*
-        isUndead = _asset.IsUndead;
-
-        isAdvanced = _asset.IsAdvanced;
-
-        isSubsequent = _asset.IsSubsequent;
-
-        IsSetupEffect = _asset.IsSetupEffect;
-        */
-
     }
+
+	public void UpdateEffectCustom()
+	{
+		if(IsRaid == true)
+		{
+            IsRaid = false;
+		}
+	}
 }

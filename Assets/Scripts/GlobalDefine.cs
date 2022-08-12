@@ -75,10 +75,6 @@ public enum EffectType
 {
     Attack,
     VampireAttack,
-    /// <summary>
-    /// 自爆攻击，数值1->对自身伤害值, 数值2->对敌方伤害值
-    /// </summary>
-    SuicideAttack,
     Heal,
     Taunt,
     Protect,
@@ -98,7 +94,9 @@ public enum EffectType
     /// <summary>
     /// 随机抽牌, 数值1->抽牌数量
     /// </summary>
-    DrawRandomCard
+    DrawRandomCard,
+
+    SpecialEffect,
 
     //*亡语*，*先机*，*每回合开始时*，*每回合结束时*, boss的特殊技能
 }

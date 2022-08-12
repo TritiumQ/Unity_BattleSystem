@@ -1,17 +1,19 @@
-﻿using System;
-
+﻿using UnityEngine;
 /// <summary>
-/// 效果传递器,用于传输效果内容
+/// 效果传递器,用于传输和保存效果内容
 /// </summary>
 [System.Serializable]
 public class EffectPackage
 {
-    public EffectType EffectType;
+	public EffectType EffectType;
+	[Header("一般效果区")]
     public int EffectValue1;
     public int EffectValue2;
     public int EffectRounds;
+	[Header("特殊效果区")]
+	public string SpecialEffectScriptName;
 
-    public EffectPackage(EffectType effectType, int effectValue1, int effectValue2, int effectRounds)
+	public EffectPackage(EffectType effectType, int effectValue1, int effectValue2, int effectRounds)
 	{
 		EffectType = effectType;
 		EffectValue1 = effectValue1;
