@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class SurventUnitManager : MonoBehaviour, IEffectRunner
+public class SurventUnitManager : MonoBehaviour
 {
     public GameObject thisSurvent;
     public SurventInBattle survent { get; private set; }
@@ -159,25 +159,25 @@ public class SurventUnitManager : MonoBehaviour, IEffectRunner
 					{
                         Effect.Set(sys.bossUnit, action, value1, value2);
                         
-                        foreach (var obj in sys.BossSurventUnits)
+                        foreach (var obj in sys.BossSurventUnitsList)
                         {
                             //obj.SendMessage("BeAttck", boss.ATK);
                             Effect.Set(obj, action, value1, value2);
                         }
                     }
                     break;
-                case TargetOptions.PlayerCreatures:
+                case TargetOptions.AllPlayerCreatures:
 					{
 
 					}
                     break;
-                case TargetOptions.EnemyCreatures:
+                case TargetOptions.AllEnemyCreatures:
 					break;
                 case TargetOptions.AllCharacters:
                     break;
-                case TargetOptions.PlayerCharacter:
+                case TargetOptions.ALlPlayerCharacter:
 					break;
-                case TargetOptions.EnemyCharacters:
+                case TargetOptions.ALlEnemyCharacters:
                     break;
                 case TargetOptions.SinglePlayerTarget:
                     break;
@@ -317,13 +317,4 @@ public class SurventUnitManager : MonoBehaviour, IEffectRunner
         survent.tauntRounds += _rounds;
 	}
 
-	public void AcceptEffect(object[] _parameterList)
-	{
-		throw new System.NotImplementedException();
-	}
-
-	public void UpdateEffect()
-	{
-		throw new System.NotImplementedException();
-	}
 }

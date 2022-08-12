@@ -5,9 +5,8 @@ public enum BossActionType
     AOEAttackExcludePlayer,
     SingleAttack,
     Summon,
-    Skill,
 }
-public enum BossSingleAttack
+public enum SingleTargetOption
 {
     PlayerTarget,
     RandomTarget,
@@ -15,66 +14,6 @@ public enum BossSingleAttack
     LowestHPTarget,
     HigestATKTarget,
     LowestATKTarget
-}
-public enum GetSurventInfomation
-{
-    ATK,
-    CurrentHP,
-    MaxHP,
-    Type
-}
-/// <summary>
-/// 常量类
-/// </summary>
-/// <returns></returns>
-public static class Const
-{
-    //偷懒
-    /// <summary>
-    /// 范围判断，左闭右闭
-    /// </summary>
-    /// <returns></returns>
-    static bool IsInRange(int value, int left, int right)
-	{
-        return value >= left && value <= right;
-	}
-
-    /// <summary>
-    /// 获取卡牌信息文件储存路径
-    /// </summary>
-    /// <returns></returns>
-    public static string CARD_DATA_PATH(int _id)
-	{
-        if (IsInRange(_id,0,199))
-        {
-            return "CardDatas/SVN-" + _id.ToString("D3");
-        }
-        else if (IsInRange(_id,200,399))
-        {
-            return "CardDatas/SPL-" + _id.ToString("D3");
-        }
-        else if(IsInRange(_id,500,699))
-		{
-            return "CardDatas/MON-" + _id.ToString("D3");
-        }
-        else
-		{
-            return null;
-		}
-    }
-    public static string BOSS_DATA_PATH(int _id)
-	{
-        return "BossDatas/MON-" + _id.ToString("D3");
-    }
-    public static string PLAYER_DATA_PATH(int _id)
-	{
-        return UnityEngine.Application.dataPath + "/PlayerDatas/Save" + _id.ToString("D2") + ".json";
-	}
-
-    public static int Forever = -1;
-    public static int MaxSaveCount = 10;
-    public static string InitialCode = "mikufans";
-    
 }
 public struct PlayerBattleInformation
 {
@@ -88,14 +27,13 @@ public struct PlayerBattleInformation
 /// 目标选择
 /// </summary>
 /// <returns></returns>
-/// 
 public enum TargetOptions
 {
     NoTarget,
     
     AllCreatures, //所有单位
-    PlayerCreatures,  //所有玩家单位（包括玩家本体）
-    EnemyCreatures,  //所有敌方单位（包括boss本体）
+    AllPlayerCreatures,  //所有玩家单位（包括玩家本体）
+    AllEnemyCreatures,  //所有敌方单位（包括boss本体）
 
     SinglePlayerTarget, //单个玩家目标
     SingleEnemyTarget, //单个敌方目标
@@ -104,8 +42,8 @@ public enum TargetOptions
     MultiEnemyTargets,
 
     AllCharacters,  //所有随从（不包括玩家和boss）
-    PlayerCharacter, //所有玩家随从 （不包括玩家）
-    EnemyCharacters  //所有敌方随从（不包括boss）
+    ALlPlayerCharacter, //所有玩家随从 （不包括玩家）
+    ALlEnemyCharacters  //所有敌方随从（不包括boss）
 }
 public enum RarityRank  //稀有度
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class AttackConfirm : MonoBehaviour, IPointerClickHandler
+public class EffectAcceptScript : MonoBehaviour, IPointerClickHandler
 {
     public GameObject thisObject;
     public void OnPointerClick(PointerEventData eventData)

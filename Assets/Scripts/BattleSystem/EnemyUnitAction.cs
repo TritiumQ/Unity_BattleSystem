@@ -17,14 +17,14 @@ public class EnemyUnitAction : MonoBehaviour
         if(sys != null)
 		{
             Debug.Log("bossËæ´Ó¹¥»÷");
-            int rand = Random.Range(0, sys.PlayerSurventUnits.Count + 1);
-            if(rand == sys.PlayerSurventUnits.Count)
+            int rand = Random.Range(0, sys.PlayerSurventUnitsList.Count + 1);
+            if(rand == sys.PlayerSurventUnitsList.Count)
 			{
                 Effect.Set(sys.playerUnit, EffectType.Attack, atk);
 			}
 			else
 			{
-                Effect.Set(sys.PlayerSurventUnits[rand], EffectType.Attack, atk);
+                Effect.Set(sys.PlayerSurventUnitsList[rand], EffectType.Attack, atk);
 			}
 		}
 	}

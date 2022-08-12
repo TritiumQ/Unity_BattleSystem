@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5260d0e1e557d924098f98884611e3f5, type: 3}
+  m_Name: MON-000
+  m_EditorClassIdentifier: 
+  CardID: 0
+  CardName: "\u86C7\u4E4B\u773C"
+  CardDescription: "\u5766\u514B"
+  CardRarity: 0
+  CardType: 0
+  CardCamp: 5
+  Cost: 0
+  CardImage: {fileID: 21300000, guid: 476cb58a6c5f7e84e8d7c20e32697fa4, type: 3}
+  RarityImage: {fileID: 0}
+  MaxHP: 39
+  Atk: 1
+  AtksPerTurn: 1
+  IsTank: 1
+  IsRaid: 1
+  IsVampire: 0
+  SpecialSkillList: []
+  IsCopidedEffect: 0
+  IsCopied: 0
+  SpellActionType: 0
+  SpellEffectList: []

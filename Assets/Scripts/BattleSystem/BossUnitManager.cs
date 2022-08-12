@@ -4,18 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class BossUnitManager : MonoBehaviour, IEffectRunner
+public class BossUnitManager : MonoBehaviour, IEffectRunner, ISpecialAbilityRunner, IAutoActionRunner
 {
-    public BossInBattle boss;
+    public BossInBattle Boss;
+    public TextMeshProUGUI HpText;
+	public TextMeshProUGUI AtkText;
+	public Image HeadIcon;
 
-    public TextMeshProUGUI hpText;
-    //public TextMeshProUGUI bossNameText;
-	public TextMeshProUGUI atkText;
-	public Image headIcon;
-	//public Image backGroungImage;
 	public void Initialized(BossSOAsset _asset)
 	{
-		boss = new BossInBattle(_asset);
+		Boss = new BossInBattle(_asset);
 	}
 	private void Update()
 	{
@@ -23,11 +21,11 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner
 	}
 	void Refresh()
 	{
-		if(boss != null) //显示刷新
+		if(Boss != null) //显示刷新
 		{
-			hpText.text = boss.currentHP.ToString();
-			atkText.text = boss.ATK.ToString();
-			if (boss.currentHP <= 0)
+			HpText.text = Boss.CurrentHP.ToString();
+			AtkText.text = Boss.ATK.ToString();
+			if (Boss.CurrentHP <= 0)
 			{
 				Debug.Log("Boss已击败，战斗胜利");
 				//胜利特效
@@ -35,68 +33,52 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner
 			}
 		}
 	}
-	//Boss行动
-	public void Action(int _CurrentRound)
+
+	#region 自动行动接口(旧版boss行动循环)
+	public void AutoAction(int currentRound)
 	{
 		BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
-		int mod = _CurrentRound % boss.actionCycle.Count;
-		switch (boss.actionCycle[mod])
+		int mod = currentRound % Boss.ActionCycle.Count;
+		//TODO 修改boss行动
+		switch (Boss.ActionCycle[mod])
 		{
 			case BossActionType.AOEAttack:
 				{
-					sys.playerUnitDisplay.BeAttacked(boss.ATK);
-					foreach (var obj in sys.PlayerSurventUnits)
-					{
-						//obj.SendMessage("BeAttck", boss.ATK);
-						Effect.Set(obj, EffectType.Attack, boss.ATK);
-					}
+					EffectPackageWithTargetOption package = new EffectPackageWithTargetOption(EffectType.Attack, Boss.ATK, 0, 0, TargetOptions.AllPlayerCreatures, 0);
+					sys.EffectDirectSetup(this.gameObject, package);
 				}
 				break;
 			case BossActionType.AOEAttackExcludePlayer:
 				{
-					foreach (var obj in sys.PlayerSurventUnits)
-					{
-						Effect.Set(obj, EffectType.Attack, boss.ATK);
-						//obj.SendMessage("BeAttacked", boss.ATK);
-					}
+					EffectPackageWithTargetOption package = new EffectPackageWithTargetOption(EffectType.Attack, Boss.ATK, 0, 0, TargetOptions.ALlPlayerCharacter, 0);
+					sys.EffectDirectSetup(this.gameObject, package);
 				}
 				break;
 			case BossActionType.SingleAttack:
 				{
-					Debug.Log("Boss攻击");
-					BossSingleAttack rnd = (BossSingleAttack)Random.Range(0,7); //需要更好的方法从枚举中随机选取
+					Debug.Log("Boss单体攻击");
+
+					var TypeArr = System.Enum.GetValues(typeof(SingleTargetOption));
+					SingleTargetOption rnd = (SingleTargetOption)TypeArr.GetValue(Random.Range(0, TypeArr.Length));
 					switch (rnd)
 					{
-						case BossSingleAttack.RandomTarget:
+						case SingleTargetOption.RandomTarget:
 							{
-								int random = Random.Range(0, sys.PlayerSurventUnits.Count + 1);
-								if(random == sys.PlayerSurventUnits.Count)
-								{
-									Effect.Set(sys.playerUnit, EffectType.Attack, boss.ATK);
-									//sys.playerUnitDisplay.BeAttacked(boss.ATK);
-								}
-								else
-								{
-									foreach (var obj in sys.PlayerSurventUnits)
-									{
-										//obj.SendMessage("BeAttacked", boss.ATK);
-										Effect.Set(obj, EffectType.Attack, boss.ATK);
-									}
-								}
+								
 							}
 							break;
-						case BossSingleAttack.PlayerTarget:
+						case SingleTargetOption.PlayerTarget:
 							{
 								//sys.playerUnitDisplay.BeAttacked(boss.ATK);
-								Effect.Set(sys.playerUnit, EffectType.Attack, boss.ATK);
+								Effect.Set(sys.playerUnit, EffectType.Attack, Boss.ATK);
 							}
 							break;
-						case BossSingleAttack.LowestATKTarget:
+						case SingleTargetOption.LowestATKTarget:
 							{
-								if(sys.PlayerSurventUnits.Count > 0)
+								if (sys.PlayerSurventUnitsList.Count > 0)
 								{
-									var target = sys.PlayerSurventUnits[0];
-									foreach (var obj in sys.PlayerSurventUnits)
+									var target = sys.PlayerSurventUnitsList[0];
+									foreach (var obj in sys.PlayerSurventUnitsList)
 									{
 										if (obj != null && obj.GetComponent<SurventUnitManager>().survent.atk
 											< target.GetComponent<SurventUnitManager>().survent.atk)
@@ -104,17 +86,17 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner
 											target = obj;
 										}
 									}
-									Effect.Set(target, EffectType.Attack, boss.ATK);
+									Effect.Set(target, EffectType.Attack, Boss.ATK);
 									//target.SendMessage("BeAttacked", boss.ATK);
 								}
 							}
 							break;
-						case BossSingleAttack.HigestATKTarget:
+						case SingleTargetOption.HigestATKTarget:
 							{
-								if (sys.PlayerSurventUnits.Count > 0)
+								if (sys.PlayerSurventUnitsList.Count > 0)
 								{
-									var target = sys.PlayerSurventUnits[0];
-									foreach (var obj in sys.PlayerSurventUnits)
+									var target = sys.PlayerSurventUnitsList[0];
+									foreach (var obj in sys.PlayerSurventUnitsList)
 									{
 										if (obj != null && obj.GetComponent<SurventUnitManager>().survent.atk
 											> target.GetComponent<SurventUnitManager>().survent.atk)
@@ -122,17 +104,17 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner
 											target = obj;
 										}
 									}
-									Effect.Set(target, EffectType.Attack, boss.ATK);
+									Effect.Set(target, EffectType.Attack, Boss.ATK);
 									//target.SendMessage("BeAttacked", boss.ATK);
 								}
 							}
 							break;
-						case BossSingleAttack.LowestHPTarget:
+						case SingleTargetOption.LowestHPTarget:
 							{
-								if (sys.PlayerSurventUnits.Count > 0)
+								if (sys.PlayerSurventUnitsList.Count > 0)
 								{
-									var target = sys.PlayerSurventUnits[0];
-									foreach (var obj in sys.PlayerSurventUnits)
+									var target = sys.PlayerSurventUnitsList[0];
+									foreach (var obj in sys.PlayerSurventUnitsList)
 									{
 										if (obj != null && obj.GetComponent<SurventUnitManager>().survent.currentHP
 											< target.GetComponent<SurventUnitManager>().survent.currentHP)
@@ -141,16 +123,16 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner
 										}
 									}
 									//target.SendMessage("BeAttacked", boss.ATK);
-									Effect.Set(target, EffectType.Attack, boss.ATK);
+									Effect.Set(target, EffectType.Attack, Boss.ATK);
 								}
 							}
 							break;
-						case BossSingleAttack.HighestHPTarget:
+						case SingleTargetOption.HighestHPTarget:
 							{
-								if (sys.PlayerSurventUnits.Count > 0)
+								if (sys.PlayerSurventUnitsList.Count > 0)
 								{
-									var target = sys.PlayerSurventUnits[0];
-									foreach (var obj in sys.PlayerSurventUnits)
+									var target = sys.PlayerSurventUnitsList[0];
+									foreach (var obj in sys.PlayerSurventUnitsList)
 									{
 										if (obj != null && obj.GetComponent<SurventUnitManager>().survent.currentHP
 											> target.GetComponent<SurventUnitManager>().survent.currentHP)
@@ -159,7 +141,7 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner
 										}
 									}
 									//target.SendMessage("BeAttacked", boss.ATK);
-									Effect.Set(target, EffectType.Attack, boss.ATK);
+									Effect.Set(target, EffectType.Attack, Boss.ATK);
 								}
 							}
 							break;
@@ -171,8 +153,8 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner
 			case BossActionType.Summon:
 				{
 					Debug.Log("Boss设置随从");
-					int rnd = Random.Range(0, boss.SurventList.Count);
-					sys.SetupBossSurvent(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(boss.SurventList[rnd])));
+					int rnd = Random.Range(0, Boss.SurventList.Count);
+					sys.SetupBossSurvent(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(Boss.SurventList[rnd])));
 
 				}
 				break;
@@ -183,8 +165,18 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner
 				break;
 		}
 	}
-	
-	//受击
+	#endregion
+
+	#region 自动行动接口(新版行动循环)
+	public void NewAction(int currentRound)
+	{
+		BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
+		int mode = currentRound % Boss.Cycle.Count;
+		//TODO 新版行动适配
+	}
+	#endregion
+
+	#region 效果接收和运行接口
 	public void AcceptEffect(object[] _parameterList)
 	{
 		GameObject initiator = (GameObject)_parameterList[0];
@@ -192,31 +184,13 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner
 		switch (effect.EffectType)
 		{
 			case EffectType.Attack:
-				{
-					if(boss.protectTimes > 0)
-					{
-						boss.protectTimes--;
-					}
-					else
-					{
-						boss.currentHP -= effect.EffectValue1;
-					}
-				}
+				Boss.BeAttacked(effect.EffectValue1);
 				break;
 			case EffectType.VampireAttack:
 				{
 					EffectPackage returnEffect = new EffectPackage();
 					returnEffect.EffectType = EffectType.Heal;
-					if (boss.protectTimes > 0)
-					{
-						boss.protectTimes--;
-						returnEffect.EffectValue1 = 0;
-					}
-					else
-					{
-						boss.currentHP -= effect.EffectValue1;
-						returnEffect.EffectValue1 = effect.EffectValue1;
-					}
+					returnEffect.EffectValue1 = Boss.BeAttacked(effect.EffectValue1);
 					if(initiator != null)
 					{
 						object[] parameterTable = { null, returnEffect };
@@ -225,46 +199,69 @@ public class BossUnitManager : MonoBehaviour, IEffectRunner
 				}
 				break;
 			case EffectType.Heal:
-				{
-					if(boss.currentHP + effect.EffectValue1 <= boss.maxHP)
-					{
-						boss.currentHP += effect.EffectValue1;
-					}
-					else
-					{
-						boss.currentHP = boss.maxHP;
-					}
-				}
+				Boss.BeHealed(effect.EffectValue1);
 				break;
 			case EffectType.Enhance:
-				{
-					boss.maxHP += effect.EffectValue1;
-					boss.currentHP += effect.EffectValue1;
-					boss.ATK += effect.EffectValue2;
-				}
+				Boss.SetEnhance(effect.EffectValue1, effect.EffectValue2);
 				break;
 			case EffectType.Inspire:
-				{
-					boss.inspireList.Add(effect);
-					boss.maxHP += effect.EffectValue1;
-					boss.currentHP += effect.EffectValue1;
-					boss.ATK += effect.EffectValue2;
-				}
+				Boss.SetInspire(effect);
 				break;
 			default:
 				break;
 		}
 	}
-
 	public void UpdateEffect()
 	{
-		for (int i = boss.inspireList.Count - 1; i >= 0; i--)
+		Boss.UpdateEffect();
+	}
+	#endregion
+
+	#region 特殊效果运行接口
+	public void SetupEffectTrigger() { }
+	public void AdvancedEffectTrigger()
+	{
+		foreach (var effect in Boss.SpecialAbilityList)
 		{
-			boss.inspireList[i].EffectRounds--;
-			if (boss.inspireList[i].EffectRounds <= 0)
+			if(effect.SkillType == SpecialSkillType.先机效果)
 			{
-				boss.inspireList.RemoveAt(i);
+				BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
+				if(sys != null)
+				{
+					sys.EffectDirectSetup(this.gameObject, effect.Package);
+				}
 			}
 		}
 	}
+	public void SubsequentEffectTrigger()
+	{
+		foreach (var effect in Boss.SpecialAbilityList)
+		{
+			if (effect.SkillType == SpecialSkillType.后手效果)
+			{
+				BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
+				if (sys != null)
+				{
+					sys.EffectDirectSetup(this.gameObject, effect.Package);
+				}
+			}
+		}
+	}
+	public void FeedbackEffectTrigger()
+	{
+		foreach (var effect in Boss.SpecialAbilityList)
+		{
+			if (effect.SkillType == SpecialSkillType.受击反馈)
+			{
+				BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
+				if (sys != null)
+				{
+					sys.EffectDirectSetup(this.gameObject, effect.Package);
+				}
+			}
+		}
+	}
+	public void UndeadEffectTrigger() { }
+
+	#endregion
 }

@@ -10,33 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5260d0e1e557d924098f98884611e3f5, type: 3}
-  m_Name: MON-002
+  m_Name: MON-001
   m_EditorClassIdentifier: 
-  CardID: 2
-  CardName: "\u54B8\u9C7C\u533B\u751F"
-  CardDescription: "\u533B\u751F"
+  CardID: 1
+  CardName: "\u5766\u514B"
+  CardDescription: "\u5766\u514B"
   CardRarity: 3
   CardType: 0
   CardCamp: 4
   Cost: 0
-  CardImage: {fileID: 21300000, guid: 85ce100ffe9422e44adce1e589a1d572, type: 3}
+  CardImage: {fileID: 21300000, guid: 476cb58a6c5f7e84e8d7c20e32697fa4, type: 3}
   RarityImage: {fileID: 0}
-  MaxHP: 39
+  MaxHP: 5
   Atk: 1
   AtksPerTurn: 1
-  IsTank: 0
-  IsRaid: 0
+  IsTank: 1
+  IsRaid: 1
   IsVampire: 0
-  IsUndead: 0
-  DeadWhisperEffect: 0
-  DeadWhisperEffectValue: 0
-  IsAdvanced: 1
-  AdvancedEffect: 3
-  AdvancedEffectValue: 10
-  IsSubsequent: 1
-  SubsequentEffect: 3
-  SubsequentEffectValue: 10
+  SpecialSkillList: []
+  IsCopidedEffect: 0
   IsCopied: 0
-  SpellScriptName: 
-  SpellCreatureAmount: 0
-  Targets: 0
+  SpellActionType: 0
+  SpellEffectList: []

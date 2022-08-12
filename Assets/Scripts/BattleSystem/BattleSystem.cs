@@ -6,27 +6,21 @@ using UnityEngine.UI;
 using TMPro;
 public class BattleSystem : MonoBehaviour
 {
-
+	[Header("玩家单位")]
+	public GameObject playerUnit;
 	//玩家信息区
 	PlayerInBattle player;
 	List<int> deck;  //牌堆
 	List<GameObject> handCards;  //手牌堆  //max count = 10
 	//List<int> usedCards;  //弃牌堆
-	int usedFlag;
-	public List<GameObject> PlayerSurventUnits; //玩家随从列表
+	int cardUsedFlag;
+	public List<GameObject> PlayerSurventUnitsList { get; private set; } //玩家随从列表
 
-	[Header("玩家单位")]
-	public GameObject playerUnit;
-	public PlayerUnitManager playerUnitDisplay;
 
-	//Boss信息区
-	BossInBattle boss;
-	//int actionCycleFlg = 0;
-	public List<GameObject> BossSurventUnits;  //Boss随从列表  //max count = 7
-	
 	[Header("Boss单位")]
 	public GameObject bossUnit;
 	public BossUnitManager bossUnitManager;
+	public List<GameObject> BossSurventUnitsList { get; private set; } //Boss随从列表  //max count = 7
 
 	//控件
 	//bool roundEndFlag = false;  //回合结束标志
@@ -69,24 +63,21 @@ public class BattleSystem : MonoBehaviour
 
 		handCards = new List<GameObject>(10);
 		//usedCards = new List<int>();
-		usedFlag = 0;
-		PlayerSurventUnits = new List<GameObject>(7);
-		BossSurventUnits = new List<GameObject>(7);
-		playerUnitDisplay = playerUnit.GetComponent<PlayerUnitManager>();
-		bossUnitManager = bossUnit.GetComponent<BossUnitManager>();
+		cardUsedFlag = 0;
+		PlayerSurventUnitsList = new List<GameObject>(7);
+		BossSurventUnitsList = new List<GameObject>(7);
 
 		//
 		TestSetData();
 
 		//
 	}
-
 	void GetCard(int _count)
 	{
 		for(int i = 0; i < _count; i++)
 		{
 			if (handCards.Count == 10) return;
-			if (usedFlag == deck.Count) //牌库空，触发洗牌以及抽空惩罚
+			if (cardUsedFlag == deck.Count) //牌库空，触发洗牌以及抽空惩罚
 			{
 				RefreshDeck();
 
@@ -100,8 +91,8 @@ public class BattleSystem : MonoBehaviour
 			//Debug.Log(Const.CARD_DATA_PATH(deck[randPos]));
 			//依据编号，从文件中读取卡牌数据
 			//Card card = new Card(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(deck[randPos])));
-			CardSOAsset card = Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(deck[usedFlag]));
-			usedFlag++;
+			CardSOAsset card = Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(deck[cardUsedFlag]));
+			cardUsedFlag++;
 
 			newCard.GetComponent<CardDisplay>().Initialized(card);
 			newCard.GetComponent<CardDisplay>().LoadInf();
@@ -116,7 +107,7 @@ public class BattleSystem : MonoBehaviour
 	void RefreshDeck()  //洗牌刷新牌堆
 	{
 		Debug.Log("刷新牌堆");
-		usedFlag = 0;
+		cardUsedFlag = 0;
 		for(int i = 0; i < deck.Count; i++)
 		{
 			var rnd = Random.Range(0, deck.Count);
@@ -152,11 +143,11 @@ public class BattleSystem : MonoBehaviour
 				GetCard(1);
 			}
 			Debug.Log("回合开始");
-			foreach (var obj in PlayerSurventUnits)
+			foreach (var obj in PlayerSurventUnitsList)
 			{
 				obj.SendMessage("CheckInStart");
 			}
-			foreach (var obj in BossSurventUnits)
+			foreach (var obj in BossSurventUnitsList)
 			{
 				obj.SendMessage("CheckInStart");
 			}
@@ -167,9 +158,10 @@ public class BattleSystem : MonoBehaviour
 		else  if (playerActionCompleted)  
 		{
 			// Boss行动
-			bossUnitManager.Action(round);
+			
+
 			//boss随从行动
-			foreach(var obj in BossSurventUnits)
+			foreach(var obj in BossSurventUnitsList)
 			{
 
 				obj.SendMessage("Action");
@@ -187,11 +179,11 @@ public class BattleSystem : MonoBehaviour
 			roundStart = false;
 			//检查并刷新buff,以及触发随从后手效果
 			//bossUnitManager.CheckBuff();
-			foreach (var obj in PlayerSurventUnits)
+			foreach (var obj in PlayerSurventUnitsList)
 			{
 				obj.SendMessage("CheckInEnd");
 			}
-			foreach (var obj in BossSurventUnits)
+			foreach (var obj in BossSurventUnitsList)
 			{
 				obj.SendMessage("CheckInEnd");
 			}
@@ -211,11 +203,11 @@ public class BattleSystem : MonoBehaviour
 			}
 			else
 			{
-				if ((_card.CardType == CardType.Survent && PlayerSurventUnits.Count < 7))
+				if ((_card.CardType == CardType.Survent && PlayerSurventUnitsList.Count < 7))
 				{
 					GameObject newSurvent = Instantiate(surventPrefab, surventArea.transform);
 					newSurvent.GetComponent<SurventUnitManager>().Initialized(_card);
-					PlayerSurventUnits.Add(newSurvent);
+					PlayerSurventUnitsList.Add(newSurvent);
 					//触发放置效果
 					newSurvent.GetComponent<SurventUnitManager>().SetupEffect();
 
@@ -233,22 +225,79 @@ public class BattleSystem : MonoBehaviour
 	}
 	public void SetupBossSurvent(CardSOAsset _card)
 	{
-		if(_card.CardType == CardType.Monster && BossSurventUnits.Count < 7)
+		if(_card.CardType == CardType.Monster && BossSurventUnitsList.Count < 7)
 		{
 			GameObject newEnemy = Instantiate(enemyPrefab, enemyArea.transform);
 			newEnemy.GetComponent<SurventUnitManager>().Initialized(_card);
-			BossSurventUnits.Add(newEnemy);
+			BossSurventUnitsList.Add(newEnemy);
 		}
 	}
 	//
 	public void PlayerSurventDie(GameObject _obj)
 	{
-		PlayerSurventUnits.Remove(_obj);
+		PlayerSurventUnitsList.Remove(_obj);
 	}
 	public void BossSurventDie(GameObject _obj)
 	{
-		BossSurventUnits.Remove(_obj);
+		BossSurventUnitsList.Remove(_obj);
 	}
+
+	#region 新版-效果的释放和接收调度函数
+	public GameObject EffectInitiator { get; private set; }
+	public GameObject EffectTarget { get; private set; }
+	public EffectPackage Package { get; private set; }
+	public void ApplyEffectTo(GameObject _target, GameObject _initiator, EffectPackage _effect)
+	{
+		if (_target != null && _initiator != null && _effect != null)
+		{
+			object[] ParameterList = { _initiator, _effect };
+			_target.SendMessage("AcceptEffect", ParameterList);
+		}
+	}
+	public void EffectSetupRequest(GameObject initiator, EffectPackage package)
+	{
+		EffectInitiator = initiator;
+		Package = package;
+	}
+	public void EffectConfirm(GameObject target)
+	{
+		EffectTarget = target;
+		if (EffectInitiator != EffectTarget && EffectInitiator != null && EffectTarget != null)
+		{
+			ApplyEffectTo(EffectTarget, EffectInitiator, Package);
+		}
+		EffectSetupOver();
+	}
+	public void EffectSetupOver()
+	{
+		EffectInitiator = null;
+		EffectTarget = null;
+		Package = null;
+	}
+	/// <summary>
+	/// 对特定单个目标直接释放效果
+	/// </summary>
+	/// <param name="initiator">效果发起者</param>
+	/// <param name="Target">效果目标</param>
+	/// <param name="package">效果信息</param>
+	public void EffectDirectSetup(GameObject initiator, GameObject Target, EffectPackage package)
+	{
+		//TODO 
+
+	}
+	/// <summary>
+	/// 直接释放效果，目标信息由效果包确定
+	/// </summary>
+	/// <param name="initiator">效果发起者</param>
+	/// <param name="package">效果信息包（有目标信息）</param>
+	public void EffectDirectSetup(GameObject initiator, EffectPackageWithTargetOption package)
+	{
+		//TODO
+
+	}
+	#endregion
+
+	#region 旧版-效果的释放和接收调度函数
 	//一套攻击方法
 	public GameObject attacker { get; private set; }
 	public CardType attackerType { get; private set; }
@@ -324,6 +373,8 @@ public class BattleSystem : MonoBehaviour
 		attacker = null;
 		victim = null;
 	}
+	#endregion
+
 	//胜利
 	public GameObject vectory;
 	public void Victory()
@@ -339,7 +390,10 @@ public class BattleSystem : MonoBehaviour
 	//相关信息载入方法
 	public void SetBossInf(int _bossID)
 	{
-		boss = new BossInBattle(Resources.Load<BossSOAsset>(Const.BOSS_DATA_PATH(_bossID)));
+		if(bossUnit != null)
+		{
+			bossUnit.SendMessage("Initialized", Resources.Load<BossSOAsset>(Const.BOSS_DATA_PATH(_bossID)));
+		}
 	}
 	public void SetPlayerInf(PlayerBattleInformation _info)
 	{
@@ -352,12 +406,11 @@ public class BattleSystem : MonoBehaviour
 	void TestSetData() //测试载入数据
 	{
 		Debug.Log("Start Data Setting...");
-		Save.LoadPlayerData(1);
+		ArchiveManager.LoadPlayerData(1);
 
-		player = new PlayerInBattle(Player.Instance);
-		playerUnitDisplay.player = player;
+		playerUnit.SendMessage("Initialized");
 
-		bossUnitManager.Initialized(Resources.Load<BossSOAsset>(Const.BOSS_DATA_PATH(1)));
+		bossUnit.SendMessage("Initialized", Resources.Load<BossSOAsset>(Const.BOSS_DATA_PATH(1)));
 
 		Debug.Log("测试载入数据完成");
 	}

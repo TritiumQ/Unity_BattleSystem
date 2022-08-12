@@ -9,16 +9,21 @@ public class BossSOAsset : ScriptableObject
     public string Name;
     public int MaxHP;
     public int ATK;
-
-	[Header("行动循环")]
-    public List<BossActionType> ActionCycle;
-    [Header("技能列表")]
-    public List<EffectPackageWithTargetOption> SkillList;
+    public Image Icon;
     [Header("可召唤随从列表")]
     public List<int> SummonList;
-
-	[Header("特殊效果列表")]
-    public List<SpecialSkillPackage> SpecialSkillList;
-    //public Image HeadIcon;
-
+    [Header("特殊效果列表")]
+    public List<SpecialAbilityPackage> SpecialAbilityList;
+    [Header("新版行动循环")]
+    public List<BossActionPackage> ActionPackage;
+    public List<BossAction> Cycle;
+	[Header("旧版行动循环")]
+    public List<BossActionType> ActionCycle;
+    
+}
+[System.Serializable]
+public class BossAction
+{
+    public int ActionIndex;
+    public int ActionTimes;
 }

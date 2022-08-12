@@ -1,40 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class BossInBattle
+using UnityEngine.UI;
+public class BossInBattle : UnitInBattle
 {
-    readonly BossSOAsset bossAsset;
-    public int id;
-    public string name;
-    public int maxHP;
-    public int currentHP;
-    public int ATK;
-    public List<BossActionType> actionCycle;
+    readonly BossSOAsset Asset;
+
+    public int ID;
+    public string Name;
+    public Image Icon;
     public List<int> SurventList;
 
-    //特殊效果区
-    public List<EffectPackage> inspireList;
+    public List<SpecialAbilityPackage> SpecialAbilityList;
 
-    public int protectTimes;
-    
+    public List<BossActionType> ActionCycle;
+
+    //新版行动循环
+    public List<BossActionPackage> ActionPackage;
+    public List<BossAction> Cycle;
+
     //
-    public BossInBattle(BossSOAsset _bossAsset)
+    public BossInBattle(BossSOAsset asset):base(asset.MaxHP, asset.MaxHP, asset.ATK, 0, 0, 0, 0, 0)
 	{
-        inspireList = new List<EffectPackage>();
-        protectTimes = 0;
-
-        bossAsset = _bossAsset;
-        if(bossAsset != null)
-		{
-            id = bossAsset.ID;
-            name = bossAsset.Name;
-            currentHP = maxHP = bossAsset.MaxHP;
-            ATK = bossAsset.ATK;
-            actionCycle = bossAsset.ActionCycle;
-            SurventList = _bossAsset.SummonList;
-            //actionLogicName = bossAsset.ActionLogicName;
-		}
+        Asset = asset;
+        ID = asset.ID;
+        Name = asset.Name;
+        ActionCycle = asset.ActionCycle;
+        SurventList = asset.SummonList;
+        Icon = asset.Icon;
+        SpecialAbilityList = asset.SpecialAbilityList;
+        ActionPackage = asset.ActionPackage;
+        Cycle = asset.Cycle;
 	}
 
 }

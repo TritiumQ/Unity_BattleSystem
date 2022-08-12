@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class AttackRequest : MonoBehaviour, IPointerClickHandler
+public class EffectRequestScript : MonoBehaviour, IPointerClickHandler
 {
     public GameObject thisObject;
     BattleSystem sys;

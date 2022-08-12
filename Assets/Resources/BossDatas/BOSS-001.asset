@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86ae5b9115e19d44f96dddff0c4231a0, type: 3}
-  m_Name: MON-001
+  m_Name: BOSS-001
   m_EditorClassIdentifier: 
   ID: 1
-  Name: MON-001
-  MaxHP: 10
+  Name: boss001
+  MaxHP: 39
   ATK: 1
   ActionCycle: 01000000040000000200000003000000
+  SkillList: []
   SummonList: 0100000002000000
+  SpecialSkillList: []

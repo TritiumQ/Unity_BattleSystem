@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public static class Effect
 {
 	/// <summary>
@@ -137,18 +136,45 @@ public static class Effect
 	}
 	
 	/// <summary>
-	/// 释放效果的通用方法
+	/// 向特定目标释放效果的通用方法
 	/// </summary>
 	/// <param name="_target">效果目标</param>
 	/// <param name="_initiator">效果发起者</param>
 	/// <param name="_effect">效果传递器</param>
 	public static void ApplyTo(GameObject _target, GameObject _initiator, EffectPackage _effect)
 	{
-		if(_target != null && _initiator != null)
+		if(_target != null && _initiator != null && _effect != null)
 		{
 			//效果发送
 			object[] ParameterList = { _initiator, _effect };
 			_target.SendMessage("AcceptEffect", ParameterList);
 		}
 	}
+}
+
+/// <summary>
+/// 特殊触发技能效果
+/// </summary>
+public enum SpecialSkillType
+{
+	/// <summary>
+	/// 受到伤害时触发
+	/// </summary>
+	受击反馈,
+	/// <summary>
+	/// 随从单位专用,放置至场上时触发
+	/// </summary>
+	放置效果,
+	/// <summary>
+	/// 每回合开始时触发
+	/// </summary>
+	先机效果,
+	/// <summary>
+	/// 每回合结束时触发
+	/// </summary>
+	后手效果,
+	/// <summary>
+	/// 单位死亡时调用
+	/// </summary>
+	亡语效果
 }

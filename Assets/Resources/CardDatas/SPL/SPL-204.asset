@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5260d0e1e557d924098f98884611e3f5, type: 3}
-  m_Name: SVN-000
+  m_Name: SPL-204
   m_EditorClassIdentifier: 
-  CardID: 0
+  CardID: 204
   CardName: NULL
   CardDescription: NULL
   CardRarity: 0
-  CardType: 0
+  CardType: 1
   CardCamp: 0
   Cost: 0
   CardImage: {fileID: 0}
@@ -28,6 +28,7 @@ MonoBehaviour:
   IsRaid: 0
   IsVampire: 0
   SpecialSkillList: []
+  IsCopidedEffect: 0
   IsCopied: 0
   SpellActionType: 0
   SpellEffectList: []

@@ -29,7 +29,7 @@ public class CardSOAsset : ScriptableObject
     public bool IsVampire;
 
     [Header("随从特殊效果列表")]
-    public List<SpecialSkillPackage> SpecialSkillList;
+    public List<SpecialAbilityPackage> SpecialSkillList;
     /*
     [Header("放置时效果")]
     public bool IsSetupEffect;
@@ -46,6 +46,7 @@ public class CardSOAsset : ScriptableObject
     */
 
     [Header("法术信息")]
+    public bool IsCopidedEffect;
     public bool IsCopied; //复制体标记
     //public string SpellScriptName;
     public EffectType SpellActionType;

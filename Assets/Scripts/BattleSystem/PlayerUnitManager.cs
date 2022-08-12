@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class PlayerUnitManager : MonoBehaviour
+public class PlayerUnitManager : MonoBehaviour, IEffectRunner
 {
-	public PlayerInBattle player;
+	public PlayerInBattle player { get; private set; }
 
     public TextMeshProUGUI hpText;
     public TextMeshProUGUI actionPointText;
@@ -16,7 +16,7 @@ public class PlayerUnitManager : MonoBehaviour
 	}
 	public void Initialized()
 	{
-		//
+		player = new PlayerInBattle(Player.Instance);
 	}
 	public void Refresh()
 	{
@@ -26,53 +26,14 @@ public class PlayerUnitManager : MonoBehaviour
 			actionPointText.text = player.CurrentActionPoint.ToString();
 		}
 	}
-	//Κά»χ
-	public int BeAttacked(int _value)
+
+	public void AcceptEffect(object[] _parameterList)
 	{
-		if(player.protectedTimes>0)
-		{
-			player.protectedTimes--;
-			return 0;
-		}
-		else
-		{
-			player.CurrentHP -= _value;
-			return _value;
-		}
+		
 	}
-	public void BeHealed(int _value)
+
+	public void UpdateEffect()
 	{
-		if(player.CurrentHP + _value <= player.MaxHP )
-		{
-			player.CurrentHP += _value;
-		}
-		else
-		{
-			player.CurrentHP = player.MaxHP;
-		}
+		
 	}
-	/*public void BeConcealed(int _value)
-	{
-
-	}*/
-	/*public void BeEnhanced(int _value)
-	{
-
-	}*/
-	/*public void BeInspired(int _value, int _rounds)
-	{
-
-	}*/
-	/*public void Waghhh(int _value)
-	{
-
-	}*/
-	public void BeProtected(int _times)
-	{
-		player.protectedTimes += _times;
-	}
-	/*public void BeTaunted(int _rounds)
-	{
-
-	}*/
 }

@@ -1,7 +1,7 @@
 using System.IO;
 using UnityEngine;
 
-public static class Save
+public static class ArchiveManager
 {
 
 	/// <summary>
