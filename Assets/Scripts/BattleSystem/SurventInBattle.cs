@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SurventInBattle : UnitInBattle, IUpdateEffectCustom
+public class SurventInBattle : UnitInBattle
 {
     //readonly CardSOAsset asset;
     public int CardID;
@@ -10,7 +10,10 @@ public class SurventInBattle : UnitInBattle, IUpdateEffectCustom
 
     public bool IsRaid;
 	public bool IsUndead;
+
+	//public int HitCount;
 	public bool IsDoubleHit;
+	private int DoubleHitRound;
 
 	public bool IsSubsequent;
 	public bool IsFeedback;
@@ -30,6 +33,7 @@ public class SurventInBattle : UnitInBattle, IUpdateEffectCustom
 			}
             IsRaid = _asset.IsRaid;
 			IsDoubleHit = _asset.IsDoubleHit;
+			DoubleHitRound = 0;
 			SurventType = _asset.CardType;
 			if(_asset.IsVampire)
 			{
@@ -58,12 +62,21 @@ public class SurventInBattle : UnitInBattle, IUpdateEffectCustom
 			}
 		}
     }
-
-	public void UpdateEffectCustom()
+	public override void UpdateEffect()
 	{
-		if(IsRaid == true)
+		base.UpdateEffect();
+		if (IsRaid == true)
 		{
-            IsRaid = false;
+			IsRaid = false;
+		}
+		if(DoubleHitRound > 0)
+		{
+			IsDoubleHit = true;
+			DoubleHitRound--;
+		}
+		else
+		{
+			IsDoubleHit = false;
 		}
 	}
 }

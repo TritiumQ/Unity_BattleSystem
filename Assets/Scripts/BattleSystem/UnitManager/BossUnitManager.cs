@@ -6,18 +6,24 @@ using TMPro;
 
 public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbilityRunner
 {
+	BattleSystem system;
+
     public BossInBattle Boss;
     public TextMeshProUGUI HpText;
 	public TextMeshProUGUI AtkText;
 	public Image HeadIcon;
 
-	public void Initialized(BossSOAsset _asset)
+	private void Awake()
 	{
-		Boss = new BossInBattle(_asset);
+		system = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
 	}
 	private void Update()
 	{
 		RefreshState();
+	}
+	public void Initialized(BossSOAsset _asset)
+	{
+		Boss = new BossInBattle(_asset);
 	}
 	public void RefreshState()
 	{
@@ -37,20 +43,18 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 	{
 		Debug.Log("Boss已击败，战斗胜利");
 		//胜利特效
-		GameObject.Find("BattleSystem").GetComponent<BattleSystem>().GameEnd(GameResult.Success);
+		system.GameEnd(GameResult.Success);
 	}
 
 	public void AutoAction(int currentRound)
 	{
-		BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
 		int mode = currentRound % Boss.Cycle.Count;
-		//TODO 新版行动适配
 		foreach(var idx in Boss.Cycle[mode].ActionIndex)
 		{
 			var packages = Boss.ActionPackages[idx];
 			if (packages.ActionEffect != null)
 			{
-				sys.EffectDirectSetup(gameObject, packages.ActionEffect);
+				system.ApplyEffect(gameObject, packages.ActionEffect);
 			}
 			if (packages.SummonCount != 0)
 			{
@@ -60,7 +64,7 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 						{
 							for(int i = 0; i < packages.SummonCount; i++)
 							{
-								sys.SetupSurvent(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(packages.SummonSurventID)), CardType.Monster);
+								system.SetupSurvent(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(packages.SummonSurventID)), CardType.Monster);
 							}
 						}
 						break;
@@ -69,7 +73,7 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 							for(int i =0; i < packages.SummonCount; i++)
 							{
 								var rnd = Random.Range(0, Boss.SurventList.Count);
-								sys.SetupSurvent(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(rnd)), CardType.Monster);
+								system.SetupSurvent(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(rnd)), CardType.Monster);
 							}
 						}
 						break;
@@ -93,13 +97,13 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 			case BossActionType.AOEAttack:
 				{
 					EffectPackageWithTargetOption package = new EffectPackageWithTargetOption(EffectType.Attack, Boss.ATK, 0, 0, null, TargetOptions.AllPlayerCreatures, 0);
-					sys.EffectDirectSetup(this.gameObject, package);
+					sys.ApplyEffect(this.gameObject, package);
 				}
 				break;
 			case BossActionType.AOEAttackExcludePlayer:
 				{
 					EffectPackageWithTargetOption package = new EffectPackageWithTargetOption(EffectType.Attack, Boss.ATK, 0, 0, null, TargetOptions.ALlPlayerCharacter, 0);
-					sys.EffectDirectSetup(this.gameObject, package);
+					sys.ApplyEffect(this.gameObject, package);
 				}
 				break;
 			case BossActionType.SingleAttack:
@@ -269,7 +273,7 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 				BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
 				if(sys != null)
 				{
-					sys.EffectDirectSetup(this.gameObject, effect.Package);
+					sys.ApplyEffect(this.gameObject, effect.Package);
 				}
 			}
 		}
@@ -283,7 +287,7 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 				BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
 				if (sys != null)
 				{
-					sys.EffectDirectSetup(this.gameObject, effect.Package);
+					sys.ApplyEffect(this.gameObject, effect.Package);
 				}
 			}
 		}
@@ -297,7 +301,7 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 				BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
 				if (sys != null)
 				{
-					sys.EffectDirectSetup(this.gameObject, effect.Package);
+					sys.ApplyEffect(this.gameObject, effect.Package);
 				}
 			}
 		}

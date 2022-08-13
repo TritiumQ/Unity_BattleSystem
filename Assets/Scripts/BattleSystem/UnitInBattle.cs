@@ -8,7 +8,7 @@ public class UnitInBattle
 	public int CurrentHP;
 	public int ATK;
 	public int DEF;
-
+	
 	protected int ProtectedTimes;
 	public bool IsProtected;
 
@@ -62,7 +62,7 @@ public class UnitInBattle
 	}
 
 	#region 效果接收接口
-	public int BeAttacked(int damage)
+	public virtual int BeAttacked(int damage)
 	{
 		if(ProtectedTimes > 0)
 		{
@@ -75,7 +75,7 @@ public class UnitInBattle
 			return damage;
 		}
 	}
-	public void BeHealed(int value)
+	public virtual void BeHealed(int value)
 	{
 		if (CurrentHP + value <= MaxHP)
 		{
@@ -86,21 +86,21 @@ public class UnitInBattle
 			CurrentHP = MaxHP;
 		}
 	}
-	public void SetTaunt(int rounds)
+	public virtual void SetTaunt(int rounds)
 	{
 		TauntRounds += rounds;
 	}
-	public void SetConceal(int rounds)
+	public virtual void SetConceal(int rounds)
 	{
 		ConcealRounds += rounds;
 	}
-	public void SetEnhance(int hp, int atk)
+	public virtual void SetEnhance(int hp, int atk)
 	{
 		CurrentHP += hp;
 		MaxHP += hp;
 		ATK += atk;
 	}
-	public void SetInspire(int hp, int atk, int rounds)
+	public virtual void SetInspire(int hp, int atk, int rounds)
 	{
 		EffectPackage isp = new EffectPackage(EffectType.Inspire, hp, atk, rounds, null);
 		Inspire.Add(isp);
@@ -108,14 +108,14 @@ public class UnitInBattle
 		CurrentHP += hp;
 		ATK += atk;
 	}
-	public void SetInspire(EffectPackage inspireEffect)
+	public virtual void SetInspire(EffectPackage inspireEffect)
 	{
 		Inspire.Add(inspireEffect);
 		MaxHP += inspireEffect.EffectValue1;
 		CurrentHP += inspireEffect.EffectValue1;
 		ATK += inspireEffect.EffectValue2;
 	}
-	public void SetProtected(int times)
+	public virtual void SetProtected(int times)
 	{
 		ProtectedTimes += times;
 	}
@@ -123,9 +123,9 @@ public class UnitInBattle
 
 	#region 效果运行/刷新接口
 	/// <summary>
-	/// 效果刷新接口,每回合结束调用
+	/// 效果刷新接口,每回合结束调用,属于虚拟方法,可被子类复写
 	/// </summary>
-	public void UpdateEffect()
+	public virtual void UpdateEffect()
 	{
 		if(TauntRounds > 0)
 		{
@@ -183,10 +183,6 @@ public class UnitInBattle
 		else
 		{
 			IsVampire = false;
-		}
-		if(this is IUpdateEffectCustom)
-		{
-			((IUpdateEffectCustom)this).UpdateEffectCustom();
 		}
 	}
 	#endregion

@@ -238,12 +238,50 @@ public class BattleSystem : MonoBehaviour
 	public GameObject EffectInitiator { get; private set; }
 	public GameObject EffectTarget { get; private set; }
 	public EffectPackage Package { get; private set; }
+	/// <summary>
+	/// 对特定单个目标直接释放效果
+	/// </summary>
+	/// <param name="_initiator">效果发起者</param>
+	/// <param name="_target">效果目标</param>
+	/// <param name="_effect">效果信息</param>
 	public void ApplyEffectTo(GameObject _target, GameObject _initiator, EffectPackage _effect)
 	{
 		if (_target != null && _initiator != null && _effect != null)
 		{
 			object[] ParameterList = { _initiator, _effect };
 			_target.SendMessage("AcceptEffect", ParameterList);
+		}
+	}
+	/// <summary>
+	/// 直接释放效果, 目标选择方式由效果包确定
+	/// </summary>
+	/// <param name="initiator">效果发起者</param>
+	/// <param name="package">效果信息包（包含目标信息）</param>
+	public void ApplyEffect(GameObject initiator, EffectPackageWithTargetOption package)
+	{
+		//TODO 设置效果
+		switch (package.EffectTarget)
+		{
+			case TargetOptions.AllCreatures:
+				break;
+			case TargetOptions.AllPlayerCreatures:
+				break;
+			case TargetOptions.AllEnemyCreatures:
+				break;
+			case TargetOptions.AllCharacters:
+				break;
+			case TargetOptions.ALlPlayerCharacter:
+				break;
+			case TargetOptions.ALlEnemyCharacters:
+				break;
+			case TargetOptions.SinglePlayerTarget:
+				break;
+			case TargetOptions.MultiPlayerTargets:
+				break;
+			case TargetOptions.MultiEnemyTargets:
+				break;
+			default:
+				break;
 		}
 	}
 	public void EffectSetupRequest(GameObject initiator, EffectPackage package)
@@ -266,28 +304,7 @@ public class BattleSystem : MonoBehaviour
 		EffectTarget = null;
 		Package = null;
 	}
-	//TODO 直接设置效果
-	/// <summary>
-	/// 对特定单个目标直接释放效果
-	/// </summary>
-	/// <param name="initiator">效果发起者</param>
-	/// <param name="Target">效果目标</param>
-	/// <param name="package">效果信息</param>
-	public void EffectDirectSetup(GameObject initiator, GameObject Target, EffectPackage package)
-	{
-		
-
-	}
-	/// <summary>
-	/// 直接释放效果，目标信息由效果包确定
-	/// </summary>
-	/// <param name="initiator">效果发起者</param>
-	/// <param name="package">效果信息包（有目标信息）</param>
-	public void EffectDirectSetup(GameObject initiator, EffectPackageWithTargetOption package)
-	{
-		
-
-	}
+	
 	#endregion
 
 	#region 旧版-效果的释放和接收调度函数

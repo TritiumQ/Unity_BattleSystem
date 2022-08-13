@@ -5,11 +5,16 @@ using UnityEngine.UI;
 using TMPro;
 public class PlayerUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner
 {
+	BattleSystem system;
 	public PlayerInBattle player { get; private set; }
 
     public TextMeshProUGUI hpText;
     public TextMeshProUGUI actionPointText;
 	public Image headIcon;
+	private void Awake()
+	{
+		system = GameObject.Find("BatttleSystem").GetComponent<BattleSystem>();
+	}
 	private void Update()
 	{
 		RefreshState();
@@ -46,7 +51,7 @@ public class PlayerUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner
 	}
 	public void Die()
 	{
-		GameObject.Find("BattleSystem").GetComponent<BattleSystem>().GameEnd(GameResult.Failure);
+		system.GameEnd(GameResult.Failure);
 	}
 
 	public void AcceptEffect(object[] _parameterList)
@@ -65,11 +70,7 @@ public class PlayerUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner
 					EffectPackage returnEffect = new EffectPackage();
 					returnEffect.EffectType = EffectType.Heal;
 					returnEffect.EffectValue1 = player.BeAttacked(effect.EffectValue1);
-					if (initiator != null)
-					{
-						object[] parameterTable = { null, returnEffect };
-						initiator.SendMessage("AcceptEffect", parameterTable);
-					}
+					system.ApplyEffectTo(initiator,gameObject,returnEffect);
 				}
 				break;
 			case EffectType.Heal:

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,11 +21,11 @@ public class CardSOAsset : ScriptableObject
     public int MaxHP;// 最大生命值
     public int Atk;// 攻击力
 
-    public int AtksPerTurn = 1;// 每回合攻击次数
+    //public int HitCount = 1;// 每回合攻击次数
+    public bool IsDoubleHit;
     public bool IsTank; // 是否嘲讽
     public bool IsRaid; // 是否突袭
     public bool IsVampire;
-    public bool IsDoubleHit;
 
     [Header("随从特殊效果列表")]
     public List<AbilityPackage> SpecialAbilityList;
