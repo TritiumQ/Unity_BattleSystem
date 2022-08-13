@@ -2,6 +2,7 @@
 /// <summary>
 /// 储存和管理场上单位信息的统一父类
 /// </summary>
+//[System.Serializable]
 public class UnitInBattle
 {
 	public int MaxHP;

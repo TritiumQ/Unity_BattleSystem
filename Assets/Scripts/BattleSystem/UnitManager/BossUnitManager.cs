@@ -15,7 +15,7 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 
 	private void Awake()
 	{
-		system = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
+		system = GameObject.Find(FightSceneObjectName.BattleSystem).GetComponent<BattleSystem>();
 	}
 	private void Update()
 	{
@@ -48,62 +48,65 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 
 	public void AutoAction(int currentRound)
 	{
+		if(Boss.Cycle.Count == 0) return;
 		int mode = currentRound % Boss.Cycle.Count;
 		foreach(var idx in Boss.Cycle[mode].ActionIndex)
 		{
-			var packages = Boss.ActionPackages[idx];
-			if (packages.ActionEffect != null)
+			if(idx < Boss.ActionPackages.Count)
 			{
-				system.ApplyEffect(gameObject, packages.ActionEffect);
-			}
-			if (packages.SummonCount != 0)
-			{
-				switch (packages.SummonMode)
+				var packages = Boss.ActionPackages[idx];
+				if (packages.ActionEffect != null)
 				{
-					case BossSummonMode.Specific:
-						{
-							for(int i = 0; i < packages.SummonCount; i++)
-							{
-								system.SetupSurvent(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(packages.SummonSurventID)), CardType.Monster);
-							}
-						}
-						break;
-					case BossSummonMode.Random:
-						{
-							for(int i =0; i < packages.SummonCount; i++)
-							{
-								var rnd = Random.Range(0, Boss.SurventList.Count);
-								system.SetupSurvent(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(rnd)), CardType.Monster);
-							}
-						}
-						break;
-					default:
-						break;
+					system.ApplyEffect(gameObject, packages.ActionEffect);
 				}
+				if (packages.SummonCount != 0)
+				{
+					switch (packages.SummonMode)
+					{
+						case BossSummonMode.Specific:
+							{
+								for (int i = 0; i < packages.SummonCount; i++)
+								{
+									system.SetupSurvent(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(packages.SummonSurventID)), CardType.Monster);
+								}
+							}
+							break;
+						case BossSummonMode.Random:
+							{
+								for (int i = 0; i < packages.SummonCount; i++)
+								{
+									var rnd = Random.Range(0, Boss.SurventList.Count);
+									system.SetupSurvent(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(rnd)), CardType.Monster);
+								}
+							}
+							break;
+						default:
+							break;
+					}
 
+				}
 			}
 		}
 
 	}
 
-	#region 自动行动接口(旧版boss行动循环)
 	public void _Action(int currentRound)
 	{
-		BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
+		/*BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
 		int mod = currentRound % Boss.ActionCycle.Count;
-		//TODO 修改boss行动
+		//修改boss行动
 		switch (Boss.ActionCycle[mod])
 		{
 			case BossActionType.AOEAttack:
 				{
-					EffectPackageWithTargetOption package = new EffectPackageWithTargetOption(EffectType.Attack, Boss.ATK, 0, 0, null, TargetOptions.AllPlayerCreatures, 0);
-					sys.ApplyEffect(this.gameObject, package);
+					//EffectPackageWithTargetOption package = new EffectPackageWithTargetOption(EffectType.Attack, Boss.ATK, 0, 0, null, TargetOptions.AllPlayerCreatures, 0);
+					//sys.ApplyEffect(this.gameObject, package);
 				}
 				break;
 			case BossActionType.AOEAttackExcludePlayer:
 				{
-					EffectPackageWithTargetOption package = new EffectPackageWithTargetOption(EffectType.Attack, Boss.ATK, 0, 0, null, TargetOptions.ALlPlayerCharacter, 0);
-					sys.ApplyEffect(this.gameObject, package);
+					//EffectPackageWithTargetOption package = new EffectPackageWithTargetOption(EffectType.Attack, Boss.ATK, 0, 0, null, TargetOptions.ALlPlayerCharacter, 0);
+					//sys.ApplyEffect(this.gameObject, package);
 				}
 				break;
 			case BossActionType.SingleAttack:
@@ -117,12 +120,6 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 						case SingleTargetOption.RandomTarget:
 							{
 
-							}
-							break;
-						case SingleTargetOption.PlayerTarget:
-							{
-								//sys.playerUnitDisplay.BeAttacked(boss.ATK);
-								Effect.Set(sys.playerUnit, EffectType.Attack, Boss.ATK);
 							}
 							break;
 						case SingleTargetOption.LowestATKTarget:
@@ -215,9 +212,8 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 				break;
 			default:
 				break;
-		}
+		}*/
 	}
-	#endregion
 
 	#region 效果接收和运行接口
 	public void AcceptEffect(object[] _parameterList)
@@ -233,13 +229,13 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 				break;
 			case EffectType.VampireAttack:
 				{
-					EffectPackage returnEffect = new EffectPackage();
-					returnEffect.EffectType = EffectType.Heal;
-					returnEffect.EffectValue1 = Boss.BeAttacked(effect.EffectValue1);
-					if(initiator != null)
+					int dmg = Boss.BeAttacked(effect.EffectValue1);
+					if (initiator != null && system != null)
 					{
-						object[] parameterTable = { null, returnEffect };
-						initiator.SendMessage("AcceptEffect", parameterTable);
+						EffectPackage returnEffect = new EffectPackage();
+						returnEffect.EffectType = EffectType.Heal;
+						returnEffect.EffectValue1 = dmg;
+						system.ApplyEffectTo(initiator, gameObject, returnEffect);
 					}
 				}
 				break;
@@ -255,6 +251,8 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 			default:
 				break;
 		}
+		string msg = Boss.Name + "接收到效果" + effect.EffectType;
+		Debug.Log(msg);
 	}
 	public void UpdateEffect()
 	{
@@ -270,10 +268,9 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 		{
 			if(effect.SkillType == AbilityType.先机效果)
 			{
-				BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
-				if(sys != null)
+				if(system != null)
 				{
-					sys.ApplyEffect(this.gameObject, effect.Package);
+					system.ApplyEffect(this.gameObject, effect.Package);
 				}
 			}
 		}
@@ -284,10 +281,9 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 		{
 			if (effect.SkillType == AbilityType.后手效果)
 			{
-				BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
-				if (sys != null)
+				if (system != null)
 				{
-					sys.ApplyEffect(this.gameObject, effect.Package);
+					system.ApplyEffect(this.gameObject, effect.Package);
 				}
 			}
 		}
@@ -298,10 +294,9 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 		{
 			if (effect.SkillType == AbilityType.受击反馈)
 			{
-				BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
-				if (sys != null)
+				if (system != null)
 				{
-					sys.ApplyEffect(this.gameObject, effect.Package);
+					system.ApplyEffect(this.gameObject, effect.Package);
 				}
 			}
 		}

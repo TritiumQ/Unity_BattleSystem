@@ -16,19 +16,18 @@ MonoBehaviour:
   CardName: NULL
   CardDescription: NULL
   CardRarity: 0
-  CardType: 1
+  CardType: 0
   CardCamp: 0
   Cost: 0
   CardImage: {fileID: 0}
   RarityImage: {fileID: 0}
   MaxHP: 0
   Atk: 0
-  AtksPerTurn: 1
+  IsDoubleHit: 0
   IsTank: 0
   IsRaid: 0
   IsVampire: 0
-  SpecialSkillList: []
+  SpecialAbilityList: []
   IsCopidedEffect: 0
   IsCopied: 0
-  SpellActionType: 0
   SpellEffectList: []

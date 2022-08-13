@@ -26,7 +26,7 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
     public Image DoubleHitImage;  //连击
 	private void Awake()
 	{
-		system = GameObject.Find("BatttleSystem").GetComponent<BattleSystem>();
+		system = GameObject.Find(FightSceneObjectName.BattleSystem).GetComponent<BattleSystem>();
     }
     private void Update()
     {
@@ -92,35 +92,44 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
         //Debug.Log(msg);
         //亡语效果
 
-        GameObject.Find("BattleSystem").GetComponent<BattleSystem>().SurventUnitDie(gameObject);
-        Destroy(gameObject);
+        //system.GetComponent<BattleSystem>().SurventUnitDie(gameObject);
+        //Destroy(gameObject);
 	}
 
-    //TODO 随从接口组
+    //随从接口组
     public void AcceptEffect(object[] _parameterList)
     {
+        
         GameObject initiator = (GameObject)_parameterList[0];
         EffectPackage effect = (EffectPackage)_parameterList[1];
         switch (effect.EffectType)
 		{
             case EffectType.Attack:
 				{
-                    EffectPackage returnEffect1 = new EffectPackage();
-                    returnEffect1.EffectType = EffectType.Attack;
-                    returnEffect1.EffectValue1 = survent.ATK;
-                    EffectPackage returnEffect2 = new EffectPackage();
-                    returnEffect2.EffectType = EffectType.Heal;
-                    returnEffect2.EffectValue1 = survent.BeAttacked(effect.EffectValue1);
-                    system.ApplyEffectTo(initiator, gameObject, returnEffect1);
-                    system.ApplyEffectTo(initiator, gameObject, returnEffect2);
+                    int dmg = survent.BeAttacked(effect.EffectValue1);
+                    if(initiator != null && system != null)
+					{
+                        EffectPackage returnEffect1 = new EffectPackage();
+                        returnEffect1.EffectType = EffectType.Attack;
+                        returnEffect1.EffectValue1 = survent.ATK;
+                        EffectPackage returnEffect2 = new EffectPackage();
+                        returnEffect2.EffectType = EffectType.Heal;
+                        returnEffect2.EffectValue1 = dmg;
+                        system.ApplyEffectTo(initiator, gameObject, returnEffect1);
+                        system.ApplyEffectTo(initiator, gameObject, returnEffect2);
+                    }
                 }
                 break;
             case EffectType.VampireAttack:
 				{
-                    EffectPackage returnEffect = new EffectPackage();
-                    returnEffect.EffectType = EffectType.Heal;
-                    returnEffect.EffectValue1 = survent.BeAttacked(effect.EffectValue1);
-                    system.ApplyEffectTo(initiator, gameObject, returnEffect);
+                    int dmg = survent.BeAttacked(effect.EffectValue1);
+                    if (initiator != null && system != null)
+					{
+                        EffectPackage returnEffect = new EffectPackage();
+                        returnEffect.EffectType = EffectType.Heal;
+                        returnEffect.EffectValue1 = dmg;
+                        system.ApplyEffectTo(initiator, gameObject, returnEffect);
+                    }
 				}
                 break;
             case EffectType.Heal:
@@ -156,6 +165,8 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
             default:
                 break;
 		}
+        string msg = survent.CardName + "接收到效果:" + effect.EffectType;
+        Debug.Log(msg);
     }
 
     public void UpdateEffect()
@@ -164,47 +175,75 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
     }
 
     #region 特殊能力效果接口组
+
     public void AdvancedEffectTrigger()
     {
         isActive = true;
         foreach (var effect in survent.SpecialAbilityList)
 		{
-
+            if(effect.SkillType == AbilityType.先机效果)
+			{
+                var eft = effect.Package;
+                if (system != null) 
+				{
+                    system.ApplyEffect(gameObject, eft);
+                }
+			}
 		}
     }
-
     public void FeedbackEffectTrigger()
     {
         foreach (var effect in survent.SpecialAbilityList)
         {
-
+            if (effect.SkillType == AbilityType.受击反馈)
+            {
+                var eft = effect.Package;
+                if (system != null)
+                {
+                    system.ApplyEffect(gameObject, eft);
+                }
+            }
         }
     }
-
     public void SetupEffectTrigger()
     {
         foreach (var effect in survent.SpecialAbilityList)
         {
-
+            if (effect.SkillType == AbilityType.放置效果)
+            {
+                var eft = effect.Package;
+                if (system != null)
+				{
+					system.ApplyEffect(gameObject, eft);
+				}
+            }
         }
     }
-
     public void SubsequentEffectTrigger()
     {
         foreach (var effect in survent.SpecialAbilityList)
         {
-
+            if (effect.SkillType == AbilityType.后手效果)
+            {
+                var eft = effect.Package;
+				if (system != null)
+				{
+					system.ApplyEffect(gameObject, eft);
+				}
+            }
         }
     }
-
     public void UndeadEffectTrigger()
     {
         foreach (var effect in survent.SpecialAbilityList)
         {
-
+            var eft = effect.Package;
+            if (effect.SkillType == AbilityType.亡语效果)
+            {
+				system.ApplyEffect(gameObject, eft);
+            }
         }
     }
-
 	#endregion
 
 }

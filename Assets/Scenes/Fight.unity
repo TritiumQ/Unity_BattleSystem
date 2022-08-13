@@ -1315,24 +1315,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e7050ea92132a4c90d12d174d94870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerSurventUnits: []
   playerUnit: {fileID: 904716220}
-  playerUnitDisplay: {fileID: 0}
-  BossSurventUnits: []
   bossUnit: {fileID: 717433334}
-  bossUnitManager: {fileID: 0}
   roundText: {fileID: 1763938206}
   endButton: {fileID: 319512024}
   playerHands: {fileID: 1451720671}
   surventArea: {fileID: 861619963}
   enemyArea: {fileID: 1499416033}
   surventPrefab: {fileID: 2634340889832455649, guid: 8187f8a4e218a7d42b3066821ce9cede, type: 3}
-  enemyPrefab: {fileID: 2634340889832455649, guid: 97509514d9881cf499c277bc40de527d, type: 3}
   cardPrefab: {fileID: 3081637641354913904, guid: f5c1e3b74d2c9494b80e011aab4d446c, type: 3}
   arrowPrefab: {fileID: 4752874742253137420, guid: 8cebe8035f76b724ba70e9576ac88557, type: 3}
   arrow: {fileID: 0}
   canvas: {fileID: 666489915}
-  vectory: {fileID: 1230133421}
+  victory: {fileID: 1230133421}
 --- !u!4 &1920822143
 Transform:
   m_ObjectHideFlags: 0

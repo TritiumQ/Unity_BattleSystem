@@ -16,18 +16,17 @@ MonoBehaviour:
   CardName: "\u86C7"
   CardDescription: "\u86C7\u662F\u4E0D\u706D\u7684"
   CardRarity: 0
-  CardType: 1
+  CardType: 0
   CardCamp: 5
   Cost: 0
   CardImage: {fileID: 21300000, guid: e7b5fa6c9df00f141820163c3c626101, type: 3}
   RarityImage: {fileID: 21300000, guid: d352133a8c1e1924f97cae3f2a11a737, type: 3}
   MaxHP: 0
   Atk: 0
-  AtksPerTurn: 1
+  IsDoubleHit: 0
   IsTank: 0
   IsRaid: 0
   IsVampire: 0
-  IsDoubleHit: 0
   SpecialAbilityList: []
   IsCopidedEffect: 1
   IsCopied: 0

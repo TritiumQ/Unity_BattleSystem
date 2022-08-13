@@ -40,7 +40,7 @@ public class BattleSystem : MonoBehaviour
 	[Header("随从预制体")]
 	public GameObject surventPrefab;
 	[Header("卡牌预制体")]
-	public GameObject cardPrefab;  
+	public GameObject cardPrefab;
 	private void Update()
 	{
 		GamePlay();
@@ -48,45 +48,63 @@ public class BattleSystem : MonoBehaviour
 	private void Awake()
 	{
 		victory.SetActive(false);
-		//初始化实例
 		endButton.onClick.AddListener(EndRound);
 		roundText.text = round.ToString();
 		//deck = new List<int>();
 		deck = new List<int> { 0,200 };
-
 		handCards = new List<GameObject>(10);
-		//usedCards = new List<int>();
 		cardUsedFlag = 0;
 		PlayerSurventUnitsList = new List<GameObject>(7);
 		BossSurventUnitsList = new List<GameObject>(7);
-
 		//
 		TestSetData();
 	}
-	void GetCard(int _count)
+	/// <summary>
+	/// 随机抽卡
+	/// </summary>
+	/// <param name="_count">抽卡数目</param>
+	void DrawCard(int _count)
 	{
 		for(int i = 0; i < _count; i++)
 		{
-			if (handCards.Count == 10) return;
-			if (cardUsedFlag == deck.Count) //牌库空，触发洗牌以及抽空惩罚
+			if (handCards.Count < 10)
 			{
-				RefreshDeck();
-				Debug.Log("洗牌惩罚");
-				//TODO 洗牌惩罚,扣玩家5点血
-				//Effect.Set(playerUnit, EffectType.Attack, 5);
-				
+				if (cardUsedFlag == deck.Count) //牌库空，触发洗牌以及抽空惩罚
+				{
+					RefreshDeck();
+					Debug.Log("洗牌惩罚");
+					//洗牌惩罚,扣玩家5点血
+					EffectPackage effect = new EffectPackage(EffectType.Attack, 5, 0, 0, null);
+					ApplyEffectTo(playerUnit, null, effect);
+
+				}
+				//抽牌
+				GameObject newCard = Instantiate(cardPrefab, playerHands.transform); //生成预制件实例
+																					 //依据编号，从文件中读取卡牌数据
+				CardSOAsset card = Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(deck[cardUsedFlag]));
+				cardUsedFlag++;
+
+				newCard.GetComponent<CardDisplay>().Initialized(card);
+				newCard.GetComponent<CardDisplay>().LoadInf();
+
+				handCards.Add(newCard);
+			}
+		}
+	}
+	/// <summary>
+	/// 获取特定卡牌
+	/// </summary>
+	/// <param name="_ID">卡牌ID</param>
+	/// <param name="_count">卡牌数量</param>
+	void GetCard(int _ID, int _count)
+	{
+		if(handCards.Count < 10)
+		{
+			CardSOAsset asset = Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(_ID));
+			if (asset != null)
+			{
 
 			}
-			//抽牌
-			GameObject newCard = Instantiate(cardPrefab, playerHands.transform); //生成预制件实例
-			//依据编号，从文件中读取卡牌数据
-			CardSOAsset card = Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(deck[cardUsedFlag]));
-			cardUsedFlag++;
-
-			newCard.GetComponent<CardDisplay>().Initialized(card);
-			newCard.GetComponent<CardDisplay>().LoadInf();
-
-			handCards.Add(newCard);
 		}
 	}
 	void RefreshDeck()  //洗牌刷新牌堆
@@ -112,11 +130,11 @@ public class BattleSystem : MonoBehaviour
 		{
 			if(round == 0)
 			{
-				GetCard(3);
+				DrawCard(3);
 			}
 			else
 			{
-				GetCard(1);
+				DrawCard(1);
 			}
 			Debug.Log("回合开始");
 			roundStart = true;
@@ -174,6 +192,7 @@ public class BattleSystem : MonoBehaviour
 				if (card.CardType == CardType.Spell)
 				{
 					//TODO 使用法术卡
+
 				}
 				else if ((card.CardType == CardType.Survent && PlayerSurventUnitsList.Count < 7))
 				{
@@ -238,6 +257,7 @@ public class BattleSystem : MonoBehaviour
 	public GameObject EffectInitiator { get; private set; }
 	public GameObject EffectTarget { get; private set; }
 	public EffectPackage Package { get; private set; }
+
 	/// <summary>
 	/// 对特定单个目标直接释放效果
 	/// </summary>
@@ -246,42 +266,300 @@ public class BattleSystem : MonoBehaviour
 	/// <param name="_effect">效果信息</param>
 	public void ApplyEffectTo(GameObject _target, GameObject _initiator, EffectPackage _effect)
 	{
-		if (_target != null && _initiator != null && _effect != null)
+		//抽卡特效
+		if (_effect.EffectType == EffectType.DrawSpecificCard || _effect.EffectType == EffectType.DrawRandomCard)
 		{
-			object[] ParameterList = { _initiator, _effect };
-			_target.SendMessage("AcceptEffect", ParameterList);
+			if (_target != null && _target.GetComponent<PlayerUnitManager>() != null)
+			{
+				switch (_effect.EffectType)
+				{
+					case EffectType.DrawSpecificCard:
+						GetCard(effect.EffectValue1, effect.EffectValue2);
+						break;
+					case EffectType.DrawRandomCard:
+						DrawCard(effect.EffectValue1);
+						break;
+					default:
+						break;
+				}
+			}
+		}
+		else if (_effect.EffectType == EffectType.SpecialEffect)
+		{
+			//TODO 特殊效果
+		}
+		else
+		{
+			if (_target != null && _effect != null)
+			{
+				object[] ParameterList = { _initiator, _effect };
+				_target.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+			}
 		}
 	}
 	/// <summary>
 	/// 直接释放效果, 目标选择方式由效果包确定
 	/// </summary>
 	/// <param name="initiator">效果发起者</param>
-	/// <param name="package">效果信息包（包含目标信息）</param>
-	public void ApplyEffect(GameObject initiator, EffectPackageWithTargetOption package)
+	/// <param name="effect">效果信息包（包含目标信息）</param>
+	public void ApplyEffect(GameObject initiator, EffectPackageWithTargetOption effect)
 	{
-		//TODO 设置效果
-		switch (package.EffectTarget)
+		//抽卡特效
+		if(effect.EffectType == EffectType.DrawSpecificCard || effect.EffectType == EffectType.DrawRandomCard)
 		{
-			case TargetOptions.AllCreatures:
-				break;
-			case TargetOptions.AllPlayerCreatures:
-				break;
-			case TargetOptions.AllEnemyCreatures:
-				break;
-			case TargetOptions.AllCharacters:
-				break;
-			case TargetOptions.ALlPlayerCharacter:
-				break;
-			case TargetOptions.ALlEnemyCharacters:
-				break;
-			case TargetOptions.SinglePlayerTarget:
-				break;
-			case TargetOptions.MultiPlayerTargets:
-				break;
-			case TargetOptions.MultiEnemyTargets:
-				break;
-			default:
-				break;
+			switch (this.effect.EffectType)
+			{
+				case EffectType.DrawSpecificCard:
+					GetCard(effect.EffectValue1, effect.EffectValue2);
+					break;
+				case EffectType.DrawRandomCard:
+					DrawCard(effect.EffectValue1);
+					break;
+				default:
+					break;
+			}
+		}
+		else if(effect.EffectType == EffectType.SpecialEffect)
+		{
+			//TODO 特殊效果
+		}
+		else
+		{
+			EffectPackage eft = (EffectPackage)Package;
+			object[] ParameterList = { initiator, eft };
+			switch (effect.Target)
+			{
+				case TargetOptions.AllCreatures:
+					{
+						playerUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+						bossUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+						foreach (var obj in PlayerSurventUnitsList)
+						{
+							obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+						}
+						foreach (var obj in BossSurventUnitsList)
+						{
+							obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+						}
+					}
+					break;
+				case TargetOptions.AllPlayerCreatures:
+					{
+						playerUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+						foreach (var obj in PlayerSurventUnitsList)
+						{
+							obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+						}
+					}
+					break;
+				case TargetOptions.AllEnemyCreatures:
+					{
+						bossUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+						foreach (var obj in BossSurventUnitsList)
+						{
+							obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+						}
+					}
+					break;
+				case TargetOptions.AllCreaturesExcludeMainUnit:
+					{
+						foreach (var obj in PlayerSurventUnitsList)
+						{
+							obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+						}
+						foreach (var obj in BossSurventUnitsList)
+						{
+							obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+						}
+					}
+					break;
+				case TargetOptions.AllPlayerCreaturesExcludePlayerUnit:
+					{
+						foreach (var obj in PlayerSurventUnitsList)
+						{
+							obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+						}
+					}
+					break;
+				case TargetOptions.ALlEnemyCreaturesExcludeBossUnit:
+					{
+						foreach (var obj in BossSurventUnitsList)
+						{
+							obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+						}
+					}
+					break;
+				case TargetOptions.SinglePlayerTarget:
+					{
+						switch (effect.SingleTargetOption)
+						{
+							case SingleTargetOption.RandomTarget:
+								{
+									int rnd = Random.Range(0, PlayerSurventUnitsList.Count + 1);
+									if(rnd == PlayerSurventUnitsList.Count)
+									{
+										playerUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+									}
+									else
+									{
+										PlayerSurventUnitsList[rnd].SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+									}
+								}
+								break;
+							case SingleTargetOption.HighestHPTarget:
+								{
+									GameObject obj = playerUnit;
+									int maxhp = playerUnit.GetComponent<PlayerUnitManager>().player.CurrentHP;
+									foreach(var tmp in PlayerSurventUnitsList)
+									{
+										if(tmp.GetComponent<SurventUnitManager>().survent.CurrentHP > maxhp)
+										{
+											obj = tmp;
+											maxhp = tmp.GetComponent<SurventUnitManager>().survent.CurrentHP;
+										}
+									}
+									obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+								}
+								break;
+							case SingleTargetOption.LowestHPTarget:
+								{
+									GameObject obj = playerUnit;
+									int minhp = playerUnit.GetComponent<PlayerUnitManager>().player.CurrentHP;
+									foreach (var tmp in PlayerSurventUnitsList)
+									{
+										if (tmp.GetComponent<SurventUnitManager>().survent.CurrentHP < minhp)
+										{
+											obj = tmp;
+											minhp = tmp.GetComponent<SurventUnitManager>().survent.CurrentHP;
+										}
+									}
+									obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+								}
+								break;
+							case SingleTargetOption.HigestATKTarget:
+								{
+									GameObject obj = playerUnit;
+									int maxatk = playerUnit.GetComponent<PlayerUnitManager>().player.ATK;
+									foreach (var tmp in PlayerSurventUnitsList)
+									{
+										if (tmp.GetComponent<SurventUnitManager>().survent.ATK  > maxatk)
+										{
+											obj = tmp;
+											maxatk = tmp.GetComponent<SurventUnitManager>().survent.ATK;
+										}
+									}
+									obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+								}
+								break;
+							case SingleTargetOption.LowestATKTarget:
+								{
+									GameObject obj = playerUnit;
+									int minatk = playerUnit.GetComponent<PlayerUnitManager>().player.ATK;
+									foreach (var tmp in PlayerSurventUnitsList)
+									{
+										if (tmp.GetComponent<SurventUnitManager>().survent.ATK < minatk)
+										{
+											obj = tmp;
+											minatk = tmp.GetComponent<SurventUnitManager>().survent.ATK;
+										}
+									}
+									obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+								}
+								break;
+							default:
+								break;
+						}
+					}
+					break;
+				case TargetOptions.SingleEnemyTarget:
+					{
+						switch (effect.SingleTargetOption)
+						{
+							case SingleTargetOption.RandomTarget:
+								{
+									int rnd = Random.Range(0, BossSurventUnitsList.Count + 1);
+									if (rnd == BossSurventUnitsList.Count)
+									{
+										bossUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+									}
+									else
+									{
+										BossSurventUnitsList[rnd].SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+									}
+								}
+								break;
+							case SingleTargetOption.HighestHPTarget:
+								{
+									GameObject obj = bossUnit;
+									int maxhp = bossUnit.GetComponent<BossUnitManager>().Boss.CurrentHP;
+									foreach (var tmp in BossSurventUnitsList)
+									{
+										if (tmp.GetComponent<SurventUnitManager>().survent.CurrentHP > maxhp)
+										{
+											obj = tmp;
+											maxhp = tmp.GetComponent<SurventUnitManager>().survent.CurrentHP;
+										}
+									}
+									obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+								}
+								break;
+							case SingleTargetOption.LowestHPTarget:
+								{
+									GameObject obj = bossUnit;
+									int minhp = bossUnit.GetComponent<BossUnitManager>().Boss.CurrentHP;
+									foreach (var tmp in BossSurventUnitsList)
+									{
+										if (tmp.GetComponent<SurventUnitManager>().survent.CurrentHP < minhp)
+										{
+											obj = tmp;
+											minhp = tmp.GetComponent<SurventUnitManager>().survent.CurrentHP;
+										}
+									}
+									obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+								}
+								break;
+							case SingleTargetOption.HigestATKTarget:
+								{
+									GameObject obj = bossUnit;
+									int maxatk = bossUnit.GetComponent<BossUnitManager>().Boss.ATK;
+									foreach (var tmp in BossSurventUnitsList)
+									{
+										if (tmp.GetComponent<SurventUnitManager>().survent.ATK > maxatk)
+										{
+											obj = tmp;
+											maxatk = tmp.GetComponent<SurventUnitManager>().survent.ATK;
+										}
+									}
+									obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+								}
+								break;
+							case SingleTargetOption.LowestATKTarget:
+								{
+									GameObject obj = bossUnit;
+									int minatk = bossUnit.GetComponent<BossUnitManager>().Boss.ATK;
+									foreach (var tmp in BossSurventUnitsList)
+									{
+										if (tmp.GetComponent<SurventUnitManager>().survent.ATK < minatk)
+										{
+											obj = tmp;
+											minatk = tmp.GetComponent<SurventUnitManager>().survent.ATK;
+										}
+									}
+									obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+								}
+								break;
+							default:
+								break;
+						}
+					}
+					break;
+				case TargetOptions.MultiPlayerTargets:
+					break;
+				case TargetOptions.MultiEnemyTargets:
+					break;
+				default:
+					break;
+			}
 		}
 	}
 	public void EffectSetupRequest(GameObject initiator, EffectPackage package)

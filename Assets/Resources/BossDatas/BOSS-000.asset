@@ -24,12 +24,15 @@ MonoBehaviour:
       EffectType: 0
       EffectValue1: 0
       EffectValue2: 0
+      IsInfinity: 0
       EffectRounds: 0
       SpecialEffectScriptName: 
-      EffectTarget: 0
+      Target: 0
+      SingleTargetOption: 0
       TargetCount: 0
     SummonMode: 0
     SummonCount: 0
     SummonSurventID: 0
-  Cycle: []
+  Cycle:
+  - ActionIndex: 00000000
   ActionCycle: 01000000020000000400000003000000

@@ -8,7 +8,6 @@ public enum BossActionType
 }
 public enum SingleTargetOption
 {
-    PlayerTarget,
     RandomTarget,
     HighestHPTarget,
     LowestHPTarget,
@@ -37,21 +36,21 @@ public enum TargetOptions
     /// <summary>
     /// 所有随从（不包括玩家和boss）
     /// </summary>
-    AllCharacters,
+    AllCreaturesExcludeMainUnit,
     /// <summary>
     /// 所有玩家随从 （不包括玩家）
     /// </summary>
-    ALlPlayerCharacter,
+    AllPlayerCreaturesExcludePlayerUnit,
     /// <summary>
     /// 所有敌方随从（不包括boss）
     /// </summary>
-    ALlEnemyCharacters,
+    ALlEnemyCreaturesExcludeBossUnit,
 
     MultiPlayerTargets,
     MultiEnemyTargets,
 
-    SinglePlayerTarget, //单个玩家目标
-    SingleEnemyTarget, //单个敌方目标
+    SinglePlayerTarget,
+    SingleEnemyTarget,
 }
 public enum RarityRank  //稀有度
 {

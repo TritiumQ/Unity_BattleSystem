@@ -30,13 +30,18 @@ public class EffectPackage
 [System.Serializable]
 public class EffectPackageWithTargetOption : EffectPackage
 {
-    public TargetOptions EffectTarget;
+	[Header("目标选项")]
+    public TargetOptions Target;
+	[Header("只有当目标选项为单目标时才启用该项")]
+	public SingleTargetOption SingleTargetOption;
+	[Header("只有当目标选项为多目标且非全体目标时才启用该项")]
     public int TargetCount;
 
-    public EffectPackageWithTargetOption(EffectType effectType, int effectValue1, int effectValue2, int effectRounds, string specialEffectScriptName, TargetOptions effectTarget, int targetCount)
+    public EffectPackageWithTargetOption(EffectType effectType, int effectValue1, int effectValue2, int effectRounds, string specialEffectScriptName, TargetOptions target, SingleTargetOption singleTargetOption, int targetCount)
 			: base(effectType, effectValue1, effectValue2, effectRounds, specialEffectScriptName)
 	{
-		EffectTarget = effectTarget;
+		Target = target;
+		SingleTargetOption = singleTargetOption;
 		TargetCount = targetCount;
 	}
 	public EffectPackageWithTargetOption() { }

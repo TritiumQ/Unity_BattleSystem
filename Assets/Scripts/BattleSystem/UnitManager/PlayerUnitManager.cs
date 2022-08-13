@@ -13,7 +13,7 @@ public class PlayerUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner
 	public Image headIcon;
 	private void Awake()
 	{
-		system = GameObject.Find("BatttleSystem").GetComponent<BattleSystem>();
+		system = GameObject.Find(FightSceneObjectName.BattleSystem).GetComponent<BattleSystem>();
 	}
 	private void Update()
 	{
@@ -67,10 +67,14 @@ public class PlayerUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner
 				break;
 			case EffectType.VampireAttack:
 				{
-					EffectPackage returnEffect = new EffectPackage();
-					returnEffect.EffectType = EffectType.Heal;
-					returnEffect.EffectValue1 = player.BeAttacked(effect.EffectValue1);
-					system.ApplyEffectTo(initiator,gameObject,returnEffect);
+					int dmg = player.BeAttacked(effect.EffectValue1);
+					if(initiator != null && system != null)
+					{
+						EffectPackage returnEffect = new EffectPackage();
+						returnEffect.EffectType = EffectType.Heal;
+						returnEffect.EffectValue1 = dmg;
+						system.ApplyEffectTo(initiator, gameObject, returnEffect);
+					}
 				}
 				break;
 			case EffectType.Heal:
@@ -81,6 +85,8 @@ public class PlayerUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner
 			default:
 				break;
 		}
+		string msg = name + "接收到效果" + effect.EffectType;
+		Debug.Log(msg);
 	}
 
 	public void UpdateEffect()
