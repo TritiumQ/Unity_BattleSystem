@@ -129,15 +129,29 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
 				}
 				break;
             case EffectType.Taunt:
-
+				{
+                    survent.SetTaunt(effect.IsInfinity ? Const.INF : effect.EffectRounds);
+                }
 				break;
             case EffectType.Protect:
+				{
+                    survent.SetProtected(effect.EffectValue1);
+				}
 				break;
             case EffectType.Conceal:
+				{
+                    survent.SetConceal(effect.IsInfinity ? Const.INF : effect.EffectRounds);
+				}
                 break;
             case EffectType.Enhance:
+				{
+                    survent.SetEnhance(effect.EffectValue1, effect.EffectValue2);
+				}
                 break;
             case EffectType.Inspire:
+				{
+                    survent.SetInspire(effect);
+				}
                 break;
             default:
                 break;
@@ -153,27 +167,42 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
     public void AdvancedEffectTrigger()
     {
         isActive = true;
+        foreach (var effect in survent.SpecialAbilityList)
+		{
 
+		}
     }
 
     public void FeedbackEffectTrigger()
     {
-        
+        foreach (var effect in survent.SpecialAbilityList)
+        {
+
+        }
     }
 
     public void SetupEffectTrigger()
     {
-        
+        foreach (var effect in survent.SpecialAbilityList)
+        {
+
+        }
     }
 
     public void SubsequentEffectTrigger()
     {
-        
+        foreach (var effect in survent.SpecialAbilityList)
+        {
+
+        }
     }
 
     public void UndeadEffectTrigger()
     {
-        
+        foreach (var effect in survent.SpecialAbilityList)
+        {
+
+        }
     }
 
 	#endregion

@@ -19,6 +19,8 @@ public class SurventInBattle : UnitInBattle
 	public bool IsFeedback;
 	public bool IsAdvanced;
 
+	public List<AbilityPackage> SpecialAbilityList;
+
 	public CardType SurventType;
 	public SurventInBattle(CardSOAsset _asset) 
 		: base(_asset.MaxHP, _asset.MaxHP, _asset.Atk, 0, 0, false, 0, _asset.IsTank, 0, false, false, 0, false, 0, _asset.IsVampire)
@@ -40,6 +42,7 @@ public class SurventInBattle : UnitInBattle
 				VampireRounds = Const.INF;
 			}
 			IsUndead = IsSubsequent = IsAdvanced = IsFeedback = false;
+			SpecialAbilityList = _asset.SpecialAbilityList;
 			foreach(var ability in _asset.SpecialAbilityList)
 			{
 				switch(ability.SkillType)

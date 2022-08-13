@@ -88,7 +88,14 @@ public class UnitInBattle
 	}
 	public virtual void SetTaunt(int rounds)
 	{
-		TauntRounds += rounds;
+		if(rounds != Const.INF)
+		{
+			TauntRounds += rounds;
+		}
+		else
+		{
+			TauntRounds = Const.INF;
+		}
 	}
 	public virtual void SetConceal(int rounds)
 	{
