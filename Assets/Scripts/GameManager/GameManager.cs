@@ -29,9 +29,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //测试区
+        ArchiveManager.LoadPlayerData(1);
         //step = 4; level = 2;
         //PlayerDataTF.EventEnd();
-        //InitGameEvent(4);
+        InitGameEvent(4);
     }
 
     void Update()
@@ -40,9 +41,6 @@ public class GameManager : MonoBehaviour
     }
     void InitGameManager() //初始化游戏管理者对象
     {
-
-        //Player数据加载
-
         //关卡数据初始化
         GameEventCount = GameConst.GameEventCount;//初始化每层关卡数量
         InitGameEvent();
@@ -89,7 +87,7 @@ public class GameManager : MonoBehaviour
         {
             AddStep();
         }
-        else if (judge == -1 /*|| player.currentHP <= 0*/)
+        else if (judge == -1 || player.CurrentHP <= 0)
         {
             Gameover(0);//游戏失败
         }
@@ -103,8 +101,8 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("EndScene");
     }
 
-
-    //以下是工具方法
+    
+    #region 行为/工具方法
 
     void AddStep()
     {
@@ -118,8 +116,10 @@ public class GameManager : MonoBehaviour
         {
             AddLevel();
         }
-        //TODO
         //数据保存
+        ArchiveManager.SavePlayerData(1);
+
+
     }
     void AddLevel()
     {
@@ -155,3 +155,4 @@ public class GameManager : MonoBehaviour
     }
 
 }
+#endregion

@@ -16,7 +16,7 @@ public class StatusDisplayUI : MonoBehaviour
     void Update()
     {
         HpValue.text = player.CurrentHP.ToString();
-        MithrilValue.text = player.Mithrils.ToString();
+        //MithrilValue.text = player.Mithrils.ToString();
         TearsValue.text = player.Tears.ToString();
 
     }
