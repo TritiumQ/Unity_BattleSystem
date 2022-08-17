@@ -75,18 +75,10 @@ public class BattleSystem : MonoBehaviour
 					//洗牌惩罚,扣玩家5点血
 					EffectPackage effect = new EffectPackage(EffectType.Attack, 5, 0, 0, null);
 					ApplyEffectTo(playerUnit, null, effect);
-
 				}
 				//抽牌
-				GameObject newCard = Instantiate(cardPrefab, playerHands.transform); //生成预制件实例
-																					 //依据编号，从文件中读取卡牌数据
-				CardSOAsset card = Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(deck[cardUsedFlag]));
+				GetCard(deck[cardUsedFlag], 1);
 				cardUsedFlag++;
-
-				newCard.GetComponent<CardDisplay>().Initialized(card);
-				newCard.GetComponent<CardDisplay>().LoadInf();
-
-				handCards.Add(newCard);
 			}
 		}
 	}
@@ -102,7 +94,9 @@ public class BattleSystem : MonoBehaviour
 			CardSOAsset asset = Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(_ID));
 			if (asset != null)
 			{
-
+				GameObject newCard = Instantiate(cardPrefab, playerHands.transform);
+				newCard.GetComponent<CardDisplay>().Initialized(asset);
+				handCards.Add(newCard);
 			}
 		}
 	}

@@ -81,6 +81,7 @@ public class Player
     }
     public void AddMaxHp(int _value)
     {
+        CurrentHP += _value;
         MaxHP += _value;
     }
     public void SetMoney(int _mithrils, int _tears)
