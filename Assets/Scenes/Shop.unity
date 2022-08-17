@@ -1174,6 +1174,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7059270259986958129}
   - {fileID: 1132877212}
   - {fileID: 1934615892}
   - {fileID: 2054174514}
@@ -1603,7 +1604,7 @@ GameObject:
   - component: {fileID: 617123656}
   - component: {fileID: 617123655}
   m_Layer: 5
-  m_Name: Inspire3
+  m_Name: HPEnhance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1728,7 +1729,7 @@ GameObject:
   - component: {fileID: 760817445}
   - component: {fileID: 760817444}
   m_Layer: 5
-  m_Name: Number
+  m_Name: MithrilCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2745,7 +2746,7 @@ GameObject:
   - component: {fileID: 1132877214}
   - component: {fileID: 1132877213}
   m_Layer: 5
-  m_Name: Background
+  m_Name: BackgroundImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2764,7 +2765,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 435489863}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4211,7 +4212,7 @@ GameObject:
   - component: {fileID: 1682852788}
   - component: {fileID: 1682852787}
   m_Layer: 5
-  m_Name: Inspire2
+  m_Name: Tears
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4337,7 +4338,7 @@ GameObject:
   - component: {fileID: 1854810257}
   - component: {fileID: 1854810256}
   m_Layer: 5
-  m_Name: Inspire1
+  m_Name: RandomGift
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4716,7 +4717,7 @@ RectTransform:
   - {fileID: 1682852786}
   - {fileID: 617123654}
   m_Father: {fileID: 435489863}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4735,7 +4736,7 @@ GameObject:
   - component: {fileID: 2054174516}
   - component: {fileID: 2054174515}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Mithrils
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4755,7 +4756,7 @@ RectTransform:
   m_Children:
   - {fileID: 760817443}
   m_Father: {fileID: 435489863}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4935,3 +4936,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2078619751}
   m_CullTransparentMesh: 1
+--- !u!1001 &7059270259986958128
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 435489863}
+    m_Modifications:
+    - target: {fileID: 576756308005870477, guid: c12187d1837a2824385ce3fb66d275a1, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 576756308005870477, guid: c12187d1837a2824385ce3fb66d275a1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 123.79443
+      objectReference: {fileID: 0}
+    - target: {fileID: 576756308005870477, guid: c12187d1837a2824385ce3fb66d275a1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.768738
+      objectReference: {fileID: 0}
+    - target: {fileID: 576756308005870477, guid: c12187d1837a2824385ce3fb66d275a1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.829552
+      objectReference: {fileID: 0}
+    - target: {fileID: 576756308005870477, guid: c12187d1837a2824385ce3fb66d275a1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 576756308005870477, guid: c12187d1837a2824385ce3fb66d275a1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 576756308005870477, guid: c12187d1837a2824385ce3fb66d275a1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 576756308005870477, guid: c12187d1837a2824385ce3fb66d275a1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 576756308005870477, guid: c12187d1837a2824385ce3fb66d275a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 576756308005870477, guid: c12187d1837a2824385ce3fb66d275a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 576756308005870477, guid: c12187d1837a2824385ce3fb66d275a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6752510259829394425, guid: c12187d1837a2824385ce3fb66d275a1, type: 3}
+      propertyPath: m_Name
+      value: ShopSystem
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c12187d1837a2824385ce3fb66d275a1, type: 3}
+--- !u!4 &7059270259986958129 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 576756308005870477, guid: c12187d1837a2824385ce3fb66d275a1, type: 3}
+  m_PrefabInstance: {fileID: 7059270259986958128}
+  m_PrefabAsset: {fileID: 0}
