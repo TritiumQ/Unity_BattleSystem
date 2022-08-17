@@ -47,11 +47,10 @@ public class BattleSystem : MonoBehaviour
 	}
 	private void Awake()
 	{
-		victory.SetActive(false);
 		endButton.onClick.AddListener(EndRound);
 		roundText.text = round.ToString();
-		//deck = new List<int>();
-		deck = new List<int> { 0,200 };
+		deck = new List<int>();
+		//deck = new List<int> { 0,200 };
 		handCards = new List<GameObject>(10);
 		cardUsedFlag = 0;
 		PlayerSurventUnitsList = new List<GameObject>(7);
@@ -151,12 +150,11 @@ public class BattleSystem : MonoBehaviour
 			//触发玩家随从后手效果
 			foreach(var unit in PlayerSurventUnitsList)
 			{
-				unit.SendMessage("SubsequentEffectTrigger");
+				unit.SendMessage(RunnerMethodName.SubsequentEffectTrigger);
 			}
-
 			// Boss以及敌人随从，先机效果和行动
 			bossUnit.SendMessage("AdvancedEffectTrigger");
-			bossUnit.SendMessage("AutoAction", round);
+			bossUnit.SendMessage(RunnerMethodName.AutoAction, round);
 			foreach (var unit in BossSurventUnitsList)
 			{
 				unit.SendMessage("AdvancedEffectTrigger");
@@ -191,7 +189,7 @@ public class BattleSystem : MonoBehaviour
 			{
 				if (card.CardType == CardType.Spell)
 				{
-					//TODO 使用法术卡
+					//TODO 使用法术卡,需要重写
 
 				}
 				else if ((card.CardType == CardType.Survent && PlayerSurventUnitsList.Count < 7))
@@ -253,10 +251,13 @@ public class BattleSystem : MonoBehaviour
 	}
 
 	#region 新版-效果的释放和接收调度函数
-	//TODO 新版效果调度
+	//  新版效果调度
 	public GameObject EffectInitiator { get; private set; }
 	public GameObject EffectTarget { get; private set; }
-	public EffectPackage Package { get; private set; }
+	public EffectPackageWithTargetOption Effect { get; private set; }
+	public GameObject ArrowPrefab;
+	public GameObject TargetSelectArrow;
+	public Transform FightSceneCanvas;
 
 	/// <summary>
 	/// 对特定单个目标直接释放效果
@@ -274,10 +275,10 @@ public class BattleSystem : MonoBehaviour
 				switch (_effect.EffectType)
 				{
 					case EffectType.DrawSpecificCard:
-						GetCard(effect.EffectValue1, effect.EffectValue2);
+						GetCard(_effect.EffectValue1, _effect.EffectValue2);
 						break;
 					case EffectType.DrawRandomCard:
-						DrawCard(effect.EffectValue1);
+						DrawCard(_effect.EffectValue1);
 						break;
 					default:
 						break;
@@ -287,6 +288,7 @@ public class BattleSystem : MonoBehaviour
 		else if (_effect.EffectType == EffectType.SpecialEffect)
 		{
 			//TODO 特殊效果
+			GetComponent<SpecialEffectManager>().SendMessage(_effect.SpecialEffectScriptName, _target);
 		}
 		else
 		{
@@ -300,34 +302,35 @@ public class BattleSystem : MonoBehaviour
 	/// <summary>
 	/// 直接释放效果, 目标选择方式由效果包确定
 	/// </summary>
-	/// <param name="initiator">效果发起者</param>
-	/// <param name="effect">效果信息包（包含目标信息）</param>
-	public void ApplyEffect(GameObject initiator, EffectPackageWithTargetOption effect)
+	/// <param name="_initiator">效果发起者</param>
+	/// <param name="_effect">效果信息包（包含目标信息）</param>
+	public void ApplyEffect(GameObject _initiator, EffectPackageWithTargetOption _effect)
 	{
 		//抽卡特效
-		if(effect.EffectType == EffectType.DrawSpecificCard || effect.EffectType == EffectType.DrawRandomCard)
+		if(_effect.EffectType == EffectType.DrawSpecificCard || _effect.EffectType == EffectType.DrawRandomCard)
 		{
-			switch (this.effect.EffectType)
+			switch (_effect.EffectType)
 			{
 				case EffectType.DrawSpecificCard:
-					GetCard(effect.EffectValue1, effect.EffectValue2);
+					GetCard(_effect.EffectValue1, _effect.EffectValue2);
 					break;
 				case EffectType.DrawRandomCard:
-					DrawCard(effect.EffectValue1);
+					DrawCard(_effect.EffectValue1);
 					break;
 				default:
 					break;
 			}
 		}
-		else if(effect.EffectType == EffectType.SpecialEffect)
+		else if(_effect.EffectType == EffectType.SpecialEffect)
 		{
-			//TODO 特殊效果
+			//TODO 特殊效果 
+			GetComponent<SpecialEffectManager>().SendMessage(_effect.SpecialEffectScriptName, _effect);
 		}
 		else
 		{
-			EffectPackage eft = (EffectPackage)Package;
-			object[] ParameterList = { initiator, eft };
-			switch (effect.Target)
+			EffectPackage eft = (EffectPackage)Effect;
+			object[] ParameterList = { _initiator, eft };
+			switch (_effect.Target)
 			{
 				case TargetOptions.AllCreatures:
 					{
@@ -391,7 +394,7 @@ public class BattleSystem : MonoBehaviour
 					break;
 				case TargetOptions.SinglePlayerTarget:
 					{
-						switch (effect.SingleTargetOption)
+						switch (_effect.SingleTargetOption)
 						{
 							case SingleTargetOption.RandomTarget:
 								{
@@ -466,6 +469,12 @@ public class BattleSystem : MonoBehaviour
 									obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 								}
 								break;
+							case SingleTargetOption.SpecificTarget:
+								{
+									//TODO 
+
+								}
+								break;
 							default:
 								break;
 						}
@@ -473,7 +482,7 @@ public class BattleSystem : MonoBehaviour
 					break;
 				case TargetOptions.SingleEnemyTarget:
 					{
-						switch (effect.SingleTargetOption)
+						switch (_effect.SingleTargetOption)
 						{
 							case SingleTargetOption.RandomTarget:
 								{
@@ -548,31 +557,122 @@ public class BattleSystem : MonoBehaviour
 									obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 								}
 								break;
+							case SingleTargetOption.SpecificTarget:
 							default:
 								break;
 						}
 					}
 					break;
+					//TODO 多目标选择（有可能重复）
 				case TargetOptions.MultiPlayerTargets:
+					{
+						if(_effect.TargetCount >= PlayerSurventUnitsList.Count + 1)
+						{
+							playerUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+							foreach (var obj in PlayerSurventUnitsList)
+							{
+								obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+							}
+						}
+						else
+						{
+							for(int i = 0; i < _effect.TargetCount; i++)
+							{
+								int rnd = Random.Range(0, PlayerSurventUnitsList.Count + 1);
+								if (rnd == PlayerSurventUnitsList.Count)
+								{
+									playerUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+								}
+								else
+								{
+									PlayerSurventUnitsList[rnd].SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+								}
+							}
+						}
+					}
 					break;
 				case TargetOptions.MultiEnemyTargets:
+					{
+						if (_effect.TargetCount >= BossSurventUnitsList.Count + 1)
+						{
+							bossUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+							foreach (var obj in BossSurventUnitsList)
+							{
+								obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+							}
+						}
+						else
+						{
+							for (int i = 0; i < _effect.TargetCount; i++)
+							{
+								int rnd = Random.Range(0, BossSurventUnitsList.Count + 1);
+								if (rnd == BossSurventUnitsList.Count)
+								{
+									bossUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+								}
+								else
+								{
+									BossSurventUnitsList[rnd].SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+								}
+							}
+						}
+					}
+					break;
+				case TargetOptions.OneselfTarget:
+					{
+						if(_initiator != null)
+						{
+							_initiator.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+						}
+					}
 					break;
 				default:
 					break;
 			}
 		}
 	}
-	public void EffectSetupRequest(GameObject initiator, EffectPackage package)
+	public void EffectSetupRequest(GameObject initiator, EffectPackageWithTargetOption package, Vector2 Pos)
 	{
-		EffectInitiator = initiator;
-		Package = package;
+		if(initiator != null && package != null)
+		{
+			EffectInitiator = initiator;
+			Effect = package;
+			// 启动目标选择动画
+			TargetSelectArrow = Instantiate(ArrowPrefab, FightSceneCanvas.transform);
+			TargetSelectArrow.GetComponent<ArrowDisplay>().SetStartPoint(Pos);
+			if (Effect.EffectType == EffectType.Attack || Effect.EffectType == EffectType.VampireAttack || Effect.EffectType == EffectType.SpecialEffect)
+			{
+				TargetSelectArrow.GetComponent<Image>().color = Color.red;
+			}
+			else
+			{
+				TargetSelectArrow.GetComponent<Image>().color = Color.yellow;
+			}
+		}
+		else
+		{
+			EffectSetupOver();
+		}
 	}
 	public void EffectConfirm(GameObject target)
 	{
+		//TODO 这里写得很狗屎，得找个时间重写
 		EffectTarget = target;
 		if (EffectInitiator != EffectTarget && EffectInitiator != null && EffectTarget != null)
 		{
-			ApplyEffectTo(EffectTarget, EffectInitiator, Package);
+			UnitType unitType = GetUnitType(target);
+			if(Effect.Target == TargetOptions.SinglePlayerTarget && (unitType == UnitType.Player || unitType == UnitType.PlayerSurvent))
+			{
+				ApplyEffectTo(EffectTarget, EffectInitiator, Effect);
+			}
+			else if(Effect.Target == TargetOptions.SingleEnemyTarget && (unitType == UnitType.Boss || unitType == UnitType.BossSurvent))
+			{
+				ApplyEffectTo(EffectTarget, EffectInitiator, Effect);
+			}
+			else if(Effect.Target == TargetOptions.OneselfTarget && EffectInitiator == EffectTarget)
+			{
+				ApplyEffectTo(EffectTarget, EffectInitiator, Effect);
+			}
 		}
 		EffectSetupOver();
 	}
@@ -580,92 +680,44 @@ public class BattleSystem : MonoBehaviour
 	{
 		EffectInitiator = null;
 		EffectTarget = null;
-		Package = null;
+		Effect = null;
+		//TODO关闭目标选择动画
+		Destroy(TargetSelectArrow);
+		TargetSelectArrow = null;
 	}
-	
-	#endregion
-
-	#region 旧版-效果的释放和接收调度函数
-	//一套攻击方法
-	public GameObject attacker { get; private set; }
-	public CardType attackerType { get; private set; }
-	public TargetOptions attackTarget { get; private set; }
-	public EffectType actionType { get; private set; }
-	public EffectPackage effect { get; private set; }
-	public GameObject victim { get; private set; }
-
-	public GameObject arrowPrefab;
-	public GameObject arrow; //攻击箭头
-	public Transform canvas;
-	//1 攻击请求
-	public void AttackRequest(GameObject _request, CardType _atkerType , TargetOptions _target,EffectType _action , Vector2 _startPoint)
+	UnitType GetUnitType(GameObject _obj)
 	{
-		if(arrow == null)
+		if (_obj.GetComponent<PlayerUnitManager>() != null)
 		{
-			Debug.Log("攻击请求");
-			arrow = GameObject.Instantiate(arrowPrefab, canvas);
-			arrow.GetComponent<TestArrow>().SetStartPoint(_startPoint);
-			attacker = _request;
-			attackerType = _atkerType;
-			attackTarget = _target;
-			actionType = _action;
+			return UnitType.Player;
 		}
-	}
-	//2 目标确认受击
-	public void AttackConfirm(GameObject _confirm)
-	{
-		if(attacker != null)
+		else if (_obj.GetComponent<BossUnitManager>() != null)
 		{
-			victim = _confirm;
-			//检查是否误攻击
-			if(attackTarget == TargetOptions.SinglePlayerTarget)
+			return UnitType.Boss;
+		}
+		else if(_obj.GetComponent<SurventUnitManager>() != null)
+		{
+			if(_obj.GetComponent<SurventUnitManager>().survent.SurventType == CardType.Survent)
 			{
-
+				return UnitType.PlayerSurvent;
 			}
-			else if(attackTarget == TargetOptions.SingleEnemyTarget)
+			else if(_obj.GetComponent<SurventUnitManager>().survent.SurventType == CardType.Monster)
 			{
-
+				return UnitType.BossSurvent;
 			}
 			else
 			{
-				AttackOver();
+				return UnitType.None;
 			}
-			//TODO 检查敌方是否有嘲讽或隐匿对象
-			if (attackerType == CardType.Survent)
-			{	
-
-				//Debug.Log("攻击成功");
-				//attacker.GetComponent<SurventUnitManager>().isActive = false;
-				Effect.Set(victim, EffectType.Attack, attacker.GetComponent<SurventUnitManager>().survent.ATK);
-			}
-			else if(attackerType == CardType.Spell)
-			{
-				CardSOAsset spellCard = attacker.GetComponent<CardDisplay>().Asset;
-				//Effect.Set(victim, spellCard.SpellActionType, spellCard.SpellActionValue1, spellCard.SpellActionValue2);
-				//player.CurrentActionPoint -= spellCard.Cost;
-				handCards.Remove(attacker);
-				Destroy(attacker);
-			}
-
-			AttackOver();
 		}
-	}
-	//结束攻击
-	public void AttackOver()
-	{
-		Debug.Log("Cancel");
-		if(arrow != null)
+		else
 		{
-			Destroy(arrow);
+			return UnitType.None;
 		}
-		attacker = null;
-		victim = null;
 	}
 	#endregion
 
-	//TODO 胜利
-	public GameObject victory;
-
+	//TODO 战斗结束
 	public void GameEnd(GameResult result)
 	{
 		switch (result)
@@ -711,9 +763,10 @@ public class BattleSystem : MonoBehaviour
 	{
 		Debug.Log("Start Data Setting...");
 		ArchiveManager.LoadPlayerData(1);
-		
-		playerUnit.SendMessage("Initialized");
+		//ArchiveManager.SavePlayerData(1);
 
+		playerUnit.SendMessage("Initialized");
+		LoadPlayerInformation();
 		bossUnit.SendMessage("Initialized", Resources.Load<BossSOAsset>(Const.BOSS_DATA_PATH(0)));
 		Debug.Log(Const.BOSS_DATA_PATH(0));
 

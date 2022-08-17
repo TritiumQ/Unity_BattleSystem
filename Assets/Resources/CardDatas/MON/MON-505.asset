@@ -16,19 +16,18 @@ MonoBehaviour:
   CardName: "\u9B54\u6014\u4EBA"
   CardDescription: "\u533B\u751F"
   CardRarity: 3
-  CardType: 0
-  CardCamp: 4
+  CardType: 2
+  CardCamp: 5
   Cost: 0
   CardImage: {fileID: 21300000, guid: 85ce100ffe9422e44adce1e589a1d572, type: 3}
   RarityImage: {fileID: 0}
-  MaxHP: 5
+  MaxHP: 25
   Atk: 1
-  AtksPerTurn: 1
+  IsDoubleHit: 0
   IsTank: 0
   IsRaid: 0
   IsVampire: 0
-  SpecialSkillList: []
+  SpecialAbilityList: []
   IsCopidedEffect: 0
   IsCopied: 0
-  SpellActionType: 0
   SpellEffectList: []

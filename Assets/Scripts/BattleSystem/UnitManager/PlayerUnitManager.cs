@@ -11,6 +11,7 @@ public class PlayerUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner
     public TextMeshProUGUI hpText;
     public TextMeshProUGUI actionPointText;
 	public Image headIcon;
+	
 	private void Awake()
 	{
 		system = GameObject.Find(FightSceneObjectName.BattleSystem).GetComponent<BattleSystem>();
@@ -63,6 +64,7 @@ public class PlayerUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner
 			case EffectType.Attack:
 				{
 					player.BeAttacked(effect.EffectValue1);
+					//MaskMiss(0.2f, Color.red);
 				}
 				break;
 			case EffectType.VampireAttack:
@@ -75,11 +77,13 @@ public class PlayerUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner
 						returnEffect.EffectValue1 = dmg;
 						system.ApplyEffectTo(initiator, gameObject, returnEffect);
 					}
+					//MaskMiss(0.5f, Color.red);
 				}
 				break;
 			case EffectType.Heal:
 				{
 					player.BeHealed(effect.EffectValue1);
+					//MaskMiss(0.5f, Color.green);
 				}
 				break;
 			default:
@@ -92,6 +96,20 @@ public class PlayerUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner
 	public void UpdateEffect()
 	{
 		player.UpdateEffect();
+	}
+
+	public Image maskImage;
+	IEnumerator MaskMiss(float times, Color color)
+	{
+		maskImage.enabled = true;
+		color.a = 0.5f;
+		maskImage.color = color;
+		while (times > 0)
+		{
+			times -= Time.deltaTime;
+			yield return new WaitForSeconds(Time.deltaTime);
+		}
+		maskImage.enabled = false;
 	}
 
 	#region 行动点使用接口

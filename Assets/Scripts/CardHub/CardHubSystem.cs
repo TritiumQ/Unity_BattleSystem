@@ -56,6 +56,4 @@ public class CardHubSystem : MonoBehaviour
 			Player.Instance.SetCardSet(CardIdDeck);
 		}
 	}
-	
-
 }

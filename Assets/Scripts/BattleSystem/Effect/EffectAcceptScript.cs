@@ -5,13 +5,12 @@ using UnityEngine.EventSystems;
 
 public class EffectAcceptScript : MonoBehaviour, IPointerClickHandler
 {
-    public GameObject thisObject;
     public void OnPointerClick(PointerEventData eventData)
     {
         BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
-        if (sys != null && thisObject != sys.attacker)
+        if (sys != null && sys.EffectInitiator != null && sys.Effect != null)
         {
-            sys.AttackConfirm(thisObject);
+            sys.EffectConfirm(gameObject);
         }
     }
 }

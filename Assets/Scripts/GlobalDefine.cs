@@ -12,7 +12,11 @@ public enum SingleTargetOption
     HighestHPTarget,
     LowestHPTarget,
     HigestATKTarget,
-    LowestATKTarget
+    LowestATKTarget,
+    /// <summary>
+    /// 特定目标，仅玩家方发起的效果可使用
+    /// </summary>
+    SpecificTarget,
 }
 /// <summary>
 /// 目标选择
@@ -51,6 +55,12 @@ public enum TargetOptions
 
     SinglePlayerTarget,
     SingleEnemyTarget,
+
+    /// <summary>
+    /// 以自身为目标
+    /// </summary>
+    OneselfTarget,
+
 }
 public enum RarityRank  //稀有度
 {
@@ -64,6 +74,15 @@ public enum CardType
     Spell, 
     Survent,
     Monster,
+}
+public enum UnitType
+{
+    None,
+    Player,
+    PlayerSurvent,
+    Boss,
+    BossSurvent,
+
 }
 public enum CardCamp
 {

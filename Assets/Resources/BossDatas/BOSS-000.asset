@@ -17,22 +17,63 @@ MonoBehaviour:
   MaxHP: 999
   ATK: 0
   Icon: {fileID: 21300000, guid: 147d1f23cbb19674caf694b1f1471c77, type: 3}
-  SummonList: 0100000002000000
+  SummonList: f4010000f5010000f6010000f7010000f8010000
   SpecialAbilityList: []
   ActionPackages:
   - ActionEffect:
-      EffectType: 0
+      EffectType: 9
+      IsInfinityEffect: 0
       EffectValue1: 0
       EffectValue2: 0
-      IsInfinity: 0
-      EffectRounds: 0
+      EffectValue3: 0
       SpecialEffectScriptName: 
-      Target: 0
+      Target: 9
+      SingleTargetOption: 0
+      TargetCount: 0
+    SummonMode: 1
+    SummonCount: 3
+    SummonSurventID: 500
+  - ActionEffect:
+      EffectType: 1
+      IsInfinityEffect: 0
+      EffectValue1: 10
+      EffectValue2: 0
+      EffectValue3: 0
+      SpecialEffectScriptName: 
+      Target: 2
       SingleTargetOption: 0
       TargetCount: 0
     SummonMode: 0
     SummonCount: 0
     SummonSurventID: 0
+  - ActionEffect:
+      EffectType: 3
+      IsInfinityEffect: 0
+      EffectValue1: 10
+      EffectValue2: 0
+      EffectValue3: 0
+      SpecialEffectScriptName: 
+      Target: 3
+      SingleTargetOption: 0
+      TargetCount: 0
+    SummonMode: 0
+    SummonCount: 0
+    SummonSurventID: 0
+  - ActionEffect:
+      EffectType: 3
+      IsInfinityEffect: 0
+      EffectValue1: 10
+      EffectValue2: 0
+      EffectValue3: 0
+      SpecialEffectScriptName: 
+      Target: 3
+      SingleTargetOption: 0
+      TargetCount: 0
+    SummonMode: 1
+    SummonCount: 3
+    SummonSurventID: 0
   Cycle:
+  - ActionIndex: 0300000001000000
+  - ActionIndex: 02000000
   - ActionIndex: 00000000
   ActionCycle: 01000000020000000400000003000000

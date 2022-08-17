@@ -27,7 +27,27 @@ MonoBehaviour:
   IsTank: 0
   IsRaid: 0
   IsVampire: 0
-  SpecialAbilityList: []
+  SpecialAbilityList:
+  - SkillType: 0
+    Package:
+      EffectType: 0
+      IsInfinityEffect: 0
+      EffectValue1: 0
+      EffectValue2: 0
+      EffectValue3: 0
+      SpecialEffectScriptName: 
+      Target: 0
+      SingleTargetOption: 0
+      TargetCount: 0
   IsCopidedEffect: 1
   IsCopied: 0
-  SpellEffectList: []
+  SpellEffectList:
+  - EffectType: 11
+    IsInfinityEffect: 0
+    EffectValue1: 0
+    EffectValue2: 0
+    EffectValue3: 0
+    SpecialEffectScriptName: 
+    Target: 0
+    SingleTargetOption: 0
+    TargetCount: 0

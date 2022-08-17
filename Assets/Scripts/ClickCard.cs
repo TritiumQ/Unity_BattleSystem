@@ -6,7 +6,7 @@ public enum CardState
 {
     Library,Deck,
 }
-public class ClickCard : MonoBehaviour,IPointerDownHandler
+public class ClickCard : MonoBehaviour, IPointerDownHandler
 {
     private DeckManager DeckManager;
    // private PlayerData PlayerData£»

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public static class Effect
+public static class Effect_UnUsed
 {
 	/// <summary>
 	/// 优化版方法已实现，该方法弃用

@@ -20,11 +20,11 @@ public class EnemyUnitAction : MonoBehaviour
             int rand = Random.Range(0, sys.PlayerSurventUnitsList.Count + 1);
             if(rand == sys.PlayerSurventUnitsList.Count)
 			{
-                Effect.Set(sys.playerUnit, EffectType.Attack, atk);
+                Effect_UnUsed.Set(sys.playerUnit, EffectType.Attack, atk);
 			}
 			else
 			{
-                Effect.Set(sys.PlayerSurventUnitsList[rand], EffectType.Attack, atk);
+                Effect_UnUsed.Set(sys.PlayerSurventUnitsList[rand], EffectType.Attack, atk);
 			}
 		}
 	}

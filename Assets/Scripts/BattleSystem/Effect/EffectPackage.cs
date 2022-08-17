@@ -7,10 +7,10 @@ public class EffectPackage
 {
 	public EffectType EffectType;
 	[Header("一般效果区")]
-    public int EffectValue1;
+	public bool IsInfinityEffect;
+	public int EffectValue1;
     public int EffectValue2;
-	public bool IsInfinity;
-    public int EffectRounds;
+    public int EffectValue3;
 	[Header("特殊效果区")]
 	public string SpecialEffectScriptName;
 
@@ -19,7 +19,7 @@ public class EffectPackage
 		EffectType = effectType;
 		EffectValue1 = effectValue1;
 		EffectValue2 = effectValue2;
-		EffectRounds = effectRounds;
+		EffectValue3 = effectRounds;
 		SpecialEffectScriptName = specialEffectScriptName;
 	}
 	public EffectPackage() { }

@@ -57,7 +57,10 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 				var packages = Boss.ActionPackages[idx];
 				if (packages.ActionEffect != null)
 				{
-					system.ApplyEffect(gameObject, packages.ActionEffect);
+					if(packages.ActionEffect.EffectType != EffectType.Void)
+					{
+						system.ApplyEffect(gameObject, packages.ActionEffect);
+					}
 				}
 				if (packages.SummonCount != 0)
 				{
@@ -213,6 +216,20 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 			default:
 				break;
 		}*/
+	}
+
+	public Image maskImage;
+	IEnumerator MaskMiss(float times, Color color)
+	{
+		maskImage.enabled = true;
+		color.a = 0.5f;
+		maskImage.color = color;
+		while (times > 0)
+		{
+			times -= Time.deltaTime;
+			yield return new WaitForSeconds(Time.deltaTime);
+		}
+		maskImage.enabled = false;
 	}
 
 	#region 效果接收和运行接口

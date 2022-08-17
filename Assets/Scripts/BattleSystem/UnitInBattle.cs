@@ -169,8 +169,8 @@ public class UnitInBattle
 			{
 				if (Inspire[i] != null)
 				{
-					Inspire[i].EffectRounds--;
-					if (Inspire[i].EffectRounds <= 0)
+					Inspire[i].EffectValue3--;
+					if (Inspire[i].EffectValue3 <= 0)
 					{
 						MaxHP -= Inspire[i].EffectValue1;
 						ATK -= Inspire[i].EffectValue2;

@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -96,7 +98,21 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
         //Destroy(gameObject);
 	}
 
-    //随从接口组
+    public Image maskImage;
+    IEnumerator MaskMiss(float times, Color color)
+    {
+        maskImage.enabled = true;
+        color.a = 0.5f;
+        maskImage.color = color;
+        while (times > 0)
+        {
+            times -= Time.deltaTime;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        maskImage.enabled = false;
+    }
+
+    //接受效果接口组
     public void AcceptEffect(object[] _parameterList)
     {
         
@@ -139,7 +155,7 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
 				break;
             case EffectType.Taunt:
 				{
-                    survent.SetTaunt(effect.IsInfinity ? Const.INF : effect.EffectRounds);
+                    survent.SetTaunt(effect.IsInfinityEffect ? Const.INF : effect.EffectValue1);
                 }
 				break;
             case EffectType.Protect:
@@ -149,7 +165,7 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
 				break;
             case EffectType.Conceal:
 				{
-                    survent.SetConceal(effect.IsInfinity ? Const.INF : effect.EffectRounds);
+                    survent.SetConceal(effect.IsInfinityEffect ? Const.INF : effect.EffectValue1);
 				}
                 break;
             case EffectType.Enhance:

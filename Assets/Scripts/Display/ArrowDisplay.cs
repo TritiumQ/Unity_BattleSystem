@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestArrow : MonoBehaviour //照抄教程的
+public class ArrowDisplay : MonoBehaviour //照抄教程的
 {
     public Vector2 startPoint;
     RectTransform arrow;

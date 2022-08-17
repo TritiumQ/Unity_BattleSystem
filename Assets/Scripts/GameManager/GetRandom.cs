@@ -52,6 +52,7 @@ public static class GetRandom
     /// <returns></returns>
     public static int GetRandomCard()
     {
+        //4 3 2 1
         int idex=0,pos1=0,pos2=0;
         idex = GameConst.DrawCard[Random.Range(0, GameConst.DrawCard.Length)];
         pos1 = Random.Range(GameConst.Card_SVN[idex, 0], GameConst.Card_SVN[idex, 1] + 1);
