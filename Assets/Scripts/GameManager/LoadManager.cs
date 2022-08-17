@@ -71,7 +71,7 @@ public class LoadManager : MonoBehaviour
                 break;
             case 2:
                 {
-                    scene = "SafeHouse";
+                    scene = "SceureHouse";
                 }
                 break;
             case 3:
@@ -87,7 +87,7 @@ public class LoadManager : MonoBehaviour
                         if (pos == 1)
                             scene = "CardSelect";
                         else if (pos == 2)
-                            scene = "Fightorleave";
+                            scene = "Select";
                         else scene = null;
                     }
                 }

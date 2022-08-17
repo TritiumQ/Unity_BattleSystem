@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
         ArchiveManager.LoadPlayerData(1);
         //step = 4; level = 2;
         //PlayerDataTF.EventEnd();
-        InitGameEvent(4);
+        //InitGameEvent(4);
     }
 
     void Update()
@@ -117,9 +117,10 @@ public class GameManager : MonoBehaviour
             AddLevel();
         }
         //Êý¾Ý±£´æ
-        ArchiveManager.SavePlayerData(1);
-
-
+        if (player != null)
+        {
+            ArchiveManager.SavePlayerData(1);
+        }
     }
     void AddLevel()
     {
