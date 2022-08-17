@@ -13,7 +13,7 @@ public static class GameConst
 
     public static int[] DrawCard = { 1, 1, 1, 1, 2, 2, 2, 3, 3, 4 };
     public static int[,] Card_SVN = { { 0, 0 }, { 1, 23 }, { 50, 78 }, { 100, 117 }, { 150, 159 } };
-    public static int[,] Card_SPL = { { 0, 0 }, { 201, 249 }, { 250, 299 }, { 300, 349 }, { 350, 399 } };//待修改
+    public static int[,] Card_SPL = { { 0, 0 }, { 201, 201 }, { 250, 267 }, { 300, 303 }, { 350, 352 } };
 
     public static int[] GetArrray(int[] _target)
     {

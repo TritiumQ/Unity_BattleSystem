@@ -76,7 +76,20 @@ public class LoadManager : MonoBehaviour
                 break;
             case 3:
                 {
-                    scene = "Ëæ»úÔâÓö";
+                    int level = GameObject.Find("GameManager").GetComponent<GameManager>().level;
+                    if(level==1)
+                    {
+                        scene = "CardSelect";
+                    }
+                    else
+                    {
+                        int pos = Random.Range(1, 2+1);
+                        if (pos == 1)
+                            scene = "CardSelect";
+                        else if (pos == 2)
+                            scene = "Fightorleave";
+                        else scene = null;
+                    }
                 }
                 break;
             case 4:

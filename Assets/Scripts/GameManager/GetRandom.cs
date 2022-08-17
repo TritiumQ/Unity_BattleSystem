@@ -57,7 +57,9 @@ public static class GetRandom
         idex = GameConst.DrawCard[Random.Range(0, GameConst.DrawCard.Length)];
         pos1 = Random.Range(GameConst.Card_SVN[idex, 0], GameConst.Card_SVN[idex, 1] + 1);
         pos2 = Random.Range(GameConst.Card_SPL[idex, 0], GameConst.Card_SPL[idex, 1] + 1);
-        if (Random.Range(1, 4) <= 2)
+        if (idex == 1)
+            return pos1;
+        else if (Random.Range(1, 4) <= 2)
             return pos1;
         else return pos2;
     }
