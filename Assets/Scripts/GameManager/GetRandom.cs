@@ -81,26 +81,26 @@ public static class GetRandom
             case 2:
                 {
                     if(choose==true)
-                        idex = 18;
+                        idex = 15;
                     else idex = Random.Range(4, 6+1);
                     break;
                 }
             case 3:
                 {
                     if (choose == true)
-                        idex = Random.Range(19, 20+1);
+                        idex = 16;
                     else if (_step == GameConst.GameEventCount[_level] - 1)
-                        idex = Random.Range(22, 24+1);
-                    else idex = Random.Range(7, 13+1);
+                        idex = Random.Range(18, 19+1);
+                    else idex = Random.Range(7, 9+1);
                     break;
                 }
             case 4:
                 {
                     if (choose == true)
-                        idex = 21;
+                        idex = 17;
                     else if (_step == GameConst.GameEventCount[_level] - 1)
-                        idex = 25;
-                    else idex = Random.Range(14, 17+1);
+                        idex = 20;
+                    else idex = Random.Range(10, 14+1);
                     break;
                 }
         }

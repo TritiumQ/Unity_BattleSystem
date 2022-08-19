@@ -5,6 +5,17 @@ using UnityEngine;
 
 public class TurnScenes : MonoBehaviour
 {
+    public void StartGame()
+    {
+        GameObject _obj=GameObject.Find("GameProcess");
+        if (Player.Instance != null)
+            ArchiveManager.SavePlayerData(1);
+        if(_obj==null)
+            SceneManager.LoadScene("Deck");
+        else SceneManager.LoadScene("GameProcess");
+        //SceneManager.LoadScene("Gameporess");
+    }
+    
     public void TurnScene(string scene)
     {
         if (Player.Instance != null)
@@ -12,6 +23,20 @@ public class TurnScenes : MonoBehaviour
             ArchiveManager.SavePlayerData(1);
         }
         SceneManager.LoadScene(scene);
+    }
+
+    public void OverGame()
+    {
+        GameObject obj = GameObject.Find("GameManager");
+        obj.GetComponent<GameManager>().Gameover(0);
+    }
+    public void ReturnMain()
+    {
+        if (Player.Instance != null)
+        {
+            ArchiveManager.SavePlayerData(1);
+        }
+        SceneManager.LoadScene("Main");
     }
 
     public void QuitGame()

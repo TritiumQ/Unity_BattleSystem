@@ -92,10 +92,12 @@ public class GameManager : MonoBehaviour
             Gameover(0);//游戏失败
         }
     }
-    void Gameover(int _result) //局内游戏结束
+    public void Gameover(int _result) //局内游戏结束
     {
         result = _result;
         GetReward();
+        if(player!=null)
+            ArchiveManager.SavePlayerData(1);
         //_result控制结局走向,暂定 0是失败，1是胜利......
         //切换End场景
         SceneManager.LoadScene("EndScene");
