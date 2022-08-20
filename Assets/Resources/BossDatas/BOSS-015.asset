@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86ae5b9115e19d44f96dddff0c4231a0, type: 3}
-  m_Name: BOSS-003
+  m_Name: BOSS-015
   m_EditorClassIdentifier: 
-  ID: 3
-  Name: boss003
-  MaxHP: 20
-  ATK: 2
+  ID: 15
+  Name: "\u611F\u67D3\u8005"
+  MaxHP: 35
+  ATK: 1
   Icon: {fileID: 0}
   SummonList: 
   SpecialAbilityList: []
@@ -35,26 +35,13 @@ MonoBehaviour:
     SummonSurventID: 0
   - ActionEffect:
       EffectType: 1
-      EffectValue1: 2
+      EffectValue1: 1
       EffectValue2: 0
       IsInfinity: 0
       EffectRounds: 0
       SpecialEffectScriptName: 
       Target: 9
-      SingleTargetOption: 0
-      TargetCount: 0
-    SummonMode: 0
-    SummonCount: 0
-    SummonSurventID: 0
-  - ActionEffect:
-      EffectType: 1
-      EffectValue1: 2
-      EffectValue2: 0
-      IsInfinity: 0
-      EffectRounds: 0
-      SpecialEffectScriptName: 
-      Target: 5
-      SingleTargetOption: 0
+      SingleTargetOption: 2
       TargetCount: 0
     SummonMode: 0
     SummonCount: 0
@@ -67,7 +54,46 @@ MonoBehaviour:
       EffectRounds: 0
       SpecialEffectScriptName: 
       Target: 9
-      SingleTargetOption: 2
+      SingleTargetOption: 3
+      TargetCount: 0
+    SummonMode: 0
+    SummonCount: 0
+    SummonSurventID: 0
+  - ActionEffect:
+      EffectType: 1
+      EffectValue1: 3
+      EffectValue2: 0
+      IsInfinity: 0
+      EffectRounds: 0
+      SpecialEffectScriptName: 
+      Target: 5
+      SingleTargetOption: 0
+      TargetCount: 0
+    SummonMode: 0
+    SummonCount: 0
+    SummonSurventID: 0
+  - ActionEffect:
+      EffectType: 1
+      EffectValue1: 35
+      EffectValue2: 0
+      IsInfinity: 0
+      EffectRounds: 0
+      SpecialEffectScriptName: 
+      Target: 10
+      SingleTargetOption: 0
+      TargetCount: 0
+    SummonMode: 0
+    SummonCount: 0
+    SummonSurventID: 0
+  - ActionEffect:
+      EffectType: 1
+      EffectValue1: 30
+      EffectValue2: 0
+      IsInfinity: 0
+      EffectRounds: 0
+      SpecialEffectScriptName: 
+      Target: 1
+      SingleTargetOption: 0
       TargetCount: 0
     SummonMode: 0
     SummonCount: 0
@@ -77,5 +103,21 @@ MonoBehaviour:
   - ActionIndex: 01000000
   - ActionIndex: 01000000
   - ActionIndex: 02000000
+  - ActionIndex: 01000000
+  - ActionIndex: 01000000
+  - ActionIndex: 01000000
   - ActionIndex: 03000000
+  - ActionIndex: 01000000
+  - ActionIndex: 03000000
+  - ActionIndex: 01000000
+  - ActionIndex: 01000000
+  - ActionIndex: 02000000
+  - ActionIndex: 01000000
+  - ActionIndex: 01000000
+  - ActionIndex: 01000000
+  - ActionIndex: 03000000
+  - ActionIndex: 01000000
+  - ActionIndex: 02000000
+  - ActionIndex: 01000000
+  - ActionIndex: 0500000004000000
   ActionCycle: 

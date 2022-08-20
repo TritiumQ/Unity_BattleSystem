@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86ae5b9115e19d44f96dddff0c4231a0, type: 3}
-  m_Name: BOSS-003
+  m_Name: BOSS-009
   m_EditorClassIdentifier: 
-  ID: 3
-  Name: boss003
-  MaxHP: 20
-  ATK: 2
+  ID: 9
+  Name: boss009
+  MaxHP: 40
+  ATK: 1
   Icon: {fileID: 0}
-  SummonList: 
+  SummonList: f8010000
   SpecialAbilityList: []
   ActionPackages:
   - ActionEffect:
@@ -34,18 +34,18 @@ MonoBehaviour:
     SummonCount: 0
     SummonSurventID: 0
   - ActionEffect:
-      EffectType: 1
-      EffectValue1: 2
+      EffectType: 0
+      EffectValue1: 0
       EffectValue2: 0
       IsInfinity: 0
       EffectRounds: 0
       SpecialEffectScriptName: 
-      Target: 9
+      Target: 0
       SingleTargetOption: 0
       TargetCount: 0
     SummonMode: 0
-    SummonCount: 0
-    SummonSurventID: 0
+    SummonCount: 2
+    SummonSurventID: 504
   - ActionEffect:
       EffectType: 1
       EffectValue1: 2
@@ -67,15 +67,29 @@ MonoBehaviour:
       EffectRounds: 0
       SpecialEffectScriptName: 
       Target: 9
-      SingleTargetOption: 2
+      SingleTargetOption: 3
+      TargetCount: 0
+    SummonMode: 0
+    SummonCount: 0
+    SummonSurventID: 0
+  - ActionEffect:
+      EffectType: 1
+      EffectValue1: 1
+      EffectValue2: 0
+      IsInfinity: 0
+      EffectRounds: 0
+      SpecialEffectScriptName: 
+      Target: 9
+      SingleTargetOption: 0
       TargetCount: 0
     SummonMode: 0
     SummonCount: 0
     SummonSurventID: 0
   Cycle:
   - ActionIndex: 00000000
-  - ActionIndex: 01000000
-  - ActionIndex: 01000000
-  - ActionIndex: 02000000
-  - ActionIndex: 03000000
+  - ActionIndex: 0100000004000000
+  - ActionIndex: 010000000200000004000000
+  - ActionIndex: 04000000
+  - ActionIndex: 0400000003000000
+  - ActionIndex: 0400000002000000
   ActionCycle: 

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5260d0e1e557d924098f98884611e3f5, type: 3}
-  m_Name: MON-503
+  m_Name: MON-511
   m_EditorClassIdentifier: 
-  CardID: 503
-  CardName: mon3
+  CardID: 511
+  CardName: mon11
   CardDescription: 
   CardRarity: 0
   CardType: 2
@@ -21,12 +21,12 @@ MonoBehaviour:
   Cost: 0
   CardImage: {fileID: 21300000, guid: 85ce100ffe9422e44adce1e589a1d572, type: 3}
   RarityImage: {fileID: 0}
-  MaxHP: 2
-  Atk: 3
+  MaxHP: 10
+  Atk: 2
   IsDoubleHit: 0
   IsTank: 0
-  IsRaid: 1
-  IsVampire: 0
+  IsRaid: 0
+  IsVampire: 1
   SpecialAbilityList: []
   IsCopidedEffect: 0
   IsCopied: 0
