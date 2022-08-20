@@ -30,6 +30,7 @@ public static class Const
         }
         else if (IsInRange(_id, 500, 699))
         {
+            UnityEngine.Debug.Log("EnemySurvent");
             return "CardDatas/MON/MON-" + _id.ToString("D3");
         }
         else
