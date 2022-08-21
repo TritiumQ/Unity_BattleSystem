@@ -13,47 +13,21 @@ MonoBehaviour:
   m_Name: SVN-002
   m_EditorClassIdentifier: 
   CardID: 2
-  CardName: NULL
-  CardDescription: NULL
+  CardName: SVN002
+  CardDescription: 
   CardRarity: 0
   CardType: 0
   CardCamp: 0
-  Cost: 0
-  CardImage: {fileID: 0}
-  RarityImage: {fileID: 0}
-  MaxHP: 0
-  Atk: 0
-  AtksPerTurn: 1
+  Cost: 2
+  CardImage: {fileID: 21300000, guid: 475375b1fde63d64eba1c7ee6085e776, type: 3}
+  RarityImage: {fileID: 21300000, guid: cf6b63cacd7382e4fbd5fddabc7e2fd4, type: 3}
+  MaxHP: 2
+  Atk: 2
+  IsDoubleHit: 0
   IsTank: 0
   IsRaid: 0
   IsVampire: 0
-  IsSetupEffect: 0
-  SetupEffect: 0
-  SetupEffectValue1: 0
-  SetupEffectValue2: 0
-  SetupEffectTarget: 0
-  SetupEffectTargetCount: 0
-  IsUndead: 0
-  DeadWhisperEffect: 0
-  DeadWhisperEffectValue1: 0
-  DeadWhisperEffectValue2: 0
-  DeadWhisperEffectTarget: 0
-  DeadWhisperEffectTargetCount: 0
-  IsAdvanced: 0
-  AdvancedEffect: 0
-  AdvancedEffectValue1: 0
-  AdvancedEffectValue2: 0
-  AdvancedEffectTarget: 0
-  AdvancedEffectTargetCount: 0
-  IsSubsequent: 0
-  SubsequentEffect: 0
-  SubsequentEffectValue1: 0
-  SubsequentEffectValue2: 0
-  SubsequentEffectTarget: 0
-  SubsequentEffectTargetCount: 0
+  SpecialAbilityList: []
+  IsCopidedEffect: 0
   IsCopied: 0
-  SpellActionType: 0
-  SpellActionValue1: 0
-  SpellActionValue2: 0
-  Targets: 0
-  TargetCount: 0
+  SpellEffectList: []
