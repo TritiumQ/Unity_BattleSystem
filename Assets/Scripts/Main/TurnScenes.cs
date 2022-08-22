@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TurnScenes : MonoBehaviour
 {
@@ -10,8 +11,16 @@ public class TurnScenes : MonoBehaviour
         GameObject _obj=GameObject.Find("GameProcess");
         if (Player.Instance != null)
             ArchiveManager.SavePlayerData(1);
-        if(_obj==null)
-            SceneManager.LoadScene("Deck");
+        if (_obj == null)
+        {
+            GameObject shop = GameObject.Find("Shop");
+            GameObject package = GameObject.Find("Package");
+            GameObject deck = GameObject.Find("Deck");
+            shop.GetComponent<Button>().interactable = false;
+            package.GetComponent<Button>().interactable = false;
+            deck.GetComponent<Button>().interactable = false;
+            SceneManager.LoadScene("CardHub");
+        }
         else SceneManager.LoadScene("GameProcess");
         //SceneManager.LoadScene("Gameporess");
     }

@@ -96,8 +96,11 @@ public class GameManager : MonoBehaviour
     {
         result = _result;
         GetReward();
-        if(player!=null)
+        if (player != null)
+        {
+            player.ReSet();
             ArchiveManager.SavePlayerData(1);
+        }
         //_result控制结局走向,暂定 0是失败，1是胜利......
         //切换End场景
         SceneManager.LoadScene("EndScene");

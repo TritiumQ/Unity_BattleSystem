@@ -16,6 +16,7 @@ public class SerializablePlayerData
     public int CurrentHP;
     public int Mithrils; //秘银
     public int Tears;  //泪滴
+    public int InitTears;
     public int[] CardSet;
     public int[] UnlockCard;
 
@@ -28,6 +29,7 @@ public class SerializablePlayerData
             CurrentHP = 16;
             Mithrils = 20070831;
             Tears = 0x39C5BB;
+            InitTears = 23452345;
 
             CardSet = new int[2];
             CardSet[0] = 0;
@@ -44,6 +46,7 @@ public class SerializablePlayerData
             CurrentHP = -1;
             Mithrils = -1;
             Tears = -1;
+            InitTears = -1;
             CardSet = null;
             UnlockCard = null;
         }
@@ -59,6 +62,7 @@ public class SerializablePlayerData
         CurrentHP = _player.CurrentHP;
         Mithrils = _player.Mithrils;
         Tears = _player.Tears;
+        InitTears = _player.InitTears;
 
         CardSet = _player.cardSet.ToArray();
 
