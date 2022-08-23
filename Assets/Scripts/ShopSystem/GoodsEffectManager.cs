@@ -28,7 +28,6 @@ public class GoodsEffectManager : MonoBehaviour
 			Player.Instance.AddMaxHp(BaseHealValue * rank);
 		}
 	}
-	
 
 	#endregion
 

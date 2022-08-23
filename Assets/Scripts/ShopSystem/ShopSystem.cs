@@ -24,14 +24,57 @@ public class ShopSystem : MonoBehaviour
 	public Button goods2;
 	public Button goods3;
 
+	[Header("Exit Button")]
+	public Button exitButton;
+
 	private void Awake()
 	{
-
+		exitButton.onClick.AddListener(Exit);
+		
+		TestLoadData();
 	}
 
 	private void Update()
 	{
 		moneyText.text = currentMoneys.ToString();
+	}
+
+	void Initialized()
+	{
+		if(Card1 != null)
+		{
+
+		}
+		if(Card2 != null)
+		{
+
+		}
+		if(Card3 != null)
+		{
+
+		}
+		if(Card4 != null)
+		{
+
+		}
+
+		if(goods1 != null)
+		{
+
+		}
+		if(goods2 != null)
+		{
+
+		}
+		if(goods3 != null)
+		{
+
+		}
+	}
+
+	void Exit()
+	{
+
 	}
 
 	public void SetCard(int pos)
@@ -68,7 +111,35 @@ public class ShopSystem : MonoBehaviour
 	}
 	public void TestLoadData()
 	{
+		if (Card1 != null)
+		{
+			Card1.GetComponent("Card").GetComponent<CardDisplay>().Initialized(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(0)));
+		}
+		if (Card2 != null)
+		{
 
+		}
+		if (Card3 != null)
+		{
+
+		}
+		if (Card4 != null)
+		{
+
+		}
+
+		if (goods1 != null)
+		{
+
+		}
+		if (goods2 != null)
+		{
+
+		}
+		if (goods3 != null)
+		{
+
+		}
 	}
 }
 public enum ShopType

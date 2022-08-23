@@ -3,12 +3,11 @@ using UnityEngine;
 
 public static class ArchiveManager
 {
-
 	/// <summary>
 	/// ∂¡»°¥Êµµ
 	/// </summary>
 	/// <returns></returns>
-	public static void LoadPlayerData(int _saveID)
+	public static void LoadPlayerData(int _saveID = 1)
 	{
 		if (_saveID > 0 && _saveID <= Const.MaxSaveCount)
 		{

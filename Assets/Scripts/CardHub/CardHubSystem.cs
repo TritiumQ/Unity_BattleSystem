@@ -19,10 +19,11 @@ public class CardHubSystem : MonoBehaviour
 
 	private void Awake()
 	{
-
+		LoadInformation();
 	}
 	void LoadInformation()
 	{
+		//ArchiveManager.LoadPlayerData();
 		if(Player.Instance != null)
 		{
 			CardIdDeck = Player.Instance.cardSet;

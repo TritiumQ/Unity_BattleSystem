@@ -8,7 +8,10 @@ using UnityEngine;
 public class Player
 {
     //单例模式
-    private Player() { }
+    private Player()
+    {
+
+    }
     private static Player instance;//全局唯一实例
     public static Player Instance //获取实例的属性
     {
