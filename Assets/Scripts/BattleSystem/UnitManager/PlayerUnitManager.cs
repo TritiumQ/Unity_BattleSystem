@@ -59,6 +59,8 @@ public class PlayerUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner
 	{
 		GameObject initiator = (GameObject)_parameterList[0];
 		EffectPackage effect = (EffectPackage)_parameterList[1];
+		if (effect == null)
+			Debug.Log("Effect null");
 		switch (effect.EffectType)
 		{
 			case EffectType.Attack:

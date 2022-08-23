@@ -20,4 +20,9 @@ static class CreateSOAssets
     {
         ScriptableObjectUtility.CreateAsset<TestAsset>();
     }
+    [MenuItem("Assets/Create/SOAsset/GoodsAsset")]
+    public static void CreateScriptableObject4()
+    {
+        ScriptableObjectUtility.CreateAsset<GoodsSOAsset>();
+    }
 }

@@ -17,7 +17,7 @@ MonoBehaviour:
   CardDescription: "\u86C7\u5728\u770B\u7740\u4F60"
   CardRarity: 0
   CardType: 1
-  CardCamp: 5
+  CardCamp: 4
   Cost: 0
   CardImage: {fileID: 21300000, guid: 2cc6d1192dce11542a3a71c7a592ce28, type: 3}
   RarityImage: {fileID: 21300000, guid: d352133a8c1e1924f97cae3f2a11a737, type: 3}
@@ -27,7 +27,40 @@ MonoBehaviour:
   IsTank: 0
   IsRaid: 0
   IsVampire: 0
-  SpecialAbilityList: []
+  SpecialAbilityList:
+  - SkillType: 1
+    Package:
+      EffectType: 3
+      IsInfinityEffect: 0
+      EffectValue1: 10
+      EffectValue2: 0
+      EffectValue3: 0
+      SpecialEffectScriptName: 
+      Target: 9
+      SingleTargetOption: 5
+      TargetCount: 0
+  - SkillType: 2
+    Package:
+      EffectType: 7
+      IsInfinityEffect: 0
+      EffectValue1: 2
+      EffectValue2: 2
+      EffectValue3: 0
+      SpecialEffectScriptName: 
+      Target: 9
+      SingleTargetOption: 5
+      TargetCount: 0
+  - SkillType: 3
+    Package:
+      EffectType: 5
+      IsInfinityEffect: 0
+      EffectValue1: 5
+      EffectValue2: 0
+      EffectValue3: 0
+      SpecialEffectScriptName: 
+      Target: 9
+      SingleTargetOption: 5
+      TargetCount: 0
   IsCopidedEffect: 0
   IsCopied: 0
   SpellEffectList: []

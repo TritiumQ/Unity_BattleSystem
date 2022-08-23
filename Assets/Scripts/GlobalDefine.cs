@@ -61,6 +61,7 @@ public enum TargetOptions
     /// </summary>
     OneselfTarget,
 
+
 }
 public enum RarityRank  //Ï¡ÓÐ¶È
 {

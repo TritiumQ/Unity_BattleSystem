@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5260d0e1e557d924098f98884611e3f5, type: 3}
   m_Name: MON-505
   m_EditorClassIdentifier: 
-  CardID: 5
-  CardName: "\u9B54\u6014\u4EBA"
-  CardDescription: "\u533B\u751F"
-  CardRarity: 3
+  CardID: 505
+  CardName: mon5
+  CardDescription: 
+  CardRarity: 0
   CardType: 2
   CardCamp: 5
   Cost: 0
   CardImage: {fileID: 21300000, guid: 85ce100ffe9422e44adce1e589a1d572, type: 3}
   RarityImage: {fileID: 0}
-  MaxHP: 25
-  Atk: 1
+  MaxHP: 1
+  Atk: 5
   IsDoubleHit: 0
   IsTank: 0
-  IsRaid: 0
+  IsRaid: 1
   IsVampire: 0
   SpecialAbilityList: []
   IsCopidedEffect: 0

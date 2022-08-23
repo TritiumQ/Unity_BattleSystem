@@ -9,7 +9,7 @@ public class BossInBattle : UnitInBattle
     public int ID;
     public string Name;
     public Sprite Icon;
-    public List<int> SurventList;
+    public List<int> SummontList;
 
     public List<AbilityPackage> SpecialAbilityList;
 
@@ -25,11 +25,10 @@ public class BossInBattle : UnitInBattle
         ID = asset.ID;
         Name = asset.Name;
         ActionCycle = asset.ActionCycle;
-        SurventList = asset.SummonList;
+        SummontList = asset.SummonList;
         Icon = asset.Icon;
         SpecialAbilityList = asset.SpecialAbilityList;
         ActionPackages = asset.ActionPackages;
         Cycle = asset.Cycle;
 	}
-
 }

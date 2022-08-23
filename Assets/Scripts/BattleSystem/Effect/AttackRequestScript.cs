@@ -11,16 +11,15 @@ public class AttackRequestScript : MonoBehaviour, IPointerClickHandler
     SurventUnitManager manager;
     void Start()
     {
-        system = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
+        system = GameObject.Find(FightSceneObjectName.BattleSystem).GetComponent<BattleSystem>();
         manager = GetComponent<SurventUnitManager>();
         
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(eventData.clickCount == 2)
+        if(eventData.clickCount == 2 && manager.survent.SurventType == CardType.Survent)
 		{
-            bool attackable = gameObject.GetComponent<SurventUnitManager>().isActive;
-            if (attackable && system != null && manager != null)
+            if (manager.isActive && system != null)
             {
                 if (system.EffectInitiator == null)
                 {
@@ -29,6 +28,7 @@ public class AttackRequestScript : MonoBehaviour, IPointerClickHandler
                     effect.EffectValue1 = manager.survent.ATK;
                     effect.Target = TargetOptions.SingleEnemyTarget;
                     system.EffectSetupRequest(gameObject, effect, transform.position);
+                    Debug.Log("Attack Request");
                 }
                 else
                 {

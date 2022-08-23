@@ -18,7 +18,7 @@ public class ReturnMainScene : MonoBehaviour
     public void Turn(GameObject NScene)
     {
         Debug.Log("Ìø×ª");
-        SceneManager.LoadScene("Ö÷³¡¾°");
+        SceneManager.LoadScene("Main");
     }
     
 }

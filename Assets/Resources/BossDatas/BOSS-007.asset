@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86ae5b9115e19d44f96dddff0c4231a0, type: 3}
+  m_Name: BOSS-007
+  m_EditorClassIdentifier: 
+  ID: 7
+  Name: boss007
+  MaxHP: 30
+  ATK: 1
+  Icon: {fileID: 0}
+  SummonList: fa010000
+  SpecialAbilityList:
+  - SkillType: 0
+    Package:
+      EffectType: 1
+      EffectValue1: 1
+      EffectValue2: 0
+      IsInfinity: 0
+      EffectRounds: 0
+      SpecialEffectScriptName: 
+      Target: 7
+      SingleTargetOption: 0
+      TargetCount: 2
+  ActionPackages:
+  - ActionEffect:
+      EffectType: 0
+      EffectValue1: 0
+      EffectValue2: 0
+      IsInfinity: 0
+      EffectRounds: 0
+      SpecialEffectScriptName: 
+      Target: 0
+      SingleTargetOption: 0
+      TargetCount: 0
+    SummonMode: 0
+    SummonCount: 0
+    SummonSurventID: 0
+  - ActionEffect:
+      EffectType: 0
+      EffectValue1: 0
+      EffectValue2: 0
+      IsInfinity: 0
+      EffectRounds: 0
+      SpecialEffectScriptName: 
+      Target: 0
+      SingleTargetOption: 0
+      TargetCount: 0
+    SummonMode: 0
+    SummonCount: 2
+    SummonSurventID: 506
+  - ActionEffect:
+      EffectType: 1
+      EffectValue1: 1
+      EffectValue2: 0
+      IsInfinity: 0
+      EffectRounds: 0
+      SpecialEffectScriptName: 
+      Target: 9
+      SingleTargetOption: 0
+      TargetCount: 0
+    SummonMode: 0
+    SummonCount: 0
+    SummonSurventID: 0
+  - ActionEffect:
+      EffectType: 1
+      EffectValue1: 2
+      EffectValue2: 0
+      IsInfinity: 0
+      EffectRounds: 0
+      SpecialEffectScriptName: 
+      Target: 9
+      SingleTargetOption: 0
+      TargetCount: 0
+    SummonMode: 0
+    SummonCount: 0
+    SummonSurventID: 0
+  Cycle:
+  - ActionIndex: 00000000
+  - ActionIndex: 0100000002000000
+  - ActionIndex: 02000000
+  - ActionIndex: 0200000003000000
+  - ActionIndex: 02000000
+  ActionCycle: 

@@ -14,9 +14,68 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 3
   Name: boss003
-  MaxHP: 39
-  ATK: 3
-  ActionCycle: 
-  SkillList: []
+  MaxHP: 20
+  ATK: 2
+  Icon: {fileID: 0}
   SummonList: 
-  SpecialSkillList: []
+  SpecialAbilityList: []
+  ActionPackages:
+  - ActionEffect:
+      EffectType: 0
+      EffectValue1: 0
+      EffectValue2: 0
+      IsInfinity: 0
+      EffectRounds: 0
+      SpecialEffectScriptName: 
+      Target: 0
+      SingleTargetOption: 0
+      TargetCount: 0
+    SummonMode: 0
+    SummonCount: 0
+    SummonSurventID: 0
+  - ActionEffect:
+      EffectType: 1
+      EffectValue1: 2
+      EffectValue2: 0
+      IsInfinity: 0
+      EffectRounds: 0
+      SpecialEffectScriptName: 
+      Target: 9
+      SingleTargetOption: 0
+      TargetCount: 0
+    SummonMode: 0
+    SummonCount: 0
+    SummonSurventID: 0
+  - ActionEffect:
+      EffectType: 1
+      EffectValue1: 2
+      EffectValue2: 0
+      IsInfinity: 0
+      EffectRounds: 0
+      SpecialEffectScriptName: 
+      Target: 5
+      SingleTargetOption: 0
+      TargetCount: 0
+    SummonMode: 0
+    SummonCount: 0
+    SummonSurventID: 0
+  - ActionEffect:
+      EffectType: 1
+      EffectValue1: 5
+      EffectValue2: 0
+      IsInfinity: 0
+      EffectRounds: 0
+      SpecialEffectScriptName: 
+      Target: 9
+      SingleTargetOption: 2
+      TargetCount: 0
+    SummonMode: 0
+    SummonCount: 0
+    SummonSurventID: 0
+  Cycle:
+  - ActionIndex: 00000000
+  - ActionIndex: 01000000
+  - ActionIndex: 01000000
+  - ActionIndex: 02000000
+  - ActionIndex: 03000000
+  ActionCycle: 

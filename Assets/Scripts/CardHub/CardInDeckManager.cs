@@ -22,7 +22,7 @@ public class CardInDeckManager : MonoBehaviour,IPointerEnterHandler,IPointerExit
 	}
 	private void Start()
 	{
-		cardAsset = Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(1));
+		//cardAsset = Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(1));
 	}
 	void Refresh()
 	{

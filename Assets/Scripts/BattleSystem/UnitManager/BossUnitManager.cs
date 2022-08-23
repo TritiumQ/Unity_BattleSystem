@@ -55,14 +55,11 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 			if(idx < Boss.ActionPackages.Count)
 			{
 				var packages = Boss.ActionPackages[idx];
-				if (packages.ActionEffect != null)
+				if (packages.ActionEffect != null && packages.ActionEffect.EffectType != EffectType.Void)
 				{
-					if(packages.ActionEffect.EffectType != EffectType.Void)
-					{
-						system.ApplyEffect(gameObject, packages.ActionEffect);
-					}
+					system.ApplyEffect(gameObject, packages.ActionEffect);
 				}
-				if (packages.SummonCount != 0)
+				else if (packages.SummonCount != 0)
 				{
 					switch (packages.SummonMode)
 					{
@@ -78,8 +75,11 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 							{
 								for (int i = 0; i < packages.SummonCount; i++)
 								{
-									var rnd = Random.Range(0, Boss.SurventList.Count);
-									system.SetupSurvent(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(rnd)), CardType.Monster);
+									if (Boss.SummontList.Count > 0)
+									{
+										var rnd = Random.Range(0, Boss.SummontList.Count);
+										system.SetupSurvent(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(Boss.SummontList[rnd])), CardType.Monster);
+									}
 								}
 							}
 							break;
@@ -91,131 +91,6 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 			}
 		}
 
-	}
-
-	public void _Action(int currentRound)
-	{
-		/*BattleSystem sys = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
-		int mod = currentRound % Boss.ActionCycle.Count;
-		//修改boss行动
-		switch (Boss.ActionCycle[mod])
-		{
-			case BossActionType.AOEAttack:
-				{
-					//EffectPackageWithTargetOption package = new EffectPackageWithTargetOption(EffectType.Attack, Boss.ATK, 0, 0, null, TargetOptions.AllPlayerCreatures, 0);
-					//sys.ApplyEffect(this.gameObject, package);
-				}
-				break;
-			case BossActionType.AOEAttackExcludePlayer:
-				{
-					//EffectPackageWithTargetOption package = new EffectPackageWithTargetOption(EffectType.Attack, Boss.ATK, 0, 0, null, TargetOptions.ALlPlayerCharacter, 0);
-					//sys.ApplyEffect(this.gameObject, package);
-				}
-				break;
-			case BossActionType.SingleAttack:
-				{
-					Debug.Log("Boss单体攻击");
-
-					var TypeArr = System.Enum.GetValues(typeof(SingleTargetOption));
-					SingleTargetOption rnd = (SingleTargetOption)TypeArr.GetValue(Random.Range(0, TypeArr.Length));
-					switch (rnd)
-					{
-						case SingleTargetOption.RandomTarget:
-							{
-
-							}
-							break;
-						case SingleTargetOption.LowestATKTarget:
-							{
-								if (sys.PlayerSurventUnitsList.Count > 0)
-								{
-									var target = sys.PlayerSurventUnitsList[0];
-									foreach (var obj in sys.PlayerSurventUnitsList)
-									{
-										if (obj != null && obj.GetComponent<SurventUnitManager>().survent.ATK
-											< target.GetComponent<SurventUnitManager>().survent.ATK)
-										{
-											target = obj;
-										}
-									}
-									Effect.Set(target, EffectType.Attack, Boss.ATK);
-									//target.SendMessage("BeAttacked", boss.ATK);
-								}
-							}
-							break;
-						case SingleTargetOption.HigestATKTarget:
-							{
-								if (sys.PlayerSurventUnitsList.Count > 0)
-								{
-									var target = sys.PlayerSurventUnitsList[0];
-									foreach (var obj in sys.PlayerSurventUnitsList)
-									{
-										if (obj != null && obj.GetComponent<SurventUnitManager>().survent.ATK
-											> target.GetComponent<SurventUnitManager>().survent.ATK)
-										{
-											target = obj;
-										}
-									}
-									Effect.Set(target, EffectType.Attack, Boss.ATK);
-									//target.SendMessage("BeAttacked", boss.ATK);
-								}
-							}
-							break;
-						case SingleTargetOption.LowestHPTarget:
-							{
-								if (sys.PlayerSurventUnitsList.Count > 0)
-								{
-									var target = sys.PlayerSurventUnitsList[0];
-									foreach (var obj in sys.PlayerSurventUnitsList)
-									{
-										if (obj != null && obj.GetComponent<SurventUnitManager>().survent.CurrentHP
-											< target.GetComponent<SurventUnitManager>().survent.CurrentHP)
-										{
-											target = obj;
-										}
-									}
-									//target.SendMessage("BeAttacked", boss.ATK);
-									Effect.Set(target, EffectType.Attack, Boss.ATK);
-								}
-							}
-							break;
-						case SingleTargetOption.HighestHPTarget:
-							{
-								if (sys.PlayerSurventUnitsList.Count > 0)
-								{
-									var target = sys.PlayerSurventUnitsList[0];
-									foreach (var obj in sys.PlayerSurventUnitsList)
-									{
-										if (obj != null && obj.GetComponent<SurventUnitManager>().survent.CurrentHP
-											> target.GetComponent<SurventUnitManager>().survent.CurrentHP)
-										{
-											target = obj;
-										}
-									}
-									//target.SendMessage("BeAttacked", boss.ATK);
-									Effect.Set(target, EffectType.Attack, Boss.ATK);
-								}
-							}
-							break;
-						default:
-							break;
-					}
-				}
-				break;
-			case BossActionType.Summon:
-				{
-					Debug.Log("Boss设置随从");
-					int rnd = Random.Range(0, Boss.SurventList.Count);
-					//sys.SetupBossSurvent(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(Boss.SurventList[rnd])));
-
-				}
-				break;
-			case BossActionType.Skip:
-				Debug.Log("Boss跳过回合");
-				break;
-			default:
-				break;
-		}*/
 	}
 
 	public Image maskImage;
@@ -237,39 +112,42 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 	{
 		GameObject initiator = (GameObject)_parameterList[0];
 		EffectPackage effect = (EffectPackage)_parameterList[1];
-		switch (effect.EffectType)
+		if(effect != null)
 		{
-			case EffectType.Attack:
-				{
-					Boss.BeAttacked(effect.EffectValue1);
-				}
-				break;
-			case EffectType.VampireAttack:
-				{
-					int dmg = Boss.BeAttacked(effect.EffectValue1);
-					if (initiator != null && system != null)
+			switch (effect.EffectType)
+			{
+				case EffectType.Attack:
 					{
-						EffectPackage returnEffect = new EffectPackage();
-						returnEffect.EffectType = EffectType.Heal;
-						returnEffect.EffectValue1 = dmg;
-						system.ApplyEffectTo(initiator, gameObject, returnEffect);
+						Boss.BeAttacked(effect.EffectValue1);
 					}
-				}
-				break;
-			case EffectType.Heal:
-				Boss.BeHealed(effect.EffectValue1);
-				break;
-			case EffectType.Enhance:
-				Boss.SetEnhance(effect.EffectValue1, effect.EffectValue2);
-				break;
-			case EffectType.Inspire:
-				Boss.SetInspire(effect);
-				break;
-			default:
-				break;
+					break;
+				case EffectType.VampireAttack:
+					{
+						int dmg = Boss.BeAttacked(effect.EffectValue1);
+						if (initiator != null && system != null)
+						{
+							EffectPackage returnEffect = new EffectPackage();
+							returnEffect.EffectType = EffectType.Heal;
+							returnEffect.EffectValue1 = dmg;
+							system.ApplyEffectTo(initiator, gameObject, returnEffect);
+						}
+					}
+					break;
+				case EffectType.Heal:
+					Boss.BeHealed(effect.EffectValue1);
+					break;
+				case EffectType.Enhance:
+					Boss.SetEnhance(effect.EffectValue1, effect.EffectValue2);
+					break;
+				case EffectType.Inspire:
+					Boss.SetInspire(effect);
+					break;
+				default:
+					break;
+			}
+			string msg = Boss.Name + "接收到效果" + effect.EffectType;
+			Debug.Log(msg);
 		}
-		string msg = Boss.Name + "接收到效果" + effect.EffectType;
-		Debug.Log(msg);
 	}
 	public void UpdateEffect()
 	{

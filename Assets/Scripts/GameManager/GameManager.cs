@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
         ArchiveManager.LoadPlayerData(1);
         //step = 4; level = 2;
         //PlayerDataTF.EventEnd();
-        InitGameEvent(4);
+        //InitGameEvent(4);
     }
 
     void Update()
@@ -92,10 +92,15 @@ public class GameManager : MonoBehaviour
             Gameover(0);//游戏失败
         }
     }
-    void Gameover(int _result) //局内游戏结束
+    public void Gameover(int _result) //局内游戏结束
     {
         result = _result;
         GetReward();
+        if (player != null)
+        {
+            player.ReSet();
+            ArchiveManager.SavePlayerData(1);
+        }
         //_result控制结局走向,暂定 0是失败，1是胜利......
         //切换End场景
         SceneManager.LoadScene("EndScene");
@@ -117,9 +122,10 @@ public class GameManager : MonoBehaviour
             AddLevel();
         }
         //数据保存
-        ArchiveManager.SavePlayerData(1);
-
-
+        if (player != null)
+        {
+            ArchiveManager.SavePlayerData(1);
+        }
     }
     void AddLevel()
     {

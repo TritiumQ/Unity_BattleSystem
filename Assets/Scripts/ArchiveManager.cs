@@ -3,12 +3,11 @@ using UnityEngine;
 
 public static class ArchiveManager
 {
-
 	/// <summary>
 	/// ∂¡»°¥Êµµ
 	/// </summary>
 	/// <returns></returns>
-	public static void LoadPlayerData(int _saveID)
+	public static void LoadPlayerData(int _saveID = 1)
 	{
 		if (_saveID > 0 && _saveID <= Const.MaxSaveCount)
 		{
@@ -22,6 +21,7 @@ public static class ArchiveManager
 			JsonUtility.FromJsonOverwrite(json, save);
 			if(save.Name != null)
 			{
+				Debug.Log("1");
 				Player.Instance.Initialized(save);
 			}
 		}
@@ -44,6 +44,17 @@ public static class ArchiveManager
 			sw.Close();
 		}
 		fs.Close();
+	}
+	/// <summary>
+	/// ªÒ»°ø®≈∆Asset
+	/// </summary>
+	/// <param name="_id">ø®≈∆ID</param>
+	/// <returns></returns>
+	public static CardSOAsset LoadCardAsset(int _id)
+	{
+		CardSOAsset asset = null;
+		asset = Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(_id));
+		return asset;
 	}
 
 	public static void ResetPlayerDataFile()

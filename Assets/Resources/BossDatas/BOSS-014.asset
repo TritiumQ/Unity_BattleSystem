@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86ae5b9115e19d44f96dddff0c4231a0, type: 3}
+  m_Name: BOSS-014
+  m_EditorClassIdentifier: 
+  ID: 14
+  Name: boss014
+  MaxHP: 25
+  ATK: 1
+  Icon: {fileID: 0}
+  SummonList: 01020000
+  SpecialAbilityList:
+  - SkillType: 0
+    Package:
+      EffectType: 7
+      EffectValue1: 0
+      EffectValue2: 1
+      IsInfinity: 0
+      EffectRounds: 0
+      SpecialEffectScriptName: 
+      Target: 0
+      SingleTargetOption: 0
+      TargetCount: 0
+  ActionPackages:
+  - ActionEffect:
+      EffectType: 0
+      EffectValue1: 0
+      EffectValue2: 0
+      IsInfinity: 0
+      EffectRounds: 0
+      SpecialEffectScriptName: 
+      Target: 0
+      SingleTargetOption: 0
+      TargetCount: 0
+    SummonMode: 0
+    SummonCount: 2
+    SummonSurventID: 513
+  - ActionEffect:
+      EffectType: 1
+      EffectValue1: 1
+      EffectValue2: 0
+      IsInfinity: 0
+      EffectRounds: 0
+      SpecialEffectScriptName: 
+      Target: 9
+      SingleTargetOption: 3
+      TargetCount: 0
+    SummonMode: 0
+    SummonCount: 0
+    SummonSurventID: 0
+  - ActionEffect:
+      EffectType: 1
+      EffectValue1: 1
+      EffectValue2: 0
+      IsInfinity: 0
+      EffectRounds: 0
+      SpecialEffectScriptName: 
+      Target: 6
+      SingleTargetOption: 0
+      TargetCount: 0
+    SummonMode: 0
+    SummonCount: 0
+    SummonSurventID: 0
+  Cycle:
+  - ActionIndex: 00000000
+  - ActionIndex: 01000000
+  - ActionIndex: 0200000001000000
+  - ActionIndex: 0200000001000000
+  - ActionIndex: 0200000001000000
+  - ActionIndex: 0200000001000000
+  ActionCycle: 

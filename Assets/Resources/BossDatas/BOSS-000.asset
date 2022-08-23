@@ -15,24 +15,37 @@ MonoBehaviour:
   ID: 0
   Name: "\u8854\u5C3E\u86C7"
   MaxHP: 999
-  ATK: 0
+  ATK: 1
   Icon: {fileID: 21300000, guid: 147d1f23cbb19674caf694b1f1471c77, type: 3}
-  SummonList: f4010000f5010000f6010000f7010000f8010000
+  SummonList: f4010000
   SpecialAbilityList: []
   ActionPackages:
   - ActionEffect:
-      EffectType: 9
+      EffectType: 0
       IsInfinityEffect: 0
       EffectValue1: 0
       EffectValue2: 0
       EffectValue3: 0
       SpecialEffectScriptName: 
-      Target: 9
+      Target: 0
       SingleTargetOption: 0
       TargetCount: 0
     SummonMode: 1
     SummonCount: 3
-    SummonSurventID: 500
+    SummonSurventID: 0
+  - ActionEffect:
+      EffectType: 0
+      IsInfinityEffect: 0
+      EffectValue1: 10
+      EffectValue2: 0
+      EffectValue3: 0
+      SpecialEffectScriptName: 
+      Target: 2
+      SingleTargetOption: 0
+      TargetCount: 0
+    SummonMode: 0
+    SummonCount: 2
+    SummonSurventID: 501
   - ActionEffect:
       EffectType: 1
       IsInfinityEffect: 0
@@ -46,34 +59,8 @@ MonoBehaviour:
     SummonMode: 0
     SummonCount: 0
     SummonSurventID: 0
-  - ActionEffect:
-      EffectType: 3
-      IsInfinityEffect: 0
-      EffectValue1: 10
-      EffectValue2: 0
-      EffectValue3: 0
-      SpecialEffectScriptName: 
-      Target: 3
-      SingleTargetOption: 0
-      TargetCount: 0
-    SummonMode: 0
-    SummonCount: 0
-    SummonSurventID: 0
-  - ActionEffect:
-      EffectType: 3
-      IsInfinityEffect: 0
-      EffectValue1: 10
-      EffectValue2: 0
-      EffectValue3: 0
-      SpecialEffectScriptName: 
-      Target: 3
-      SingleTargetOption: 0
-      TargetCount: 0
-    SummonMode: 1
-    SummonCount: 3
-    SummonSurventID: 0
   Cycle:
-  - ActionIndex: 0300000001000000
-  - ActionIndex: 02000000
   - ActionIndex: 00000000
+  - ActionIndex: 01000000
+  - ActionIndex: 02000000
   ActionCycle: 01000000020000000400000003000000
