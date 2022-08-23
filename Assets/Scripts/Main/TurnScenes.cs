@@ -47,6 +47,20 @@ public class TurnScenes : MonoBehaviour
         }
         SceneManager.LoadScene("Main");
     }
+    public void ReturnGameProcess()
+    {
+        GameObject _obj = GameObject.Find("GameProcess");
+        if(_obj!=null)
+        {
+            PlayerDataTF.EventContinue();
+            SceneManager.LoadScene("GameProcess");
+        }
+    }
+    public void SelectLeave()
+    {
+        PlayerDataTF.EventContinue();
+        SceneManager.LoadScene("GameProcess");
+    }
 
     public void QuitGame()
     {
