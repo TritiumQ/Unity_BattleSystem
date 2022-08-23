@@ -26,6 +26,20 @@ public class CardDisplay : MonoBehaviour
     public Image CardRarityImage;// 卡牌稀有度
     public Image CardFaceGlowImage;// 卡牌发光
     public Image CardBackImage;
+
+    bool _IsActive;
+    public bool IsActive
+	{
+        get
+		{
+            return _IsActive;
+		}
+		set
+		{
+            _IsActive = value;
+            CardBackImage.enabled = !value;
+		}
+	}
 	private void Update()
 	{
         
@@ -65,11 +79,6 @@ public class CardDisplay : MonoBehaviour
                 HealthText.GetComponent<TextMeshProUGUI>().gameObject.SetActive(false);
             }
         }
-	}
-    //控制卡背
-    public void CardBackActive(bool isActive)
-	{
-        CardBackImage.enabled = isActive;
 	}
     //控制预览
     public void SetPreview()

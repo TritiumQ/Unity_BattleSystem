@@ -45,6 +45,17 @@ public static class ArchiveManager
 		}
 		fs.Close();
 	}
+	/// <summary>
+	/// ªÒ»°ø®≈∆Asset
+	/// </summary>
+	/// <param name="_id">ø®≈∆ID</param>
+	/// <returns></returns>
+	public static CardSOAsset LoadCardAsset(int _id)
+	{
+		CardSOAsset asset = null;
+		asset = Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(_id));
+		return asset;
+	}
 
 	public static void ResetPlayerDataFile()
 	{

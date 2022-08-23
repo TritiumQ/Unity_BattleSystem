@@ -23,19 +23,20 @@ public class CardHubSystem : MonoBehaviour
 	}
 	void LoadInformation()
 	{
-		//ArchiveManager.LoadPlayerData();
+		ArchiveManager.LoadPlayerData();
 		if(Player.Instance != null)
 		{
 			CardIdDeck = Player.Instance.cardSet;
 			CardObjectDeck = new List<GameObject>();
-			for(int i = 0; i < CardIdDeck.Count; i++)
+			foreach (int id in CardIdDeck)
 			{
 				GameObject newCard = Instantiate(CardInDeckPrefab, CardDeckContent.transform);
-				newCard.GetComponent<CardDisplay>().Initialized(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(CardIdDeck[i])));
+				newCard.GetComponent<CardInDeckManager>().Initialized(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(id)));
 				CardObjectDeck.Add(newCard);
 			}
 
 			unlock = Player.Instance.Unlocked;
+			CardHub = new List<GameObject>();
 			for(int i = 0; i < unlock.Length; i++)
 			{
 				var asset = Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(i));
@@ -43,7 +44,7 @@ public class CardHubSystem : MonoBehaviour
 				{
 					GameObject newCard = Instantiate(CardInHubPrefab, CardHubContent.transform);
 					newCard.GetComponent<CardDisplay>().Initialized(asset);
-					newCard.GetComponent<CardDisplay>().CardBackActive(!unlock[i]);
+					newCard.GetComponent<CardDisplay>().IsActive = unlock[i];
 					CardHub.Add(newCard);
 				}
 			}

@@ -102,7 +102,7 @@ public class BattleSystem : MonoBehaviour
 	{
 		if(handCards.Count < 10)
 		{
-			CardSOAsset asset = Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(_ID));
+			CardSOAsset asset = ArchiveManager.LoadCardAsset(_ID);
 			if (asset != null)
 			{
 				GameObject newCard = Instantiate(cardPrefab, playerHands.transform);

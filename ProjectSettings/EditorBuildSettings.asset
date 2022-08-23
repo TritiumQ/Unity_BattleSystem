@@ -36,7 +36,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Select.unity
     guid: bc57775933e12e8449086d557b345a5c
   - enabled: 1
-    path: Assets/Scenes/Deck.unity
+    path: Assets/UnArchived/Deck.unity
     guid: 6dfdfffc5bda0484aab9dff826acbbc7
   - enabled: 1
     path: Assets/Scenes/CardHub.unity
