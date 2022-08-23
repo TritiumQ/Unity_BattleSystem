@@ -21,6 +21,7 @@ public static class ArchiveManager
 			JsonUtility.FromJsonOverwrite(json, save);
 			if(save.Name != null)
 			{
+				Debug.Log("1");
 				Player.Instance.Initialized(save);
 			}
 		}

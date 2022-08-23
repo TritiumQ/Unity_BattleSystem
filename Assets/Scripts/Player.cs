@@ -28,6 +28,7 @@ public class Player
     public int CurrentHP { get; private set; }
     public int Mithrils { get; private set; }//秘银
     public int Tears { get; private set; }//泪滴
+    public int InitTears { get; private set; }//初始泪滴
     public List<int> cardSet  { get; private set; } //牌组
     //0~199：随从  200~399：法术
     public bool[] Unlocked { get; private set; } //记录已解锁的卡牌
@@ -43,6 +44,7 @@ public class Player
         CurrentHP = _info.CurrentHP;
         Tears = _info.Tears;
         Mithrils = _info.Mithrils;
+        InitTears = _info.InitTears;
 
         cardSet = new List<int>(_info.CardSet);
 
@@ -55,13 +57,14 @@ public class Player
 	}
 
     #region 数据修改接口
-    public void SetData(string _name, int _maxHP, int _currentHp, int _mithrils, int _tears)
+    public void SetData(string _name, int _maxHP, int _currentHp, int _mithrils, int _tears,int _initTears)
     {
         Name = _name;
         MaxHP = _maxHP;
         CurrentHP = _currentHp;
         Mithrils = _mithrils;
         Tears = _tears;
+        InitTears = _initTears;
     }
     public void SetCurrentHP(int _value)
     {
@@ -96,6 +99,15 @@ public class Player
     {
         Mithrils += _mithrils;
         Tears += _tears;
+    }
+    public void AddInitTears(int _initTears)
+    {
+        InitTears += _initTears;
+    }
+    public void ReSet()
+    {
+        CurrentHP = MaxHP;
+        Tears = InitTears;
     }
 	#endregion
 
