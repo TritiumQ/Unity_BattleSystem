@@ -31,6 +31,7 @@ public class Player
     public int InitTears { get; private set; }//初始泪滴
     public List<int> cardSet  { get; private set; } //牌组
     //0~199：随从  200~399：法术
+    public bool IsAllUnlocked { get; private set; }
     public bool[] Unlocked { get; private set; } //记录已解锁的卡牌
 
     /// <summary>
@@ -47,13 +48,20 @@ public class Player
         InitTears = _info.InitTears;
 
         cardSet = new List<int>(_info.CardSet);
-
-        Unlocked = new bool[401];
-        Array.Fill(Unlocked, false);
-        foreach(var id in _info.UnlockCard)
+        IsAllUnlocked = _info.IsAllUnlocked;
+        Unlocked = new bool[400];
+        if(IsAllUnlocked)
 		{
-            Unlocked[id] = true;
-		}
+            Array.Fill(Unlocked, true);
+        }
+		else
+		{
+            Array.Fill(Unlocked, false);
+            foreach (var id in _info.UnlockCard)
+            {
+                Unlocked[id] = true;
+            }
+        }
 	}
 
     #region 数据修改接口

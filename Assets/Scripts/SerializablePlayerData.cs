@@ -18,6 +18,7 @@ public class SerializablePlayerData
     public int Tears;  //泪滴
     public int InitTears;
     public int[] CardSet;
+    public bool IsAllUnlocked;
     public int[] UnlockCard;
 
     
@@ -37,9 +38,7 @@ public class SerializablePlayerData
             CardSet[0] = 0;
             CardSet[1] = 200;
 
-            UnlockCard = new int[2];
-            UnlockCard[0] = 0;
-            UnlockCard[1] = 200;
+            IsAllUnlocked = true;
         }
         else
         {
@@ -50,6 +49,7 @@ public class SerializablePlayerData
             Tears = -1;
             InitTears = -1;
             CardSet = null;
+            IsAllUnlocked = false;
             UnlockCard = null;
         }
     }
@@ -67,7 +67,7 @@ public class SerializablePlayerData
         InitTears = _player.InitTears;
 
         CardSet = _player.cardSet.ToArray();
-
+        IsAllUnlocked = _player.IsAllUnlocked;
         System.Collections.Generic.List<int> tmpList = new System.Collections.Generic.List<int>();
         for (int i = 0; i < _player.Unlocked.Length; i++)
         {

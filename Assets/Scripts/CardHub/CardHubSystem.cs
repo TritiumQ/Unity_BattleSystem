@@ -8,7 +8,6 @@ public class CardHubSystem : MonoBehaviour
 	Dictionary<int, GameObject> CardObejcts;
 	Dictionary<int, int> CardCount;
 
-	bool[] unlock;
 	List<GameObject> CardHub;
 
 	public GameObject CardHubContent;
@@ -16,6 +15,8 @@ public class CardHubSystem : MonoBehaviour
 
 	public GameObject CardInDeckPrefab;
 	public GameObject CardInHubPrefab;
+	[Header("ÍË³ö°´Å¥")]
+	public Button ExitButton;
 
 	private void Awake()
 	{
@@ -43,17 +44,15 @@ public class CardHubSystem : MonoBehaviour
 					CardObejcts.Add(id, newCard);
 				}
 			}
-
-			unlock = Player.Instance.Unlocked;
 			CardHub = new List<GameObject>();
-			for(int i = 0; i < unlock.Length; i++)
+			for(int i = 0; i < Player.Instance.Unlocked.Length; i++)
 			{
 				var asset = Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(i));
 				if(asset != null)
 				{
 					GameObject newCard = Instantiate(CardInHubPrefab, CardHubContent.transform);
 					newCard.GetComponent<CardManager>().Initialized(asset);
-					newCard.GetComponent<CardManager>().IsActive = unlock[i];
+					newCard.GetComponent<CardManager>().IsActive = Player.Instance.Unlocked[i];
 					CardHub.Add(newCard);
 				}
 			}
@@ -89,7 +88,7 @@ public class CardHubSystem : MonoBehaviour
 				Debug.Log("delete card");
 				DeleteCardInDeck(card.GetComponent<CardInDeckManager>().Asset.CardID);
 			}
-			else if(card.GetComponent<CardManager>() != null)
+			else if(card.GetComponent<CardManager>() != null && card.GetComponent<CardManager>().IsActive)
 			{
 				Debug.Log("add card");
 				AddCardToDeck(card.GetComponent<CardManager>().Asset.CardID);
