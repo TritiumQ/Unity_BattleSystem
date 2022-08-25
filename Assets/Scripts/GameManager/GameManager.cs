@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
         ArchiveManager.LoadPlayerData(1);
         //step = 4; level = 2;
         //PlayerDataTF.EventEnd();
-        //InitGameEvent(4);
+        InitGameEvent(2);
     }
 
     void Update()
