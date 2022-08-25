@@ -6,19 +6,19 @@ using UnityEngine.EventSystems;
 using TMPro;
 using DG.Tweening;
 
-public class CardInDeckManager : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
+public class CardInDeckManager : MonoBehaviour//,IPointerEnterHandler,IPointerExitHandler
 {
-	CardSOAsset cardAsset;
+	public CardSOAsset Asset { get; private set; }
 	[Header("UI组件")]
 	public TextMeshProUGUI cardCostText;
 	public TextMeshProUGUI cardNameText;
 	public TextMeshProUGUI cardCountText;
-
 	public int currentCount;
 
 	public void Initialized(CardSOAsset _card)
 	{
-		cardAsset = _card;
+		Asset = _card;
+		currentCount = 1;
 	}
 	private void Start()
 	{
@@ -26,13 +26,13 @@ public class CardInDeckManager : MonoBehaviour,IPointerEnterHandler,IPointerExit
 	}
 	void Refresh()
 	{
-		if(cardAsset != null)
+		if(Asset != null)
 		{
-			cardCostText.text = cardAsset.Cost.ToString();
-			cardNameText.text = cardAsset.CardName;
+			cardCostText.text = Asset.Cost.ToString();
+			cardNameText.text = Asset.CardName;
 			if (currentCount == 2)
 			{
-				cardCountText.text = currentCount.ToString();
+				cardCountText.enabled = true;
 			}
 			else
 			{
@@ -46,6 +46,7 @@ public class CardInDeckManager : MonoBehaviour,IPointerEnterHandler,IPointerExit
 		Refresh();
 	}
 
+	/*
 	//预览效果
 	public GameObject previewPrefab;
 	GameObject preview;
@@ -57,7 +58,7 @@ public class CardInDeckManager : MonoBehaviour,IPointerEnterHandler,IPointerExit
 		preview.transform.position = Pos;
 		if(preview != null)
 		{
-			preview.GetComponent<CardDisplay>().Initialized(cardAsset);
+			preview.GetComponent<CardManager>().Initialized(Asset);
 		}
 	}
 	void EndPreview()
@@ -74,4 +75,5 @@ public class CardInDeckManager : MonoBehaviour,IPointerEnterHandler,IPointerExit
 		CancelInvoke();
 		EndPreview();
 	}
+	*/
 }

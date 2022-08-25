@@ -122,6 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3081637641354913905}
   - component: {fileID: -435671400692423294}
+  - component: {fileID: 3454267157682204084}
   m_Layer: 5
   m_Name: CardInHub
   m_TagString: Untagged
@@ -184,6 +185,18 @@ MonoBehaviour:
   CardRarityImage: {fileID: 7770002035693126024}
   CardFaceGlowImage: {fileID: 5447768155776464921}
   CardBackImage: {fileID: 4624895078509891710}
+--- !u!114 &3454267157682204084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3081637641354913904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc1e6b2451179fb41905862a5fb67df8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3081637641367703337
 GameObject:
   m_ObjectHideFlags: 0

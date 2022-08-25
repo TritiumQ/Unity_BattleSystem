@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
-public class CardDisplay : MonoBehaviour
+public class CardManager : MonoBehaviour
 {
     //public Card card;
     public CardSOAsset Asset { get; private set; }

@@ -106,7 +106,7 @@ public class BattleSystem : MonoBehaviour
 			if (asset != null)
 			{
 				GameObject newCard = Instantiate(cardPrefab, playerHands.transform);
-				newCard.GetComponent<CardDisplay>().Initialized(asset);
+				newCard.GetComponent<CardManager>().Initialized(asset);
 				handCards.Add(newCard);
 			}
 		}
@@ -192,7 +192,7 @@ public class BattleSystem : MonoBehaviour
 	{
 		if(_cardObject != null)
 		{
-			CardSOAsset card = _cardObject.GetComponent<CardDisplay>().Asset;
+			CardSOAsset card = _cardObject.GetComponent<CardManager>().Asset;
 			if (card != null && playerUnit.GetComponent<PlayerUnitManager>().CanUseActionPoint(card.Cost))
 			{
 				if (card.CardType == CardType.Spell)

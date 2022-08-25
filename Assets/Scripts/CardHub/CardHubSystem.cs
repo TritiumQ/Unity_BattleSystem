@@ -5,8 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class CardHubSystem : MonoBehaviour
 {
-	List<int> CardIdDeck;
-	List<GameObject> CardObjectDeck;
+	Dictionary<int, GameObject> CardObejcts;
+	Dictionary<int, int> CardCount;
 
 	bool[] unlock;
 	List<GameObject> CardHub;
@@ -19,20 +19,29 @@ public class CardHubSystem : MonoBehaviour
 
 	private void Awake()
 	{
+		ArchiveManager.LoadPlayerData();
 		LoadInformation();
 	}
 	void LoadInformation()
 	{
-		ArchiveManager.LoadPlayerData();
 		if(Player.Instance != null)
 		{
-			CardIdDeck = Player.Instance.cardSet;
-			CardObjectDeck = new List<GameObject>();
-			foreach (int id in CardIdDeck)
+			CardObejcts = new Dictionary<int, GameObject>();
+			CardCount = new Dictionary<int, int>();
+			foreach (int id in Player.Instance.cardSet)
 			{
-				GameObject newCard = Instantiate(CardInDeckPrefab, CardDeckContent.transform);
-				newCard.GetComponent<CardInDeckManager>().Initialized(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(id)));
-				CardObjectDeck.Add(newCard);
+				if(CardObejcts.ContainsKey(id))
+				{
+					CardCount[id]++;
+					CardObejcts[id].GetComponent<CardInDeckManager>().currentCount++;
+				}
+				else
+				{
+					GameObject newCard = Instantiate(CardInDeckPrefab, CardDeckContent.transform);
+					newCard.GetComponent<CardInDeckManager>().Initialized(ArchiveManager.LoadCardAsset(id));
+					CardCount.Add(id, 1);
+					CardObejcts.Add(id, newCard);
+				}
 			}
 
 			unlock = Player.Instance.Unlocked;
@@ -43,8 +52,8 @@ public class CardHubSystem : MonoBehaviour
 				if(asset != null)
 				{
 					GameObject newCard = Instantiate(CardInHubPrefab, CardHubContent.transform);
-					newCard.GetComponent<CardDisplay>().Initialized(asset);
-					newCard.GetComponent<CardDisplay>().IsActive = unlock[i];
+					newCard.GetComponent<CardManager>().Initialized(asset);
+					newCard.GetComponent<CardManager>().IsActive = unlock[i];
 					CardHub.Add(newCard);
 				}
 			}
@@ -55,7 +64,71 @@ public class CardHubSystem : MonoBehaviour
 	{
 		if (Player.Instance != null)
 		{
-			Player.Instance.SetCardSet(CardIdDeck);
+			List<int> CardSet = new List<int>();
+			foreach (var card in CardCount)
+			{
+				for(int i = 0; i < card.Value; i++)
+				{
+					CardSet.Add(card.Key);
+				}
+			}
+			Player.Instance.SetCardSet(CardSet);
+		}
+	}
+	
+	/// <summary>
+	/// 配合脚本SelectCardTrigger使用
+	/// </summary>
+	/// <param name="card">卡牌ID</param>
+	public void SelectCardCommit(GameObject card)
+	{
+		if(card != null)
+		{
+			if(card.GetComponent<CardInDeckManager>() != null)
+			{
+				Debug.Log("delete card");
+				DeleteCardInDeck(card.GetComponent<CardInDeckManager>().Asset.CardID);
+			}
+			else if(card.GetComponent<CardManager>() != null)
+			{
+				Debug.Log("add card");
+				AddCardToDeck(card.GetComponent<CardManager>().Asset.CardID);
+			}
+		}
+	}
+	void AddCardToDeck(int _ID)
+	{
+		if (CardCount.ContainsKey(_ID))
+		{
+			if (CardCount[_ID] < 2)
+			{
+				CardCount[_ID]++;
+				CardObejcts[_ID].GetComponent<CardInDeckManager>().currentCount++;
+			}
+		}
+		else
+		{
+			GameObject newCard = Instantiate(CardInDeckPrefab, CardDeckContent.transform);
+			newCard.GetComponent<CardInDeckManager>().Initialized(ArchiveManager.LoadCardAsset(_ID));
+			CardCount.Add(_ID, 1);
+			CardObejcts.Add(_ID, newCard);
+		}
+	}
+	void DeleteCardInDeck(int _ID)
+	{
+		if (CardCount.ContainsKey(_ID))
+		{
+			if (CardCount[_ID] > 1)
+			{
+				CardCount[_ID]--;
+				CardObejcts[_ID].GetComponent<CardInDeckManager>().currentCount--;
+			}
+			else
+			{
+				CardCount.Remove(_ID);
+				Destroy(CardObejcts[_ID]);
+				CardObejcts.Remove(_ID);
+			}
 		}
 	}
 }

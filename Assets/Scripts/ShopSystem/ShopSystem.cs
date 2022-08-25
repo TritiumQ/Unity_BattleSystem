@@ -113,7 +113,7 @@ public class ShopSystem : MonoBehaviour
 	{
 		if (Card1 != null)
 		{
-			Card1.GetComponent("Card").GetComponent<CardDisplay>().Initialized(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(0)));
+			Card1.GetComponent("Card").GetComponent<CardManager>().Initialized(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(0)));
 		}
 		if (Card2 != null)
 		{
