@@ -50,5 +50,6 @@ public static class Const
     public static int INF = 0x3f3f3f3f;
     public static int MaxSaveCount = 10;
     public static string InitialCode = "mikufans";
+    public static int MaxSingleCardCount = 2;
 
 }

@@ -99,7 +99,7 @@ public class CardHubSystem : MonoBehaviour
 	{
 		if (CardCount.ContainsKey(_ID))
 		{
-			if (CardCount[_ID] < 2)
+			if (CardCount[_ID] < Const.MaxSingleCardCount)
 			{
 				CardCount[_ID]++;
 				CardObejcts[_ID].GetComponent<CardInDeckManager>().currentCount++;
