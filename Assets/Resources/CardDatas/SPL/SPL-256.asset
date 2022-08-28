@@ -30,13 +30,13 @@ MonoBehaviour:
   SpecialAbilityList: []
   IsCopidedEffect: 0
   IsCopied: 0
-  SpellEffectList:
-  - EffectType: 3
+  SpellEffect:
+    EffectType: 3
     IsInfinityEffect: 0
     EffectValue1: 5
     EffectValue2: 0
     EffectValue3: 0
     SpecialEffectScriptName: 
-    Target: 10
+    Target: 9
     SingleTargetOption: 5
     TargetCount: 0

@@ -28,31 +28,9 @@ MonoBehaviour:
   IsRaid: 0
   IsVampire: 0
   SpecialAbilityList:
-  - SkillType: 1
-    Package:
-      EffectType: 3
-      IsInfinityEffect: 0
-      EffectValue1: 10
-      EffectValue2: 0
-      EffectValue3: 0
-      SpecialEffectScriptName: 
-      Target: 9
-      SingleTargetOption: 5
-      TargetCount: 0
-  - SkillType: 2
-    Package:
-      EffectType: 7
-      IsInfinityEffect: 0
-      EffectValue1: 2
-      EffectValue2: 2
-      EffectValue3: 0
-      SpecialEffectScriptName: 
-      Target: 9
-      SingleTargetOption: 5
-      TargetCount: 0
   - SkillType: 3
     Package:
-      EffectType: 5
+      EffectType: 3
       IsInfinityEffect: 0
       EffectValue1: 5
       EffectValue2: 0
@@ -63,4 +41,13 @@ MonoBehaviour:
       TargetCount: 0
   IsCopidedEffect: 0
   IsCopied: 0
-  SpellEffectList: []
+  SpellEffect:
+    EffectType: 0
+    IsInfinityEffect: 0
+    EffectValue1: 0
+    EffectValue2: 0
+    EffectValue3: 0
+    SpecialEffectScriptName: 
+    Target: 0
+    SingleTargetOption: 0
+    TargetCount: 0

@@ -30,8 +30,8 @@ MonoBehaviour:
   SpecialAbilityList: []
   IsCopidedEffect: 0
   IsCopied: 0
-  SpellEffectList:
-  - EffectType: 7
+  SpellEffect:
+    EffectType: 7
     IsInfinityEffect: 0
     EffectValue1: 2
     EffectValue2: 0

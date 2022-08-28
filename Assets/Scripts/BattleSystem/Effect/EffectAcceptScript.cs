@@ -12,5 +12,9 @@ public class EffectAcceptScript : MonoBehaviour, IPointerClickHandler
         {
             sys.EffectConfirm(gameObject);
         }
+        else
+		{
+            sys.EffectSetupOver();
+		}
     }
 }

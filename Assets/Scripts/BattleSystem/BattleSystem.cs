@@ -6,16 +6,15 @@ using UnityEngine.UI;
 using TMPro;
 public class BattleSystem : MonoBehaviour
 {
-	[Header("玩家单位")]
-	public GameObject playerUnit;
-	List<int> deck;  //牌堆
-	List<GameObject> handCards;  //手牌堆  //max count = 10
-	//List<int> usedCards;  //弃牌堆
+	[SerializeField, Header("玩家单位")]
+	GameObject playerUnit;
+	List<int> playerCardDeck;  //牌堆
+	List<GameObject> playerHandCards;  //手牌堆  //max count = 10
 	int cardUsedFlag;
 	public List<GameObject> PlayerSurventUnitsList { get; private set; } //玩家随从列表
 
-	[Header("Boss单位")]
-	public GameObject bossUnit;
+	[SerializeField, Header("Boss单位")]
+	GameObject bossUnit;
 	public List<GameObject> BossSurventUnitsList { get; private set; } //Boss随从列表  //max count = 7
 
 	//控件
@@ -55,9 +54,9 @@ public class BattleSystem : MonoBehaviour
 		EnemyTurn.enabled = true;
 		endButton.onClick.AddListener(EndRound);
 		roundText.text = round.ToString();
-		deck = new List<int>();
+		playerCardDeck = new List<int>();
 		//deck = new List<int> { 0,200 };
-		handCards = new List<GameObject>(10);
+		playerHandCards = new List<GameObject>(10);
 		cardUsedFlag = 0;
 		PlayerSurventUnitsList = new List<GameObject>(7);
 		BossSurventUnitsList = new List<GameObject>(7);
@@ -72,9 +71,9 @@ public class BattleSystem : MonoBehaviour
 	{
 		for(int i = 0; i < _count; i++)
 		{
-			if (handCards.Count < 10)
+			if (playerHandCards.Count < 10)
 			{
-				if (cardUsedFlag == deck.Count) //牌库空，触发洗牌以及抽空惩罚
+				if (cardUsedFlag == playerCardDeck.Count) //牌库空，触发洗牌以及抽空惩罚
 				{
 					RefreshDeck();
 					Debug.Log("洗牌惩罚");
@@ -83,7 +82,7 @@ public class BattleSystem : MonoBehaviour
 					ApplyEffectTo(playerUnit, null, effect);
 				}
 				//抽牌
-				GetCard(deck[cardUsedFlag], 1);
+				GetCard(playerCardDeck[cardUsedFlag], 1);
 				cardUsedFlag++;
 			}
 		}
@@ -100,14 +99,14 @@ public class BattleSystem : MonoBehaviour
 	/// <param name="_count">卡牌数量</param>
 	void GetCard(int _ID, int _count)
 	{
-		if(handCards.Count < 10)
+		if(playerHandCards.Count < 10)
 		{
 			CardSOAsset asset = ArchiveManager.LoadCardAsset(_ID);
 			if (asset != null)
 			{
 				GameObject newCard = Instantiate(cardPrefab, playerHands.transform);
 				newCard.GetComponent<CardManager>().Initialized(asset);
-				handCards.Add(newCard);
+				playerHandCards.Add(newCard);
 			}
 		}
 	}
@@ -118,12 +117,12 @@ public class BattleSystem : MonoBehaviour
 	{
 		Debug.Log("洗牌");
 		cardUsedFlag = 0;
-		for(int i = 0; i < deck.Count; i++)
+		for(int i = 0; i < playerCardDeck.Count; i++)
 		{
-			var rnd = Random.Range(0, deck.Count);
-			var swap = deck[rnd];
-			deck[rnd] = deck[i];
-			deck[i] = swap;
+			var rnd = Random.Range(0, playerCardDeck.Count);
+			var swap = playerCardDeck[rnd];
+			playerCardDeck[rnd] = playerCardDeck[i];
+			playerCardDeck[i] = swap;
 		}
 	}
 	void EndRound()
@@ -197,14 +196,22 @@ public class BattleSystem : MonoBehaviour
 			{
 				if (card.CardType == CardType.Spell)
 				{
-					//TODO 使用法术卡,需要重写
+					// 使用法术卡,需要重写
+					if(EffectInitiator == null)
+					{
+						EffectSetupRequest(_cardObject, card.SpellEffect, _cardObject.transform.position, CardType.Spell);
+					}
+					else
+					{
+						EffectSetupOver();
+					}
 
 				}
 				else if ((card.CardType == CardType.Survent && PlayerSurventUnitsList.Count < 7))
 				{
 					SetupSurvent(card, CardType.Survent);
 					playerUnit.GetComponent<PlayerUnitManager>().UseActionPoint(card.Cost);
-					handCards.Remove(_cardObject);
+					playerHandCards.Remove(_cardObject);
 					Destroy(_cardObject);
 				}
 			}
@@ -264,8 +271,10 @@ public class BattleSystem : MonoBehaviour
 	#region 新版-效果的释放和接收调度函数
 	//  新版效果调度
 	public GameObject EffectInitiator { get; private set; }
+	public CardType InitiatorType { get; private set; }
 	public GameObject EffectTarget { get; private set; }
 	public EffectPackageWithTargetOption effectPack { get; private set; }
+
 	public GameObject ArrowPrefab;
 	public GameObject TargetSelectArrow;
 	public Transform FightSceneCanvas;
@@ -485,7 +494,7 @@ public class BattleSystem : MonoBehaviour
 								{
 									if (_initiator.GetComponent<SurventUnitManager>() != null)
 									{
-										EffectSetupRequest(_initiator, _effect, _initiator.transform.position);
+										EffectSetupRequest(_initiator, _effect, _initiator.transform.position, CardType.Survent);
 									}
 
 								}
@@ -576,7 +585,7 @@ public class BattleSystem : MonoBehaviour
 								{
 									if(_initiator.GetComponent<SurventUnitManager>()!=null)
 									{
-										EffectSetupRequest(_initiator, _effect, _initiator.transform.position);
+										EffectSetupRequest(_initiator, _effect, _initiator.transform.position, CardType.Survent);
 									}
 								}
 								break;
@@ -653,12 +662,13 @@ public class BattleSystem : MonoBehaviour
 			}
 		}
 	}
-	public void EffectSetupRequest(GameObject initiator, EffectPackageWithTargetOption package, Vector2 Pos)
+	public void EffectSetupRequest(GameObject initiator, EffectPackageWithTargetOption package, Vector2 Pos, CardType _type)
 	{
 		if(initiator != null && package != null)
 		{
 			EffectInitiator = initiator;
 			effectPack = package;
+			InitiatorType = _type;
 			//Debug.Log("Accept Request");
 			// 启动目标选择动画
 			TargetSelectArrow = Instantiate(ArrowPrefab, FightSceneCanvas.transform);
@@ -687,17 +697,27 @@ public class BattleSystem : MonoBehaviour
 			if(effectPack.Target == TargetOptions.SinglePlayerTarget && (unitType == UnitType.Player || unitType == UnitType.PlayerSurvent))
 			{
 				ApplyEffectTo(EffectTarget, EffectInitiator, effectPack);
-				if(EffectInitiator != null)
+				if(InitiatorType == CardType.Survent)
 				{
 					EffectInitiator.SendMessage("ActionComplete");
+				}
+				else if(InitiatorType == CardType.Spell)
+				{
+					playerHandCards.Remove(EffectInitiator);
+					Destroy(EffectInitiator);
 				}
 			}
 			else if(effectPack.Target == TargetOptions.SingleEnemyTarget && (unitType == UnitType.Boss || unitType == UnitType.BossSurvent))
 			{
 				ApplyEffectTo(EffectTarget, EffectInitiator, effectPack);
-				if (EffectInitiator != null)
+				if (InitiatorType == CardType.Survent)
 				{
 					EffectInitiator.SendMessage("ActionComplete");
+				}
+				else if (InitiatorType == CardType.Spell)
+				{
+					playerHandCards.Remove(EffectInitiator);
+					Destroy(EffectInitiator);
 				}
 			}
 		}
@@ -708,7 +728,7 @@ public class BattleSystem : MonoBehaviour
 		EffectInitiator = null;
 		EffectTarget = null;
 		effectPack = null;
-		//TODO关闭目标选择动画
+		//关闭目标选择动画
 		Debug.Log("Cancel Request");
 		Destroy(TargetSelectArrow);
 		TargetSelectArrow = null;
@@ -783,15 +803,14 @@ public class BattleSystem : MonoBehaviour
 		if(playerUnit != null && Player.Instance != null)
 		{
 			playerUnit.SendMessage("Initialized");
-			deck = Player.Instance.cardSet;
+			playerCardDeck = Player.Instance.cardSet;
 		}
 	}
 	
 	void TestSetData() //测试载入数据
 	{
 		Debug.Log("Start Data Setting...");
-		ArchiveManager.LoadPlayerData(1);
-		//ArchiveManager.SavePlayerData(1);
+		ArchiveManager.LoadPlayerData();
 
 		playerUnit.SendMessage("Initialized");
 		LoadPlayerInformation();

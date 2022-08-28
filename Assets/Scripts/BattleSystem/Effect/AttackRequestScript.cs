@@ -27,7 +27,7 @@ public class AttackRequestScript : MonoBehaviour, IPointerClickHandler
                     effect.EffectType = manager.survent.IsVampire ? EffectType.VampireAttack : EffectType.Attack;
                     effect.EffectValue1 = manager.survent.ATK;
                     effect.Target = TargetOptions.SingleEnemyTarget;
-                    system.EffectSetupRequest(gameObject, effect, transform.position);
+                    system.EffectSetupRequest(gameObject, effect, transform.position, CardType.Survent);
                     Debug.Log("Attack Request");
                 }
                 else
