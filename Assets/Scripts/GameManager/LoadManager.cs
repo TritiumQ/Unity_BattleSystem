@@ -129,7 +129,7 @@ public class LoadManager : MonoBehaviour
                 break;
             case 4:
                 {
-                    scene = "Shop";
+                    scene = "ShopInGame";
                 }
                 break;
             case 5:

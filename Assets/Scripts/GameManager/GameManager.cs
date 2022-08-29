@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-//专门用来管理局内游戏数据的类对象
+
 public class GameManager : MonoBehaviour
 {
     Player player;       //设置为单例模式
@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
         InitGameEvent();
         //加载关卡进度数据（重新进入游戏的进度加载）
     }
-    void InitGameEvent(int _level = 1)   //初始化/设置 游戏事件
+    public void InitGameEvent(int _level = 1)   //初始化/设置 游戏事件
     {
         level = _level; //初始化所在层数
         step = 0;
@@ -77,7 +77,45 @@ public class GameManager : MonoBehaviour
         //设置下一关场景加载
         LoadManager.GetComponent<LoadManager>().NextScene(GameEvent[0]);
     }
-    
+
+    public void InitGameEvent(SerializableGP gp)
+    {
+        level = gp.level; //初始化所在层数
+        //Debug.Log(level);
+        step = gp.step;
+        GameEvent = new List<int>();
+
+        levelUI.GetComponent<LevelUI>().SetLevel(level);
+
+        for (int i = eventUnit.Count - 1; i >= 0; i--)
+        {
+            Destroy(eventUnit[i]);
+        }
+        eventUnit.Clear();
+        GameEvent.Clear();
+
+        foreach (var e in gp.gameEvent)
+        {
+            GameEvent.Add(e.eventSign);
+        }
+
+        for (int i = 0; i < GameEventCount[level]; i++)//初始化事件预制体对象链表
+        {
+            GameObject newEvent = Instantiate(eventPrefab, transform); //生成事件预制件
+            newEvent.GetComponent<Transform>().position = new Vector3(SetPosition(i, 375, 1725), 500, 0);
+            if (newEvent != null)
+            {
+                newEvent.GetComponent<EventUI>().SetEventSign(GameEvent[i]); //设置事件对象的类型
+                if (gp.gameEvent[i].isPass)
+                {
+                    newEvent.GetComponent<EventUI>().SetPass();
+                }
+            }
+            eventUnit.Add(newEvent);
+        }
+
+        LoadManager.GetComponent<LoadManager>().NextScene(GameEvent[step]);
+    }
     void RefreshData() //更新游戏局内数据
     {
         //局内游戏数据更新
