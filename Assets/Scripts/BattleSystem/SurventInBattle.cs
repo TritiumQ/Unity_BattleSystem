@@ -50,7 +50,7 @@ public class SurventInBattle : UnitInBattle
 					case AbilityType.受击反馈:
 						IsFeedback = true;
 						break;
-					case AbilityType.先机效果:
+					case AbilityType.先手效果:
 						IsAdvanced = true;
 						break;
 					case AbilityType.后手效果:

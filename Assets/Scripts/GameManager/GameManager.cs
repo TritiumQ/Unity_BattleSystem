@@ -8,8 +8,7 @@ public class GameManager : MonoBehaviour
 {
     Player player;       //设置为单例模式
 
-    //TODO
-    //结构优化
+    //TODO 结构优化
     public int step;     //关卡步骤
     public int[] GameEventCount; //每层关卡数量
     public int level;     //层数

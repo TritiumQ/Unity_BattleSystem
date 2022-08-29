@@ -74,7 +74,8 @@ public class ShopSystem : MonoBehaviour
 
 	void Exit()
 	{
-
+		//TODO ÍË³öÉÌµê
+		
 	}
 
 	public void SetCard(int pos)

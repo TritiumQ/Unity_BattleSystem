@@ -5,7 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class CardHubSystem : MonoBehaviour
 {
-	Dictionary<int, GameObject> CardObejcts;
+	int Count;//TODO 限制卡组12张
+	Dictionary<int, GameObject> CardObejcts; 
 	Dictionary<int, int> CardCount;
 
 	List<GameObject> CardHub;

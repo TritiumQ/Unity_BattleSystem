@@ -41,7 +41,7 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 
 	public void Die()
 	{
-		Debug.Log("Boss已击败，战斗胜利");
+		//Debug.Log("Boss已击败，战斗胜利");
 		//胜利特效
 		system.GameEnd(GameResult.Success);
 	}
@@ -161,7 +161,7 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 	{
 		foreach (var effect in Boss.SpecialAbilityList)
 		{
-			if(effect.SkillType == AbilityType.先机效果)
+			if(effect.SkillType == AbilityType.先手效果)
 			{
 				if(system != null)
 				{

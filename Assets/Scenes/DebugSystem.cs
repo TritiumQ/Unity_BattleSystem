@@ -14,4 +14,5 @@ public class DebugSystem : MonoBehaviour
 	{
 		ArchiveManager.ResetPlayerDataFile();
 	}
+
 }

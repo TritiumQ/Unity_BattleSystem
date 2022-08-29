@@ -18,20 +18,39 @@ public class BattleSystem : MonoBehaviour
 	public List<GameObject> BossSurventUnitsList { get; private set; } //Boss随从列表  //max count = 7
 
 	//控件
+	GameStage Stage;
+	GameStage StageCache;
 	//回合结束标志
-	bool playerActionCompleted = false;
-	//回合开始标志
-	bool roundStart = false;
-	int round;
+	bool PlayerActionCompleted = false;
 
+	public struct ActionPackage
+	{
+		public GameObject Initiator;
+		public EffectPackageWithTargetOption Effect;
+		public bool IsEffectOver;
+	}
+
+	//特殊行动标记
+	bool AdavancedActionCompleted = false;
+	Queue<ActionPackage> AdavancedActionQueue;
+	bool SubsequentActionCompleted = false;
+	Queue<ActionPackage> SubsequentActionQueue;
+	bool ExtraActionCompleted = false;
+	Queue<ActionPackage> ExtraActionQueue;
+
+	/// <summary>
+	/// 回合数
+	/// </summary>
+	int Rounds;
+	
 	//其他
 	[Header("回合数")]
 	public TextMeshProUGUI roundText;
 	[Header("结束回合按钮")]
 	public Button endButton;
 	[Header("回合标识")]
-	public TextMeshProUGUI PlayerTurn;
-	public TextMeshProUGUI EnemyTurn;
+	public TextMeshProUGUI PlayerTurnText;
+	public TextMeshProUGUI EnemyTurnText;
 
 	[Header("玩家手牌区")]
 	public GameObject playerHands;
@@ -50,16 +69,25 @@ public class BattleSystem : MonoBehaviour
 	}
 	private void Awake()
 	{
-		PlayerTurn.enabled = false;
-		EnemyTurn.enabled = true;
+		PlayerTurnText.enabled = false;
+		EnemyTurnText.enabled = true;
+
 		endButton.onClick.AddListener(EndRound);
-		roundText.text = round.ToString();
+
+		roundText.text = Rounds.ToString();
+
 		playerCardDeck = new List<int>();
-		//deck = new List<int> { 0,200 };
 		playerHandCards = new List<GameObject>(10);
 		cardUsedFlag = 0;
 		PlayerSurventUnitsList = new List<GameObject>(7);
 		BossSurventUnitsList = new List<GameObject>(7);
+
+		AdavancedActionQueue = new Queue<ActionPackage>();
+		SubsequentActionQueue = new Queue<ActionPackage>();
+		ExtraActionQueue = new Queue<ActionPackage>();
+
+		//
+		Stage = GameStage.RoundStart;
 		//
 		TestSetData();
 	}
@@ -89,8 +117,8 @@ public class BattleSystem : MonoBehaviour
 	}
 	void SwitchTurnText()
 	{
-		PlayerTurn.enabled = !PlayerTurn.enabled;
-		EnemyTurn.enabled = !EnemyTurn.enabled;
+		PlayerTurnText.enabled = !PlayerTurnText.enabled;
+		EnemyTurnText.enabled = !EnemyTurnText.enabled;
 	}
 	/// <summary>
 	/// 获取特定卡牌
@@ -127,66 +155,172 @@ public class BattleSystem : MonoBehaviour
 	}
 	void EndRound()
 	{
-		playerActionCompleted = true;
+		PlayerActionCompleted = true;
 	}
+	
+	bool CheckAction()
+	{
+		switch (Stage)
+		{
+			case GameStage.PlayerAdvancedAction:
+				return AdavancedActionCompleted;
+			case GameStage.PlayerSubsequentAction:
+				return SubsequentActionCompleted;
+			case GameStage.ExtraAction:
+				return ExtraActionCompleted;
+			default:
+				return false;
+		}
+	}
+
+	IEnumerator Check()
+	{
+		switch (Stage)
+		{
+			case GameStage.PlayerAdvancedAction:
+				{
+					if(AdavancedActionQueue.Count > 0)
+					{
+						
+						yield return new WaitUntil(CheckAction);
+
+					}
+					else
+					{
+						AdavancedActionCompleted = true;
+					}
+				}
+				break;
+			case GameStage.PlayerSubsequentAction:
+				break;
+			case GameStage.ExtraAction:
+				break;
+			default:
+				yield break;
+		}
+	}
+
 	void GamePlay()
 	{
-		//1 玩家抽牌,回合开始,重置随从行动状态,触发随从先机效果
-		if (roundStart == false)
+		switch (Stage)
 		{
-			if(round == 0)
-			{
-				DrawCard(3);
-			}
-			else
-			{
-				DrawCard(1);
-			}
-			Debug.Log("回合开始");
-			SwitchTurnText();
-			roundStart = true;
-			//触发玩家随从先机效果
-			foreach (var unit in PlayerSurventUnitsList)
-			{
-				unit.SendMessage("AdvancedEffectTrigger");
-			}
-		}
-		//2 玩家部署随从/使用法术牌
-		//3 玩家行动完成后怪物行动,并结束回合
-		else  if (playerActionCompleted)  
-		{
-			//触发玩家随从后手效果
-			foreach (var unit in PlayerSurventUnitsList)
-			{
-				unit.SendMessage(RunnerMethodName.SubsequentEffectTrigger);
-			}
-			// Boss以及敌人随从，先机效果和行动
-			SwitchTurnText();
-			foreach (var unit in BossSurventUnitsList)
-			{
-				unit.SendMessage("AdvancedEffectTrigger");
-			}
-			foreach(var unit in BossSurventUnitsList)
-			{
-				unit.SendMessage(RunnerMethodName.AutoAction, round);
-			}
+			case GameStage.ExtraAction:
+				{
+					if(ExtraActionCompleted)
+					{
+						//TODO
+						
+						Stage = StageCache;
+					}
+				}
+				break;
 
-			//刷新回合
-			round++;
-			roundText.text = round.ToString();
-			playerActionCompleted = false;
-			roundStart = false;
+			case GameStage.RoundStart: //回合开始
+				{
+					Debug.Log("回合开始");
+					Stage = GameStage.PlayerAdvancedAction;
+				}
+				break;
+			case GameStage.PlayerAdvancedAction: //玩家单位先手效果
+				{
 
-			//检查并刷新buff,以及触发boss和敌人随从后手效果
-			bossUnit.SendMessage("SubsequentEffectTrigger");
-			foreach(var unit in BossSurventUnitsList)
-			{
-				unit.SendMessage("SubsequentEffectTrigger");
-			}
-			//结束回合
+					if(AdavancedActionCompleted)
+					{
+						//TODO
+						Stage = GameStage.EnemyAdvancedAction;
+					}
+				}
+				break;
+			case GameStage.EnemyAdvancedAction: //敌人单位先手效果
+				{
+					bossUnit.SendMessage(RunnerMethodName.AdvancedEffectTrigger);
+					foreach (var unit in BossSurventUnitsList)
+					{
+						unit.SendMessage(RunnerMethodName.AdvancedEffectTrigger);
+					}
+					Stage = GameStage.PlayerDrawCard;
+				}
+				break;
+			case GameStage.PlayerDrawCard: //玩家抽卡
+				{
+					if (Rounds == 0)
+					{
+						DrawCard(3);
+					}
+					else
+					{
+						DrawCard(1);
+					}
+					Stage = GameStage.PlayerAction;
+				}
+				break;
+			case GameStage.PlayerAction: //玩家行动
+				{
+					if(PlayerActionCompleted)
+					{
+						//TODO
+						Stage = GameStage.EnemyAction;
+					}
+				}
+				break;
+			case GameStage.EnemyAction: //敌人行动
+				{
+					bossUnit.SendMessage(RunnerMethodName.AutoAction, Rounds);
+					foreach (var unit in BossSurventUnitsList)
+					{
+						unit.SendMessage(RunnerMethodName.AutoAction, Rounds);
+					}
+					Stage = GameStage.PlayerSubsequentAction;
+				}
+				break;
+			case GameStage.PlayerSubsequentAction: //玩家后手效果
+				{
+					//TODO
+					if (SubsequentActionCompleted)
+					{
+						Stage = GameStage.EnemySubsequentAction;
+					}
+				}
+				break;
+			case GameStage.EnemySubsequentAction:  //敌人后手效果
+				{
+					bossUnit.SendMessage(RunnerMethodName.SubsequentEffectTrigger);
+					foreach (var unit in BossSurventUnitsList)
+					{
+						unit.SendMessage(RunnerMethodName.SubsequentEffectTrigger);
+					}
+					Stage = GameStage.RoundEnd;
+				}
+				break;
+			case GameStage.RoundEnd: //回合结束
+				{
+					Rounds++;
+					roundText.text = Rounds.ToString();
+
+					PlayerActionCompleted = false;
+					AdavancedActionCompleted = false;
+					SubsequentActionCompleted = false;
+					ExtraActionCompleted = false;
+					Stage = GameStage.RoundStart;
+
+					//刷新buff
+					playerUnit.SendMessage(RunnerMethodName.UpdateEffect);
+					foreach (var obj in PlayerSurventUnitsList)
+					{
+						obj.SendMessage(RunnerMethodName.UpdateEffect);
+					}
+					bossUnit.SendMessage(RunnerMethodName.UpdateEffect);
+					foreach (var obj in BossSurventUnitsList)
+					{
+						obj.SendMessage(RunnerMethodName.UpdateEffect);
+					}
+				}
+				break;
+			default:
+				break;
 		}
-		
 	}
+
 	public void UseCardByPlayer(GameObject _cardObject)  //使用卡牌
 	{
 		if(_cardObject != null)
@@ -196,7 +330,7 @@ public class BattleSystem : MonoBehaviour
 			{
 				if (card.CardType == CardType.Spell)
 				{
-					// 使用法术卡,需要重写
+					// 使用法术卡
 					if(EffectInitiator == null)
 					{
 						EffectSetupRequest(_cardObject, card.SpellEffect, _cardObject.transform.position, CardType.Spell);
@@ -205,7 +339,6 @@ public class BattleSystem : MonoBehaviour
 					{
 						EffectSetupOver();
 					}
-
 				}
 				else if ((card.CardType == CardType.Survent && PlayerSurventUnitsList.Count < 7))
 				{
@@ -248,7 +381,7 @@ public class BattleSystem : MonoBehaviour
 				default:
 					break;
 			}
-			//触发放置效果
+			//触发*先机*效果
 			if(newSurvent != null)
 			{
 				newSurvent.SendMessage(RunnerMethodName.SetupEffectTrigger);
@@ -266,6 +399,7 @@ public class BattleSystem : MonoBehaviour
 		{
 			BossSurventUnitsList.Remove(unitObject);
 		}
+		Destroy(unitObject);
 	}
 
 	#region 新版-效果的释放和接收调度函数
@@ -274,6 +408,7 @@ public class BattleSystem : MonoBehaviour
 	public CardType InitiatorType { get; private set; }
 	public GameObject EffectTarget { get; private set; }
 	public EffectPackageWithTargetOption effectPack { get; private set; }
+	public bool EffectSetupCompleted { get; private set; }
 
 	public GameObject ArrowPrefab;
 	public GameObject TargetSelectArrow;
@@ -594,7 +729,7 @@ public class BattleSystem : MonoBehaviour
 						}
 					}
 					break;
-					//TODO 多目标选择（有可能重复）
+					//TODO 优化多目标选择（有可能重复）
 				case TargetOptions.MultiPlayerTargets:
 					{
 						if(_effect.TargetCount >= PlayerSurventUnitsList.Count + 1)
@@ -669,6 +804,7 @@ public class BattleSystem : MonoBehaviour
 			EffectInitiator = initiator;
 			effectPack = package;
 			InitiatorType = _type;
+			EffectSetupCompleted = false;
 			//Debug.Log("Accept Request");
 			// 启动目标选择动画
 			TargetSelectArrow = Instantiate(ArrowPrefab, FightSceneCanvas.transform);
@@ -684,6 +820,7 @@ public class BattleSystem : MonoBehaviour
 		}
 		else
 		{
+			//Debug.Log("Refuse Request");
 			EffectSetupOver();
 		}
 	}
@@ -691,7 +828,7 @@ public class BattleSystem : MonoBehaviour
 	{
 		//TODO 这里写得很狗屎，得找个时间重写
 		EffectTarget = target;
-		if (EffectInitiator != EffectTarget && EffectInitiator != null && EffectTarget != null)
+		if (EffectInitiator != EffectTarget && EffectInitiator != null && EffectTarget != null && !EffectSetupCompleted)
 		{
 			UnitType unitType = GetUnitType(target);
 			if(effectPack.Target == TargetOptions.SinglePlayerTarget && (unitType == UnitType.Player || unitType == UnitType.PlayerSurvent))
@@ -728,6 +865,7 @@ public class BattleSystem : MonoBehaviour
 		EffectInitiator = null;
 		EffectTarget = null;
 		effectPack = null;
+		EffectSetupCompleted = true;
 		//关闭目标选择动画
 		Debug.Log("Cancel Request");
 		Destroy(TargetSelectArrow);

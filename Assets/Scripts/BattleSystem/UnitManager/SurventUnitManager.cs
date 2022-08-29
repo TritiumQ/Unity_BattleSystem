@@ -87,34 +87,20 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
     {
         if(survent.SurventType == CardType.Monster)
 		{
-            //TODO 敌方随从自动行动
-
+            //敌方随从自动行动
+            EffectPackageWithTargetOption effect
+                = new EffectPackageWithTargetOption(EffectType.Attack, survent.ATK, 0, 0, null, TargetOptions.SinglePlayerTarget, SingleTargetOption.RandomTarget, 0);
+            system.ApplyEffect(gameObject,effect);
 		}
     }
     public void Die()
 	{
         //死亡动画
-        //string msg = survent..cardName + "死亡";
-        //Debug.Log(msg);
-        //亡语效果
+        string msg = survent.CardName + "死亡";
+        Debug.Log(msg);
 
-        //system.GetComponent<BattleSystem>().SurventUnitDie(gameObject);
-        //Destroy(gameObject);
+        system.SurventUnitDie(gameObject);
 	}
-
-    public Image maskImage;
-    IEnumerator MaskMiss(float times, Color color)
-    {
-        maskImage.enabled = true;
-        color.a = 0.5f;
-        maskImage.color = color;
-        while (times > 0)
-        {
-            times -= Time.deltaTime;
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-        maskImage.enabled = false;
-    }
 
     //接受效果接口组
     public void AcceptEffect(object[] _parameterList)
@@ -130,7 +116,7 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
                     if(initiator != null && system != null)
 					{
                         EffectPackage returnEffect1 = new EffectPackage();
-                        returnEffect1.EffectType = EffectType.Attack;
+                        returnEffect1.EffectType = EffectType.FeedbackAttack;
                         returnEffect1.EffectValue1 = survent.ATK;
                         EffectPackage returnEffect2 = new EffectPackage();
                         returnEffect2.EffectType = EffectType.Heal;
@@ -150,6 +136,11 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
                         returnEffect.EffectValue1 = dmg;
                         system.ApplyEffectTo(initiator, gameObject, returnEffect);
                     }
+				}
+                break;
+            case EffectType.FeedbackAttack:
+				{
+                    survent.BeAttacked(effect.EffectValue1);
 				}
                 break;
             case EffectType.Heal:
@@ -201,7 +192,7 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
         isActive = true;
         foreach (var effect in survent.SpecialAbilityList)
 		{
-            if(effect.SkillType == AbilityType.先机效果)
+            if(effect.SkillType == AbilityType.先手效果)
 			{
                 var eft = effect.Package;
                 if (system != null) 
@@ -229,7 +220,7 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
     {
         foreach (var effect in survent.SpecialAbilityList)
         {
-            if (effect.SkillType == AbilityType.放置效果)
+            if (effect.SkillType == AbilityType.先机效果)
             {
                 var eft = effect.Package;
                 if (system != null)

@@ -1,11 +1,9 @@
+using DG.Tweening;
+using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using DG;
-using DG.Tweening;
-using TMPro;
+using UnityEngine.SceneManagement;
 public class SafeHouse : MonoBehaviour
 {
 
@@ -25,13 +23,12 @@ public class SafeHouse : MonoBehaviour
     public void selectTear()
     {
         //Player.Instance.Tears += 20;
-        Player.Instance.AddMoney(0, 20);
+        Player.Instance.AddMoney(0, 13);
 
-        GameObject button = this.gameObject.transform.Find("Button").gameObject;
-        button.SetActive(false);
-        PlayerDataTF.EventContinue();
-        ShowTip("您获得了20泪滴", Color.red);
-        Destroy(this.gameObject, 1);
+        this.transform.Find("GetTear").GetComponent<Button>().enabled = false;
+        ShowTip("您获得了13点泪滴", Color.red);
+        StartCoroutine(Test1());
+       
 
     }
     //选择卡牌
@@ -40,30 +37,39 @@ public class SafeHouse : MonoBehaviour
         //卡库随机卡牌添加到卡组中去；
         for (int i = 0; i < 2; i++)
         {
-            int RandomNewCard = Random.Range(0, 200);//这个要结合之后卡库卡牌信息来改正；
+            int RandomNewCard = GetRandom.GetRandomCard();//这个要结合之后卡库卡牌信息来改正；
             Player.Instance.AddCard(RandomNewCard);
         }
-        GameObject button = this.gameObject.transform.Find("Button (2)").gameObject;
-        button.SetActive(false);
-        PlayerDataTF.EventContinue();
-        PlayerDataTF.EventContinue();
-        ShowTip("您获得了随机2张卡牌", Color.red);
+        this.transform.Find("GetCard").GetComponent<Button>().enabled = false;
 
-        Destroy(this.gameObject, 1);
+        ShowTip("您获得了随机1张卡牌", Color.red);
+        StartCoroutine(Test1());
+       
+      
+
     }
     //选择恢复；
     public void selectCur()
     {
         Player.Instance.AddCurrentHp(2);
 
-        GameObject button = this.gameObject.transform.Find("Button (1)").gameObject;
-        button.SetActive(false);
+        this.transform.Find("Heal").GetComponent<Button>().enabled = false;
         ShowTip("您获得了2点血量恢复", Color.red);
-        Destroy(this.gameObject, 1);
+        StartCoroutine(Test1());
+       
     }
+    //携程两秒之后摧毁物体，1.5秒后开换场景；
+    private IEnumerator Test1()
+    {
+        
+        yield return new WaitForSeconds(1.5f);
+        PlayerDataTF.EventContinue();
+        SceneManager.LoadScene("GameProcess");
+    }
+
     public void ShowTip(string msg, Color color, System.Action callback = null)
     {
-        GameObject obj = Instantiate(Resources.Load("SafeHouse/Tips"), canvasTf) as GameObject;
+        GameObject obj = Instantiate(Resources.Load("prefabs/Tips"), canvasTf) as GameObject;
         Text text = obj.transform.Find("bg/Text").GetComponent<Text>();
         text.color = color;
         text.text = msg;

@@ -23,11 +23,11 @@ public enum AbilityType
 	/// <summary>
 	/// 随从单位专用,放置至场上时触发
 	/// </summary>
-	放置效果,
+	先机效果,
 	/// <summary>
 	/// 每回合开始时触发
 	/// </summary>
-	先机效果,
+	先手效果,
 	/// <summary>
 	/// 每回合结束时触发
 	/// </summary>

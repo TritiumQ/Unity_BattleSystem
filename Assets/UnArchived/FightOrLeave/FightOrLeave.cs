@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class FightOrLeave : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -17,10 +17,12 @@ public class FightOrLeave : MonoBehaviour
     }
     public void Leave()
     {
-       
+        PlayerDataTF.EventContinue();
+        SceneManager.LoadScene("GameProcess");
     }
     public void Fight()
     {
-        
+        PlayerDataTF.EventContinue();
+        SceneManager.LoadScene("GameProcess");
     }
 }

@@ -14,7 +14,8 @@ public class EffectAcceptScript : MonoBehaviour, IPointerClickHandler
         }
         else
 		{
-            sys.EffectSetupOver();
+            Debug.Log("Dame");
+            //sys.EffectSetupOver();
 		}
     }
 }

@@ -28,11 +28,11 @@ public class AttackRequestScript : MonoBehaviour, IPointerClickHandler
                     effect.EffectValue1 = manager.survent.ATK;
                     effect.Target = TargetOptions.SingleEnemyTarget;
                     system.EffectSetupRequest(gameObject, effect, transform.position, CardType.Survent);
-                    Debug.Log("Attack Request");
                 }
                 else
                 {
                     system.EffectSetupOver();
+                    Debug.Log("Attack Dame");
                 }
             }
         }

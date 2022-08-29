@@ -132,5 +132,30 @@ public enum EffectType
 
     SpecialEffect,
 
-    //*亡语*，*先机*，*每回合开始时*，*每回合结束时*, boss的特殊技能
+    FeedbackAttack,
+
+	//*亡语*，*先机*，*每回合开始时*，*每回合结束时*, boss的特殊技能
 }
+
+public enum GameStage
+{
+    Void,
+    ExtraAction,
+
+    RoundStart,
+
+    PlayerAdvancedAction,
+    EnemyAdvancedAction,
+
+    PlayerDrawCard,
+    PlayerAction,
+    EnemyAction,
+
+    PlayerSubsequentAction,
+    EnemySubsequentAction,
+
+    RoundEnd,
+
+
+}
+
