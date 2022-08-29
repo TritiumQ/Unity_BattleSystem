@@ -159,3 +159,10 @@ public enum GameStage
 
 }
 
+public struct ActionPackage
+{
+    public UnityEngine.GameObject Initiator;
+    public EffectPackageWithTargetOption Effect;
+    public bool IsEffectOver;
+}
+

@@ -22,14 +22,6 @@ public class BattleSystem : MonoBehaviour
 	GameStage StageCache;
 	//回合结束标志
 	bool PlayerActionCompleted = false;
-
-	public struct ActionPackage
-	{
-		public GameObject Initiator;
-		public EffectPackageWithTargetOption Effect;
-		public bool IsEffectOver;
-	}
-
 	//特殊行动标记
 	bool AdavancedActionCompleted = false;
 	Queue<ActionPackage> AdavancedActionQueue;
@@ -157,49 +149,6 @@ public class BattleSystem : MonoBehaviour
 	{
 		PlayerActionCompleted = true;
 	}
-	
-	bool CheckAction()
-	{
-		switch (Stage)
-		{
-			case GameStage.PlayerAdvancedAction:
-				return AdavancedActionCompleted;
-			case GameStage.PlayerSubsequentAction:
-				return SubsequentActionCompleted;
-			case GameStage.ExtraAction:
-				return ExtraActionCompleted;
-			default:
-				return false;
-		}
-	}
-
-	IEnumerator Check()
-	{
-		switch (Stage)
-		{
-			case GameStage.PlayerAdvancedAction:
-				{
-					if(AdavancedActionQueue.Count > 0)
-					{
-						
-						yield return new WaitUntil(CheckAction);
-
-					}
-					else
-					{
-						AdavancedActionCompleted = true;
-					}
-				}
-				break;
-			case GameStage.PlayerSubsequentAction:
-				break;
-			case GameStage.ExtraAction:
-				break;
-			default:
-				yield break;
-		}
-	}
-
 	void GamePlay()
 	{
 		switch (Stage)
