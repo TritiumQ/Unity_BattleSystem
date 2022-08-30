@@ -135,7 +135,6 @@ public class BattleSystem : MonoBehaviour
 	/// </summary>
 	void RefreshDeck()
 	{
-		
 		Debug.Log("Ï´ÅÆ");
 		cardUsedFlag = 0;
 		for(int i = 0; i < playerCardDeck.Count; i++)

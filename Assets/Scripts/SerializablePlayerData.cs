@@ -21,6 +21,8 @@ public class SerializablePlayerData
     public bool IsAllUnlocked;
     public int[] UnlockCard;
 
+    
+
     public SerializablePlayerData(string InitialCode = "null")
     {
         if (InitialCode == "mikufans")

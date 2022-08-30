@@ -5,51 +5,37 @@ using System.IO;
 
 //TODO
 //ÉèÎª¾²Ì¬
-public class GameProcessSave : MonoBehaviour
-{
-    public GameManager gameManager;
-    protected string savePath;
-    public string Lock;
-    private void Awake()
-    {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        savePath = UnityEngine.Application.dataPath + "/GameProcessDatas/DataSave01";
-        Lock = "Lock";
-    }
-    private void Update()
-    {
-        if (Time.frameCount % 6 == 0)
-        {
-            if (gameManager != null)
-            {
-                //GameProcessDataSave(true);
-            }
-            else
-                gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        }
-    }
+public static class GameProcessSave 
+{ 
+    public static string savePath= UnityEngine.Application.dataPath + "/GameProcessDatas/DataSave01";
+    public static bool isLoad = false;
+    public static string Lock="Lock";    
 
-    public void GameProcessDataSave(bool isContinue)
+    public static void GameProcessDataSave(GameManager gameManager, bool isContinue)
     {
         lock (Lock)
         {
-            SerializableGP gp = new SerializableGP(gameManager, isContinue);
-            string json = null;
-            json = JsonUtility.ToJson(gp);
-            FileStream fs = new FileStream(savePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            if (fs != null)
+            if (!isLoad)
             {
-                StreamWriter sw = new StreamWriter(fs);
-                //Debug.Log(json);
-                sw.Write(json);
-                sw.Flush();
-                sw.Close();
+                SerializableGP gp = new SerializableGP(gameManager, isContinue);
+                string json = null;
+                json = JsonUtility.ToJson(gp);
+                FileStream fs = new FileStream(savePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                if (fs != null)
+                {
+                    StreamWriter sw = new StreamWriter(fs);
+                    //Debug.Log(json);
+                    sw.Write(json);
+                    sw.Flush();
+                    sw.Close();
+                }
+                fs.Close();
+                isLoad = true;
             }
-            fs.Close();
         }
     }
 
-    public void GameProcessDataLoad()
+    public static void GameProcessDataLoad(GameManager gameManager)
     {
         lock (Lock)
         {
@@ -75,10 +61,10 @@ public class GameProcessSave : MonoBehaviour
             }
         }
     }
-    public void GameSaveSet(int player, bool process)
+    public static void GameSaveSet(int player,GameManager gameManager ,bool process)
     {
         ArchiveManager.SavePlayerData(player);
-        GameProcessDataSave(process);
+        GameProcessDataSave(gameManager,process);
     }
 }
 

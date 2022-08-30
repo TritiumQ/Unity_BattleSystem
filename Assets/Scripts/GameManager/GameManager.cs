@@ -22,16 +22,24 @@ public class GameManager : MonoBehaviour
     public List<GameObject> eventUnit; //事件对象链表
     private void Awake()
     {
-        InitGameManager();
-        player = Player.Instance;
+        
     }
     void Start()
     {
-        //测试区
+        GameEventCount = GameConst.GameEventCount;
+        player = Player.Instance;
         ArchiveManager.LoadPlayerData(1);
+        GameProcessSave.GameProcessDataLoad(this);
+
+        //测试区
         //step = 4; level = 2;
         //PlayerDataTF.EventEnd();
-        InitGameEvent(2);
+        //InitGameManager();
+        //InitGameEvent(2);
+
+        //数据重置
+        //InitGameEvent();
+        //GameProcessSave.GameSaveSet(1, this, true);
     }
 
     void Update()
@@ -40,10 +48,10 @@ public class GameManager : MonoBehaviour
     }
     void InitGameManager() //初始化游戏管理者对象
     {
-        //关卡数据初始化
+        player = Player.Instance;
         GameEventCount = GameConst.GameEventCount;//初始化每层关卡数量
-        InitGameEvent();
-        //加载关卡进度数据（重新进入游戏的进度加载）
+        //InitGameEvent();
+        GameProcessSave.GameProcessDataLoad(this);
     }
     public void InitGameEvent(int _level = 1)   //初始化/设置 游戏事件
     {
@@ -136,7 +144,7 @@ public class GameManager : MonoBehaviour
         if (player != null)
         {
             player.ReSet();
-            ArchiveManager.SavePlayerData(1);
+            GameProcessSave.GameSaveSet(1, this, true);
         }
         //_result控制结局走向,暂定 0是失败，1是胜利......
         //切换End场景
@@ -161,7 +169,7 @@ public class GameManager : MonoBehaviour
         //数据保存
         if (player != null)
         {
-            ArchiveManager.SavePlayerData(1);
+            GameProcessSave.GameSaveSet(1, this, true);
         }
     }
     void AddLevel()
