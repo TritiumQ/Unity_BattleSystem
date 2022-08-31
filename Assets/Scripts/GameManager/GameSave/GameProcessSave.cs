@@ -48,17 +48,38 @@ public static class GameProcessSave
                 if (fs != null)
                 {
                     json = new StreamReader(fs).ReadToEnd();
-                    Debug.Log(json);
+                    //Debug.Log(json);
                     fs.Close();
                 }
                 SerializableGP gp = new SerializableGP();
                 JsonUtility.FromJsonOverwrite(json, gp);
                 if (gp != null)
                 {
-                    Debug.Log(json);
-                    gameManager.InitGameEvent(gp);
+                    if (gp.level == 1 && gp.step == 0)
+                        gameManager.InitGameEvent();
+                    else gameManager.InitGameEvent(gp);
                 }
             }
+        }
+    }
+
+    public static bool ReadSave()
+    {
+        lock(Lock)
+        {
+            string json = null;
+            FileStream fs = new FileStream(savePath, FileMode.OpenOrCreate, FileAccess.Read);
+            if (fs != null)
+            {
+                json = new StreamReader(fs).ReadToEnd();
+                //Debug.Log(json);
+                fs.Close();
+            }
+            SerializableGP gp = new SerializableGP();
+            JsonUtility.FromJsonOverwrite(json, gp);
+            if (gp.level == 1 && gp.step == 0)
+                return false;
+            else return true;
         }
     }
     public static void GameSaveSet(int player,GameManager gameManager ,bool process)

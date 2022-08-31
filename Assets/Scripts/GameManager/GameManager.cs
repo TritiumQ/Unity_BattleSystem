@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public int level;     //层数
     public int result=-1;    //游戏结局
     public List<int> GameEvent; //游戏事件
+    private static bool isFistOpen = true;
 
     public GameObject eventPrefab;
     public GameObject levelUI;
@@ -26,10 +27,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        GameEventCount = GameConst.GameEventCount;
-        player = Player.Instance;
-        ArchiveManager.LoadPlayerData(1);
-        GameProcessSave.GameProcessDataLoad(this);
+        InitGameManager();
 
         //测试区
         //step = 4; level = 2;
@@ -50,8 +48,12 @@ public class GameManager : MonoBehaviour
     {
         player = Player.Instance;
         GameEventCount = GameConst.GameEventCount;//初始化每层关卡数量
-        //InitGameEvent();
-        GameProcessSave.GameProcessDataLoad(this);
+        if (isFistOpen)
+        {
+            ArchiveManager.LoadPlayerData(1);
+            GameProcessSave.GameProcessDataLoad(this);
+            isFistOpen = false;
+        }
     }
     public void InitGameEvent(int _level = 1)   //初始化/设置 游戏事件
     {
@@ -144,6 +146,7 @@ public class GameManager : MonoBehaviour
         if (player != null)
         {
             player.ReSet();
+            InitGameEvent();
             GameProcessSave.GameSaveSet(1, this, true);
         }
         //_result控制结局走向,暂定 0是失败，1是胜利......

@@ -17,8 +17,7 @@ public class MainSceneManager : MonoBehaviour
     }
     private void Start()
     {
-        GameObject _obj = GameObject.Find("GameProcess");
-        if(_obj!=null)
+        if(GameProcessSave.ReadSave())
         {
             ShopButton.GetComponent<Button>().interactable = false;
             PackageButton.GetComponent<Button>().interactable = false;
