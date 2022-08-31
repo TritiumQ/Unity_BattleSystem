@@ -24,9 +24,8 @@ public class BattleSystem : MonoBehaviour
 	bool PlayerActionCompleted = false;
 	//特殊行动标记
 	bool AdavancedActionCompleted = false;
-	Queue<ActionPackage> AdavancedActionQueue;
 	bool SubsequentActionCompleted = false;
-	Queue<ActionPackage> SubsequentActionQueue;
+
 	bool ExtraActionCompleted = false;
 	Queue<ActionPackage> ExtraActionQueue;
 
@@ -74,9 +73,7 @@ public class BattleSystem : MonoBehaviour
 		PlayerSurventUnitsList = new List<GameObject>(7);
 		BossSurventUnitsList = new List<GameObject>(7);
 
-		AdavancedActionQueue = new Queue<ActionPackage>();
-		SubsequentActionQueue = new Queue<ActionPackage>();
-		ExtraActionQueue = new Queue<ActionPackage>();
+
 
 		//
 		Stage = GameStage.RoundStart;
@@ -158,7 +155,6 @@ public class BattleSystem : MonoBehaviour
 				{
 					if(ExtraActionCompleted)
 					{
-						//TODO
 						
 						Stage = StageCache;
 					}
@@ -173,10 +169,9 @@ public class BattleSystem : MonoBehaviour
 				break;
 			case GameStage.PlayerAdvancedAction: //玩家单位先手效果
 				{
-
+					
 					if(AdavancedActionCompleted)
 					{
-						//TODO
 						Stage = GameStage.EnemyAdvancedAction;
 					}
 				}

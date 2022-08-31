@@ -32,10 +32,6 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
     }
     private void Update()
     {
-        if(survent.SurventType == CardType.Monster)
-		{
-            
-		}
         RefreshState();
     }
     public void Initialized(CardSOAsset _card)
