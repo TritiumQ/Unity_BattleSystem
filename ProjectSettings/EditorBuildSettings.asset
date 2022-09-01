@@ -32,6 +32,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CardHub.unity
     guid: 2032b60326f04ba478f720bdcbcb7887
+  - enabled: 1
+    path: Assets/Scenes/Select.unity
+    guid: 6ee012c2ef4c6924baaa772ea0934366
+  - enabled: 1
+    path: Assets/Scenes/CardSelect.unity
+    guid: ea2b11e51c15c5545b6f29d1fb7fa060
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000

@@ -8,23 +8,18 @@ public class TurnScenes : MonoBehaviour
 {
     public void StartGame()
     {
-        GameObject _obj=GameObject.Find("GameProcess");
         if (Player.Instance != null)
             ArchiveManager.SavePlayerData(1);
-        if (_obj == null)
-        {
-            GameObject shop = GameObject.Find("Shop");
-            GameObject package = GameObject.Find("Package");
-            GameObject deck = GameObject.Find("Deck");
-            shop.GetComponent<Button>().interactable = false;
-            package.GetComponent<Button>().interactable = false;
-            deck.GetComponent<Button>().interactable = false;
-            SceneManager.LoadScene("CardHub");
-        }
-        else SceneManager.LoadScene("GameProcess");
-        //SceneManager.LoadScene("Gameporess");
+        SceneManager.LoadScene("CardHub");
     }
     
+    public void ContinueGame()
+    {
+        if (Player.Instance != null)
+            ArchiveManager.SavePlayerData(1);
+        SceneManager.LoadScene("GameProcess");
+    }
+
     public void TurnScene(string scene)
     {
         if (Player.Instance != null)
@@ -37,7 +32,10 @@ public class TurnScenes : MonoBehaviour
     public void OverGame()
     {
         GameObject obj = GameObject.Find("GameManager");
-        obj.GetComponent<GameManager>().Gameover(0);
+        if (obj!=null)
+        {
+            obj.GetComponent<GameManager>().Gameover(0);
+        }
     }
     public void ReturnMain()
     {
@@ -56,11 +54,7 @@ public class TurnScenes : MonoBehaviour
             SceneManager.LoadScene("GameProcess");
         }
     }
-    public void SelectLeave()
-    {
-        PlayerDataTF.EventContinue();
-        SceneManager.LoadScene("GameProcess");
-    }
+    
 
     public void QuitGame()
     {
