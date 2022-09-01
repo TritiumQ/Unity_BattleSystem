@@ -27,14 +27,15 @@ public class BattleSystem : MonoBehaviour
 	bool SubsequentActionCompleted = false;
 
 	public Queue<ActionPackage> ExtraActionQueue { get; private set; }
-	bool ExtraActionCompleted
+	bool ExtraActionExist
 	{
 		get
 		{
-			return ExtraActionQueue.Count <= 0;
+			return ExtraActionQueue.Count > 0;
 		}
 	}
 	bool ExtraActionActive = false;
+	bool ExtraActionOver = false;
 
 	/// <summary>
 	/// 回合数
@@ -63,13 +64,18 @@ public class BattleSystem : MonoBehaviour
 
 	private void Update()
 	{
+		if (ExtraActionExist)
+		{
+			StageCache = Stage;
+			Stage = GameStage.ExtraAction;
+		}
 		if(Stage == GameStage.ExtraAction)
 		{
-			StartCoroutine(ExtraProcess());
+			
 		}
 		else
 		{
-			StartCoroutine(MainProcess());
+			
 		}
 	}
 	private void Awake()
@@ -87,7 +93,7 @@ public class BattleSystem : MonoBehaviour
 		PlayerSurventUnitsList = new List<GameObject>(7);
 		BossSurventUnitsList = new List<GameObject>(7);
 
-
+		ExtraActionQueue = new Queue<ActionPackage>();
 
 		//
 		Stage = GameStage.RoundStart;
@@ -160,6 +166,15 @@ public class BattleSystem : MonoBehaviour
 	{
 		PlayerActionCompleted = true;
 	}
+	
+	public void AddExtraAction(GameObject initiator, EffectPackageWithTargetOption effect)
+	{
+		ActionPackage pack = new ActionPackage();
+		pack.Initiator = initiator;
+		pack.Effect = effect;
+		pack.IsEffectOver = false;
+		ExtraActionQueue.Enqueue(pack);
+	}
 
 	IEnumerator ExtraProcess()
 	{
@@ -168,18 +183,29 @@ public class BattleSystem : MonoBehaviour
 
 	IEnumerator MainProcess()
 	{
-		yield break;
 		Debug.Log("Round start");
 		switch (Stage)
 		{
 			case GameStage.RoundStart: //回合开始
 				{
+					//刷新buff
+					playerUnit.SendMessage(RunnerMethodName.UpdateEffect);
+					foreach (var obj in PlayerSurventUnitsList)
+					{
+						obj.SendMessage(RunnerMethodName.UpdateEffect);
+					}
+					bossUnit.SendMessage(RunnerMethodName.UpdateEffect);
+					foreach (var obj in BossSurventUnitsList)
+					{
+						obj.SendMessage(RunnerMethodName.UpdateEffect);
+					}
 					Debug.Log("回合开始");
 					Stage = GameStage.PlayerAdvancedAction;
 				}
-				break;
+				yield break;
 			case GameStage.PlayerAdvancedAction: //玩家单位先手效果
 				{
+
 					if(!AdavancedActionCompleted)
 					{
 						foreach (var unit in PlayerSurventUnitsList)
@@ -196,17 +222,19 @@ public class BattleSystem : MonoBehaviour
 						//AdavancedActionCompleted = false;
 					}
 				}
-				break;
+				yield break;
 			case GameStage.EnemyAdvancedAction: //敌人单位先手效果
 				{
 					bossUnit.SendMessage(RunnerMethodName.AdvancedEffectTrigger);
+					yield return new WaitForSeconds(0.1f);
 					foreach (var unit in BossSurventUnitsList)
 					{
 						unit.SendMessage(RunnerMethodName.AdvancedEffectTrigger);
+						yield return new WaitForSeconds(0.1f);
 					}
 					Stage = GameStage.PlayerDrawCard;
 				}
-				break;
+				yield break;
 			case GameStage.PlayerDrawCard: //玩家抽卡
 				{
 					if (Rounds == 0)
@@ -219,7 +247,7 @@ public class BattleSystem : MonoBehaviour
 					}
 					Stage = GameStage.PlayerAction;
 				}
-				break;
+				yield break;
 			case GameStage.PlayerAction: //玩家行动
 				{
 					if(PlayerActionCompleted)
@@ -227,17 +255,19 @@ public class BattleSystem : MonoBehaviour
 						Stage = GameStage.EnemyAction;
 					}
 				}
-				break;
+				yield break;
 			case GameStage.EnemyAction: //敌人行动
 				{
 					bossUnit.SendMessage(RunnerMethodName.AutoAction, Rounds);
+					yield return new WaitForSeconds(0.1f);
 					foreach (var unit in BossSurventUnitsList)
 					{
 						unit.SendMessage(RunnerMethodName.AutoAction, Rounds);
+						yield return new WaitForSeconds(0.1f);
 					}
 					Stage = GameStage.PlayerSubsequentAction;
 				}
-				break;
+				yield break;
 			case GameStage.PlayerSubsequentAction: //玩家后手效果
 				{
 					//TODO
@@ -247,17 +277,19 @@ public class BattleSystem : MonoBehaviour
 					}
 					Stage = GameStage.EnemySubsequentAction;
 				}
-				break;
+				yield break;
 			case GameStage.EnemySubsequentAction:  //敌人后手效果
 				{
 					bossUnit.SendMessage(RunnerMethodName.SubsequentEffectTrigger);
+					yield return new WaitForSeconds(0.1f);
 					foreach (var unit in BossSurventUnitsList)
 					{
 						unit.SendMessage(RunnerMethodName.SubsequentEffectTrigger);
+						yield return new WaitForSeconds(0.1f);
 					}
 					Stage = GameStage.RoundEnd;
 				}
-				break;
+				yield break;
 			case GameStage.RoundEnd: //回合结束
 				{
 					Rounds++;
@@ -269,21 +301,10 @@ public class BattleSystem : MonoBehaviour
 
 					Stage = GameStage.RoundStart;
 
-					//刷新buff
-					playerUnit.SendMessage(RunnerMethodName.UpdateEffect);
-					foreach (var obj in PlayerSurventUnitsList)
-					{
-						obj.SendMessage(RunnerMethodName.UpdateEffect);
-					}
-					bossUnit.SendMessage(RunnerMethodName.UpdateEffect);
-					foreach (var obj in BossSurventUnitsList)
-					{
-						obj.SendMessage(RunnerMethodName.UpdateEffect);
-					}
 				}
-				break;
+				yield break;
 			default:
-				break;
+				yield break;
 		}
 	}
 

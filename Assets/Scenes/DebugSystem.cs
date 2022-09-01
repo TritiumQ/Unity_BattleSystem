@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class DebugSystem : MonoBehaviour
 {
-    public Button Func1;
+	public Button Func1;
 	public Button Func2;
 
 	private void Awake()
@@ -16,106 +16,64 @@ public class DebugSystem : MonoBehaviour
 	}
 	void Foo1()
 	{
-		_flg2 = true;
+
 	}
 	void Foo2()
 	{
-		_flg4 = true;
+
 	}
 	private void Update()
 	{
-		Refresh();
+		StartCoroutine(Refresh());
 	}
 
 	Phase phase;
-	bool flg2 = false;
-	bool _flg2 = false;
-	bool flg4 = false;
-	bool _flg4 = false;
 
-	void Refresh()
+	bool flg2 = true;
+
+	IEnumerator Refresh()
 	{
 		switch (phase)
 		{
 			case Phase.Phase_1:
 				{
+					flg2 = true;
+					Debug.Log("1");
 					phase = Phase.Phase_2;
 				}
-				break;
+				yield break;
 			case Phase.Phase_2:
 				{
-					while(phase == Phase.Phase_2)
+					if(flg2)
 					{
-
-					}
-					StartCoroutine(PhaseAction());
-					if (flg2)
-					{
-						Debug.Log("Pahse2 End");
-						flg2 = false;
+						Debug.Log("1 front");
+						yield return new WaitForSeconds(1f);
+						Debug.Log("1 back");
 						phase = Phase.Phase_3;
+						flg2 = false;
 					}
 				}
-				break;
+				yield break;
 			case Phase.Phase_3:
 				{
 					phase = Phase.Phase_4;
 				}
-				break;
+				yield break;
 			case Phase.Phase_4:
 				{
-					if(flg4)
-					{
-						Debug.Log("Phase4 End");
-						flg4 = false;
-						phase = Phase.Phase_1;
-						
-					}
-					else
-					{
-						StartCoroutine(PhaseAction());
-					}
+
+					phase = Phase.Phase_1;
 				}
-				break;
+				yield break;
 			default:
-				break;
+				yield break;
 		}
 	}
-	IEnumerator PhaseAction()
-	{
-		switch(phase)
-		{
-			case Phase.Phase_2:
-				{
-					Debug.Log("phase2 start");
-
-					yield return new WaitUntil(() => _flg2);
-					
-					_flg2 = false;
-					flg2 = true;
-					Debug.Log("phase2 complete");
-				}
-				break;
-			case Phase.Phase_4:
-				{
-					Debug.Log("phase4 start");
-
-					yield return new WaitUntil(() => _flg4);
-
-					_flg4 = false;
-					flg4 = true;
-					Debug.Log("phase4 complete");
-				}
-				break;
-			default:
-				break;
-		}
-	}
-	enum Phase
-	{
-		Phase_1,
-		Phase_2,
-		Phase_3,
-		Phase_4,
-	}
+}
+enum Phase
+{
+	Phase_1,
+	Phase_2,
+	Phase_3,
+	Phase_4,
 }

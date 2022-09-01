@@ -94,7 +94,7 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
         //死亡动画
         string msg = survent.CardName + "死亡";
         Debug.Log(msg);
-
+        UndeadEffectTrigger();
         system.SurventUnitDie(gameObject);
 	}
 
@@ -193,7 +193,8 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
                 var eft = effect.Package;
                 if (system != null) 
 				{
-                    system.ApplyEffect(gameObject, eft);
+                    //system.ApplyEffect(gameObject, eft);
+                    system.AddExtraAction(gameObject, eft);
                 }
 			}
 		}
@@ -207,7 +208,8 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
                 var eft = effect.Package;
                 if (system != null)
                 {
-                    system.ApplyEffect(gameObject, eft);
+                    //system.ApplyEffect(gameObject, eft);
+                    system.AddExtraAction(gameObject, eft);
                 }
             }
         }
@@ -221,8 +223,9 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
                 var eft = effect.Package;
                 if (system != null)
 				{
-					system.ApplyEffect(gameObject, eft);
-				}
+                    //system.ApplyEffect(gameObject, eft);
+                    system.AddExtraAction(gameObject, eft);
+                }
             }
         }
     }
@@ -235,8 +238,9 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
                 var eft = effect.Package;
 				if (system != null)
 				{
-					system.ApplyEffect(gameObject, eft);
-				}
+                    //system.ApplyEffect(gameObject, eft);
+                    system.AddExtraAction(gameObject, eft);
+                }
             }
         }
     }
@@ -247,7 +251,8 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
             var eft = effect.Package;
             if (effect.SkillType == AbilityType.亡语效果)
             {
-				system.ApplyEffect(gameObject, eft);
+                //system.ApplyEffect(gameObject, eft);
+                system.AddExtraAction(gameObject, eft);
             }
         }
     }
