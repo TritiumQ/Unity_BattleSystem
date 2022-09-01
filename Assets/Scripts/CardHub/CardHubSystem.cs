@@ -16,11 +16,18 @@ public class CardHubSystem : MonoBehaviour
 
 	public GameObject CardInDeckPrefab;
 	public GameObject CardInHubPrefab;
+
 	[Header("退出按钮")]
 	public Button ExitButton;
+	[Header("确定按钮")]
+	public Button ContinueButton;
 
 	private void Awake()
 	{
+		ExitButton.onClick.AddListener(Exit);
+		ContinueButton.onClick.AddListener(Continue);
+
+		//
 		ArchiveManager.LoadPlayerData();
 		LoadInformation();
 	}
@@ -130,5 +137,14 @@ public class CardHubSystem : MonoBehaviour
 				CardObejcts.Remove(_ID);
 			}
 		}
+	}
+
+	void Exit()
+	{
+		SceneManager.LoadScene("Main");
+	}
+	void Continue()
+	{
+		//TODO 确认并进入游戏
 	}
 }

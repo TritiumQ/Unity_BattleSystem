@@ -26,8 +26,15 @@ public class BattleSystem : MonoBehaviour
 	bool AdavancedActionCompleted = false;
 	bool SubsequentActionCompleted = false;
 
-	bool ExtraActionCompleted = false;
-	Queue<ActionPackage> ExtraActionQueue;
+	public Queue<ActionPackage> ExtraActionQueue { get; private set; }
+	bool ExtraActionCompleted
+	{
+		get
+		{
+			return ExtraActionQueue.Count <= 0;
+		}
+	}
+	bool ExtraActionActive = false;
 
 	/// <summary>
 	/// 回合数
@@ -56,7 +63,14 @@ public class BattleSystem : MonoBehaviour
 
 	private void Update()
 	{
-		GamePlay();
+		if(Stage == GameStage.ExtraAction)
+		{
+			StartCoroutine(ExtraProcess());
+		}
+		else
+		{
+			StartCoroutine(MainProcess());
+		}
 	}
 	private void Awake()
 	{
@@ -146,20 +160,18 @@ public class BattleSystem : MonoBehaviour
 	{
 		PlayerActionCompleted = true;
 	}
-	void GamePlay()
+
+	IEnumerator ExtraProcess()
 	{
+		yield break;
+	}
+
+	IEnumerator MainProcess()
+	{
+		yield break;
+		Debug.Log("Round start");
 		switch (Stage)
 		{
-			case GameStage.ExtraAction:
-				{
-					if(ExtraActionCompleted)
-					{
-						
-						Stage = StageCache;
-					}
-				}
-				break;
-
 			case GameStage.RoundStart: //回合开始
 				{
 					Debug.Log("回合开始");
@@ -168,10 +180,20 @@ public class BattleSystem : MonoBehaviour
 				break;
 			case GameStage.PlayerAdvancedAction: //玩家单位先手效果
 				{
-					
-					if(AdavancedActionCompleted)
+					if(!AdavancedActionCompleted)
+					{
+						foreach (var unit in PlayerSurventUnitsList)
+						{
+							unit.SendMessage(RunnerMethodName.AdvancedEffectTrigger);
+						}
+
+						StageCache = Stage;
+						Stage = GameStage.ExtraAction;
+					}
+					else
 					{
 						Stage = GameStage.EnemyAdvancedAction;
+						//AdavancedActionCompleted = false;
 					}
 				}
 				break;
@@ -202,7 +224,6 @@ public class BattleSystem : MonoBehaviour
 				{
 					if(PlayerActionCompleted)
 					{
-						//TODO
 						Stage = GameStage.EnemyAction;
 					}
 				}
@@ -224,6 +245,7 @@ public class BattleSystem : MonoBehaviour
 					{
 						Stage = GameStage.EnemySubsequentAction;
 					}
+					Stage = GameStage.EnemySubsequentAction;
 				}
 				break;
 			case GameStage.EnemySubsequentAction:  //敌人后手效果
@@ -244,7 +266,7 @@ public class BattleSystem : MonoBehaviour
 					PlayerActionCompleted = false;
 					AdavancedActionCompleted = false;
 					SubsequentActionCompleted = false;
-					ExtraActionCompleted = false;
+
 					Stage = GameStage.RoundStart;
 
 					//刷新buff

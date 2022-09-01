@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ShopSystem : MonoBehaviour
 {
@@ -39,11 +40,12 @@ public class ShopSystem : MonoBehaviour
 		moneyText.text = currentMoneys.ToString();
 	}
 
-	void Initialized()
+	void Initialized(ShopType type,int cardID1, int cardID2, int cardID3, int cardID4)
 	{
+		shopType = type;
 		if(Card1 != null)
 		{
-
+			
 		}
 		if(Card2 != null)
 		{
@@ -75,7 +77,14 @@ public class ShopSystem : MonoBehaviour
 	void Exit()
 	{
 		//TODO ÍË³öÉÌµê
-		
+		if(shopType == ShopType.Shop)
+		{
+			SceneManager.LoadScene("Main");
+		}
+		else if(shopType == ShopType.ShopInGame)
+		{
+
+		}
 	}
 
 	public void SetCard(int pos)
@@ -114,24 +123,24 @@ public class ShopSystem : MonoBehaviour
 	{
 		if (Card1 != null)
 		{
-			Card1.GetComponent("Card").GetComponent<CardManager>().Initialized(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(0)));
+			Card1.GetComponent<CardManager>().Initialized(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(0)));
 		}
 		if (Card2 != null)
 		{
-
+			Card2.GetComponent("Card").GetComponent<CardManager>().Initialized(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(0)));
 		}
 		if (Card3 != null)
 		{
-
+			Card3.GetComponent("Card").GetComponent<CardManager>().Initialized(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(0)));
 		}
 		if (Card4 != null)
 		{
-
+			Card4.GetComponent("Card").GetComponent<CardManager>().Initialized(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(0)));
 		}
 
 		if (goods1 != null)
 		{
-
+			
 		}
 		if (goods2 != null)
 		{

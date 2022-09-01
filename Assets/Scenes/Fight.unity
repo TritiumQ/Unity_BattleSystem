@@ -1258,8 +1258,8 @@ MonoBehaviour:
   bossUnit: {fileID: 717433334}
   roundText: {fileID: 1763938206}
   endButton: {fileID: 319512024}
-  PlayerTurn: {fileID: 1426187863}
-  EnemyTurn: {fileID: 2085651237}
+  PlayerTurnText: {fileID: 1426187863}
+  EnemyTurnText: {fileID: 2085651237}
   playerHands: {fileID: 1451720671}
   surventArea: {fileID: 861619963}
   enemyArea: {fileID: 1499416033}

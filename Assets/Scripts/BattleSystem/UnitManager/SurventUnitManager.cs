@@ -178,6 +178,7 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
 
     public void UpdateEffect()
     {
+        isActive = true;
         survent.UpdateEffect();
     }
 
@@ -185,7 +186,6 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
 
     public void AdvancedEffectTrigger()
     {
-        isActive = true;
         foreach (var effect in survent.SpecialAbilityList)
 		{
             if(effect.SkillType == AbilityType.回合开始效果)
