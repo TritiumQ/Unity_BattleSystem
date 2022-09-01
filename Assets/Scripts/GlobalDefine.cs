@@ -144,7 +144,6 @@ public enum EffectType
 public enum GameStage
 {
     Void,
-    ExtraAction,
 
     RoundStart,
 
@@ -159,14 +158,25 @@ public enum GameStage
     EnemySubsequentAction,
 
     RoundEnd,
-
-
 }
 
-public struct ActionPackage
+public enum ActionType
+{
+    Void,
+    NormalAction,
+    ExtraAction,
+}
+
+public class ExtraActionPackage
 {
     public UnityEngine.GameObject Initiator;
     public EffectPackageWithTargetOption Effect;
     public bool IsEffectOver;
+    public ExtraActionPackage()
+	{
+        Initiator = null;
+        Effect = null;
+        IsEffectOver = false;
+	}
 }
 

@@ -108,9 +108,21 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
 		{
             case EffectType.Attack:
 				{
+                    survent.BeAttacked(effect.EffectValue1);
+                    if (initiator != null && system != null)
+                    {
+                        EffectPackage returnEffect = new EffectPackage();
+                        returnEffect.EffectType = EffectType.FeedbackAttack;
+                        returnEffect.EffectValue1 = survent.ATK;
+                        system.ApplyEffectTo(initiator, gameObject, returnEffect);
+                    }
+                }
+                break;
+            case EffectType.VampireAttack:
+				{
                     int dmg = survent.BeAttacked(effect.EffectValue1);
-                    if(initiator != null && system != null)
-					{
+                    if (initiator != null && system != null)
+                    {
                         EffectPackage returnEffect1 = new EffectPackage();
                         returnEffect1.EffectType = EffectType.FeedbackAttack;
                         returnEffect1.EffectValue1 = survent.ATK;
@@ -119,18 +131,6 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
                         returnEffect2.EffectValue1 = dmg;
                         system.ApplyEffectTo(initiator, gameObject, returnEffect1);
                         system.ApplyEffectTo(initiator, gameObject, returnEffect2);
-                    }
-                }
-                break;
-            case EffectType.VampireAttack:
-				{
-                    int dmg = survent.BeAttacked(effect.EffectValue1);
-                    if (initiator != null && system != null)
-					{
-                        EffectPackage returnEffect = new EffectPackage();
-                        returnEffect.EffectType = EffectType.Heal;
-                        returnEffect.EffectValue1 = dmg;
-                        system.ApplyEffectTo(initiator, gameObject, returnEffect);
                     }
 				}
                 break;

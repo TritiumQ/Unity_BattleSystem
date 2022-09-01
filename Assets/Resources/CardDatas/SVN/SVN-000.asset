@@ -24,11 +24,11 @@ MonoBehaviour:
   MaxHP: 39
   Atk: 39
   IsDoubleHit: 0
-  IsTank: 0
-  IsRaid: 0
+  IsTank: 1
+  IsRaid: 1
   IsVampire: 0
   SpecialAbilityList:
-  - SkillType: 1
+  - SkillType: 2
     Package:
       EffectType: 3
       IsInfinityEffect: 0

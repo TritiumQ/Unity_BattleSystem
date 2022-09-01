@@ -22,11 +22,8 @@ public class BattleSystem : MonoBehaviour
 	GameStage StageCache;
 	//回合结束标志
 	bool PlayerActionCompleted = false;
-	//特殊行动标记
-	bool AdavancedActionCompleted = false;
-	bool SubsequentActionCompleted = false;
 
-	public Queue<ActionPackage> ExtraActionQueue { get; private set; }
+	public Queue<ExtraActionPackage> ExtraActionQueue { get; private set; }
 	bool ExtraActionExist
 	{
 		get
@@ -34,8 +31,6 @@ public class BattleSystem : MonoBehaviour
 			return ExtraActionQueue.Count > 0;
 		}
 	}
-	bool ExtraActionActive = false;
-	bool ExtraActionOver = false;
 
 	/// <summary>
 	/// 回合数
@@ -66,16 +61,15 @@ public class BattleSystem : MonoBehaviour
 	{
 		if (ExtraActionExist)
 		{
-			StageCache = Stage;
-			Stage = GameStage.ExtraAction;
-		}
-		if(Stage == GameStage.ExtraAction)
-		{
-			
+			if(EffectInitiator == null)
+			{
+				ApplyEffect(ExtraActionQueue.Peek().Initiator, ExtraActionQueue.Peek().Effect);
+				ExtraActionQueue.Dequeue();
+			}
 		}
 		else
 		{
-			
+			MainProcess();
 		}
 	}
 	private void Awake()
@@ -93,7 +87,7 @@ public class BattleSystem : MonoBehaviour
 		PlayerSurventUnitsList = new List<GameObject>(7);
 		BossSurventUnitsList = new List<GameObject>(7);
 
-		ExtraActionQueue = new Queue<ActionPackage>();
+		ExtraActionQueue = new Queue<ExtraActionPackage>();
 
 		//
 		Stage = GameStage.RoundStart;
@@ -169,25 +163,20 @@ public class BattleSystem : MonoBehaviour
 	
 	public void AddExtraAction(GameObject initiator, EffectPackageWithTargetOption effect)
 	{
-		ActionPackage pack = new ActionPackage();
+		ExtraActionPackage pack = new ExtraActionPackage();
 		pack.Initiator = initiator;
 		pack.Effect = effect;
 		pack.IsEffectOver = false;
 		ExtraActionQueue.Enqueue(pack);
 	}
 
-	IEnumerator ExtraProcess()
+	void MainProcess()
 	{
-		yield break;
-	}
-
-	IEnumerator MainProcess()
-	{
-		Debug.Log("Round start");
 		switch (Stage)
 		{
 			case GameStage.RoundStart: //回合开始
 				{
+					Debug.Log("Round start");
 					//刷新buff
 					playerUnit.SendMessage(RunnerMethodName.UpdateEffect);
 					foreach (var obj in PlayerSurventUnitsList)
@@ -202,39 +191,26 @@ public class BattleSystem : MonoBehaviour
 					Debug.Log("回合开始");
 					Stage = GameStage.PlayerAdvancedAction;
 				}
-				yield break;
+				break;
 			case GameStage.PlayerAdvancedAction: //玩家单位先手效果
 				{
-
-					if(!AdavancedActionCompleted)
+					foreach (var unit in PlayerSurventUnitsList)
 					{
-						foreach (var unit in PlayerSurventUnitsList)
-						{
-							unit.SendMessage(RunnerMethodName.AdvancedEffectTrigger);
-						}
-
-						StageCache = Stage;
-						Stage = GameStage.ExtraAction;
+						unit.SendMessage(RunnerMethodName.AdvancedEffectTrigger);
 					}
-					else
-					{
-						Stage = GameStage.EnemyAdvancedAction;
-						//AdavancedActionCompleted = false;
-					}
+					Stage = GameStage.EnemyAdvancedAction;
 				}
-				yield break;
+				break;
 			case GameStage.EnemyAdvancedAction: //敌人单位先手效果
 				{
 					bossUnit.SendMessage(RunnerMethodName.AdvancedEffectTrigger);
-					yield return new WaitForSeconds(0.1f);
 					foreach (var unit in BossSurventUnitsList)
 					{
 						unit.SendMessage(RunnerMethodName.AdvancedEffectTrigger);
-						yield return new WaitForSeconds(0.1f);
 					}
 					Stage = GameStage.PlayerDrawCard;
 				}
-				yield break;
+				break;
 			case GameStage.PlayerDrawCard: //玩家抽卡
 				{
 					if (Rounds == 0)
@@ -247,7 +223,7 @@ public class BattleSystem : MonoBehaviour
 					}
 					Stage = GameStage.PlayerAction;
 				}
-				yield break;
+				break;
 			case GameStage.PlayerAction: //玩家行动
 				{
 					if(PlayerActionCompleted)
@@ -255,56 +231,49 @@ public class BattleSystem : MonoBehaviour
 						Stage = GameStage.EnemyAction;
 					}
 				}
-				yield break;
+				break;
 			case GameStage.EnemyAction: //敌人行动
 				{
 					bossUnit.SendMessage(RunnerMethodName.AutoAction, Rounds);
-					yield return new WaitForSeconds(0.1f);
 					foreach (var unit in BossSurventUnitsList)
 					{
 						unit.SendMessage(RunnerMethodName.AutoAction, Rounds);
-						yield return new WaitForSeconds(0.1f);
 					}
 					Stage = GameStage.PlayerSubsequentAction;
 				}
-				yield break;
+				break;
 			case GameStage.PlayerSubsequentAction: //玩家后手效果
 				{
-					//TODO
-					if (SubsequentActionCompleted)
+					foreach (var unit in PlayerSurventUnitsList)
 					{
-						Stage = GameStage.EnemySubsequentAction;
+						unit.SendMessage(RunnerMethodName.SubsequentEffectTrigger);
 					}
 					Stage = GameStage.EnemySubsequentAction;
 				}
-				yield break;
+				break;
 			case GameStage.EnemySubsequentAction:  //敌人后手效果
 				{
 					bossUnit.SendMessage(RunnerMethodName.SubsequentEffectTrigger);
-					yield return new WaitForSeconds(0.1f);
 					foreach (var unit in BossSurventUnitsList)
 					{
 						unit.SendMessage(RunnerMethodName.SubsequentEffectTrigger);
-						yield return new WaitForSeconds(0.1f);
 					}
 					Stage = GameStage.RoundEnd;
 				}
-				yield break;
+				break;
 			case GameStage.RoundEnd: //回合结束
 				{
 					Rounds++;
 					roundText.text = Rounds.ToString();
 
 					PlayerActionCompleted = false;
-					AdavancedActionCompleted = false;
-					SubsequentActionCompleted = false;
 
 					Stage = GameStage.RoundStart;
 
 				}
-				yield break;
+				break;
 			default:
-				yield break;
+				break;
 		}
 	}
 
@@ -393,9 +362,9 @@ public class BattleSystem : MonoBehaviour
 	//  新版效果调度
 	public GameObject EffectInitiator { get; private set; }
 	public CardType InitiatorType { get; private set; }
+	public ActionType actionType { get; private set; }
 	public GameObject EffectTarget { get; private set; }
 	public EffectPackageWithTargetOption effectPack { get; private set; }
-	public bool EffectSetupCompleted { get; private set; }
 
 	public GameObject ArrowPrefab;
 	public GameObject TargetSelectArrow;
@@ -624,7 +593,7 @@ public class BattleSystem : MonoBehaviour
 								{
 									if (_initiator.GetComponent<SurventUnitManager>() != null)
 									{
-										EffectSetupRequest(_initiator, _effect, _initiator.transform.position, CardType.Survent);
+										EffectSetupRequest(_initiator, _effect, _initiator.transform.position, CardType.Survent, ActionType.ExtraAction);
 									}
 									else if(_initiator.GetComponent<CardManager>() != null)
 									{
@@ -726,7 +695,11 @@ public class BattleSystem : MonoBehaviour
 								{
 									if(_initiator.GetComponent<SurventUnitManager>()!=null)
 									{
-										EffectSetupRequest(_initiator, _effect, _initiator.transform.position, CardType.Survent);
+										EffectSetupRequest(_initiator, _effect, _initiator.transform.position, CardType.Survent, ActionType.ExtraAction);
+									}
+									else if (_initiator.GetComponent<CardManager>() != null)
+									{
+										EffectSetupRequest(_initiator, _effect, _initiator.transform.position, CardType.Spell);
 									}
 								}
 								break;
@@ -803,14 +776,14 @@ public class BattleSystem : MonoBehaviour
 			}
 		}
 	}
-	public void EffectSetupRequest(GameObject initiator, EffectPackageWithTargetOption package, Vector2 Pos, CardType _type)
+	public void EffectSetupRequest(GameObject initiator, EffectPackageWithTargetOption package, Vector2 Pos, CardType _type, ActionType _actionType = ActionType.NormalAction)
 	{
 		if(initiator != null && package != null)
 		{
 			EffectInitiator = initiator;
 			effectPack = package;
 			InitiatorType = _type;
-			EffectSetupCompleted = false;
+			actionType = _actionType;
 			//Debug.Log("Accept Request");
 			// 启动目标选择动画
 			TargetSelectArrow = Instantiate(ArrowPrefab, FightSceneCanvas.transform);
@@ -834,7 +807,7 @@ public class BattleSystem : MonoBehaviour
 	{
 		//TODO 这里写得很狗屎，得找个时间重写
 		EffectTarget = target;
-		if (EffectInitiator != EffectTarget && EffectInitiator != null && EffectTarget != null && !EffectSetupCompleted)
+		if (EffectInitiator != EffectTarget && EffectInitiator != null && EffectTarget != null)
 		{
 			if(CheckAttack(EffectTarget))
 			{
@@ -842,7 +815,7 @@ public class BattleSystem : MonoBehaviour
 				if (effectPack.Target == TargetOptions.SinglePlayerTarget && (unitType == UnitType.Player || unitType == UnitType.PlayerSurvent))
 				{
 					ApplyEffectTo(EffectTarget, EffectInitiator, effectPack);
-					if (InitiatorType == CardType.Survent)
+					if (InitiatorType == CardType.Survent && actionType != ActionType.ExtraAction)
 					{
 						EffectInitiator.SendMessage("ActionComplete");
 					}
@@ -855,7 +828,7 @@ public class BattleSystem : MonoBehaviour
 				else if (effectPack.Target == TargetOptions.SingleEnemyTarget && (unitType == UnitType.Boss || unitType == UnitType.BossSurvent))
 				{
 					ApplyEffectTo(EffectTarget, EffectInitiator, effectPack);
-					if (InitiatorType == CardType.Survent)
+					if (InitiatorType == CardType.Survent && actionType != ActionType.ExtraAction)
 					{
 						EffectInitiator.SendMessage("ActionComplete");
 					}
@@ -874,7 +847,7 @@ public class BattleSystem : MonoBehaviour
 		EffectInitiator = null;
 		EffectTarget = null;
 		effectPack = null;
-		EffectSetupCompleted = true;
+
 		//关闭目标选择动画
 		Debug.Log("Cancel Request");
 		Destroy(TargetSelectArrow);
@@ -963,7 +936,7 @@ public class BattleSystem : MonoBehaviour
 				}
 			}
 		}
-		return false;
+		return true;
 	}
 	#endregion
 

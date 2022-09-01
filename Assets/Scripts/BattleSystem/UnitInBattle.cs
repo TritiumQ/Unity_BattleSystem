@@ -90,8 +90,16 @@ public class UnitInBattle
 		}
 		else
 		{
+			int currentHP_tmp = CurrentHP;
 			CurrentHP -= damage;
-			return damage;
+			if(CurrentHP > 0)
+			{
+				return damage;
+			}
+			else
+			{
+				return currentHP_tmp;
+			}
 		}
 	}
 	public virtual void BeHealed(int value)
