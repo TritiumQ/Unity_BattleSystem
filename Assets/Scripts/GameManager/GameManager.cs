@@ -36,8 +36,15 @@ public class GameManager : MonoBehaviour
         //InitGameEvent(2);
 
         //数据重置
-        //InitGameEvent();
-        //GameProcessSave.GameSaveSet(1, this, true);
+        //player = Player.Instance;
+        //ArchiveManager.LoadPlayerData(1);
+        //GameEventCount = GameConst.GameEventCount;//初始化每层关卡数量
+        //if (isFistOpen)
+        //{
+        //    InitGameEvent(2);
+        //    GameProcessSave.GameSaveSet(1, this, true);
+        //    isFistOpen = false;
+        //}
     }
 
     void Update()

@@ -9,29 +9,26 @@ public static class GameProcessSave
 { 
     public static string savePath = Application.dataPath + "/GameProcessDatas/DataSave01.json";
     public static bool isLoad = false;
-    public static string Lock="Lock";    
-
+    public static string Lock="Lock";
+    private static Player player = Player.Instance;
     public static void GameProcessDataSave(GameManager gameManager, bool isContinue)
     {
         lock (Lock)
         {
-            if (!isLoad)
+            System.IO.File.WriteAllText(savePath, string.Empty);
+            SerializableGP gp = new SerializableGP(gameManager, isContinue);
+            string json = null;
+            json = JsonUtility.ToJson(gp);
+            FileStream fs = new FileStream(savePath, FileMode.OpenOrCreate, FileAccess.Write);
+                
+            if (fs != null)
             {
-                SerializableGP gp = new SerializableGP(gameManager, isContinue);
-                string json = null;
-                json = JsonUtility.ToJson(gp);
-                FileStream fs = new FileStream(savePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-                if (fs != null)
-                {
-                    StreamWriter sw = new StreamWriter(fs);
-                    //Debug.Log(json);
-                    sw.Write(json);
-                    sw.Flush();
-                    sw.Close();
-                }
-                fs.Close();
-                isLoad = true;
+                StreamWriter sw = new StreamWriter(fs);
+                sw.WriteLine(json);
+                sw.Flush();
+                sw.Close();
             }
+            fs.Close();
         }
     }
 
@@ -75,6 +72,7 @@ public static class GameProcessSave
                 //Debug.Log(json);
                 fs.Close();
             }
+            Debug.Log(json);
             SerializableGP gp = new SerializableGP();
             JsonUtility.FromJsonOverwrite(json, gp);
             if (gp.level == 1 && gp.step == 0)
@@ -84,8 +82,11 @@ public static class GameProcessSave
     }
     public static void GameSaveSet(int player,GameManager gameManager ,bool process)
     {
-        ArchiveManager.SavePlayerData(player);
-        GameProcessDataSave(gameManager,process);
+        lock (Lock)
+        {
+            ArchiveManager.SavePlayerData(player);
+            GameProcessDataSave(gameManager, process);
+        }
     }
 }
 

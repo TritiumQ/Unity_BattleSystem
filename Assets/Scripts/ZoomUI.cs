@@ -5,10 +5,10 @@ using UnityEngine.EventSystems;
 
 public class ZoomUI : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
 {
-    public float zoomSize;
+    
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
-        transform.localScale = new Vector3(zoomSize, zoomSize, 1.0f);
+        transform.localScale = new Vector3(1.2f,1.2f, 1.0f);
     }
     public void OnPointerExit(PointerEventData eventData)
     {
