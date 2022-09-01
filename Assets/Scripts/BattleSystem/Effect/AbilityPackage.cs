@@ -27,11 +27,11 @@ public enum AbilityType
 	/// <summary>
 	/// 每回合开始时触发
 	/// </summary>
-	先手效果,
+	回合开始效果,
 	/// <summary>
 	/// 每回合结束时触发
 	/// </summary>
-	后手效果,
+	回合结束效果,
 	/// <summary>
 	/// 单位死亡时调用
 	/// </summary>

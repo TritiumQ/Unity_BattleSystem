@@ -188,7 +188,7 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
         isActive = true;
         foreach (var effect in survent.SpecialAbilityList)
 		{
-            if(effect.SkillType == AbilityType.先手效果)
+            if(effect.SkillType == AbilityType.回合开始效果)
 			{
                 var eft = effect.Package;
                 if (system != null) 
@@ -230,7 +230,7 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
     {
         foreach (var effect in survent.SpecialAbilityList)
         {
-            if (effect.SkillType == AbilityType.后手效果)
+            if (effect.SkillType == AbilityType.回合结束效果)
             {
                 var eft = effect.Package;
 				if (system != null)

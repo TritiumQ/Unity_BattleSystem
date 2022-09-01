@@ -161,7 +161,7 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 	{
 		foreach (var effect in Boss.SpecialAbilityList)
 		{
-			if(effect.SkillType == AbilityType.先手效果)
+			if(effect.SkillType == AbilityType.回合开始效果)
 			{
 				if(system != null)
 				{
@@ -174,7 +174,7 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 	{
 		foreach (var effect in Boss.SpecialAbilityList)
 		{
-			if (effect.SkillType == AbilityType.后手效果)
+			if (effect.SkillType == AbilityType.回合结束效果)
 			{
 				if (system != null)
 				{

@@ -498,15 +498,23 @@ public class BattleSystem : MonoBehaviour
 						{
 							case SingleTargetOption.RandomTarget:
 								{
-									int rnd = Random.Range(0, PlayerSurventUnitsList.Count + 1);
-									if(rnd == PlayerSurventUnitsList.Count)
+									do
 									{
-										playerUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
-									}
-									else
-									{
-										PlayerSurventUnitsList[rnd].SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
-									}
+										int rnd = Random.Range(0, PlayerSurventUnitsList.Count + 1);
+										if (rnd == PlayerSurventUnitsList.Count)
+										{
+											playerUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+											break;
+										}
+										else
+										{
+											if(CheckAttack(PlayerSurventUnitsList[rnd]))
+											{
+												PlayerSurventUnitsList[rnd].SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+												break;
+											}
+										}
+									} while (true);	
 								}
 								break;
 							case SingleTargetOption.HighestHPTarget:
@@ -575,7 +583,10 @@ public class BattleSystem : MonoBehaviour
 									{
 										EffectSetupRequest(_initiator, _effect, _initiator.transform.position, CardType.Survent);
 									}
-
+									else if(_initiator.GetComponent<CardManager>() != null)
+									{
+										EffectSetupRequest(_initiator, _effect, _initiator.transform.position, CardType.Spell);
+									}
 								}
 								break;
 							default:
@@ -589,15 +600,23 @@ public class BattleSystem : MonoBehaviour
 						{
 							case SingleTargetOption.RandomTarget:
 								{
-									int rnd = Random.Range(0, BossSurventUnitsList.Count + 1);
-									if (rnd == BossSurventUnitsList.Count)
+									do
 									{
-										bossUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
-									}
-									else
-									{
-										BossSurventUnitsList[rnd].SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
-									}
+										int rnd = Random.Range(0, BossSurventUnitsList.Count + 1);
+										if (rnd == BossSurventUnitsList.Count)
+										{
+											bossUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+											break;
+										}
+										else
+										{
+											if (CheckAttack(BossSurventUnitsList[rnd]))
+											{
+												BossSurventUnitsList[rnd].SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+												break;
+											}
+										}
+									} while (true);
 								}
 								break;
 							case SingleTargetOption.HighestHPTarget:
@@ -774,31 +793,34 @@ public class BattleSystem : MonoBehaviour
 		EffectTarget = target;
 		if (EffectInitiator != EffectTarget && EffectInitiator != null && EffectTarget != null && !EffectSetupCompleted)
 		{
-			UnitType unitType = GetUnitType(target);
-			if(effectPack.Target == TargetOptions.SinglePlayerTarget && (unitType == UnitType.Player || unitType == UnitType.PlayerSurvent))
+			if(CheckAttack(EffectTarget))
 			{
-				ApplyEffectTo(EffectTarget, EffectInitiator, effectPack);
-				if(InitiatorType == CardType.Survent)
+				UnitType unitType = GetUnitType(target);
+				if (effectPack.Target == TargetOptions.SinglePlayerTarget && (unitType == UnitType.Player || unitType == UnitType.PlayerSurvent))
 				{
-					EffectInitiator.SendMessage("ActionComplete");
+					ApplyEffectTo(EffectTarget, EffectInitiator, effectPack);
+					if (InitiatorType == CardType.Survent)
+					{
+						EffectInitiator.SendMessage("ActionComplete");
+					}
+					else if (InitiatorType == CardType.Spell)
+					{
+						playerHandCards.Remove(EffectInitiator);
+						Destroy(EffectInitiator);
+					}
 				}
-				else if(InitiatorType == CardType.Spell)
+				else if (effectPack.Target == TargetOptions.SingleEnemyTarget && (unitType == UnitType.Boss || unitType == UnitType.BossSurvent))
 				{
-					playerHandCards.Remove(EffectInitiator);
-					Destroy(EffectInitiator);
-				}
-			}
-			else if(effectPack.Target == TargetOptions.SingleEnemyTarget && (unitType == UnitType.Boss || unitType == UnitType.BossSurvent))
-			{
-				ApplyEffectTo(EffectTarget, EffectInitiator, effectPack);
-				if (InitiatorType == CardType.Survent)
-				{
-					EffectInitiator.SendMessage("ActionComplete");
-				}
-				else if (InitiatorType == CardType.Spell)
-				{
-					playerHandCards.Remove(EffectInitiator);
-					Destroy(EffectInitiator);
+					ApplyEffectTo(EffectTarget, EffectInitiator, effectPack);
+					if (InitiatorType == CardType.Survent)
+					{
+						EffectInitiator.SendMessage("ActionComplete");
+					}
+					else if (InitiatorType == CardType.Spell)
+					{
+						playerHandCards.Remove(EffectInitiator);
+						Destroy(EffectInitiator);
+					}
 				}
 			}
 		}
@@ -844,6 +866,61 @@ public class BattleSystem : MonoBehaviour
 		{
 			return UnitType.None;
 		}
+	}
+	/// <summary>
+	/// 检测能否攻击该目标
+	/// </summary>
+	/// <param name="attackTarget"></param>
+	/// <returns></returns>
+	bool CheckAttack(GameObject attackTarget)
+	{
+		if(attackTarget.GetComponent<SurventUnitManager>() != null)
+		{
+			if(attackTarget.GetComponent<SurventUnitManager>().survent.IsConcealed)
+			{
+				return false;
+			}
+			else
+			{
+				bool tankExist = false;
+				switch (GetUnitType(attackTarget))
+				{
+					case UnitType.PlayerSurvent:
+						{
+							foreach (var unit in PlayerSurventUnitsList)
+							{
+								if (unit.GetComponent<SurventUnitManager>().survent.IsTank)
+								{
+									tankExist = true;
+								}
+							}
+						}
+						break;
+					case UnitType.BossSurvent:
+						{
+							foreach (var unit in BossSurventUnitsList)
+							{
+								if (unit.GetComponent<SurventUnitManager>().survent.IsTank)
+								{
+									tankExist = true;
+								}
+							}
+						}
+						break;
+					default:
+						return false;
+				}
+				if(tankExist)
+				{
+					return attackTarget.GetComponent<SurventUnitManager>().survent.IsTank;
+				}
+				else
+				{
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	#endregion
 

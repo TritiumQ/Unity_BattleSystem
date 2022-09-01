@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SVN-001
   m_EditorClassIdentifier: 
   CardID: 1
-  CardName: SVN001
+  CardName: "\u666E\u901A\u804C\u5458"
   CardDescription: 
   CardRarity: 0
   CardType: 1
@@ -30,4 +30,13 @@ MonoBehaviour:
   SpecialAbilityList: []
   IsCopidedEffect: 0
   IsCopied: 0
-  SpellEffectList: []
+  SpellEffect:
+    EffectType: 0
+    IsInfinityEffect: 0
+    EffectValue1: 0
+    EffectValue2: 0
+    EffectValue3: 0
+    SpecialEffectScriptName: 
+    Target: 0
+    SingleTargetOption: 0
+    TargetCount: 0

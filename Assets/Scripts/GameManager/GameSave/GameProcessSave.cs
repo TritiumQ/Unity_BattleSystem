@@ -7,7 +7,7 @@ using System.IO;
 //ÉèÎª¾²Ì¬
 public static class GameProcessSave 
 { 
-    public static string savePath= UnityEngine.Application.dataPath + "/GameProcessDatas/DataSave01";
+    public static string savePath = Application.dataPath + "/GameProcessDatas/DataSave01";
     public static bool isLoad = false;
     public static string Lock="Lock";    
 

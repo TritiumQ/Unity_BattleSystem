@@ -11,22 +11,40 @@ public class UnitInBattle
 	public int DEF;
 	
 	protected int ProtectedTimes;
-	public bool IsProtected;
+	public bool IsProtected
+	{
+		get { return ProtectedTimes > 0; }
+	}
 
 	protected int TauntRounds;
-	public bool IsTank;
+	public bool IsTank
+	{
+		get { return TauntRounds > 0; }
+	}
 
 	protected int ConcealRounds;
-	public bool IsConcealed;
+	public bool IsConcealed
+	{
+		get { return ConcealRounds > 0; }
+	}
 
 	protected List<EffectPackage> Inspire;
-	public bool IsInspired;
+	public bool IsInspired
+	{
+		get { return Inspire != null && Inspire.Count > 0; }
+	}
 
 	protected int SilenceRounds;
-	public bool IsSilenced;
+	public bool IsSilenced
+	{
+		get { return SilenceRounds > 0; }
+	}
 
 	protected int VampireRounds;
-	public bool IsVampire;
+	public bool IsVampire
+	{
+		get { return VampireRounds > 0; }
+	}
 
 
 	public UnitInBattle(int maxHP, int currentHP, int aTK, int dEF, int protectedTimes, bool isProtected, int tauntRounds, bool isTank, int concealRounds, bool isConcealed, bool isInspired, int silenceRounds, bool isSilenced, int vampireRounds, bool isVampire)
@@ -36,17 +54,17 @@ public class UnitInBattle
 		ATK = aTK;
 		DEF = dEF;
 		ProtectedTimes = protectedTimes;
-		IsProtected = isProtected;
+		//IsProtected = isProtected;
 		TauntRounds = tauntRounds;
-		IsTank = isTank;
+		//IsTank = isTank;
 		ConcealRounds = concealRounds;
-		IsConcealed = isConcealed;
+		//IsConcealed = isConcealed;
 		Inspire = new List<EffectPackage>();
-		IsInspired = isInspired;
+		//IsInspired = isInspired;
 		SilenceRounds = silenceRounds;
-		IsSilenced = isSilenced;
+		//IsSilenced = isSilenced;
 		VampireRounds = vampireRounds;
-		IsVampire = isVampire;
+		//IsVampire = isVampire;
 	}
 
 	public UnitInBattle()
@@ -91,7 +109,7 @@ public class UnitInBattle
 	{
 		if(rounds != Const.INF)
 		{
-			TauntRounds += rounds;
+			TauntRounds = rounds;
 		}
 		else
 		{
@@ -100,7 +118,7 @@ public class UnitInBattle
 	}
 	public virtual void SetConceal(int rounds)
 	{
-		ConcealRounds += rounds;
+		ConcealRounds = rounds;
 	}
 	public virtual void SetEnhance(int hp, int atk)
 	{
@@ -125,7 +143,7 @@ public class UnitInBattle
 	}
 	public virtual void SetProtected(int times)
 	{
-		ProtectedTimes += times;
+		ProtectedTimes = times;
 	}
 	#endregion
 
@@ -138,33 +156,20 @@ public class UnitInBattle
 		if(TauntRounds > 0)
 		{
 			TauntRounds--;
-			IsTank = true;
 		}
-		else
-		{
-			IsTank = false;
-		}
+
 		if(ConcealRounds > 0)
 		{
 			ConcealRounds--;
-			IsConcealed = true;
 		}
-		else
-		{
-			IsConcealed = false;
-		}
+
 		if(SilenceRounds > 0)
 		{
 			SilenceRounds--;
-			IsSilenced = true;
 		}
-		else
-		{
-			IsSilenced = false;
-		}
+
 		if(Inspire.Count > 0)
 		{
-			IsInspired = true;
 			for (int i = Inspire.Count - 1; i >= 0; i--)
 			{
 				if (Inspire[i] != null)
@@ -179,18 +184,10 @@ public class UnitInBattle
 				}
 			}
 		}
-		else
-		{
-			IsInspired = false;
-		}
+
 		if(VampireRounds > 0)
 		{
-			IsVampire = true;
 			VampireRounds--;
-		}
-		else
-		{
-			IsVampire = false;
 		}
 	}
 	#endregion
