@@ -91,6 +91,7 @@ public class BattleSystem : MonoBehaviour
 
 		//
 		Stage = GameStage.RoundStart;
+
 #if UNITY_EDITOR
 		TestSetData();
 		GameObject.Find("Success").SetActive(true);
@@ -952,6 +953,7 @@ public class BattleSystem : MonoBehaviour
 				{
 					Debug.Log("ÓÎÏ·Ê¤Àû");
 					
+					SceneManager.LoadScene("CardSelect");
 				}
 				break;
 			case GameResult.Failure:

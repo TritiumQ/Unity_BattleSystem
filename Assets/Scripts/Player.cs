@@ -10,7 +10,7 @@ public class Player
     //单例模式
     private Player()
     {
-
+        
     }
     private static Player instance;//全局唯一实例
     public static Player Instance //获取实例的属性
@@ -33,7 +33,6 @@ public class Player
     //0~199：随从  200~399：法术
     public bool IsAllUnlocked { get; private set; }
     public bool[] Unlocked { get; private set; } //记录已解锁的卡牌
-
     /// <summary>
     ///  初始化信息, 仅供ArchiveManager类载入储存信息用, 请勿直接调用
     /// </summary>

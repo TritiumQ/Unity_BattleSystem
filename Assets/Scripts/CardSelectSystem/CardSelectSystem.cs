@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 
 public class CardSelectSystem : MonoBehaviour
-{
+{ 
     public Button ExitButton;
     public Button Card1;
     int id1;
@@ -22,10 +22,9 @@ public class CardSelectSystem : MonoBehaviour
     string NextSceneName;
 
     private void Awake()
-	{
+    { 
         StartCoroutine(EnterScene());
         ExitButton.onClick.AddListener(Exit);
-
 
         //Initialized(0, 0, 0);
 	}
@@ -80,7 +79,7 @@ public class CardSelectSystem : MonoBehaviour
 	{
         //Debug.Log("Exit fade");
         yield return StartCoroutine(QuitScene());
-        //SceneManager.LoadScene(NextSceneName);
+        SceneManager.LoadScene(NextSceneName);
     }
 
     #region µ­Èëµ­³ö
