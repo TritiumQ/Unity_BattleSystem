@@ -141,10 +141,12 @@ public class CardHubSystem : MonoBehaviour
 
 	void Exit()
 	{
+		SaveInformation();
 		SceneManager.LoadScene("Main");
 	}
 	void Continue()
 	{
-		//TODO 确认并进入游戏
+		SaveInformation();
+		SceneManager.LoadScene("GameProcess");
 	}
 }

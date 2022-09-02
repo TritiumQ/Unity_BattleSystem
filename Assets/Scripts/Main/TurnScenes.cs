@@ -15,7 +15,7 @@ public class TurnScenes : MonoBehaviour
     
     public void ContinueGame()
     {
-        if (Player.Instance != null)
+        //if (Player.Instance != null)
             ArchiveManager.SavePlayerData(1);
         SceneManager.LoadScene("GameProcess");
     }
