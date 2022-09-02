@@ -39,7 +39,7 @@ public static class GameProcessSave
             //Debug.Log(1);
             if (gameManager != null)
             {
-                Debug.Log(savePath);
+                //Debug.Log(savePath);
                 string json = null;
                 FileStream fs = new FileStream(savePath, FileMode.OpenOrCreate, FileAccess.Read);
                 if (fs != null)

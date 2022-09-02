@@ -150,6 +150,7 @@ public class GameManager : MonoBehaviour
     {
         result = _result;
         GetReward();
+        isFistOpen = true;
         if (player != null)
         {
             player.ReSet();
