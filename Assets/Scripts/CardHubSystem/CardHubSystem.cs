@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class CardHubSystem : MonoBehaviour
 {
 	int Count;//TODO 限制卡组12张
+
 	Dictionary<int, GameObject> CardObejcts; 
 	Dictionary<int, int> CardCount;
 
@@ -35,6 +36,7 @@ public class CardHubSystem : MonoBehaviour
 	{
 		if(Player.Instance != null)
 		{
+			Count = Player.Instance.cardSet.Count;
 			CardObejcts = new Dictionary<int, GameObject>();
 			CardCount = new Dictionary<int, int>();
 			foreach (int id in Player.Instance.cardSet)
@@ -89,7 +91,7 @@ public class CardHubSystem : MonoBehaviour
 	/// <param name="card">卡牌ID</param>
 	public void SelectCardCommit(GameObject card)
 	{
-		if(card != null)
+		if(card != null && Count < 12)
 		{
 			if(card.GetComponent<CardInDeckManager>() != null)
 			{
@@ -111,6 +113,7 @@ public class CardHubSystem : MonoBehaviour
 			{
 				CardCount[_ID]++;
 				CardObejcts[_ID].GetComponent<CardInDeckManager>().currentCount++;
+				Count++;
 			}
 		}
 		else
@@ -129,22 +132,27 @@ public class CardHubSystem : MonoBehaviour
 			{
 				CardCount[_ID]--;
 				CardObejcts[_ID].GetComponent<CardInDeckManager>().currentCount--;
+				Count--;
 			}
 			else
 			{
 				CardCount.Remove(_ID);
 				Destroy(CardObejcts[_ID]);
 				CardObejcts.Remove(_ID);
+				Count--;
 			}
 		}
 	}
 
 	void Exit()
 	{
+		SaveInformation();
 		SceneManager.LoadScene("Main");
 	}
 	void Continue()
 	{
 		//TODO 确认并进入游戏
+		SaveInformation();
+		SceneManager.LoadScene("GameProcess");
 	}
 }
