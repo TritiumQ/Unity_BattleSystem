@@ -58,6 +58,11 @@ public class LoadManager : MonoBehaviour
                     Debug.Log("敌人信息载入成功");
                 }
             }
+            else if(scene=="CardSelect")
+            {
+                CardSelectSystem obj = GameObject.Find("CardSelectSystem").GetComponent<CardSelectSystem>();
+                obj.Initialized("GameProcess", GetRandom.GetRandomCard(), GetRandom.GetRandomCard(), GetRandom.GetRandomCard());
+            }
             GameObject _obj = GameObject.Find("Panel");
             _obj.SetActive(false);
         }
