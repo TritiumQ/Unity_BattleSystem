@@ -106,6 +106,8 @@ public class CardSelectSystem : MonoBehaviour
             Mask.color = new Color(0, 0, 0, alpha_tmp);
             yield return null;
         }
+        PlayerDataTF.EventContinue();
+        SceneManager.LoadScene("GameProcess");
     }
     #endregion
 }
