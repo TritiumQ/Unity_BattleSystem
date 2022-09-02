@@ -18,7 +18,6 @@ public class CardSelectSystem : MonoBehaviour
 
 	public Image Mask;
 
-    List<int> CurrentCardSet;
     string NextSceneName;
 
     private void Awake()
@@ -31,6 +30,7 @@ public class CardSelectSystem : MonoBehaviour
 
 	public void Initialized(string _nextSceneName, int cardID1, int cardID2, int cardID3)
 	{
+        Debug.Log("Init Card Select");
         NextSceneName = _nextSceneName;
         id1 = cardID1;
         id2 = cardID2;

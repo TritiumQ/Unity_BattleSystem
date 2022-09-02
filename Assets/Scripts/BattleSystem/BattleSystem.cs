@@ -98,6 +98,11 @@ public class BattleSystem : MonoBehaviour
 		GameObject.Find("Fail").SetActive(true);
 #endif
 	}
+	void SwitchTurnText()
+	{
+		PlayerTurnText.enabled = !PlayerTurnText.enabled;
+		EnemyTurnText.enabled = !EnemyTurnText.enabled;
+	}
 	/// <summary>
 	/// 随机抽卡
 	/// </summary>
@@ -122,11 +127,6 @@ public class BattleSystem : MonoBehaviour
 			}
 		}
 	}
-	void SwitchTurnText()
-	{
-		PlayerTurnText.enabled = !PlayerTurnText.enabled;
-		EnemyTurnText.enabled = !EnemyTurnText.enabled;
-	}
 	/// <summary>
 	/// 获取特定卡牌
 	/// </summary>
@@ -134,14 +134,17 @@ public class BattleSystem : MonoBehaviour
 	/// <param name="_count">卡牌数量</param>
 	void GetCard(int _ID, int _count)
 	{
-		if(playerHandCards.Count < 10)
+		for(int i = 0; i< _count; i++)
 		{
-			CardSOAsset asset = ArchiveManager.LoadCardAsset(_ID);
-			if (asset != null)
+			if (playerHandCards.Count < 10)
 			{
-				GameObject newCard = Instantiate(cardPrefab, playerHands.transform);
-				newCard.GetComponent<CardManager>().Initialized(asset);
-				playerHandCards.Add(newCard);
+				CardSOAsset asset = ArchiveManager.LoadCardAsset(_ID);
+				if (asset != null)
+				{
+					GameObject newCard = Instantiate(cardPrefab, playerHands.transform);
+					newCard.GetComponent<CardManager>().Initialized(asset);
+					playerHandCards.Add(newCard);
+				}
 			}
 		}
 	}
@@ -944,6 +947,20 @@ public class BattleSystem : MonoBehaviour
 	}
 	#endregion
 
+
+	IEnumerator LoadNextScene()
+	{
+		AsyncOperation async = SceneManager.LoadSceneAsync("CardSelect");
+		
+		while (!async.isDone)
+		{
+			yield return null;
+		}
+		Debug.Log("mmm");
+		GameObject.Find("CardSelectSystem").GetComponent<CardSelectSystem>().Initialized("GameProcess", GetRandom.GetRandomCard(), GetRandom.GetRandomCard(), GetRandom.GetRandomCard());
+	}
+
+
 	//TODO 战斗结束
 	public void GameEnd(GameResult result)
 	{
@@ -952,8 +969,8 @@ public class BattleSystem : MonoBehaviour
 			case GameResult.Success:
 				{
 					Debug.Log("游戏胜利");
-					
-					SceneManager.LoadScene("CardSelect");
+					//SceneManager.LoadSceneAsync("CardSelect");
+					StartCoroutine(LoadNextScene());
 				}
 				break;
 			case GameResult.Failure:
