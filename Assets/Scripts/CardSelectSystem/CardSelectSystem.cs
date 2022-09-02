@@ -10,23 +10,32 @@ public class CardSelectSystem : MonoBehaviour
 {
     public Button ExitButton;
     public Button Card1;
+    int id1;
     public Button Card2;
+    int id2;
     public Button Card3;
+    int id3;
 
 	public Image Mask;
 
     List<int> CurrentCardSet;
+    string NextSceneName;
 
-	private void Awake()
+    private void Awake()
 	{
         StartCoroutine(EnterScene());
-        ExitButton.StartCoroutine(Exit());
+        ExitButton.onClick.AddListener(Exit);
+
 
         //Initialized(0, 0, 0);
 	}
 
-	public void Initialized(int cardID1, int cardID2, int cardID3)
+	public void Initialized(string _nextSceneName, int cardID1, int cardID2, int cardID3)
 	{
+        NextSceneName = _nextSceneName;
+        id1 = cardID1;
+        id2 = cardID2;
+        id3 = cardID3;
         if(Card1 != null)
 		{
             Card1.GetComponentInChildren<CardManager>().Initialized(ArchiveManager.LoadCardAsset(cardID1));
@@ -41,10 +50,38 @@ public class CardSelectSystem : MonoBehaviour
         }
 	}
 
-    IEnumerator Exit()
+    public void SelectCard(int _pos)
 	{
-        yield return StartCoroutine(QuitScene());
+        switch (_pos)
+		{
+            case 1:
+                Player.Instance.AddCard(id1);
+                break;
+            case 2:
+                Player.Instance.AddCard(id2);
+                break;
+            case 3:
+                Player.Instance.AddCard(id3);
+                break;
+            default:
+                //Debug.LogError("错误的位置ID");
+                break;
+		}
+        Exit();
 	}
+
+    void Exit()
+	{
+        Debug.Log("Exit");
+        StartCoroutine(_exit());
+	}
+
+    IEnumerator _exit()
+	{
+        //Debug.Log("Exit fade");
+        yield return StartCoroutine(QuitScene());
+        //SceneManager.LoadScene(NextSceneName);
+    }
 
     #region 淡入淡出
     public float alpha = 2;
