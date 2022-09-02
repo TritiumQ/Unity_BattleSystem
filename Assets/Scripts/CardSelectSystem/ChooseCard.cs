@@ -35,7 +35,9 @@ public class ChooseCard : MonoBehaviour,IPointerDownHandler
     {
         Player.Instance.AddCard(RanNum);
         ArchiveManager.SavePlayerData(RanNum);
+        FadeModel.Instance.fadeToScene();
         PlayerDataTF.EventContinue();
-        SceneManager.LoadScene("GameProcess");
+       
+        //SceneManager.LoadScene("GameProcess");
     }
 }

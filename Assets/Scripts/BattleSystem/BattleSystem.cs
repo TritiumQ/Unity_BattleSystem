@@ -91,8 +91,11 @@ public class BattleSystem : MonoBehaviour
 
 		//
 		Stage = GameStage.RoundStart;
-		//
+#if UNITY_EDITOR
 		TestSetData();
+		GameObject.Find("Success").SetActive(true);
+		GameObject.Find("Fail").SetActive(true);
+#endif
 	}
 	/// <summary>
 	/// 随机抽卡
@@ -948,6 +951,7 @@ public class BattleSystem : MonoBehaviour
 			case GameResult.Success:
 				{
 					Debug.Log("游戏胜利");
+					
 				}
 				break;
 			case GameResult.Failure:
@@ -963,6 +967,11 @@ public class BattleSystem : MonoBehaviour
 			default:
 				break;
 		}
+	}
+	public void GameEnd(int _result)
+	{
+		GameResult result = (GameResult)_result;
+		GameEnd(result);
 	}
 
 	//相关信息载入方法
@@ -994,6 +1003,5 @@ public class BattleSystem : MonoBehaviour
 
 		Debug.Log("测试载入数据完成");
 	}
-
 }
 

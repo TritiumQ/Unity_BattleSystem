@@ -33,7 +33,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SceureHouse.unity
     guid: 96d53d383726d084db252565b93c499d
   - enabled: 1
-    path: Assets/Scenes/Select.unity
+    path: Assets/Scenes/Choice.unity
     guid: 6ee012c2ef4c6924baaa772ea0934366
   - enabled: 0
     path: 
