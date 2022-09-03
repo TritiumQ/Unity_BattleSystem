@@ -154,8 +154,8 @@ public class GameManager : MonoBehaviour
         if (player != null)
         {
             player.ReSet();
-            InitGameEvent();
-            GameProcessSave.GameSaveSet(1, this, true);
+            //InitGameEvent();
+            //GameProcessSave.GameSaveSet(1, this, true);
         }
         //_result控制结局走向,暂定 0是失败，1是胜利......
         //切换End场景
