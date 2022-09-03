@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public int level;     //层数
     public int result=-1;    //游戏结局
     public List<int> GameEvent; //游戏事件
-    private static bool isFistOpen = true;
+    public static bool isFistOpen = true;
 
     public GameObject eventPrefab;
     public GameObject levelUI;
@@ -23,11 +23,11 @@ public class GameManager : MonoBehaviour
     public List<GameObject> eventUnit; //事件对象链表
     private void Awake()
     {
-        
+        InitGameManager();
     }
     void Start()
     {
-        InitGameManager();
+        //InitGameManager();
 
         //测试区
         //step = 4; level = 2;
@@ -90,8 +90,9 @@ public class GameManager : MonoBehaviour
                 newEvent.GetComponent<EventUI>().SetEventSign(GameEvent[i]); //设置事件对象的类型
             eventUnit.Add(newEvent);
         }
-        
+
         //设置下一关场景加载
+        //Debug.Log(GameEvent[0]);
         LoadManager.GetComponent<LoadManager>().NextScene(GameEvent[0]);
     }
 
@@ -167,6 +168,7 @@ public class GameManager : MonoBehaviour
 
     void AddStep()
     {
+        Debug.Log(eventUnit.Count);
         eventUnit[step].GetComponent<EventUI>().SetPass();//事件图标更新
         step++;
         if (step < GameEventCount[level])

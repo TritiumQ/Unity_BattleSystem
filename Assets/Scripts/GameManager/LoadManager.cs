@@ -13,7 +13,9 @@ public class LoadManager : MonoBehaviour
     public Slider slider;
     public TextMeshProUGUI text;
     public string scene;
+    public GameManager gameManager;
 
+    
     public void LoadNextLevel()
     {
         StartCoroutine(LoadLevel());//¿ªÆôÐ­³Ì
@@ -118,7 +120,7 @@ public class LoadManager : MonoBehaviour
                 break;
             case 3:
                 {
-                    int level = GameObject.Find("GameManager").GetComponent<GameManager>().level;
+                    int level = gameManager.level;
                     if(level==1)
                     {
                         scene = "CardSelect";

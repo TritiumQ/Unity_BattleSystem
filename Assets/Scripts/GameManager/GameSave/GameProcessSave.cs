@@ -72,7 +72,7 @@ public static class GameProcessSave
                 //Debug.Log(json);
                 fs.Close();
             }
-            Debug.Log(json);
+            //Debug.Log(json);
             SerializableGP gp = new SerializableGP();
             JsonUtility.FromJsonOverwrite(json, gp);
             if (gp.level == 1 && gp.step == 0)

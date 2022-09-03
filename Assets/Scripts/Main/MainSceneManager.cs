@@ -14,6 +14,8 @@ public class MainSceneManager : MonoBehaviour
     
     private void Start()
     {
+        //ArchiveManager.ResetPlayerDataFile();
+        
         player = Player.Instance;
         ArchiveManager.LoadPlayerData(1);
         if (GameProcessSave.ReadSave())

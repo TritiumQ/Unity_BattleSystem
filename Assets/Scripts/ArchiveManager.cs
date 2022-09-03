@@ -35,6 +35,7 @@ public static class ArchiveManager
 	public static void SavePlayerData(int _saveID)
 	{
 		Debug.Log("±£´æ¿ªÊ¼");
+		System.IO.File.WriteAllText(Const.PLAYER_DATA_PATH(_saveID), string.Empty);
 		SerializablePlayerData save = new SerializablePlayerData(Player.Instance);
 		string json = null;
 		json = JsonUtility.ToJson(save);

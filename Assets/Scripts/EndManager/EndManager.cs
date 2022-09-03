@@ -29,7 +29,7 @@ public class EndManager : MonoBehaviour
             SetDisplayBox(1, step);
             SetDisplayBox(2, step);
             GameObject _obj = GameObject.Find("GameProcess");
-            Destroy(_object);
+            Destroy(_obj);
         }
     }
     
