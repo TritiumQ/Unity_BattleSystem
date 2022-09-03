@@ -15,6 +15,7 @@ public class ShopSystem : MonoBehaviour
 	public TextMeshProUGUI moneyText;
 
 	[Header("¿¨ÅÆÑ¡Ôñ")]
+	int[] cardPrice;
 	public Button Card1;
 	public Button Card2;
 	public Button Card3;
@@ -31,13 +32,49 @@ public class ShopSystem : MonoBehaviour
 	private void Awake()
 	{
 		exitButton.onClick.AddListener(Exit);
-		
-		TestLoadData();
+		cardPrice = new int[4];
+
+		Initialized(ShopType.Shop);
 	}
 
 	private void Update()
 	{
 		moneyText.text = currentMoneys.ToString();
+	}
+
+	void Initialized(ShopType type)
+	{
+		shopType = type;
+		int idx = 0;
+		foreach(var obj in new Button[4] { Card1, Card2, Card3, Card4 })
+		{
+			CardSOAsset asset = ArchiveManager.LoadCardAsset(GetRandom.GetRandomCard());
+			//obj.GetComponentInChildren<CardManager>().Initialized(asset);
+			//obj.transform.Find("Name").GetComponent<TextMeshProUGUI>().text = asset.CardName;
+			Debug.Log(obj.transform.Find("Name").parent.name);
+			/*
+			switch (asset.CardRarity)
+			{
+				case RarityRank.Normal:
+					cardPrice[idx] = Const.NormalCardPrice;
+					break;
+				case RarityRank.Rare:
+					cardPrice[idx] = Const.RareCardPrice;
+					break;
+				case RarityRank.Epic:
+					cardPrice[idx] = Const.EpicCardPrice;
+					break;
+				case RarityRank.Legend:
+					cardPrice[idx] = Const.LegendCardPrice;
+					break;
+				default:
+					cardPrice[idx] = 39;
+					break;
+			}
+			obj.transform.Find("Price").GetComponent<TextMeshProUGUI>().text = cardPrice[idx].ToString();
+			idx++;
+			*/
+		}
 	}
 
 	void Initialized(ShopType type,int cardID1, int cardID2, int cardID3, int cardID4)
@@ -119,38 +156,7 @@ public class ShopSystem : MonoBehaviour
 				break;
 		}
 	}
-	public void TestLoadData()
-	{
-		if (Card1 != null)
-		{
-			Card1.GetComponent<CardManager>().Initialized(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(0)));
-		}
-		if (Card2 != null)
-		{
-			Card2.GetComponent("Card").GetComponent<CardManager>().Initialized(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(0)));
-		}
-		if (Card3 != null)
-		{
-			Card3.GetComponent("Card").GetComponent<CardManager>().Initialized(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(0)));
-		}
-		if (Card4 != null)
-		{
-			Card4.GetComponent("Card").GetComponent<CardManager>().Initialized(Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(0)));
-		}
-
-		if (goods1 != null)
-		{
-			
-		}
-		if (goods2 != null)
-		{
-
-		}
-		if (goods3 != null)
-		{
-
-		}
-	}
+	
 }
 public enum ShopType
 {
