@@ -951,13 +951,18 @@ public class BattleSystem : MonoBehaviour
 	IEnumerator LoadNextScene()
 	{
 		AsyncOperation async = SceneManager.LoadSceneAsync("CardSelect");
-		
-		while (!async.isDone)
+		if (async != null)
 		{
-			yield return null;
+			async.allowSceneActivation = false;
+			while (!async.isDone)
+			{
+				if (async.progress >= 0.9f)
+				{
+					async.allowSceneActivation = true;
+				}
+				yield return null;
+			}
 		}
-		Debug.Log("mmm");
-		GameObject.Find("CardSelectSystem").GetComponent<CardSelectSystem>().Initialized("GameProcess", GetRandom.GetRandomCard(), GetRandom.GetRandomCard(), GetRandom.GetRandomCard());
 	}
 
 

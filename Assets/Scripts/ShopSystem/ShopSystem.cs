@@ -77,6 +77,7 @@ public class ShopSystem : MonoBehaviour
 		}
 		else if(shopType == ShopType.ShopInGame)
 		{
+			PlayerDataTF.EventContinue();
 			SceneManager.LoadScene("GameProcess");
 		}
 	}
