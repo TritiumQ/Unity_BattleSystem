@@ -18,6 +18,10 @@ public class GoodsManager : MonoBehaviour
 	{
 		Refresh();
 	}
+	public void Initialized(GoodsSOAsset _asset)
+	{
+		asset = _asset;
+	}
 	public void Refresh()
 	{
 		if(asset != null)

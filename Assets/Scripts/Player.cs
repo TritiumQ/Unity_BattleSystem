@@ -107,6 +107,16 @@ public class Player
         Mithrils += _mithrils;
         Tears += _tears;
     }
+
+    public void SetTears(int _tears)
+	{
+        Tears += _tears;
+	}
+    public void SetMithrils(int _mithrils)
+	{
+        Mithrils = _mithrils;
+	}
+
     public void AddInitTears(int _initTears)
     {
         InitTears += _initTears;
