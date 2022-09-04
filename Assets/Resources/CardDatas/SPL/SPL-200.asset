@@ -41,13 +41,13 @@ MonoBehaviour:
       TargetCount: 0
   IsCopidedEffect: 1
   IsCopied: 0
-  SpellEffectList:
-  - EffectType: 11
+  SpellEffect:
+    EffectType: 1
     IsInfinityEffect: 0
-    EffectValue1: 0
+    EffectValue1: 39
     EffectValue2: 0
     EffectValue3: 0
     SpecialEffectScriptName: 
-    Target: 0
-    SingleTargetOption: 0
+    Target: 10
+    SingleTargetOption: 5
     TargetCount: 0

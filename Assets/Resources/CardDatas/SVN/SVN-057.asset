@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5260d0e1e557d924098f98884611e3f5, type: 3}
+  m_Name: SVN-057
+  m_EditorClassIdentifier: 
+  CardID: 57
+  CardName: SVN057
+  CardDescription: "*\u7A81\u88AD*"
+  CardRarity: 1
+  CardType: 1
+  CardCamp: 2
+  Cost: 3
+  CardImage: {fileID: 21300000, guid: eebc8b4394935fc4d84d060254dbafa6, type: 3}
+  RarityImage: {fileID: 21300000, guid: 1cccf424955f79b4599d71bb3e3a8397, type: 3}
+  MaxHP: 3
+  Atk: 2
+  IsDoubleHit: 0
+  IsTank: 0
+  IsRaid: 1
+  IsVampire: 0
+  SpecialAbilityList: []
+  IsCopidedEffect: 0
+  IsCopied: 0
+  SpellEffect:
+    EffectType: 0
+    IsInfinityEffect: 0
+    EffectValue1: 0
+    EffectValue2: 0
+    EffectValue3: 0
+    SpecialEffectScriptName: 
+    Target: 0
+    SingleTargetOption: 0
+    TargetCount: 0

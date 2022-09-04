@@ -125,7 +125,7 @@ public class DeckManager : MonoBehaviour
             reData = playerData.playerDeck;
         }
         GameObject newCard = Instantiate(targetPrefab, targetPanel);
-        //TODO
+        
         //newCard.GetComponent<CardDisplay>().card = CardStore.cardList[_id];
         deckDic.Add(_id, newCard);
         */

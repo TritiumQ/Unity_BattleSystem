@@ -10,7 +10,7 @@ public class Player
     //单例模式
     private Player()
     {
-
+        
     }
     private static Player instance;//全局唯一实例
     public static Player Instance //获取实例的属性
@@ -31,8 +31,8 @@ public class Player
     public int InitTears { get; private set; }//初始泪滴
     public List<int> cardSet  { get; private set; } //牌组
     //0~199：随从  200~399：法术
+    public bool IsAllUnlocked { get; private set; }
     public bool[] Unlocked { get; private set; } //记录已解锁的卡牌
-
     /// <summary>
     ///  初始化信息, 仅供ArchiveManager类载入储存信息用, 请勿直接调用
     /// </summary>
@@ -47,13 +47,20 @@ public class Player
         InitTears = _info.InitTears;
 
         cardSet = new List<int>(_info.CardSet);
-
-        Unlocked = new bool[401];
-        Array.Fill(Unlocked, false);
-        foreach(var id in _info.UnlockCard)
+        IsAllUnlocked = _info.IsAllUnlocked;
+        Unlocked = new bool[400];
+        if(IsAllUnlocked)
 		{
-            Unlocked[id] = true;
-		}
+            Array.Fill(Unlocked, true);
+        }
+		else
+		{
+            Array.Fill(Unlocked, false);
+            foreach (var id in _info.UnlockCard)
+            {
+                Unlocked[id] = true;
+            }
+        }
 	}
 
     #region 数据修改接口
@@ -100,6 +107,16 @@ public class Player
         Mithrils += _mithrils;
         Tears += _tears;
     }
+
+    public void SetTears(int _tears)
+	{
+        Tears += _tears;
+	}
+    public void SetMithrils(int _mithrils)
+	{
+        Mithrils = _mithrils;
+	}
+
     public void AddInitTears(int _initTears)
     {
         InitTears += _initTears;

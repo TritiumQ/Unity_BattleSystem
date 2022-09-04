@@ -11,6 +11,7 @@ public static class ArchiveManager
 	{
 		if (_saveID > 0 && _saveID <= Const.MaxSaveCount)
 		{
+			Debug.Log("载入数据");
 			string json = null;
 			FileStream fs = new FileStream(Const.PLAYER_DATA_PATH(_saveID), FileMode.Open, FileAccess.Read);
 			if(fs != null)
@@ -21,9 +22,10 @@ public static class ArchiveManager
 			JsonUtility.FromJsonOverwrite(json, save);
 			if(save.Name != null)
 			{
-				Debug.Log("1");
 				Player.Instance.Initialized(save);
 			}
+			fs.Close();
+			Debug.Log("载入完成");
 		}
 	}
 	/// <summary>
@@ -32,11 +34,13 @@ public static class ArchiveManager
 	/// <returns></returns>
 	public static void SavePlayerData(int _saveID)
 	{
+		Debug.Log("保存开始");
+		System.IO.File.WriteAllText(Const.PLAYER_DATA_PATH(_saveID), string.Empty);
 		SerializablePlayerData save = new SerializablePlayerData(Player.Instance);
 		string json = null;
 		json = JsonUtility.ToJson(save);
 		FileStream fs = new FileStream(Const.PLAYER_DATA_PATH(_saveID), FileMode.OpenOrCreate, FileAccess.Write);
-		if(fs != null)
+		if (fs != null)
 		{
 			StreamWriter sw = new StreamWriter(fs);
 			sw.Write(json);
@@ -44,6 +48,8 @@ public static class ArchiveManager
 			sw.Close();
 		}
 		fs.Close();
+		Debug.Log("保存完成");
+
 	}
 	/// <summary>
 	/// 获取卡牌Asset

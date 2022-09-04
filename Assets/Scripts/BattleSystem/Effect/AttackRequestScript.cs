@@ -25,14 +25,16 @@ public class AttackRequestScript : MonoBehaviour, IPointerClickHandler
                 {
                     EffectPackageWithTargetOption effect = new EffectPackageWithTargetOption();
                     effect.EffectType = manager.survent.IsVampire ? EffectType.VampireAttack : EffectType.Attack;
+                    Debug.Log(effect.EffectType);
                     effect.EffectValue1 = manager.survent.ATK;
                     effect.Target = TargetOptions.SingleEnemyTarget;
-                    system.EffectSetupRequest(gameObject, effect, transform.position);
-                    Debug.Log("Attack Request");
+                    effect.SingleTargetOption = SingleTargetOption.SpecificTarget;
+                    system.EffectSetupRequest(gameObject, effect, transform.position, CardType.Survent);
                 }
                 else
                 {
                     system.EffectSetupOver();
+                    Debug.Log("Attack Dame");
                 }
             }
         }

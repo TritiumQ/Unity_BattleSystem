@@ -17,17 +17,19 @@ public class EndManager : MonoBehaviour
     }
     public void InitData()
     {
-        GameObject _object= GameObject.Find("GameManager");
+        GameManager _object = GameObject.Find("GameManager").GetComponent<GameManager>();
         if (_object != null) 
         {
-            //step计算有误
-            step = _object.GetComponent<GameManager>().step;
-            level= _object.GetComponent<GameManager>().level;
-            result= _object.GetComponent<GameManager>().result;
+            Debug.Log("初始化结束场景");
+            step = _object.step;
+            level= _object.level;
+            result= _object.result;
+            _object.InitGameEvent();
+            GameProcessSave.GameSaveSet(1, _object, true);
             SetDisplayBox(1, step);
             SetDisplayBox(2, step);
-            _object = GameObject.Find("GameProcess");
-            Destroy(_object);
+            GameObject _obj = GameObject.Find("GameProcess");
+            Destroy(_obj);
         }
     }
     

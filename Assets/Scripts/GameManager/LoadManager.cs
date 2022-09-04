@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using UnityEngine.Events;
+using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+
 
 public class LoadManager : MonoBehaviour
 {
@@ -11,12 +13,17 @@ public class LoadManager : MonoBehaviour
     public Slider slider;
     public TextMeshProUGUI text;
     public string scene;
+    public GameManager gameManager;
 
+    
     public void LoadNextLevel()
     {
         StartCoroutine(LoadLevel());//开启协程
     }
-
+    public void SelectFight()
+    {
+        StartCoroutine(LoadFight());
+    }
     IEnumerator LoadLevel()
     {
         loadScreen.SetActive(true);//可以加载场景
@@ -55,8 +62,45 @@ public class LoadManager : MonoBehaviour
                     Debug.Log("敌人信息载入成功");
                 }
             }
+            else if(scene=="CardSelect")
+            {
+                CardSelectSystem obj = GameObject.Find("CardSelectSystem").GetComponent<CardSelectSystem>();
+                obj.Initialized("GameProcess", GetRandom.GetRandomCard(), GetRandom.GetRandomCard(), GetRandom.GetRandomCard());
+            }
             GameObject _obj = GameObject.Find("Panel");
             _obj.SetActive(false);
+        }
+    }
+
+    IEnumerator LoadFight()
+    {
+        //loadScreen.SetActive(true);
+        AsyncOperation operation = SceneManager.LoadSceneAsync("Fight");
+        if (operation != null)
+        {
+            operation.allowSceneActivation = false;
+            while (!operation.isDone)
+            {
+                if (operation.progress >= 0.9F)
+                {
+                    GameObject obj = GameObject.Find("GameManager");
+                    int level = obj.GetComponent<GameManager>().level;
+                    int step = obj.GetComponent<GameManager>().step;
+                    int enemy = GetRandom.GetRandomEnemy(level, step,true);
+                    Debug.Log(enemy);
+                    GameObject _battle = GameObject.Find("BattleSystem");
+                    if (_battle != null)
+                    {
+                        Debug.Log("find");
+                        _battle.GetComponent<BattleSystem>().LoadBossInformation(enemy);
+                        Debug.Log("敌人信息载入成功");
+                    }
+                    operation.allowSceneActivation = true;
+                }
+
+                yield return null;
+            }
+            
         }
     }
 
@@ -76,7 +120,7 @@ public class LoadManager : MonoBehaviour
                 break;
             case 3:
                 {
-                    int level = GameObject.Find("GameManager").GetComponent<GameManager>().level;
+                    int level = gameManager.level;
                     if(level==1)
                     {
                         scene = "CardSelect";
@@ -94,7 +138,7 @@ public class LoadManager : MonoBehaviour
                 break;
             case 4:
                 {
-                    scene = "Shop";
+                    scene = "ShopInGame";
                 }
                 break;
             case 5:

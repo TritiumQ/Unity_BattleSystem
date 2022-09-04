@@ -13,47 +13,30 @@ MonoBehaviour:
   m_Name: SVN-015
   m_EditorClassIdentifier: 
   CardID: 15
-  CardName: NULL
-  CardDescription: NULL
+  CardName: "\u9632\u5FA1\u88C5\u7F6E"
+  CardDescription: 
   CardRarity: 0
-  CardType: 0
-  CardCamp: 0
-  Cost: 0
-  CardImage: {fileID: 0}
-  RarityImage: {fileID: 0}
-  MaxHP: 0
-  Atk: 0
-  AtksPerTurn: 1
+  CardType: 1
+  CardCamp: 3
+  Cost: 7
+  CardImage: {fileID: 21300000, guid: eebc8b4394935fc4d84d060254dbafa6, type: 3}
+  RarityImage: {fileID: 21300000, guid: cf6b63cacd7382e4fbd5fddabc7e2fd4, type: 3}
+  MaxHP: 4
+  Atk: 6
+  IsDoubleHit: 0
   IsTank: 0
   IsRaid: 0
   IsVampire: 0
-  IsSetupEffect: 0
-  SetupEffect: 0
-  SetupEffectValue1: 0
-  SetupEffectValue2: 0
-  SetupEffectTarget: 0
-  SetupEffectTargetCount: 0
-  IsUndead: 0
-  DeadWhisperEffect: 0
-  DeadWhisperEffectValue1: 0
-  DeadWhisperEffectValue2: 0
-  DeadWhisperEffectTarget: 0
-  DeadWhisperEffectTargetCount: 0
-  IsAdvanced: 0
-  AdvancedEffect: 0
-  AdvancedEffectValue1: 0
-  AdvancedEffectValue2: 0
-  AdvancedEffectTarget: 0
-  AdvancedEffectTargetCount: 0
-  IsSubsequent: 0
-  SubsequentEffect: 0
-  SubsequentEffectValue1: 0
-  SubsequentEffectValue2: 0
-  SubsequentEffectTarget: 0
-  SubsequentEffectTargetCount: 0
+  SpecialAbilityList: []
+  IsCopidedEffect: 0
   IsCopied: 0
-  SpellActionType: 0
-  SpellActionValue1: 0
-  SpellActionValue2: 0
-  Targets: 0
-  TargetCount: 0
+  SpellEffect:
+    EffectType: 0
+    IsInfinityEffect: 0
+    EffectValue1: 0
+    EffectValue2: 0
+    EffectValue3: 0
+    SpecialEffectScriptName: 
+    Target: 0
+    SingleTargetOption: 0
+    TargetCount: 0

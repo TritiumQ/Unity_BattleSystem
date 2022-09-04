@@ -132,5 +132,51 @@ public enum EffectType
 
     SpecialEffect,
 
-    //*亡语*，*先机*，*每回合开始时*，*每回合结束时*, boss的特殊技能
+    FeedbackAttack,
+    /// <summary>
+    /// 召唤特定单位，数值1-》对象id，数值2->召唤数量
+    /// </summary>
+    Summon,
+
+	//*亡语*，*先机*，*每回合开始时*，*每回合结束时*, boss的特殊技能
 }
+
+public enum GameStage
+{
+    Void,
+
+    RoundStart,
+
+    PlayerAdvancedAction,
+    EnemyAdvancedAction,
+
+    PlayerDrawCard,
+    PlayerAction,
+    EnemyAction,
+
+    PlayerSubsequentAction,
+    EnemySubsequentAction,
+
+    RoundEnd,
+}
+
+public enum ActionType
+{
+    Void,
+    NormalAction,
+    ExtraAction,
+}
+
+public class ExtraActionPackage
+{
+    public UnityEngine.GameObject Initiator;
+    public EffectPackageWithTargetOption Effect;
+    public bool IsEffectOver;
+    public ExtraActionPackage()
+	{
+        Initiator = null;
+        Effect = null;
+        IsEffectOver = false;
+	}
+}
+

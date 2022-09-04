@@ -10,15 +10,15 @@ public class MainSceneManager : MonoBehaviour
     public GameObject DeckButton;
     public GameObject StartButton;
     public GameObject ContinueButton;
-    private void Awake()
-    {
-        Player player = Player.Instance;
-        ArchiveManager.LoadPlayerData(1);
-    }
+    public Player player;
+    
     private void Start()
     {
-        GameObject _obj = GameObject.Find("GameProcess");
-        if(_obj!=null)
+        //ArchiveManager.ResetPlayerDataFile();
+        
+        player = Player.Instance;
+        ArchiveManager.LoadPlayerData(1);
+        if (GameProcessSave.ReadSave())
         {
             ShopButton.GetComponent<Button>().interactable = false;
             PackageButton.GetComponent<Button>().interactable = false;

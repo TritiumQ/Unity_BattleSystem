@@ -50,5 +50,11 @@ public static class Const
     public static int INF = 0x3f3f3f3f;
     public static int MaxSaveCount = 10;
     public static string InitialCode = "mikufans";
+    public static int MaxSingleCardCount = 2;
+
+    public static int NormalCardPrice = 4;
+    public static int RareCardPrice = 10;
+    public static int EpicCardPrice = 16;
+    public static int LegendCardPrice = 20;
 
 }

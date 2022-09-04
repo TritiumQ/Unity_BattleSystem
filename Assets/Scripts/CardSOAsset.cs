@@ -33,5 +33,6 @@ public class CardSOAsset : ScriptableObject
     [Header("法术信息")]
     public bool IsCopidedEffect;
     public bool IsCopied; //复制体标记
-    public List<EffectPackageWithTargetOption> SpellEffectList;
+    public EffectPackageWithTargetOption SpellEffect;
+    //public List<EffectPackageWithTargetOption> SpellEffectList;
 }

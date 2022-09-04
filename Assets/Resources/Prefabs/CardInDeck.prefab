@@ -221,6 +221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4498918061881874239}
   - component: {fileID: 5975667740706276243}
+  - component: {fileID: 2533983761482385272}
   m_Layer: 5
   m_Name: CardInDeck
   m_TagString: Untagged
@@ -269,6 +270,18 @@ MonoBehaviour:
   cardCountText: {fileID: 4670728939787867252}
   currentCount: 0
   previewPrefab: {fileID: 3081637641354913904, guid: b5a3565fde954ab42b420fb4ed303bbd, type: 3}
+--- !u!114 &2533983761482385272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4500188667856796561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc1e6b2451179fb41905862a5fb67df8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5536437235598119675
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,7 +348,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f81601c98265cda45bb82ff64a634192, type: 2}
   m_sharedMaterial: {fileID: 4008780421236989568, guid: f81601c98265cda45bb82ff64a634192, type: 2}
