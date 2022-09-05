@@ -947,10 +947,11 @@ public class BattleSystem : MonoBehaviour
 	}
 	#endregion
 
+
 	IEnumerator LoadNextScene()
 	{
 		AsyncOperation async = SceneManager.LoadSceneAsync("CardSelect");
-		if(async != null)
+		if (async != null)
 		{
 			async.allowSceneActivation = false;
 			while (!async.isDone)
@@ -961,12 +962,9 @@ public class BattleSystem : MonoBehaviour
 				}
 				yield return null;
 			}
-			Debug.Log("HGGG");
-			CardSelectSystem system = GameObject.Find("CardSelectSystem").GetComponent<CardSelectSystem>();
-			system.Initialized("GameProcess", GetRandom.GetRandomCard(), GetRandom.GetRandomCard(), GetRandom.GetRandomCard());
-			Debug.Log("mmm");
 		}
 	}
+
 
 	//TODO 战斗结束
 	public void GameEnd(GameResult result)
@@ -976,21 +974,18 @@ public class BattleSystem : MonoBehaviour
 			case GameResult.Success:
 				{
 					Debug.Log("游戏胜利");
+					//SceneManager.LoadSceneAsync("CardSelect");
 					StartCoroutine(LoadNextScene());
 				}
 				break;
 			case GameResult.Failure:
 				{
 					Debug.Log("游戏失败");
-					PlayerDataTF.EventEnd();
-					SceneManager.LoadScene("GameProcess");
 				}
 				break;
 			case GameResult.Escape:
 				{
 					Debug.Log("临阵脱逃");
-					PlayerDataTF.EventEnd();
-					SceneManager.LoadScene("GameProcess");
 				}
 				break;
 			default:
@@ -999,7 +994,8 @@ public class BattleSystem : MonoBehaviour
 	}
 	public void GameEnd(int _result)
 	{
-		bossUnit.GetComponent<BossUnitManager>().Die();
+		GameResult result = (GameResult)_result;
+		GameEnd(result);
 	}
 
 	//相关信息载入方法

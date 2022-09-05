@@ -24,10 +24,11 @@ public class CardSelectSystem : MonoBehaviour
     { 
         StartCoroutine(EnterScene());
         ExitButton.onClick.AddListener(Exit);
-        //Initialized("",0,0,0);
-	}
+        Initialized("GameProcess", GetRandom.GetRandomCard(), GetRandom.GetRandomCard(), GetRandom.GetRandomCard());
+        //Initialized(0, 0, 0);
+    }
 
-	public void Initialized(string _nextSceneName, int cardID1, int cardID2, int cardID3)
+    public void Initialized(string _nextSceneName, int cardID1, int cardID2, int cardID3)
 	{
         Debug.Log("Init Card Select");
         NextSceneName = _nextSceneName;

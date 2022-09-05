@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //InitGameManager();
+        
 
         //²âÊÔÇø
         //step = 4; level = 2;
