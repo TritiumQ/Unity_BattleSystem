@@ -125,6 +125,10 @@ public class Player
     {
         CurrentHP = MaxHP;
         Tears = InitTears;
+        while(cardSet.Count>12)
+        {
+            cardSet.RemoveAt(cardSet.Count - 1);
+        }
     }
 	#endregion
 

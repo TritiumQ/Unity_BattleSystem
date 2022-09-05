@@ -82,6 +82,7 @@ public class CardHubSystem : MonoBehaviour
 				}
 			}
 			Player.Instance.SetCardSet(CardSet);
+			ArchiveManager.SavePlayerData(1);
 		}
 	}
 	

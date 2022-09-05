@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
         GameEventCount = GameConst.GameEventCount;//初始化每层关卡数量
         if (isFistOpen)
         {
+            Debug.Log("首次进入加载数据");
             ArchiveManager.LoadPlayerData(1);
             GameProcessSave.GameProcessDataLoad(this);
             isFistOpen = false;
@@ -156,6 +157,7 @@ public class GameManager : MonoBehaviour
         if (player != null)
         {
             player.ReSet();
+            ArchiveManager.SavePlayerData(1);
             //InitGameEvent();
             //GameProcessSave.GameSaveSet(1, this, true);
         }

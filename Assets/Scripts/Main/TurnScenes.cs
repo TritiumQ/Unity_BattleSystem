@@ -50,6 +50,7 @@ public class TurnScenes : MonoBehaviour
         GameObject _obj = GameObject.Find("GameProcess");
         if(_obj!=null)
         {
+            ArchiveManager.SavePlayerData(1);
             PlayerDataTF.EventContinue();
             SceneManager.LoadScene("GameProcess");
         }

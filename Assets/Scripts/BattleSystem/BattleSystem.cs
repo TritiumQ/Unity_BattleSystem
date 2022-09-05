@@ -92,15 +92,15 @@ public class BattleSystem : MonoBehaviour
 		//
 		Stage = GameStage.RoundStart;
 
-		LoadPlayerInformation();
-
 //#if UNITY_EDITOR
-//		TestSetData();
-//		GameObject.Find("Success").SetActive(true);
-//		GameObject.Find("Fail").SetActive(true);
+//        TestSetData();
+//        GameObject.Find("Success").SetActive(true);
+//        GameObject.Find("Fail").SetActive(true);
 //#endif
-	}
-	void SwitchTurnText()
+		LoadPlayerInformation();
+		RefreshDeck();
+    }
+    void SwitchTurnText()
 	{
 		PlayerTurnText.enabled = !PlayerTurnText.enabled;
 		EnemyTurnText.enabled = !EnemyTurnText.enabled;
@@ -1005,14 +1005,16 @@ public class BattleSystem : MonoBehaviour
 		GameEnd(result);
 	}
 
-	//0oo0o0o0oilLI相关信息载入方法
 	public void LoadBossInformation(int _bossID)
 	{
 		if(bossUnit != null)
 		{
 			bossUnit.SendMessage("Initialized", Resources.Load<BossSOAsset>(Const.BOSS_DATA_PATH(_bossID)));
 		}
-		
+        else
+        {
+			bossUnit.SendMessage("Initialized", Resources.Load<BossSOAsset>(Const.BOSS_DATA_PATH(0)));
+		}
 	}
 	public void LoadPlayerInformation()
 	{
@@ -1022,14 +1024,15 @@ public class BattleSystem : MonoBehaviour
 			playerCardDeck = Player.Instance.cardSet;
 		}
 	}
+
 	public void SavePlayerInformation()
 	{
-		if(playerUnit != null && Player.Instance != null)
+		if (playerUnit != null && Player.Instance != null)
 		{
 			Player.Instance.SetCurrentHP(playerUnit.GetComponent<PlayerUnitManager>().player.CurrentHP);
 		}
 	}
-	
+
 	void TestSetData() //测试载入数据
 	{
 		Debug.Log("Start Data Setting...");

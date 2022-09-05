@@ -16,16 +16,16 @@ MonoBehaviour:
   Name: boss010
   MaxHP: 45
   ATK: 2
-  Icon: {fileID: 0}
+  Icon: {fileID: 42193215, guid: cedf225d046dc764b89876760c250465, type: 3}
   SummonList: fd010000
   SpecialAbilityList:
   - SkillType: 0
     Package:
       EffectType: 3
+      IsInfinityEffect: 0
       EffectValue1: 2
       EffectValue2: 0
-      IsInfinity: 0
-      EffectRounds: 0
+      EffectValue3: 0
       SpecialEffectScriptName: 
       Target: 6
       SingleTargetOption: 0
@@ -33,10 +33,10 @@ MonoBehaviour:
   ActionPackages:
   - ActionEffect:
       EffectType: 0
+      IsInfinityEffect: 0
       EffectValue1: 0
       EffectValue2: 0
-      IsInfinity: 0
-      EffectRounds: 0
+      EffectValue3: 0
       SpecialEffectScriptName: 
       Target: 0
       SingleTargetOption: 0
@@ -46,10 +46,10 @@ MonoBehaviour:
     SummonSurventID: 0
   - ActionEffect:
       EffectType: 0
+      IsInfinityEffect: 0
       EffectValue1: 0
       EffectValue2: 0
-      IsInfinity: 0
-      EffectRounds: 0
+      EffectValue3: 0
       SpecialEffectScriptName: 
       Target: 0
       SingleTargetOption: 0
@@ -59,10 +59,10 @@ MonoBehaviour:
     SummonSurventID: 509
   - ActionEffect:
       EffectType: 1
+      IsInfinityEffect: 0
       EffectValue1: 2
       EffectValue2: 0
-      IsInfinity: 0
-      EffectRounds: 0
+      EffectValue3: 0
       SpecialEffectScriptName: 
       Target: 9
       SingleTargetOption: 0
@@ -72,10 +72,10 @@ MonoBehaviour:
     SummonSurventID: 0
   - ActionEffect:
       EffectType: 1
+      IsInfinityEffect: 0
       EffectValue1: 5
       EffectValue2: 0
-      IsInfinity: 0
-      EffectRounds: 0
+      EffectValue3: 0
       SpecialEffectScriptName: 
       Target: 9
       SingleTargetOption: 2
