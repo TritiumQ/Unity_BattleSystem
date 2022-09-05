@@ -47,6 +47,11 @@ public static class Const
         return UnityEngine.Application.dataPath + "/PlayerDatas/Save" + _id.ToString("D2") + ".json";
     }
 
+    public static string GOODS_DATA_PATH(int _id)
+	{
+        return "Goods/GOODS-" + _id.ToString("D3");
+	}
+
     public static int INF = 0x3f3f3f3f;
     public static int MaxSaveCount = 10;
     public static string InitialCode = "mikufans";

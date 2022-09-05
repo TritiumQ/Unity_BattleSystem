@@ -623,4 +623,5 @@ MonoBehaviour:
   NameText: {fileID: 3269769791193772938}
   DescriptionText: {fileID: 3269769791798097940}
   PriceText: {fileID: 3269769791010899189}
+  GoodsImage: {fileID: 3269769791178488826}
   CountText: {fileID: 0}

@@ -110,7 +110,7 @@ public class Player
 
     public void SetTears(int _tears)
 	{
-        Tears += _tears;
+        Tears = _tears;
 	}
     public void SetMithrils(int _mithrils)
 	{

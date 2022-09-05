@@ -10,7 +10,7 @@ public class GoodsEffectManager : MonoBehaviour
 	/// 恢复, 回复量 = BaseHealValue * 回复等级)
 	/// </summary>
 	/// <param name="rank">回复等级</param>
-	public void Healing(int rank = 0)
+	public void Healing(int rank = 1)
 	{
 		if(rank > 0)
 		{
@@ -21,14 +21,20 @@ public class GoodsEffectManager : MonoBehaviour
 	/// 生命最大值增加, 增加量 = BaseEnhanceValue * 等级
 	/// </summary>
 	/// <param name="rank">等级</param>
-	public void HPEnhance(int rank = 0)
+	public void HPEnhance(int rank = 1)
 	{
 		if (rank > 0)
 		{
 			Player.Instance.AddMaxHp(BaseHealValue * rank);
 		}
 	}
-
+	/// <summary>
+	/// 初始泪滴增加
+	/// </summary>
+	public void ExtraTears()
+	{
+		Player.Instance.AddInitTears(2);
+	}
 	#endregion
 
 	#region 商品特效(游戏商店)

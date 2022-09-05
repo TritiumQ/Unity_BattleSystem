@@ -57,6 +57,7 @@ MonoBehaviour:
   HpText: {fileID: 4766870418402365208}
   AtkText: {fileID: 4251468518498117384}
   HeadIcon: {fileID: 778905475787719828}
+  maskImage: {fileID: 0}
 --- !u!114 &1900415922192117691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,7 +70,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486b1f0235e6397459056f29b611a71b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisObject: {fileID: 778905475051422001}
 --- !u!1 &778905475787719826
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 1058029200, guid: cedf225d046dc764b89876760c250465, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48.6
+  m_fontSize: 48.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -374,7 +374,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48.6
+  m_fontSize: 48.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

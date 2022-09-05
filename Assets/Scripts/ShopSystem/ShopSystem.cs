@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class ShopSystem : MonoBehaviour
 {
     public ShopType shopType;
+	public GoodsEffectManager manager;
     /// <summary>
     /// 泪滴或秘银,视商店种类而定
     /// </summary>
@@ -34,8 +35,11 @@ public class ShopSystem : MonoBehaviour
 
 	[Header("物品选择")]
 	public Button goods1;
+	int goods1Count = 2;
 	public Button goods2;
+	int goods2Count = 2;
 	public Button goods3;
+	int goods3Count = 2;
 
 	[Header("Exit Button")]
 	public Button exitButton;
@@ -45,24 +49,58 @@ public class ShopSystem : MonoBehaviour
 		exitButton.onClick.AddListener(Exit);
 		currentMoneys = 0;
 
+		manager = GetComponent<GoodsEffectManager>();
+
 		Initialized();
 	}
 
 	private void Update()
 	{
 		moneyText.text = currentMoneys.ToString();
+		if(shopType == ShopType.Shop)
+		{
+			goods1.GetComponent<GoodsManager>().SetCount(goods1Count);
+			goods2.GetComponent<GoodsManager>().SetCount(goods2Count);
+			goods3.GetComponent<GoodsManager>().SetCount(goods3Count);
+			if(goods1Count <= 0)
+			{
+				goods1.enabled = false;
+			}
+			if(goods2Count <= 0)
+			{
+				goods2.enabled = false;
+			}
+			if (goods3Count <= 0)
+			{
+				goods3.enabled = false;
+			}
+		}
 	}
 
 	void Initialized()
 	{
 		for (int i = 1; i <= 4; i++)
 		{
-			Debug.Log(i);
+			Debug.Log("Card" + i);
 			SetCard(i, ArchiveManager.LoadCardAsset(GetRandom.GetRandomCard()));
 		}
 		for (int i = 1; i <= 3; i++)
 		{
-			
+			GoodsSOAsset asset = null;
+			if(shopType == ShopType.Shop)
+			{
+				asset = ArchiveManager.LoadGoodsAsset(i);
+			}
+			else if(shopType == ShopType.ShopInGame)
+			{
+				asset = ArchiveManager.LoadGoodsAsset(i + 10);
+			}
+			if(asset != null)
+			{
+				SetGoods(i, asset);
+				Debug.Log("Load Goods:" + asset.name);
+			}
+
 		}
 		Load();
 	}
@@ -190,6 +228,23 @@ public class ShopSystem : MonoBehaviour
 				Debug.LogWarning("商品位置错误");
 				break;
 		}
+		if(goods != null && currentMoneys - price > 0)
+		{
+			currentMoneys -= price;
+			manager.SendMessage(goods.GetComponent<GoodsManager>().asset.GoodsEffectName);
+			if(goods == goods1)
+			{
+				goods1Count--;
+			}
+			if(goods == goods2)
+			{
+				goods2Count--;
+			}
+			if(goods == goods3)
+			{
+				goods3Count--;
+			}
+		}
 		
 	}
 
@@ -199,16 +254,36 @@ public class ShopSystem : MonoBehaviour
 		switch (pos)
 		{
 			case 1:
-				Player.Instance.AddCard(cardID1);
+				if(currentMoneys - cardPrice1 > 0)
+				{
+					currentMoneys -= cardPrice1;
+					Player.Instance.AddCard(cardID1);
+					Card1.enabled = false;
+				}
 				break;
 			case 2:
-				Player.Instance.AddCard(cardID2);
+				if(currentMoneys - cardPrice2 > 0)
+				{
+					currentMoneys -= cardPrice2;
+					Player.Instance.AddCard(cardID2);
+					Card2.enabled = false;
+				}
 				break;
 			case 3:
-				Player.Instance.AddCard(cardID3);
+				if(currentMoneys - cardPrice3 > 0)
+				{
+					currentMoneys -= cardPrice3;
+					Player.Instance.AddCard(cardID3);
+					Card3.enabled = false;
+				}
 				break;
 			case 4: 
-				Player.Instance.AddCard(cardID4);
+				if(currentMoneys - cardPrice4 > 0)
+				{
+					currentMoneys -= cardPrice4;
+					Player.Instance.AddCard(cardID4);
+					Card4.enabled = false;
+				}
 				break;
 			default:
 				Debug.LogWarning("商品位置错误");
@@ -242,6 +317,7 @@ public class ShopSystem : MonoBehaviour
 		{
 			Player.Instance.SetTears(currentMoneys);
 		}
+		ArchiveManager.SavePlayerData(1);
 	}
 	
 }

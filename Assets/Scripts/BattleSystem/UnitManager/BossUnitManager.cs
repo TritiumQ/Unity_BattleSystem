@@ -24,6 +24,7 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 	public void Initialized(BossSOAsset _asset)
 	{
 		Boss = new BossInBattle(_asset);
+		Debug.Log(Boss.Name);
 	}
 	public void RefreshState()
 	{

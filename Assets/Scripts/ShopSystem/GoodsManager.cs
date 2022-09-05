@@ -36,4 +36,13 @@ public class GoodsManager : MonoBehaviour
 			GoodsImage.sprite = asset.GoodsImage;
 		}
 	}
+
+	public void SetCount(int e)
+	{
+		GameObject countObj = GameObject.Find("Count");
+		if(countObj != null)
+		{
+			countObj.GetComponent<TextMeshProUGUI>().text = e.ToString();
+		}
+	}
 }

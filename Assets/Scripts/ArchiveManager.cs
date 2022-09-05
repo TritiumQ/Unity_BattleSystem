@@ -63,6 +63,13 @@ public static class ArchiveManager
 		return asset;
 	}
 
+	public static GoodsSOAsset LoadGoodsAsset(int _id)
+	{
+		GoodsSOAsset asset = null;
+		asset = Resources.Load<GoodsSOAsset>(Const.GOODS_DATA_PATH(_id));
+		return asset;
+	}
+
 	public static void ResetPlayerDataFile()
 	{
 		Debug.Log("≥ı ºªØ¥Êµµ");
