@@ -110,7 +110,7 @@ public class Player
 
     public void SetTears(int _tears)
 	{
-        Tears += _tears;
+        Tears = _tears;
 	}
     public void SetMithrils(int _mithrils)
 	{
@@ -125,6 +125,10 @@ public class Player
     {
         CurrentHP = MaxHP;
         Tears = InitTears;
+        while(cardSet.Count>12)
+        {
+            cardSet.RemoveAt(cardSet.Count - 1);
+        }
     }
 	#endregion
 

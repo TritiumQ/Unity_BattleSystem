@@ -92,13 +92,15 @@ public class BattleSystem : MonoBehaviour
 		//
 		Stage = GameStage.RoundStart;
 
-#if UNITY_EDITOR
-		TestSetData();
-		GameObject.Find("Success").SetActive(true);
-		GameObject.Find("Fail").SetActive(true);
-#endif
-	}
-	void SwitchTurnText()
+//#if UNITY_EDITOR
+//        TestSetData();
+//        GameObject.Find("Success").SetActive(true);
+//        GameObject.Find("Fail").SetActive(true);
+//#endif
+		LoadPlayerInformation();
+		RefreshDeck();
+    }
+    void SwitchTurnText()
 	{
 		PlayerTurnText.enabled = !PlayerTurnText.enabled;
 		EnemyTurnText.enabled = !EnemyTurnText.enabled;
@@ -969,6 +971,7 @@ public class BattleSystem : MonoBehaviour
 	//TODO 战斗结束
 	public void GameEnd(GameResult result)
 	{
+		SavePlayerInformation();
 		switch (result)
 		{
 			case GameResult.Success:
@@ -981,6 +984,8 @@ public class BattleSystem : MonoBehaviour
 			case GameResult.Failure:
 				{
 					Debug.Log("游戏失败");
+					PlayerDataTF.EventEnd();
+					SceneManager.LoadScene("GameProcess");
 				}
 				break;
 			case GameResult.Escape:
@@ -1005,6 +1010,10 @@ public class BattleSystem : MonoBehaviour
 		{
 			bossUnit.SendMessage("Initialized", Resources.Load<BossSOAsset>(Const.BOSS_DATA_PATH(_bossID)));
 		}
+        else
+        {
+			bossUnit.SendMessage("Initialized", Resources.Load<BossSOAsset>(Const.BOSS_DATA_PATH(0)));
+		}
 	}
 	public void LoadPlayerInformation()
 	{
@@ -1014,7 +1023,15 @@ public class BattleSystem : MonoBehaviour
 			playerCardDeck = Player.Instance.cardSet;
 		}
 	}
-	
+
+	public void SavePlayerInformation()
+	{
+		if (playerUnit != null && Player.Instance != null)
+		{
+			Player.Instance.SetCurrentHP(playerUnit.GetComponent<PlayerUnitManager>().player.CurrentHP);
+		}
+	}
+
 	void TestSetData() //测试载入数据
 	{
 		Debug.Log("Start Data Setting...");
