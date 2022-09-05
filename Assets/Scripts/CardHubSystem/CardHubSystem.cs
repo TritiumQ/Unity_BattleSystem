@@ -91,14 +91,14 @@ public class CardHubSystem : MonoBehaviour
 	/// <param name="card">¿¨ÅÆID</param>
 	public void SelectCardCommit(GameObject card)
 	{
-		if(card != null && Count < 12)
+		if(card != null)
 		{
-			if(card.GetComponent<CardInDeckManager>() != null)
+			if(card.GetComponent<CardInDeckManager>() != null && Count > 0)
 			{
 				Debug.Log("delete card");
 				DeleteCardInDeck(card.GetComponent<CardInDeckManager>().Asset.CardID);
 			}
-			else if(card.GetComponent<CardManager>() != null && card.GetComponent<CardManager>().IsActive)
+			else if(card.GetComponent<CardManager>() != null && card.GetComponent<CardManager>().IsActive && Count < 12)
 			{
 				Debug.Log("add card");
 				AddCardToDeck(card.GetComponent<CardManager>().Asset.CardID);

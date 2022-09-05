@@ -41,7 +41,7 @@ public class BossUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAbili
 
 	public void Die()
 	{
-		//Debug.Log("Boss已击败，战斗胜利");
+		Debug.Log("Boss已击败，战斗胜利");
 		//胜利特效
 		system.GameEnd(GameResult.Success);
 	}
