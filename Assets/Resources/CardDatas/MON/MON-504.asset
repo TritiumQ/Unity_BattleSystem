@@ -21,7 +21,7 @@ MonoBehaviour:
   Cost: 0
   CardImage: {fileID: 21300000, guid: 85ce100ffe9422e44adce1e589a1d572, type: 3}
   RarityImage: {fileID: 0}
-  MaxHP: 4
+  MaxHP: 2
   Atk: 1
   IsDoubleHit: 0
   IsTank: 1

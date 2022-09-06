@@ -16,16 +16,16 @@ MonoBehaviour:
   Name: "\u8D70\u79C1\u72AF"
   MaxHP: 15
   ATK: 2
-  Icon: {fileID: 1851892228, guid: cedf225d046dc764b89876760c250465, type: 3}
+  Icon: {fileID: 0}
   SummonList: f4010000
   SpecialAbilityList: []
   ActionPackages:
   - ActionEffect:
       EffectType: 0
-      IsInfinityEffect: 0
       EffectValue1: 0
       EffectValue2: 0
-      EffectValue3: 0
+      IsInfinity: 0
+      EffectRounds: 0
       SpecialEffectScriptName: 
       Target: 0
       SingleTargetOption: 0
@@ -35,10 +35,10 @@ MonoBehaviour:
     SummonSurventID: 500
   - ActionEffect:
       EffectType: 1
-      IsInfinityEffect: 0
       EffectValue1: 3
       EffectValue2: 0
-      EffectValue3: 0
+      IsInfinity: 0
+      EffectRounds: 0
       SpecialEffectScriptName: 
       Target: 10
       SingleTargetOption: 3
@@ -48,10 +48,10 @@ MonoBehaviour:
     SummonSurventID: 500
   - ActionEffect:
       EffectType: 1
-      IsInfinityEffect: 0
       EffectValue1: 2
       EffectValue2: 0
-      EffectValue3: 0
+      IsInfinity: 0
+      EffectRounds: 0
       SpecialEffectScriptName: 
       Target: 10
       SingleTargetOption: 0
@@ -61,10 +61,10 @@ MonoBehaviour:
     SummonSurventID: 500
   - ActionEffect:
       EffectType: 1
-      IsInfinityEffect: 0
       EffectValue1: 3
       EffectValue2: 0
-      EffectValue3: 0
+      IsInfinity: 0
+      EffectRounds: 0
       SpecialEffectScriptName: 
       Target: 9
       SingleTargetOption: 0
@@ -74,10 +74,10 @@ MonoBehaviour:
     SummonSurventID: 500
   - ActionEffect:
       EffectType: 0
-      IsInfinityEffect: 0
       EffectValue1: 3
       EffectValue2: 0
-      EffectValue3: 0
+      IsInfinity: 0
+      EffectRounds: 0
       SpecialEffectScriptName: 
       Target: 9
       SingleTargetOption: 0

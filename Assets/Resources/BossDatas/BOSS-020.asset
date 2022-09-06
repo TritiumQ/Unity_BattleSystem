@@ -13,19 +13,19 @@ MonoBehaviour:
   m_Name: BOSS-020
   m_EditorClassIdentifier: 
   ID: 20
-  Name: FinalBoss
-  MaxHP: 60
-  ATK: 5
+  Name: "\u661F\u8F89\u652F\u914D\u8005"
+  MaxHP: 50
+  ATK: 3
   Icon: {fileID: 0}
   SummonList: 05020000
   SpecialAbilityList: []
   ActionPackages:
   - ActionEffect:
       EffectType: 0
+      IsInfinityEffect: 0
       EffectValue1: 0
       EffectValue2: 0
-      IsInfinity: 0
-      EffectRounds: 0
+      EffectValue3: 0
       SpecialEffectScriptName: 
       Target: 0
       SingleTargetOption: 0
@@ -35,36 +35,23 @@ MonoBehaviour:
     SummonSurventID: 517
   - ActionEffect:
       EffectType: 1
+      IsInfinityEffect: 0
       EffectValue1: 3
       EffectValue2: 0
-      IsInfinity: 0
-      EffectRounds: 0
-      SpecialEffectScriptName: 
-      Target: 2
-      SingleTargetOption: 0
-      TargetCount: 0
-    SummonMode: 0
-    SummonCount: 0
-    SummonSurventID: 0
-  - ActionEffect:
-      EffectType: 1
-      EffectValue1: 10
-      EffectValue2: 0
-      IsInfinity: 0
-      EffectRounds: 0
+      EffectValue3: 0
       SpecialEffectScriptName: 
       Target: 9
-      SingleTargetOption: 3
+      SingleTargetOption: 0
       TargetCount: 0
     SummonMode: 0
     SummonCount: 0
     SummonSurventID: 0
   - ActionEffect:
       EffectType: 1
-      EffectValue1: 5
+      IsInfinityEffect: 0
+      EffectValue1: 3
       EffectValue2: 0
-      IsInfinity: 0
-      EffectRounds: 0
+      EffectValue3: 0
       SpecialEffectScriptName: 
       Target: 5
       SingleTargetOption: 0
@@ -73,24 +60,37 @@ MonoBehaviour:
     SummonCount: 0
     SummonSurventID: 0
   - ActionEffect:
-      EffectType: 10
+      EffectType: 1
+      IsInfinityEffect: 0
+      EffectValue1: 10
+      EffectValue2: 0
+      EffectValue3: 0
+      SpecialEffectScriptName: 
+      Target: 9
+      SingleTargetOption: 1
+      TargetCount: 0
+    SummonMode: 0
+    SummonCount: 0
+    SummonSurventID: 0
+  - ActionEffect:
+      EffectType: 1
+      IsInfinityEffect: 0
+      EffectValue1: 5
+      EffectValue2: 0
+      EffectValue3: 0
+      SpecialEffectScriptName: 
+      Target: 5
+      SingleTargetOption: 0
+      TargetCount: 0
+    SummonMode: 0
+    SummonCount: 0
+    SummonSurventID: 0
+  - ActionEffect:
+      EffectType: 9
+      IsInfinityEffect: 0
       EffectValue1: 0
-      EffectValue2: 0
-      IsInfinity: 0
-      EffectRounds: 0
-      SpecialEffectScriptName: 
-      Target: 5
-      SingleTargetOption: 0
-      TargetCount: 0
-    SummonMode: 0
-    SummonCount: 0
-    SummonSurventID: 0
-  - ActionEffect:
-      EffectType: 1
-      EffectValue1: 5
-      EffectValue2: 0
-      IsInfinity: 0
-      EffectRounds: 0
+      EffectValue2: 1
+      EffectValue3: 0
       SpecialEffectScriptName: 
       Target: 9
       SingleTargetOption: 0
@@ -100,8 +100,12 @@ MonoBehaviour:
     SummonSurventID: 0
   Cycle:
   - ActionIndex: 00000000
-  - ActionIndex: 0500000001000000
-  - ActionIndex: 0400000002000000
-  - ActionIndex: 040000000500000003000000
+  - ActionIndex: 01000000
+  - ActionIndex: 0300000005000000
+  - ActionIndex: 0200000005000000
+  - ActionIndex: 01000000
+  - ActionIndex: 0400000005000000
+  - ActionIndex: 0100000005000000
+  - ActionIndex: 02000000
   - ActionIndex: 01000000
   ActionCycle: 

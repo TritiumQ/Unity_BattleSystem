@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: BOSS-002
   m_EditorClassIdentifier: 
   ID: 2
-  Name: boss002
+  Name: "\u761F\u75AB\u533B\u751F"
   MaxHP: 20
   ATK: 1
-  Icon: {fileID: 1647753018, guid: cedf225d046dc764b89876760c250465, type: 3}
+  Icon: {fileID: 0}
   SummonList: f5010000
   SpecialAbilityList: []
   ActionPackages:

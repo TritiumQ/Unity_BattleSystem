@@ -16,16 +16,16 @@ MonoBehaviour:
   Name: "\u611F\u67D3\u8005"
   MaxHP: 35
   ATK: 1
-  Icon: {fileID: 298773726, guid: cedf225d046dc764b89876760c250465, type: 3}
+  Icon: {fileID: 0}
   SummonList: 
   SpecialAbilityList: []
   ActionPackages:
   - ActionEffect:
       EffectType: 0
-      IsInfinityEffect: 0
       EffectValue1: 0
       EffectValue2: 0
-      EffectValue3: 0
+      IsInfinity: 0
+      EffectRounds: 0
       SpecialEffectScriptName: 
       Target: 0
       SingleTargetOption: 0
@@ -35,10 +35,10 @@ MonoBehaviour:
     SummonSurventID: 0
   - ActionEffect:
       EffectType: 1
-      IsInfinityEffect: 0
       EffectValue1: 1
       EffectValue2: 0
-      EffectValue3: 0
+      IsInfinity: 0
+      EffectRounds: 0
       SpecialEffectScriptName: 
       Target: 9
       SingleTargetOption: 2
@@ -48,10 +48,10 @@ MonoBehaviour:
     SummonSurventID: 0
   - ActionEffect:
       EffectType: 1
-      IsInfinityEffect: 0
       EffectValue1: 5
       EffectValue2: 0
-      EffectValue3: 0
+      IsInfinity: 0
+      EffectRounds: 0
       SpecialEffectScriptName: 
       Target: 9
       SingleTargetOption: 3
@@ -61,10 +61,10 @@ MonoBehaviour:
     SummonSurventID: 0
   - ActionEffect:
       EffectType: 1
-      IsInfinityEffect: 0
       EffectValue1: 3
       EffectValue2: 0
-      EffectValue3: 0
+      IsInfinity: 0
+      EffectRounds: 0
       SpecialEffectScriptName: 
       Target: 5
       SingleTargetOption: 0
@@ -74,10 +74,10 @@ MonoBehaviour:
     SummonSurventID: 0
   - ActionEffect:
       EffectType: 1
-      IsInfinityEffect: 0
       EffectValue1: 35
       EffectValue2: 0
-      EffectValue3: 0
+      IsInfinity: 0
+      EffectRounds: 0
       SpecialEffectScriptName: 
       Target: 10
       SingleTargetOption: 0
@@ -87,10 +87,10 @@ MonoBehaviour:
     SummonSurventID: 0
   - ActionEffect:
       EffectType: 1
-      IsInfinityEffect: 0
       EffectValue1: 30
       EffectValue2: 0
-      EffectValue3: 0
+      IsInfinity: 0
+      EffectRounds: 0
       SpecialEffectScriptName: 
       Target: 1
       SingleTargetOption: 0

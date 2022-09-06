@@ -16,8 +16,8 @@ MonoBehaviour:
   Name: boss011
   MaxHP: 50
   ATK: 1
-  Icon: {fileID: -1636677121, guid: cedf225d046dc764b89876760c250465, type: 3}
-  SummonList: ff010000
+  Icon: {fileID: 0}
+  SummonList: fe010000
   SpecialAbilityList: []
   ActionPackages:
   - ActionEffect:

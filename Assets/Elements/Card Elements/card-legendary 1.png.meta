@@ -1,0 +1,376 @@
+fileFormatVersion: 2
+guid: 0aabb39e8878b374187a524284226913
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: card-legendary 1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 031f6fa55daf0724687d6ee3f56626da
+      internalID: -820050716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-legendary 1_1
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 344ac337237629a4280d08e05b8059d5
+      internalID: 783138178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-legendary 1_2
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66d32136f3091234f9bb317f07579204
+      internalID: 984512426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-legendary 1_3
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0240665f6614c5143a8dc88a93e5a62f
+      internalID: -1159102096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-legendary 1_4
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95e23dffb674def409ce645a99e2deb7
+      internalID: -1475342121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-legendary 1_5
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33733f799daf53446ac40330ba923aa0
+      internalID: 1356058683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-legendary 1_6
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51db255f8a740a740a366bc0d964ebcd
+      internalID: 5876764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-legendary 1_7
+      rect:
+        serializedVersion: 2
+        x: 2100
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4da171bb40021be4a8bc0eae3097e847
+      internalID: 2025388993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-legendary 1_8
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efa63af6653b1d443ab79e97200dc1f4
+      internalID: -86734923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-legendary 1_9
+      rect:
+        serializedVersion: 2
+        x: 2700
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14826996689b7c74c9173d7f867b7361
+      internalID: -1325540257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      card-legendary 1_25: -1701416425
+      card-legendary 1_35: 2077944114
+      card-legendary 1_22: 1327031361
+      card-legendary 1_4: -1475342121
+      card-legendary 1_2: 984512426
+      card-legendary 1_18: 902444279
+      card-legendary 1_23: 1513390307
+      card-legendary 1_42: 1566827184
+      card-legendary 1_1: 783138178
+      card-legendary 1_39: 445018843
+      card-legendary 1_7: 2025388993
+      card-legendary 1_40: 250121224
+      card-legendary 1_16: -686455060
+      card-legendary 1_13: 152526875
+      card-legendary 1_3: -1159102096
+      card-legendary 1_9: -1325540257
+      card-legendary 1_41: 593974673
+      card-legendary 1_10: -1482309983
+      card-legendary 1_33: -1077650534
+      card-legendary 1_24: 1023532350
+      card-legendary 1_32: 522258992
+      card-legendary 1_34: -119104017
+      card-legendary 1_12: 558850123
+      card-legendary 1_15: 1070066340
+      card-legendary 1_38: -564391396
+      card-legendary 1_37: -1343082537
+      card-legendary 1_0: -820050716
+      card-legendary 1_6: 5876764
+      card-legendary 1_5: 1356058683
+      card-legendary 1_26: 1906810394
+      card-legendary 1_19: -1774829482
+      card-legendary 1_31: 1613719649
+      card-legendary 1_43: 822966331
+      card-legendary 1_29: 1641961978
+      card-legendary 1_20: -1531291936
+      card-legendary 1_11: -1073734734
+      card-legendary 1_14: 110290329
+      card-legendary 1_17: 2137416472
+      card-legendary 1_27: 1748535174
+      card-legendary 1_36: -1889847466
+      card-legendary 1_30: -186864937
+      card-legendary 1_8: -86734923
+      card-legendary 1_21: -1101318715
+      card-legendary 1_28: -1776890040
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

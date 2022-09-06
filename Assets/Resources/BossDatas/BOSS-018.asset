@@ -14,11 +14,79 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 18
   Name: boss018
-  MaxHP: 50
-  ATK: 3
-  Icon: {fileID: 1058029200, guid: cedf225d046dc764b89876760c250465, type: 3}
-  SummonList: 
-  SpecialAbilityList: []
-  ActionPackages: []
-  Cycle: []
+  MaxHP: 35
+  ATK: 1
+  Icon: {fileID: 0}
+  SummonList: 02020000
+  SpecialAbilityList:
+  - SkillType: 0
+    Package:
+      EffectType: 7
+      IsInfinityEffect: 0
+      EffectValue1: 0
+      EffectValue2: 1
+      EffectValue3: 0
+      SpecialEffectScriptName: 
+      Target: 6
+      SingleTargetOption: 0
+      TargetCount: 0
+  ActionPackages:
+  - ActionEffect:
+      EffectType: 0
+      IsInfinityEffect: 0
+      EffectValue1: 0
+      EffectValue2: 0
+      EffectValue3: 0
+      SpecialEffectScriptName: 
+      Target: 0
+      SingleTargetOption: 0
+      TargetCount: 0
+    SummonMode: 0
+    SummonCount: 2
+    SummonSurventID: 514
+  - ActionEffect:
+      EffectType: 1
+      IsInfinityEffect: 0
+      EffectValue1: 0
+      EffectValue2: 0
+      EffectValue3: 0
+      SpecialEffectScriptName: 
+      Target: 9
+      SingleTargetOption: 0
+      TargetCount: 0
+    SummonMode: 0
+    SummonCount: 0
+    SummonSurventID: 0
+  - ActionEffect:
+      EffectType: 1
+      IsInfinityEffect: 0
+      EffectValue1: 1
+      EffectValue2: 0
+      EffectValue3: 0
+      SpecialEffectScriptName: 
+      Target: 3
+      SingleTargetOption: 0
+      TargetCount: 0
+    SummonMode: 0
+    SummonCount: 0
+    SummonSurventID: 0
+  - ActionEffect:
+      EffectType: 1
+      IsInfinityEffect: 0
+      EffectValue1: 6
+      EffectValue2: 0
+      EffectValue3: 0
+      SpecialEffectScriptName: 
+      Target: 9
+      SingleTargetOption: 2
+      TargetCount: 0
+    SummonMode: 0
+    SummonCount: 0
+    SummonSurventID: 0
+  Cycle:
+  - ActionIndex: 00000000
+  - ActionIndex: 01000000
+  - ActionIndex: 0200000001000000
+  - ActionIndex: 0300000001000000
+  - ActionIndex: 030000000200000001000000
   ActionCycle: 

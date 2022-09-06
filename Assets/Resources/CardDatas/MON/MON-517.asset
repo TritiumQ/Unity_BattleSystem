@@ -22,11 +22,11 @@ MonoBehaviour:
   CardImage: {fileID: 21300000, guid: 85ce100ffe9422e44adce1e589a1d572, type: 3}
   RarityImage: {fileID: 0}
   MaxHP: 10
-  Atk: 10
+  Atk: 3
   IsDoubleHit: 0
   IsTank: 1
   IsRaid: 0
-  IsVampire: 0
+  IsVampire: 1
   SpecialAbilityList: []
   IsCopidedEffect: 0
   IsCopied: 0

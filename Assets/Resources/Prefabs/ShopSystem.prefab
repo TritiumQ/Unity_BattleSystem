@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 576756308005870477}
   - component: {fileID: 2017697965228772833}
+  - component: {fileID: 7368516947975611522}
   m_Layer: 0
   m_Name: ShopSystem
   m_TagString: Untagged
@@ -45,3 +46,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopType: 1
+  manager: {fileID: 0}
+  moneyText: {fileID: 0}
+  Card1: {fileID: 0}
+  Card2: {fileID: 0}
+  Card3: {fileID: 0}
+  Card4: {fileID: 0}
+  goods1: {fileID: 0}
+  goods2: {fileID: 0}
+  goods3: {fileID: 0}
+  exitButton: {fileID: 0}
+--- !u!114 &7368516947975611522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6752510259829394425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbac11fb6ca9b6d4ab3a38f7709b8581, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

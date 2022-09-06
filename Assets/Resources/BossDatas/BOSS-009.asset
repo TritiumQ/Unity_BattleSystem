@@ -16,8 +16,8 @@ MonoBehaviour:
   Name: boss009
   MaxHP: 40
   ATK: 1
-  Icon: {fileID: -1808600788, guid: cedf225d046dc764b89876760c250465, type: 3}
-  SummonList: f8010000
+  Icon: {fileID: 0}
+  SummonList: f9010000
   SpecialAbilityList: []
   ActionPackages:
   - ActionEffect:
@@ -45,7 +45,7 @@ MonoBehaviour:
       TargetCount: 0
     SummonMode: 0
     SummonCount: 2
-    SummonSurventID: 504
+    SummonSurventID: 505
   - ActionEffect:
       EffectType: 1
       IsInfinityEffect: 0
