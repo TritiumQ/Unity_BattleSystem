@@ -56,7 +56,7 @@ public class BattleSystem : MonoBehaviour
 	public GameObject surventPrefab;
 	[Header("卡牌预制体")]
 	public GameObject cardPrefab;
-
+	public SpecialEffectManager SpecialEffectManager { get; private set; }
 	private void Update()
 	{
 		if (ExtraActionExist)
@@ -88,6 +88,8 @@ public class BattleSystem : MonoBehaviour
 		BossSurventUnitsList = new List<GameObject>(7);
 
 		ExtraActionQueue = new Queue<ExtraActionPackage>();
+
+		SpecialEffectManager = GetComponent<SpecialEffectManager>();
 
 		//
 		Stage = GameStage.RoundStart;
@@ -408,7 +410,7 @@ public class BattleSystem : MonoBehaviour
 		else if (_effect.EffectType == EffectType.SpecialEffect)
 		{
 			//TODO 特殊效果
-			GetComponent<SpecialEffectManager>().SendMessage(_effect.SpecialEffectScriptName, _target);
+			SpecialEffectManager.SendMessage(_effect.SpecialEffectScriptName, _target);
 		}
 		else
 		{
@@ -441,11 +443,11 @@ public class BattleSystem : MonoBehaviour
 					break;
 			}
 		}
-		else if(_effect.EffectType == EffectType.SpecialEffect)
-		{
-			//TODO 特殊效果 
-			GetComponent<SpecialEffectManager>().SendMessage(_effect.SpecialEffectScriptName, _effect);
-		}
+		//else if(_effect.EffectType == EffectType.SpecialEffect)
+		//{
+		//	//TODO 特殊效果 
+		//	GetComponent<SpecialEffectManager>().SendMessage(_effect.SpecialEffectScriptName, _effect);
+		//}
 		else
 		{
 			EffectPackage eft = _effect;

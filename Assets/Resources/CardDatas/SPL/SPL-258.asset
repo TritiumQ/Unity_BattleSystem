@@ -33,10 +33,10 @@ MonoBehaviour:
   SpellEffect:
     EffectType: 6
     IsInfinityEffect: 0
-    EffectValue1: 0
+    EffectValue1: 3
     EffectValue2: 0
     EffectValue3: 0
     SpecialEffectScriptName: 
-    Target: 10
+    Target: 9
     SingleTargetOption: 5
     TargetCount: 0

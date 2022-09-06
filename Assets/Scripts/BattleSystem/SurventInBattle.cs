@@ -8,16 +8,16 @@ public class SurventInBattle : UnitInBattle
     public int CardID;
     public string CardName;
 
-    public bool IsRaid;
-	public bool IsUndead;
+    public bool IsRaid { get; set; }
+	public bool IsUndead { get; set; }
 
 	//public int HitCount;
-	public bool IsDoubleHit;
-	private int DoubleHitRound;
+	public bool IsDoubleHit { get; set; }
+	private int DoubleHitRound { get; set; }
 
-	public bool IsSubsequent;
-	public bool IsFeedback;
-	public bool IsAdvanced;
+	public bool IsSubsequent { get; set; }
+	public bool IsFeedback { get; set; }
+	public bool IsAdvanced { get; set; }
 
 	public List<AbilityPackage> SpecialAbilityList;
 

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5260d0e1e557d924098f98884611e3f5, type: 3}
-  m_Name: SPL-261 1
+  m_Name: SPL-261
   m_EditorClassIdentifier: 
   CardID: 261
   CardName: "\u673A\u68B0\u88C5\u7532"
@@ -31,12 +31,12 @@ MonoBehaviour:
   IsCopidedEffect: 0
   IsCopied: 0
   SpellEffect:
-    EffectType: 6
+    EffectType: 5
     IsInfinityEffect: 0
-    EffectValue1: 0
+    EffectValue1: 1
     EffectValue2: 0
     EffectValue3: 0
     SpecialEffectScriptName: 
-    Target: 10
+    Target: 9
     SingleTargetOption: 5
     TargetCount: 0

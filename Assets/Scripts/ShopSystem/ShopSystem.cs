@@ -205,7 +205,7 @@ public class ShopSystem : MonoBehaviour
 
 	public void BuyGoods(int pos)
 	{
-		Debug.Log("Buy Goods 1");
+		Debug.Log("Buy Goods" + pos.ToString());
 		int price;
 		Button goods;
 		switch (pos)
@@ -228,8 +228,9 @@ public class ShopSystem : MonoBehaviour
 				Debug.LogWarning("商品位置错误");
 				break;
 		}
-		if(goods != null && currentMoneys - price > 0)
+		if(goods != null && currentMoneys - price >= 0)
 		{
+			Debug.Log("购买成功");
 			currentMoneys -= price;
 			manager.SendMessage(goods.GetComponent<GoodsManager>().asset.GoodsEffectName);
 			if(goods == goods1)
@@ -245,12 +246,15 @@ public class ShopSystem : MonoBehaviour
 				goods3Count--;
 			}
 		}
-		
+		else
+		{
+			Debug.Log("no money no talk");
+		}
 	}
 
 	public void BuyCard(int pos)
 	{
-		Debug.Log("Buy Card 1");
+		Debug.Log("Buy Card" + pos.ToString());
 		switch (pos)
 		{
 			case 1:

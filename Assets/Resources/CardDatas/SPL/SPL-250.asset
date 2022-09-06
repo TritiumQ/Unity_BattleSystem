@@ -37,6 +37,6 @@ MonoBehaviour:
     EffectValue2: 0
     EffectValue3: 0
     SpecialEffectScriptName: 
-    Target: 10
+    Target: 3
     SingleTargetOption: 5
     TargetCount: 0

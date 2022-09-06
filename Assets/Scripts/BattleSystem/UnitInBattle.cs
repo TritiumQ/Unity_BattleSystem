@@ -151,7 +151,7 @@ public class UnitInBattle
 	}
 	public virtual void SetProtected(int times)
 	{
-		ProtectedTimes = times;
+		ProtectedTimes += times;
 	}
 	#endregion
 

@@ -31,12 +31,12 @@ MonoBehaviour:
   IsCopidedEffect: 0
   IsCopied: 0
   SpellEffect:
-    EffectType: 6
+    EffectType: 7
     IsInfinityEffect: 0
-    EffectValue1: 0
-    EffectValue2: 0
+    EffectValue1: 6
+    EffectValue2: 6
     EffectValue3: 0
     SpecialEffectScriptName: 
-    Target: 10
+    Target: 9
     SingleTargetOption: 5
     TargetCount: 0

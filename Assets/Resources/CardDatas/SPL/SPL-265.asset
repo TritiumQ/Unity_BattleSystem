@@ -31,7 +31,7 @@ MonoBehaviour:
   IsCopidedEffect: 0
   IsCopied: 0
   SpellEffect:
-    EffectType: 6
+    EffectType: 11
     IsInfinityEffect: 0
     EffectValue1: 0
     EffectValue2: 0

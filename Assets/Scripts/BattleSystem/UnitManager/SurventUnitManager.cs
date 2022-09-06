@@ -9,7 +9,7 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
 
     BattleSystem system;
     public SurventInBattle survent { get; private set; }
-    public bool isActive { get; private set; }
+    public bool isActive { get; set; }
 
     [Header("卡牌信息")]
     public TextMeshProUGUI atkText;

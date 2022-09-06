@@ -7,7 +7,18 @@ using UnityEngine;
 public class SpecialEffectManager : MonoBehaviour
 {
 	#region 特殊效果，方法名必须先在SpecialEffectRegistry中声明一个静态字符串
-	
+	/// <summary>
+	/// 使1名随从再次就绪
+	/// </summary>
+	void SetSurventActive(GameObject target)
+	{
+		Debug.Log("SetSurventActive");
+		if(target.GetComponent<SurventUnitManager>() != null)
+		{
+			target.GetComponent<SurventUnitManager>().isActive = true;
+		}
+	}
+
 
 
 	#endregion
