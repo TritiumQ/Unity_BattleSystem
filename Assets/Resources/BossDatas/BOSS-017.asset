@@ -16,16 +16,16 @@ MonoBehaviour:
   Name: "\u6355\u98DF\u8005"
   MaxHP: 55
   ATK: 5
-  Icon: {fileID: 0}
+  Icon: {fileID: 1596604725, guid: cedf225d046dc764b89876760c250465, type: 3}
   SummonList: 
   SpecialAbilityList: []
   ActionPackages:
   - ActionEffect:
       EffectType: 0
+      IsInfinityEffect: 0
       EffectValue1: 0
       EffectValue2: 0
-      IsInfinity: 0
-      EffectRounds: 0
+      EffectValue3: 0
       SpecialEffectScriptName: 
       Target: 0
       SingleTargetOption: 0
@@ -35,10 +35,10 @@ MonoBehaviour:
     SummonSurventID: 0
   - ActionEffect:
       EffectType: 1
+      IsInfinityEffect: 0
       EffectValue1: 5
       EffectValue2: 0
-      IsInfinity: 0
-      EffectRounds: 0
+      EffectValue3: 0
       SpecialEffectScriptName: 
       Target: 9
       SingleTargetOption: 0
@@ -48,10 +48,10 @@ MonoBehaviour:
     SummonSurventID: 0
   - ActionEffect:
       EffectType: 1
+      IsInfinityEffect: 0
       EffectValue1: 15
       EffectValue2: 0
-      IsInfinity: 0
-      EffectRounds: 0
+      EffectValue3: 0
       SpecialEffectScriptName: 
       Target: 9
       SingleTargetOption: 3

@@ -16,7 +16,7 @@ MonoBehaviour:
   Name: boss018
   MaxHP: 35
   ATK: 1
-  Icon: {fileID: 0}
+  Icon: {fileID: -1400011450, guid: cedf225d046dc764b89876760c250465, type: 3}
   SummonList: 02020000
   SpecialAbilityList:
   - SkillType: 0

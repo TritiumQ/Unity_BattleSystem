@@ -16,7 +16,7 @@ MonoBehaviour:
   Name: boss019
   MaxHP: 50
   ATK: 3
-  Icon: {fileID: 0}
+  Icon: {fileID: 1058029200, guid: cedf225d046dc764b89876760c250465, type: 3}
   SummonList: 0302000004020000
   SpecialAbilityList: []
   ActionPackages:

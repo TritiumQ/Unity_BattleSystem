@@ -533,7 +533,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &604891107
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1842,7 +1842,6 @@ MonoBehaviour:
   enemyArea: {fileID: 1499416033}
   surventPrefab: {fileID: 2634340889832455649, guid: 8187f8a4e218a7d42b3066821ce9cede, type: 3}
   cardPrefab: {fileID: 3081637641354913904, guid: f5c1e3b74d2c9494b80e011aab4d446c, type: 3}
-  loadTool: {fileID: 4947474189124648888, guid: 9d5edf2bf44306e45ab137c44ff78baf, type: 3}
   ArrowPrefab: {fileID: 4752874742253137420, guid: 8cebe8035f76b724ba70e9576ac88557, type: 3}
   TargetSelectArrow: {fileID: 0}
   FightSceneCanvas: {fileID: 666489915}

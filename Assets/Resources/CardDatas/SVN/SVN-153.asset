@@ -30,13 +30,13 @@ MonoBehaviour:
   SpecialAbilityList:
   - SkillType: 1
     Package:
-      EffectType: 12
+      EffectType: 7
       IsInfinityEffect: 0
-      EffectValue1: 4
+      EffectValue1: 2
       EffectValue2: 0
       EffectValue3: 0
       SpecialEffectScriptName: 
-      Target: 10
+      Target: 11
       SingleTargetOption: 5
       TargetCount: 0
   IsCopidedEffect: 0

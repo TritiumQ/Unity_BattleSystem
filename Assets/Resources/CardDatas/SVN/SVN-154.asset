@@ -25,18 +25,18 @@ MonoBehaviour:
   Atk: 5
   IsDoubleHit: 0
   IsTank: 0
-  IsRaid: 0
+  IsRaid: 1
   IsVampire: 0
   SpecialAbilityList:
-  - SkillType: 1
+  - SkillType: 4
     Package:
-      EffectType: 12
+      EffectType: 6
       IsInfinityEffect: 0
-      EffectValue1: 4
+      EffectValue1: 3
       EffectValue2: 0
       EffectValue3: 0
       SpecialEffectScriptName: 
-      Target: 10
+      Target: 2
       SingleTargetOption: 5
       TargetCount: 0
   IsCopidedEffect: 0

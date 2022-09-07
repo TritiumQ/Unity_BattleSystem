@@ -451,6 +451,13 @@ public class BattleSystem : MonoBehaviour
 					break;
 			}
 		}
+		else if(_effect.EffectType == EffectType.Summon)
+		{
+			for (int i = 0; i < _effect.EffectValue1; i++)
+			{
+				SetupSurvent(ArchiveManager.LoadCardAsset(_effect.EffectValue2), CardType.Survent);
+			}
+		}
 		//else if(_effect.EffectType == EffectType.SpecialEffect)
 		//{
 		//	//TODO ÌØÊâÐ§¹û 

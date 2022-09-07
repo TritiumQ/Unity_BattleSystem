@@ -28,12 +28,12 @@ MonoBehaviour:
   IsRaid: 0
   IsVampire: 0
   SpecialAbilityList:
-  - SkillType: 1
+  - SkillType: 2
     Package:
-      EffectType: 12
+      EffectType: 13
       IsInfinityEffect: 0
-      EffectValue1: 4
-      EffectValue2: 0
+      EffectValue1: 2
+      EffectValue2: 18
       EffectValue3: 0
       SpecialEffectScriptName: 
       Target: 10
