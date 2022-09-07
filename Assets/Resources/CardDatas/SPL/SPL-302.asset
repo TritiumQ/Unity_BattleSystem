@@ -19,7 +19,7 @@ MonoBehaviour:
   CardType: 0
   CardCamp: 1
   Cost: 5
-  CardImage: {fileID: 21300000, guid: eebc8b4394935fc4d84d060254dbafa6, type: 3}
+  CardImage: {fileID: 1963968454, guid: deef9ef9d5a345647bfc11fd34557f80, type: 3}
   RarityImage: {fileID: 21300000, guid: d045c3e1ae5ff55469e7cc94951ba23c, type: 3}
   MaxHP: 0
   Atk: 0

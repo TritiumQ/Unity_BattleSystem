@@ -10,16 +10,67 @@ public class SpecialEffectManager : MonoBehaviour
 	/// <summary>
 	/// 使1名随从再次就绪
 	/// </summary>
-	void SetSurventActive(GameObject target)
+	/// <param name="parameterTable">参数表，[0]为发起者，[1]为目标， [2]为效果包</param>
+	void SetSurventActive(object[] parameterTable)
 	{
 		Debug.Log("SetSurventActive");
-		if(target.GetComponent<SurventUnitManager>() != null)
+		GameObject target = null;
+		EffectPackage effect = null;
+		if (parameterTable != null)
+		{
+			target = (GameObject)parameterTable[1];
+			effect = (EffectPackage)parameterTable[2];
+		}
+		if (target.GetComponent<SurventUnitManager>() != null)
 		{
 			target.GetComponent<SurventUnitManager>().isActive = true;
 		}
 	}
 
+	/// <summary>
+	/// Enhance具有*嘲讽*的随从
+	/// </summary>
+	/// <param name="parameterTable">参数表，[0]为发起者，[1]为目标， [2]为效果包</param>
+	void EnhanceTank(object[] parameterTable)
+	{
+		GameObject target = null;
+		EffectPackage effect = null;
+		if(parameterTable != null)
+		{
+			target = (GameObject)parameterTable[1];
+			effect = (EffectPackage)parameterTable[2];
+;		}
+		if(target.GetComponent<SurventUnitManager>() != null && target != null && effect != null)
+		{
+			if(target.GetComponent<SurventUnitManager>().survent.IsTank)
+			{
+				target.GetComponent<SurventUnitManager>().survent.SetEnhance(effect.EffectValue1, effect.EffectValue2);
+			}
+		}
+	}
 
+	/// <summary>
+	/// Enhance具有*隐匿*的随从
+	/// </summary>
+	/// <param name="parameterTable">参数表，[0]为发起者，[1]为目标， [2]为效果包</param>
+	void EnhanceConceal(object[] parameterTable)
+	{
+		GameObject target = null;
+		EffectPackage effect = null;
+		if (parameterTable != null)
+		{
+			target = (GameObject)parameterTable[1];
+			effect = (EffectPackage)parameterTable[2];
+			;
+		}
+		if (target.GetComponent<SurventUnitManager>() != null && target != null && effect != null)
+		{
+			if (target.GetComponent<SurventUnitManager>().survent.IsConcealed)
+			{
+				target.GetComponent<SurventUnitManager>().survent.SetEnhance(effect.EffectValue1, effect.EffectValue2);
+			}
+		}
+	}
 
 	#endregion
 }

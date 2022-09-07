@@ -8,6 +8,15 @@ public class PlayerInBattle : UnitInBattle
 	public int CurrentActionPoint;
 	public int MaxActionPoint;
 
+	public  void AddCurrentActionPoint(int value)
+	{
+		CurrentActionPoint += value;
+		if(CurrentActionPoint > MaxActionPoint)
+		{
+			CurrentActionPoint = MaxActionPoint;
+		}
+	}
+
 	public PlayerInBattle(Player _player) : base(_player.MaxHP, _player.CurrentHP, 0, 0, 0, false, 0, false, 0, false, false, 0, false, 0, false)
 	{
 		CurrentActionPoint = MaxActionPoint = 1;

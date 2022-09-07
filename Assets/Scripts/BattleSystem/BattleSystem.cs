@@ -407,10 +407,18 @@ public class BattleSystem : MonoBehaviour
 				}
 			}
 		}
+		else if (_effect.EffectType == EffectType.ActionPointRecovery)
+		{
+			if (_target != null && _target.GetComponent<PlayerUnitManager>() != null)
+			{
+				playerUnit.GetComponent<PlayerUnitManager>().player.AddCurrentActionPoint(_effect.EffectValue1);
+			}
+		}
 		else if (_effect.EffectType == EffectType.SpecialEffect)
 		{
 			//TODO Ãÿ ‚–ßπ˚
-			SpecialEffectManager.SendMessage(_effect.SpecialEffectScriptName, _target);
+			object[] parameterTable = { _initiator, _target, _effect };
+			SpecialEffectManager.SendMessage(_effect.SpecialEffectScriptName, parameterTable);
 		}
 		else
 		{
@@ -456,34 +464,42 @@ public class BattleSystem : MonoBehaviour
 			{
 				case TargetOptions.AllCreatures:
 					{
-						playerUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
-						bossUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+						//playerUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+						ApplyEffectTo(playerUnit,_initiator, _effect);
+						//bossUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+						ApplyEffectTo(bossUnit, _initiator, _effect);
 						foreach (var obj in PlayerSurventUnitsList)
 						{
-							obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+							//obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+							ApplyEffectTo(obj, _initiator, _effect);
 						}
 						foreach (var obj in BossSurventUnitsList)
 						{
-							obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+							//obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+							ApplyEffectTo(obj, _initiator, _effect);
 						}
 					}
 					break;
 				case TargetOptions.AllPlayerCreatures:
 					{
-						Debug.Log("AllPlayerCreatures");
-						playerUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+						//Debug.Log("AllPlayerCreatures");
+						//playerUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+						ApplyEffectTo(playerUnit, _initiator, _effect);
 						foreach (var obj in PlayerSurventUnitsList)
 						{
-							obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+							ApplyEffectTo(obj, _initiator, _effect);
+							//obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 						}
 					}
 					break;
 				case TargetOptions.AllEnemyCreatures:
 					{
-						bossUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+						ApplyEffectTo(bossUnit, _initiator, _effect);
+						//SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 						foreach (var obj in BossSurventUnitsList)
 						{
-							obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+							ApplyEffectTo(obj, _initiator, _effect);
+							//obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 						}
 					}
 					break;
@@ -491,11 +507,13 @@ public class BattleSystem : MonoBehaviour
 					{
 						foreach (var obj in PlayerSurventUnitsList)
 						{
-							obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+							ApplyEffectTo(obj, _initiator, _effect);
+							//obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 						}
 						foreach (var obj in BossSurventUnitsList)
 						{
-							obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+							ApplyEffectTo(obj, _initiator, _effect);
+							//obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 						}
 					}
 					break;
@@ -503,7 +521,8 @@ public class BattleSystem : MonoBehaviour
 					{
 						foreach (var obj in PlayerSurventUnitsList)
 						{
-							obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+							ApplyEffectTo(obj, _initiator, _effect);
+							//obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 						}
 					}
 					break;
@@ -511,7 +530,8 @@ public class BattleSystem : MonoBehaviour
 					{
 						foreach (var obj in BossSurventUnitsList)
 						{
-							obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+							ApplyEffectTo(obj, _initiator, _effect);
+							//obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 						}
 					}
 					break;
@@ -526,14 +546,16 @@ public class BattleSystem : MonoBehaviour
 										int rnd = Random.Range(0, PlayerSurventUnitsList.Count + 1);
 										if (rnd == PlayerSurventUnitsList.Count)
 										{
-											playerUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+											ApplyEffectTo(playerUnit, _initiator, _effect);
+											//playerUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 											break;
 										}
 										else
 										{
 											if(CheckAttack(PlayerSurventUnitsList[rnd]))
 											{
-												PlayerSurventUnitsList[rnd].SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+												ApplyEffectTo(PlayerSurventUnitsList[rnd], _initiator, _effect);
+												//PlayerSurventUnitsList[rnd].SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 												break;
 											}
 										}
@@ -552,7 +574,8 @@ public class BattleSystem : MonoBehaviour
 											maxhp = tmp.GetComponent<SurventUnitManager>().survent.CurrentHP;
 										}
 									}
-									obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+									ApplyEffectTo(obj, _initiator, _effect);
+									//obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 								}
 								break;
 							case SingleTargetOption.LowestHPTarget:
@@ -567,7 +590,8 @@ public class BattleSystem : MonoBehaviour
 											minhp = tmp.GetComponent<SurventUnitManager>().survent.CurrentHP;
 										}
 									}
-									obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+									ApplyEffectTo(obj, _initiator, _effect);
+									//obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 								}
 								break;
 							case SingleTargetOption.HigestATKTarget:
@@ -582,7 +606,8 @@ public class BattleSystem : MonoBehaviour
 											maxatk = tmp.GetComponent<SurventUnitManager>().survent.ATK;
 										}
 									}
-									obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+									ApplyEffectTo(obj, _initiator, _effect);
+									//obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 								}
 								break;
 							case SingleTargetOption.LowestATKTarget:
@@ -597,7 +622,8 @@ public class BattleSystem : MonoBehaviour
 											minatk = tmp.GetComponent<SurventUnitManager>().survent.ATK;
 										}
 									}
-									obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+									ApplyEffectTo(obj, _initiator, _effect);
+									//obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 								}
 								break;
 							case SingleTargetOption.SpecificTarget:
@@ -628,14 +654,16 @@ public class BattleSystem : MonoBehaviour
 										int rnd = Random.Range(0, BossSurventUnitsList.Count + 1);
 										if (rnd == BossSurventUnitsList.Count)
 										{
-											bossUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+											ApplyEffectTo(bossUnit, _initiator, _effect);
+											//bossUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 											break;
 										}
 										else
 										{
 											if (CheckAttack(BossSurventUnitsList[rnd]))
 											{
-												BossSurventUnitsList[rnd].SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+												ApplyEffectTo(BossSurventUnitsList[rnd], _initiator, _effect);
+												//BossSurventUnitsList[rnd].SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 												break;
 											}
 										}
@@ -654,7 +682,8 @@ public class BattleSystem : MonoBehaviour
 											maxhp = tmp.GetComponent<SurventUnitManager>().survent.CurrentHP;
 										}
 									}
-									obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+									ApplyEffectTo(obj, _initiator, _effect);
+									//obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 								}
 								break;
 							case SingleTargetOption.LowestHPTarget:
@@ -669,7 +698,8 @@ public class BattleSystem : MonoBehaviour
 											minhp = tmp.GetComponent<SurventUnitManager>().survent.CurrentHP;
 										}
 									}
-									obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+									ApplyEffectTo(obj, _initiator, _effect);
+									//obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 								}
 								break;
 							case SingleTargetOption.HigestATKTarget:
@@ -684,7 +714,8 @@ public class BattleSystem : MonoBehaviour
 											maxatk = tmp.GetComponent<SurventUnitManager>().survent.ATK;
 										}
 									}
-									obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+									ApplyEffectTo(obj, _initiator, _effect);
+									//obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 								}
 								break;
 							case SingleTargetOption.LowestATKTarget:
@@ -699,7 +730,8 @@ public class BattleSystem : MonoBehaviour
 											minatk = tmp.GetComponent<SurventUnitManager>().survent.ATK;
 										}
 									}
-									obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+									ApplyEffectTo(obj, _initiator, _effect);
+									//obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 								}
 								break;
 							case SingleTargetOption.SpecificTarget:
@@ -727,7 +759,8 @@ public class BattleSystem : MonoBehaviour
 							playerUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 							foreach (var obj in PlayerSurventUnitsList)
 							{
-								obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+								//obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+								ApplyEffectTo(obj, _initiator, _effect);
 							}
 						}
 						else
@@ -737,11 +770,13 @@ public class BattleSystem : MonoBehaviour
 								int rnd = Random.Range(0, PlayerSurventUnitsList.Count + 1);
 								if (rnd == PlayerSurventUnitsList.Count)
 								{
-									playerUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+									ApplyEffectTo(playerUnit, _initiator, _effect);
+									//playerUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 								}
 								else
 								{
-									PlayerSurventUnitsList[rnd].SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+									ApplyEffectTo(PlayerSurventUnitsList[rnd], _initiator, _effect);
+									//PlayerSurventUnitsList[rnd].SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 								}
 							}
 						}
@@ -754,7 +789,8 @@ public class BattleSystem : MonoBehaviour
 							bossUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 							foreach (var obj in BossSurventUnitsList)
 							{
-								obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+								//obj.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+								ApplyEffectTo(obj, _initiator, _effect);
 							}
 						}
 						else
@@ -764,11 +800,13 @@ public class BattleSystem : MonoBehaviour
 								int rnd = Random.Range(0, BossSurventUnitsList.Count + 1);
 								if (rnd == BossSurventUnitsList.Count)
 								{
-									bossUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+									//bossUnit.SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+									ApplyEffectTo(bossUnit, _initiator, _effect);
 								}
 								else
 								{
-									BossSurventUnitsList[rnd].SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
+									ApplyEffectTo(BossSurventUnitsList[rnd], _initiator, _effect);
+									//BossSurventUnitsList[rnd].SendMessage(RunnerMethodName.AcceptEffect, ParameterList);
 								}
 							}
 						}
@@ -825,6 +863,10 @@ public class BattleSystem : MonoBehaviour
 				UnitType unitType = GetUnitType(target);
 				if (effectPack.Target == TargetOptions.SinglePlayerTarget && (unitType == UnitType.Player || unitType == UnitType.PlayerSurvent))
 				{
+					if(InitiatorType == CardType.Survent && EffectInitiator.GetComponent<SurventUnitManager>().survent.IsDoubleHit)
+					{
+						ApplyEffectTo(EffectTarget, EffectInitiator, effectPack);
+					}
 					ApplyEffectTo(EffectTarget, EffectInitiator, effectPack);
 					if (InitiatorType == CardType.Survent && actionType != ActionType.ExtraAction)
 					{

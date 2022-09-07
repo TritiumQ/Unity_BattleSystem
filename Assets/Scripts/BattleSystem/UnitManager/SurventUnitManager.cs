@@ -169,6 +169,16 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
                     survent.SetInspire(effect);
 				}
                 break;
+            case EffectType.SetVampire:
+				{
+                    survent.SetVmapire(effect.IsInfinityEffect ? Const.INF : effect.EffectValue1);
+				}
+                break;
+            case EffectType.SetDoubleHit:
+				{
+                    survent.SetDoubleHit(effect.IsInfinityEffect ? Const.INF : effect.EffectValue1);
+				}
+                break;
             default:
                 break;
 		}

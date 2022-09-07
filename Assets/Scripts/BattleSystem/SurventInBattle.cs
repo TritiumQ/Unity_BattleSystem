@@ -19,6 +19,8 @@ public class SurventInBattle : UnitInBattle
 	public bool IsFeedback { get; set; }
 	public bool IsAdvanced { get; set; }
 
+
+
 	public List<AbilityPackage> SpecialAbilityList;
 
 	public CardType SurventType;
@@ -82,4 +84,10 @@ public class SurventInBattle : UnitInBattle
 			IsDoubleHit = false;
 		}
 	}
+
+	public void SetDoubleHit(int rounds)
+	{
+		DoubleHitRound = rounds;
+	}
+
 }
