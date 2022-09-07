@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/HEAD.unity
+    guid: 37320e265a36f1740b738d980b2df619
+  - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 4f34a2d16c26a484bacd3b7adfef7e13
   - enabled: 1
@@ -33,12 +36,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SceureHouse.unity
     guid: 96d53d383726d084db252565b93c499d
   - enabled: 1
-    path: Assets/Scenes/Choice.unity
-    guid: 6ee012c2ef4c6924baaa772ea0934366
-  - enabled: 1
     path: Assets/Scenes/Producer.unity
     guid: 132dec8df0546d040becbd88a8724900
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Choice.unity
+    guid: 6ee012c2ef4c6924baaa772ea0934366
   m_configObjects: {}

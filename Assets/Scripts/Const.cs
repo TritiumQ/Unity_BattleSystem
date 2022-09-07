@@ -45,8 +45,10 @@ public static class Const
     }
     public static string PLAYER_DATA_PATH(int _id)
     {
-        return UnityEngine.Application.dataPath + "/PlayerDatas/Save" + _id.ToString("D2") + ".json";
+        // return UnityEngine.Application.dataPath + "/PlayerDatas/Save" + _id.ToString("D2") + ".json";
+        return UnityEngine.Application.streamingAssetsPath + "/PlayerDatas/Save" + _id.ToString("D2") + ".json";
     }
+
 
     public static string GOODS_DATA_PATH(int _id)
 	{

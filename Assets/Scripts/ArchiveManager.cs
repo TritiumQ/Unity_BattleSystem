@@ -78,7 +78,7 @@ public static class ArchiveManager
 		string json = JsonUtility.ToJson(prePlayer);
 		for(int i = 1; i <= Const.MaxSaveCount; i++)
 		{
-			string path = Application.dataPath + "/PlayerDatas/Save" + i.ToString("D2") + ".json";
+			string path = Application.streamingAssetsPath + "/PlayerDatas/Save" + i.ToString("D2") + ".json";
 			FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
 			StreamWriter sw = new StreamWriter(fs);
 			sw.Write(json);
