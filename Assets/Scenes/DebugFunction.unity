@@ -474,9 +474,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dfa752a13d57394d86fdace9532a64a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Func1: {fileID: 580136395}
-  Func2: {fileID: 601484880}
-  Text1: {fileID: 682395890}
 --- !u!1 &580136393
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,7 +557,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 580136396}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 340566562}
+        m_TargetAssemblyTypeName: DebugSystem, Assembly-CSharp
+        m_MethodName: foo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &580136396
 MonoBehaviour:
   m_ObjectHideFlags: 0

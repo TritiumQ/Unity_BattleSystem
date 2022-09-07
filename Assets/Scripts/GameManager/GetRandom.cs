@@ -54,15 +54,66 @@ public static class GetRandom
     {
         //4 3 2 1
         int idex=0,pos1=0,pos2=0;
-        idex = GameConst.DrawCard[Random.Range(0, GameConst.DrawCard.Length)];
+        idex = GameConst.DrawCardWeight[Random.Range(0, GameConst.DrawCardWeight.Length)];
         pos1 = Random.Range(GameConst.Card_SVN[idex, 0], GameConst.Card_SVN[idex, 1] + 1);
         pos2 = Random.Range(GameConst.Card_SPL[idex, 0], GameConst.Card_SPL[idex, 1] + 1);
         if (idex == 1)
             return pos1;
-        else if (Random.Range(1, 4) <= 2)
+        else if (Random.Range(1, 3 + 1) <= 2)
             return pos1;
         else return pos2;
     }
+
+    public static int GetUnlockedCard()
+	{
+        int rank = GameConst.DrawCardWeight[Random.Range(0, GameConst.DrawCardWeight.Length)];
+        int type = Random.Range(1, 4);
+        List<int> list = new List<int>();
+        if (type <= 2) //SVN
+        {
+            for(int i = GameConst.Card_SVN[rank, 0]; i < GameConst.Card_SVN[rank, 1] + 1; i++)
+			{
+				if(!Player.Instance.Unlocked[i])
+				{
+                    list.Add(i);
+				}
+			}
+      
+        }
+        else //SPL
+		{
+            for (int i = GameConst.Card_SPL[rank, 0]; i < GameConst.Card_SPL[rank, 1] + 1; i++)
+            {
+                if (!Player.Instance.Unlocked[i])
+                {
+                    list.Add(i);
+                }
+            }
+        }
+        if (list.Count > 0)
+        {
+            int idx = Random.Range(0,list.Count);
+            return list[idx];
+        }
+        else
+        {
+            return -1;
+        }
+
+    }
+    
+    static bool IsInCardRange(int id)
+	{
+        //return ArchiveManager.LoadCardAsset(id) != null;
+        for(int i=0;i<GameConst.CardRange.Length;i++)
+		{
+            if(id >= GameConst.CardRange[i,0] && id <= GameConst.CardRange[i,1] )
+			{
+                return true;
+			}
+		}
+        return false;
+	}
 
     /// <summary>
     /// 伪随机获取敌人编号

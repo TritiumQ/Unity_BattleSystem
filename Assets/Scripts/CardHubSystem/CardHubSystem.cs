@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
 public class CardHubSystem : MonoBehaviour
 {
@@ -31,6 +32,10 @@ public class CardHubSystem : MonoBehaviour
 		//
 		ArchiveManager.LoadPlayerData();
 		LoadInformation();
+	}
+	private void Update()
+	{
+		GameObject.Find("CardCount").GetComponent<TextMeshProUGUI>().text = Count.ToString();
 	}
 	void LoadInformation()
 	{
@@ -123,6 +128,7 @@ public class CardHubSystem : MonoBehaviour
 			newCard.GetComponent<CardInDeckManager>().Initialized(ArchiveManager.LoadCardAsset(_ID));
 			CardCount.Add(_ID, 1);
 			CardObejcts.Add(_ID, newCard);
+			Count++;
 		}
 	}
 	void DeleteCardInDeck(int _ID)

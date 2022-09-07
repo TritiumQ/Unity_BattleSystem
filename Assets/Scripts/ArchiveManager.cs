@@ -63,6 +63,7 @@ public static class ArchiveManager
 		return asset;
 	}
 
+
 	public static GoodsSOAsset LoadGoodsAsset(int _id)
 	{
 		GoodsSOAsset asset = null;
@@ -70,10 +71,10 @@ public static class ArchiveManager
 		return asset;
 	}
 
-	public static void ResetPlayerDataFile()
+	public static void ResetPlayerDataFile(string code)
 	{
 		Debug.Log("≥ı ºªØ¥Êµµ");
-		SerializablePlayerData prePlayer = new SerializablePlayerData(Const.InitialCode);
+		SerializablePlayerData prePlayer = new SerializablePlayerData(code);
 		string json = JsonUtility.ToJson(prePlayer);
 		for(int i = 1; i <= Const.MaxSaveCount; i++)
 		{

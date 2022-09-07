@@ -1021,6 +1021,7 @@ public class BattleSystem : MonoBehaviour
 			case GameResult.Success:
 				{
 					Debug.Log("ÓÎÏ·Ê¤Àû");
+					Player.Instance.AddMoney(0, 2);
 					//SceneManager.LoadSceneAsync("CardSelect");
 					StartCoroutine(LoadNextScene());
 				}

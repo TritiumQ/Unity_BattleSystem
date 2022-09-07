@@ -53,15 +53,30 @@ public class Player
 		{
             Array.Fill(Unlocked, true);
         }
+        else if(_info.IsStarter)
+		{
+            Array.Fill(Unlocked, false);
+            for (int i=1; i < Unlocked.Length; i++)
+			{
+                if (i > 0 && i < 25)
+				{
+                    Unlocked[i] = true;
+				}
+                if (i > 250 && i <= 257)
+				{
+                    Unlocked[i] = true;
+				}
+			}
+		}
 		else
 		{
             Array.Fill(Unlocked, false);
-            foreach (var id in _info.UnlockCard)
-            {
-                Unlocked[id] = true;
-            }
         }
-	}
+        foreach (var id in _info.UnlockCard)
+        {
+            Unlocked[id] = true;
+        }
+    }
 
     #region 数据修改接口
     public void SetData(string _name, int _maxHP, int _currentHp, int _mithrils, int _tears,int _initTears)

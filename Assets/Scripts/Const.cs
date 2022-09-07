@@ -3,7 +3,8 @@
 /// </summary>
 /// <returns></returns>
 public static class Const
-{
+{   
+
     //偷懒
     /// <summary>
     /// 范围判断，左闭右闭
