@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 //≤‚ ‘”√£¨”–bug
-public class TestCardUpShow : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
+public class CardUpShow : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
 {
     public static bool EnablePreview = true;
 
