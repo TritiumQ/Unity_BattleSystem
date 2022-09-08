@@ -35,9 +35,29 @@ public class GoodsEffectManager : MonoBehaviour
 	{
 		Player.Instance.AddInitTears(2);
 	}
+
+	public void GetCurse(int rank)
+	{
+
+	}
 	#endregion
 
 	#region 商品特效(游戏商店)
+
+	public void UndeadCurse(int rank)
+	{
+
+	}
+
+	public void GetTearsByHP(int rank)
+	{
+		if(Player.Instance != null)
+		{
+			Player.Instance.AddMoney(0, 5);
+			Player.Instance.AddCurrentHp(-3);
+		}
+	}
+
 	/// <summary>
 	/// 获取馈赠(预留,未投入使用)
 	/// </summary>

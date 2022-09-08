@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SPL-255
   m_EditorClassIdentifier: 
   CardID: 255
-  CardName: SPL255
+  CardName: "\u9644\u9B54\u672F"
   CardDescription: "\u4F7F1\u540D\u968F\u4ECE+3/+3"
   CardRarity: 1
   CardType: 0

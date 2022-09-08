@@ -98,14 +98,11 @@ public class Player
     }
     public void AddCurrentHp(int _value)
     {
-        if(CurrentHP + _value <= MaxHP)
-		{
-            CurrentHP += _value;
-		}
-        else
-		{
+        CurrentHP += _value;
+        if (CurrentHP >= MaxHP)
             CurrentHP = MaxHP;
-		}
+        else if (CurrentHP < 0)
+            PlayerDataTF.EventEnd();
     }
     public void AddMaxHp(int _value)
     {

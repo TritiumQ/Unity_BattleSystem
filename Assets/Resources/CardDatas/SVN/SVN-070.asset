@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: SVN-070
   m_EditorClassIdentifier: 
   CardID: 70
-  CardName: SVN070
+  CardName: "\u9690\u5F62\u62A4\u536B"
   CardDescription: "*\u4EA1\u8BED*\uFF1A\u4F7F\u5168\u4F53\u53CB\u65B9\u968F\u4ECE\u83B7\u5F97*\u9690\u533F*"
   CardRarity: 1
   CardType: 1
   CardCamp: 2
   Cost: 3
-  CardImage: {fileID: 21300000, guid: eebc8b4394935fc4d84d060254dbafa6, type: 3}
+  CardImage: {fileID: -1079960856, guid: 71eaa34fb1175304487d67eb0170f6ae, type: 3}
   RarityImage: {fileID: 21300000, guid: 1cccf424955f79b4599d71bb3e3a8397, type: 3}
   MaxHP: 4
   Atk: 3

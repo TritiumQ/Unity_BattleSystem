@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 147d1f23cbb19674caf694b1f1471c77, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpText: {fileID: 2072024574225691357}
   actionPointText: {fileID: 3490028636455015585}
-  headIcon: {fileID: 1019666339039145652}
+  headIcon: {fileID: 2893836499407520720}
   maskImage: {fileID: 0}
 --- !u!114 &1894661336493899994
 MonoBehaviour:

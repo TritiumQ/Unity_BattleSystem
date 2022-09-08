@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e017dedad9b46c4c9fdfd01c7578d11, type: 3}
   m_Name: GOODS-012
   m_EditorClassIdentifier: 
-  GoodsName: 
-  GoodsDescription: 
-  GoodsEffectName: 
-  GoodsRnak: 0
+  GoodsName: "\u4F24\u75D5\u4E4B\u6CEA1"
+  GoodsDescription: "\u6D88\u80173\u70B9\u751F\u547D\u503C\u83B7\u5F975\u70B9\u6CEA\u6EF4"
+  GoodsEffectName: GetTearsByHP
+  GoodsRnak: 1
   GoodsPrice: 0
-  GoodsImage: {fileID: 0}
+  GoodsImage: {fileID: 21300000, guid: 1a7407c36f6f49b49b9cf34b77c265ae, type: 3}

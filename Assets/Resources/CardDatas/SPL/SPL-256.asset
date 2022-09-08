@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SPL-256
   m_EditorClassIdentifier: 
   CardID: 256
-  CardName: SPL256
+  CardName: "\u7D27\u6025\u5305\u624E"
   CardDescription: "\u4F7F1\u540D\u968F\u4ECE*\u6062\u590D*5\u70B9\u751F\u547D"
   CardRarity: 1
   CardType: 0

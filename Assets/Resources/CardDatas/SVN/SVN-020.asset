@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5260d0e1e557d924098f98884611e3f5, type: 3}
   m_Name: SVN-020
   m_EditorClassIdentifier: 
-  CardID: 20
+  CardID: 21
   CardName: "\u9760\u5C71"
   CardDescription: 
   CardRarity: 0
   CardType: 1
   CardCamp: 1
   Cost: 5
-  CardImage: {fileID: 21300000, guid: eebc8b4394935fc4d84d060254dbafa6, type: 3}
+  CardImage: {fileID: -1895060489, guid: 2d5a0f78e6700c94b95eb860f67d1432, type: 3}
   RarityImage: {fileID: 21300000, guid: cf6b63cacd7382e4fbd5fddabc7e2fd4, type: 3}
   MaxHP: 4
   Atk: 4
