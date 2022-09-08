@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4239446
 RectTransform:
   m_ObjectHideFlags: 0
@@ -174,8 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b212fd21364aa334488de115fa28cc7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ContinueButton: {fileID: 1593582591}
-  Mask: {fileID: 0}
+  Mask: {fileID: 4239448}
   alpha: 2
 --- !u!114 &4239448
 MonoBehaviour:
@@ -542,7 +541,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b212fd21364aa334488de115fa28cc7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ContinueButton: {fileID: 1593582591}
   Mask: {fileID: 4239448}
   alpha: 2
 --- !u!1 &1327875752
