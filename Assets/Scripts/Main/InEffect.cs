@@ -11,6 +11,9 @@ public class InEffect : MonoBehaviour
     private int count;
     private int cnt;
     private float step;
+	[Header("淡出淡入速度")]
+    public float alpha = 1f;
+
 
     void Awake()
     {

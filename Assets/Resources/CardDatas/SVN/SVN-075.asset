@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardID: 75
   CardName: THX-02
-  CardDescription: "*\u5148\u673A*\uFF1A\u62BD2\u5F20\u724C"
+  CardDescription: "*\u5148\u673A*:\u62BD2\u5F20\u724C"
   CardRarity: 1
   CardType: 1
   CardCamp: 1

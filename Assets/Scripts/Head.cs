@@ -15,8 +15,8 @@ public class Head : MonoBehaviour
         //SceneManager.LoadScene("Main");
         //ArchiveManager.ResetPlayerDataFile("starter");
         //ArchiveManager.LoadPlayerData();
-        //StartCoroutine(EnterScene());
-        ContinueButton.onClick.AddListener(Continue);
+        StartCoroutine(EnterScene());
+        //ContinueButton.onClick.AddListener(Continue);
         
     }
 
@@ -46,6 +46,7 @@ public class Head : MonoBehaviour
         while (alpha_tmp > 0)
         {
             alpha_tmp -= Time.deltaTime;
+       
             Mask.color = new Color(0, 0, 0, alpha_tmp);
             yield return null;
         }

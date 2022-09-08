@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardID: 154
   CardName: "\u51B2\u950B\u5C0F\u8F66"
-  CardDescription: "*\u7A81\u88AD*\uFF0C*\u4EA1\u8BED*\uFF1A\u4F7F\u6240\u6709\u53CB\u65B9\u968F\u4ECE\u83B7\u5F97*\u9690\u533F*"
+  CardDescription: "*\u7A81\u88AD*,*\u4EA1\u8BED*:\u4F7F\u6240\u6709\u53CB\u65B9\u968F\u4ECE\u83B7\u5F97*\u9690\u533F*"
   CardRarity: 3
   CardType: 1
   CardCamp: 2
