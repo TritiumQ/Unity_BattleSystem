@@ -60,7 +60,7 @@ public class CardHubSystem : MonoBehaviour
 				}
 			}
 			CardHub = new List<GameObject>();
-			for(int i = 0; i < Player.Instance.Unlocked.Length; i++)
+			for(int i = 1; i < Player.Instance.Unlocked.Length; i++)
 			{
 				var asset = Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(i));
 				if(asset != null)

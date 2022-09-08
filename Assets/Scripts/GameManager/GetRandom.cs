@@ -69,7 +69,7 @@ public static class GetRandom
         int rank = GameConst.DrawCardWeight[Random.Range(0, GameConst.DrawCardWeight.Length)];
         int type = Random.Range(1, 4);
         List<int> list = new List<int>();
-        if (type <= 2) //SVN
+        if (type <= 2||rank==1) //SVN
         {
             for(int i = GameConst.Card_SVN[rank, 0]; i < GameConst.Card_SVN[rank, 1] + 1; i++)
 			{

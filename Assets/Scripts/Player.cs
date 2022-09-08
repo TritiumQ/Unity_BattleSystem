@@ -91,6 +91,8 @@ public class Player
     public void SetCurrentHP(int _value)
     {
         CurrentHP = _value;
+        if (CurrentHP >= MaxHP)
+            CurrentHP = MaxHP;
     }
     public void SetMaxHP(int _value)
     {

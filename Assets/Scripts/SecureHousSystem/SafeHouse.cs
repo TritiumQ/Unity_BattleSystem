@@ -23,10 +23,10 @@ public class SafeHouse : MonoBehaviour
     public void selectTear()
     {
         //Player.Instance.Tears += 20;
-        Player.Instance.AddMoney(0, 13);
+        Player.Instance.AddMoney(0, 12);
 
         this.transform.Find("GetTear").GetComponent<Button>().enabled = false;
-        ShowTip("您获得了13点泪滴", Color.red);
+        ShowTip("您获得了12点泪滴", Color.red);
         StartCoroutine(Test1());
        
 
@@ -35,7 +35,7 @@ public class SafeHouse : MonoBehaviour
     public void selectCard()
     {
         //卡库随机卡牌添加到卡组中去；
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 1; i++)
         {
             int RandomNewCard = GetRandom.GetRandomCard();//这个要结合之后卡库卡牌信息来改正；
             Player.Instance.AddCard(RandomNewCard);
@@ -51,10 +51,10 @@ public class SafeHouse : MonoBehaviour
     //选择恢复；
     public void selectCur()
     {
-        Player.Instance.AddCurrentHp(2);
+        Player.Instance.AddCurrentHp(5);
 
         this.transform.Find("Heal").GetComponent<Button>().enabled = false;
-        ShowTip("您获得了2点血量恢复", Color.red);
+        ShowTip("您获得了5点血量恢复", Color.red);
         StartCoroutine(Test1());
        
     }
