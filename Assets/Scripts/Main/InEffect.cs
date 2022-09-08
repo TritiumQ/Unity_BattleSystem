@@ -17,12 +17,12 @@ public class InEffect : MonoBehaviour
         startColor = 255f;
         finalColor = 0.0f;
         currentColor = startColor;
-        count = 10;
+        count = 1;
         cnt = 0;
         step = 5.0f;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         cnt++;
         if (cnt >= count)
