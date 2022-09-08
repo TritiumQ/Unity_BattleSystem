@@ -1395,7 +1395,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13cacc7d9de22a148814618f9d455b60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisSurvent: {fileID: 2634340889832455649}
   atkText: {fileID: 2634340889731753358}
   hpText: {fileID: 2634340889170074197}
   cardImage: {fileID: 2634340889445956699}
@@ -1419,7 +1418,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed323f778288b9941b9281e4220d15d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisObject: {fileID: 2634340889832455649}
 --- !u!114 &559360886539687523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1432,4 +1430,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486b1f0235e6397459056f29b611a71b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisObject: {fileID: 2634340889832455649}

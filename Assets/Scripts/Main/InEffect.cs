@@ -5,39 +5,35 @@ using UnityEngine;
 
 public class InEffect : MonoBehaviour
 {
-    private float startColor;
-    private float finalColor;
-    private float currentColor;
-    private int count;
-    private int cnt;
-    private float step;
 	[Header("淡出淡入速度")]
     public float alpha = 1f;
+    public Image mask;
 
-
-    void Awake()
+    IEnumerator EnterScene()
     {
-        startColor = 255f;
-        finalColor = 0.0f;
-        currentColor = startColor;
-        count = 1;
-        cnt = 0;
-        step = 5.0f;
-    }
-
-    void FixedUpdate()
-    {
-        cnt++;
-        if (cnt >= count)
+        float alpha_tmp = alpha;
+        while (alpha_tmp > 0)
         {
-            cnt = 0;
-            currentColor -= step;
-            GetComponent<Image>().color = new Color((0f / 255f), (0f / 255f), (0f / 255f), (currentColor / 255f));
-            if (currentColor == finalColor)
-            {
-                Destroy(GameObject.Find("InEffect"));
-            }
+            alpha_tmp -= Time.deltaTime;
+            mask.color = new Color(0, 0, 0, alpha_tmp);
+            yield return null;
         }
     }
+
+    public IEnumerator QuitScene()
+    {
+        float alpha_tmp = 0;
+        while (alpha_tmp < alpha)
+        {
+            alpha_tmp += Time.deltaTime;
+            mask.color = new Color(0, 0, 0, alpha_tmp);
+            yield return null;
+        }
+    }
+
+    void Start()
+	{
+		StartCoroutine(EnterScene());
+	}
 }
 

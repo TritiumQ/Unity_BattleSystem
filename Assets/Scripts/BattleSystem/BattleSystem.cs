@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -74,11 +75,12 @@ public class BattleSystem : MonoBehaviour
 	}
 	private void Awake()
 	{
-		PlayerTurnText.enabled = false;
-		EnemyTurnText.enabled = true;
+		PlayerTurnText.enabled = true;
+		EnemyTurnText.enabled = false;
 
 		endButton.onClick.AddListener(EndRound);
-
+		
+		Rounds = 0;
 		roundText.text = Rounds.ToString();
 
 		playerCardDeck = new List<int>();
@@ -92,7 +94,9 @@ public class BattleSystem : MonoBehaviour
 		SpecialEffectManager = GetComponent<SpecialEffectManager>();
 
 		//
-		Stage = GameStage.RoundStart;
+		//Stage = GameStage.RoundStart;
+		Stage = GameStage.PlayerDrawCard;
+
 
 //#if UNITY_EDITOR
 //        TestSetData();
@@ -105,7 +109,6 @@ public class BattleSystem : MonoBehaviour
     void SwitchTurnText()
 	{
 		PlayerTurnText.enabled = !PlayerTurnText.enabled;
-		EnemyTurnText.enabled = !EnemyTurnText.enabled;
 	}
 	/// <summary>
 	/// 随机抽卡
@@ -245,12 +248,14 @@ public class BattleSystem : MonoBehaviour
 				break;
 			case GameStage.EnemyAction: //敌人行动
 				{
+					//SwitchTurnText();
 					bossUnit.SendMessage(RunnerMethodName.AutoAction, Rounds);
 					foreach (var unit in BossSurventUnitsList)
 					{
 						unit.SendMessage(RunnerMethodName.AutoAction, Rounds);
 					}
 					Stage = GameStage.PlayerSubsequentAction;
+					//SwitchTurnText();
 				}
 				break;
 			case GameStage.PlayerSubsequentAction: //玩家后手效果
@@ -300,7 +305,17 @@ public class BattleSystem : MonoBehaviour
 					// 使用法术卡
 					if(EffectInitiator == null)
 					{
-						EffectSetupRequest(_cardObject, card.SpellEffect, _cardObject.transform.position, CardType.Spell);
+						if(card.SpellEffect.Target == TargetOptions.SinglePlayerTarget
+							|| card.SpellEffect.Target == TargetOptions.SinglePlayerTarget
+							&& card.SpellEffect.SingleTargetOption == SingleTargetOption.SpecificTarget)
+						{
+							EffectSetupRequest(_cardObject, card.SpellEffect, _cardObject.transform.position, CardType.Spell);
+						}
+						else
+						{
+							ApplyEffect(_cardObject, card.SpellEffect);
+							Destroy(_cardObject);
+						}
 					}
 					else
 					{
@@ -330,9 +345,12 @@ public class BattleSystem : MonoBehaviour
 			{
 				case CardType.Survent:
 					{
-						newSurvent = Instantiate(surventPrefab, surventArea.transform);
-						newSurvent.GetComponent<SurventUnitManager>().Initialized(_card);
-						PlayerSurventUnitsList.Add(newSurvent);
+						if(PlayerSurventUnitsList.Count < 7)
+						{
+							newSurvent = Instantiate(surventPrefab, surventArea.transform);
+							newSurvent.GetComponent<SurventUnitManager>().Initialized(_card);
+							PlayerSurventUnitsList.Add(newSurvent);
+						}
 					}
 					break;
 				case CardType.Monster:

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Head : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Button ContinueButton;
+    //public Button ContinueButton;
     public Image Mask;
     void Awake()
     {
@@ -17,28 +17,16 @@ public class Head : MonoBehaviour
         //ArchiveManager.LoadPlayerData();
         StartCoroutine(EnterScene());
         //ContinueButton.onClick.AddListener(Continue);
+        Invoke("Continue", 3f);
         
     }
-
     void Continue()
 	{
-        Invoke("_Continue", 1f);
-    }
-
-    void _Continue()
-	{
-        StartCoroutine(_exit());
-    }
-
-
-    IEnumerator _exit()
-    {
-        //Debug.Log("Exit fade");
-        yield return StartCoroutine(QuitScene());
+        StartCoroutine(QuitScene());
     }
 
     #region µ­Èëµ­³ö
-    public float alpha = 2;
+    public float alpha = 5;
 
     IEnumerator EnterScene()
     {

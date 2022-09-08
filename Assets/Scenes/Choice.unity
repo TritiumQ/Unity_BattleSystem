@@ -1170,7 +1170,7 @@ RectTransform:
   - {fileID: 538280313}
   - {fileID: 1413730241}
   - {fileID: 820275674}
-  - {fileID: 1997817440}
+  - {fileID: 1920559301}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1191,7 +1191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c39ad1da4f966774ea263c89bbc4f95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1997817439
+--- !u!1001 &1920559300
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1288,10 +1288,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29bdc7847aaf4544fbe249a7cc19702b, type: 3}
---- !u!224 &1997817440 stripped
+--- !u!224 &1920559301 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4770682547906648392, guid: 29bdc7847aaf4544fbe249a7cc19702b, type: 3}
-  m_PrefabInstance: {fileID: 1997817439}
+  m_PrefabInstance: {fileID: 1920559300}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2033764431
 GameObject:
