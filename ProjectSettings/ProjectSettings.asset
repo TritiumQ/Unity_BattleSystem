@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: "\u6728\u74DC\u661F\u7075\u5728\u72DE\u7B11"
   productName: "\u58A8\u745E\u4E9A\u884C\u52A8\uFF1A\u4E34\u6E0A"
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -145,7 +145,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.3
+  bundleVersion: 0.6.0
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0

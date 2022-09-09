@@ -65,4 +65,6 @@ public static class Const
     public static int EpicCardPrice = 16;
     public static int LegendCardPrice = 20;
 
+    public static int DefaultSaveID = 1; 
+
 }
