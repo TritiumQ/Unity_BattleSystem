@@ -151,8 +151,13 @@ public class UnitInBattle
 	}
 	public virtual void SetProtected(int times)
 	{
-		ProtectedTimes = times;
+		ProtectedTimes += times;
 	}
+	public virtual void SetVmapire(int rounds)
+	{
+		VampireRounds = rounds;
+	}
+
 	#endregion
 
 	#region 效果运行/刷新接口

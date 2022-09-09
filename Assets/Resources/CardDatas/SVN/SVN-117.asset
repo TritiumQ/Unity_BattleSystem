@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: SVN-117
   m_EditorClassIdentifier: 
   CardID: 117
-  CardName: 
-  CardDescription: "*\u5148\u673A*\uFF1A\u5BF9\u4EFB\u610F1\u540D\u5355\u4F4D\u9020\u62105\u70B9\u4F24\u5BB3"
+  CardName: "\u5E9F\u6DB2\u63A2\u7D22\u8005"
+  CardDescription: "*\u5148\u673A*:\u5BF9\u4EFB\u610F1\u540D\u5355\u4F4D\u9020\u62105\u70B9\u4F24\u5BB3"
   CardRarity: 2
   CardType: 1
   CardCamp: 0
   Cost: 4
-  CardImage: {fileID: 21300000, guid: eebc8b4394935fc4d84d060254dbafa6, type: 3}
-  RarityImage: {fileID: 21300000, guid: 1cccf424955f79b4599d71bb3e3a8397, type: 3}
+  CardImage: {fileID: 1845673181, guid: 2c93956df02cd0245a8752bd99142785, type: 3}
+  RarityImage: {fileID: 21300000, guid: d045c3e1ae5ff55469e7cc94951ba23c, type: 3}
   MaxHP: 5
   Atk: 3
   IsDoubleHit: 0
@@ -32,7 +32,7 @@ MonoBehaviour:
     Package:
       EffectType: 12
       IsInfinityEffect: 0
-      EffectValue1: 4
+      EffectValue1: 5
       EffectValue2: 0
       EffectValue3: 0
       SpecialEffectScriptName: 

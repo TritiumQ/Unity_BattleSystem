@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e017dedad9b46c4c9fdfd01c7578d11, type: 3}
   m_Name: GOODS-001
   m_EditorClassIdentifier: 
-  GoodsName: 
-  GoodsDescription: 
-  GoodsEffectName: 
-  GoodsRnak: 0
-  GoodsPrice: 0
-  GoodsImage: {fileID: 0}
+  GoodsName: "\u6CEA1"
+  GoodsDescription: "\u5F00\u5C40\u83B7\u5F97\u4E24\u4E2A\u989D\u5916\u7684\u6CEA\u6EF4"
+  GoodsEffectName: ExtraTears
+  GoodsRnak: 1
+  GoodsPrice: 50
+  GoodsImage: {fileID: 21300000, guid: ec785febb56d8bb469dd6cb6235ebcd2, type: 3}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Audiomanage : MonoBehaviour
 {
-    public static Audiomanage Instance=new Audiomanage();
+    public static Audiomanage Instance;// = new Audiomanage();
     public static string musicPath = "Music/";
     private void Awake()
     {

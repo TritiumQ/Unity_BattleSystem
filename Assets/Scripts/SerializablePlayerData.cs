@@ -19,6 +19,7 @@ public class SerializablePlayerData
     public int InitTears;
     public int[] CardSet;
     public bool IsAllUnlocked;
+    public bool IsStarter;
     public int[] UnlockCard;
 
     
@@ -39,8 +40,9 @@ public class SerializablePlayerData
             CardSet[1] = 200;
 
             IsAllUnlocked = true;
+            IsStarter = false;
         }
-        else
+        else if(InitialCode == "null")
         {
             Name = null;
             MaxHP = -1;
@@ -50,7 +52,21 @@ public class SerializablePlayerData
             InitTears = -1;
             CardSet = null;
             IsAllUnlocked = false;
+            IsStarter = false;
             UnlockCard = null;
+        }
+        else if(InitialCode == "starter")
+		{
+            Name = "Noob";
+            MaxHP = 15;
+            CurrentHP = 15;
+            Mithrils = 0;
+            Tears = 0;
+            InitTears = 10;
+            CardSet = null;
+            IsAllUnlocked = false;
+            UnlockCard = null;
+            IsStarter = true;
         }
     }
     /// <summary>

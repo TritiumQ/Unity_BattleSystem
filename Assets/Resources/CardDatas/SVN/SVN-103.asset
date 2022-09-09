@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardID: 103
   CardName: "\u63A5\u5355\u738B"
-  CardDescription: "*\u9690\u533F*\uFF0C\u6BCF\u6B21\u653B\u51FB\u540E\u83B7\u5F97+1/+0"
+  CardDescription: "*\u9690\u533F*, \u6BCF\u6B21\u653B\u51FB\u540E\u83B7\u5F97+1/+0"
   CardRarity: 2
   CardType: 1
   CardCamp: 2
   Cost: 3
-  CardImage: {fileID: 21300000, guid: eebc8b4394935fc4d84d060254dbafa6, type: 3}
-  RarityImage: {fileID: 21300000, guid: 1cccf424955f79b4599d71bb3e3a8397, type: 3}
-  MaxHP: 3
+  CardImage: {fileID: 570349351, guid: 2c93956df02cd0245a8752bd99142785, type: 3}
+  RarityImage: {fileID: 21300000, guid: d045c3e1ae5ff55469e7cc94951ba23c, type: 3}
+  MaxHP: 4
   Atk: 2
   IsDoubleHit: 0
   IsTank: 0
@@ -30,13 +30,24 @@ MonoBehaviour:
   SpecialAbilityList:
   - SkillType: 1
     Package:
-      EffectType: 12
+      EffectType: 6
       IsInfinityEffect: 0
-      EffectValue1: 4
+      EffectValue1: 3
       EffectValue2: 0
       EffectValue3: 0
       SpecialEffectScriptName: 
-      Target: 10
+      Target: 11
+      SingleTargetOption: 5
+      TargetCount: 0
+  - SkillType: 0
+    Package:
+      EffectType: 7
+      IsInfinityEffect: 0
+      EffectValue1: 1
+      EffectValue2: 0
+      EffectValue3: 0
+      SpecialEffectScriptName: 
+      Target: 11
       SingleTargetOption: 5
       TargetCount: 0
   IsCopidedEffect: 0

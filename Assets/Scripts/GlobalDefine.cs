@@ -138,6 +138,13 @@ public enum EffectType
     /// </summary>
     Summon,
 
+    SetVampire,
+    
+    SetDoubleHit,
+
+    ActionPointRecovery,
+
+
 	//*亡语*，*先机*，*每回合开始时*，*每回合结束时*, boss的特殊技能
 }
 

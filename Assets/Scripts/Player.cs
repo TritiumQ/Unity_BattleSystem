@@ -53,15 +53,30 @@ public class Player
 		{
             Array.Fill(Unlocked, true);
         }
+        else if(_info.IsStarter)
+		{
+            Array.Fill(Unlocked, false);
+            for (int i=1; i < Unlocked.Length; i++)
+			{
+                if (i > 0 && i < 25)
+				{
+                    Unlocked[i] = true;
+				}
+                if (i > 250 && i <= 257)
+				{
+                    Unlocked[i] = true;
+				}
+			}
+		}
 		else
 		{
             Array.Fill(Unlocked, false);
-            foreach (var id in _info.UnlockCard)
-            {
-                Unlocked[id] = true;
-            }
         }
-	}
+        foreach (var id in _info.UnlockCard)
+        {
+            Unlocked[id] = true;
+        }
+    }
 
     #region 数据修改接口
     public void SetData(string _name, int _maxHP, int _currentHp, int _mithrils, int _tears,int _initTears)
@@ -76,6 +91,8 @@ public class Player
     public void SetCurrentHP(int _value)
     {
         CurrentHP = _value;
+        if (CurrentHP >= MaxHP)
+            CurrentHP = MaxHP;
     }
     public void SetMaxHP(int _value)
     {
@@ -83,14 +100,11 @@ public class Player
     }
     public void AddCurrentHp(int _value)
     {
-        if(CurrentHP + _value <= MaxHP)
-		{
-            CurrentHP += _value;
-		}
-        else
-		{
+        CurrentHP += _value;
+        if (CurrentHP >= MaxHP)
             CurrentHP = MaxHP;
-		}
+        else if (CurrentHP < 0)
+            PlayerDataTF.EventEnd();
     }
     public void AddMaxHp(int _value)
     {
@@ -110,7 +124,7 @@ public class Player
 
     public void SetTears(int _tears)
 	{
-        Tears += _tears;
+        Tears = _tears;
 	}
     public void SetMithrils(int _mithrils)
 	{
@@ -125,6 +139,10 @@ public class Player
     {
         CurrentHP = MaxHP;
         Tears = InitTears;
+        while(cardSet.Count>12)
+        {
+            cardSet.RemoveAt(cardSet.Count - 1);
+        }
     }
 	#endregion
 

@@ -19,8 +19,8 @@ MonoBehaviour:
   CardType: 2
   CardCamp: 5
   Cost: 0
-  CardImage: {fileID: 21300000, guid: 85ce100ffe9422e44adce1e589a1d572, type: 3}
-  RarityImage: {fileID: 0}
+  CardImage: {fileID: 2132987592, guid: b19bd23508a88a847895c1828f31a522, type: 3}
+  RarityImage: {fileID: 2132987592, guid: b19bd23508a88a847895c1828f31a522, type: 3}
   MaxHP: 5
   Atk: 4
   IsDoubleHit: 0
@@ -30,4 +30,13 @@ MonoBehaviour:
   SpecialAbilityList: []
   IsCopidedEffect: 0
   IsCopied: 0
-  SpellEffectList: []
+  SpellEffect:
+    EffectType: 0
+    IsInfinityEffect: 0
+    EffectValue1: 0
+    EffectValue2: 0
+    EffectValue3: 0
+    SpecialEffectScriptName: 
+    Target: 0
+    SingleTargetOption: 0
+    TargetCount: 0

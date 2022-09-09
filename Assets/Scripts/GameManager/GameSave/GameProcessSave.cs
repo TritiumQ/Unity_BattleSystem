@@ -6,8 +6,9 @@ using System.IO;
 //TODO
 //ÉèÎª¾²Ì¬
 public static class GameProcessSave 
-{ 
-    public static string savePath = Application.dataPath + "/GameProcessDatas/DataSave01.json";
+{
+    //public static string savePath = Application.dataPath + "/GameProcessDatas/DataSave01.json";
+    public static string savePath = Application.streamingAssetsPath + "/GameProcessDatas/DataSave01.json";
     public static bool isLoad = false;
     public static string Lock="Lock";
     private static Player player = Player.Instance;

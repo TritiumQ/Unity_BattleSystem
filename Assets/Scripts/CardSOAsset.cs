@@ -18,9 +18,9 @@ public class CardSOAsset : ScriptableObject
     public Sprite RarityImage;// 稀有度图像
 
     [Header("随从/敌人信息")]
-    public int MaxHP;// 最大生命值
-    public int Atk;// 攻击力
 
+    public int Atk;// 攻击力
+    public int MaxHP;// 最大生命值
     //public int HitCount = 1;// 每回合攻击次数
     public bool IsDoubleHit;
     public bool IsTank; // 是否嘲讽

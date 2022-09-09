@@ -1,0 +1,544 @@
+fileFormatVersion: 2
+guid: 2c93956df02cd0245a8752bd99142785
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: card-epic_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93a987aeaa5cc0e42b72d27059a6ceab
+      internalID: -1132588056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-epic_1
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d2d9d71b2f804a4e8b72cd1ea26ab2c
+      internalID: 755376852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-epic_2
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 190a3368f73dbb74395d2914438dfb6f
+      internalID: -1405642463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-epic_3
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fc3b0399cc05ed48a5686b6e8ec6dd1
+      internalID: 570349351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-epic_4
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2480a93030f30124ba1efd6cd5414d01
+      internalID: 1238200203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-epic_5
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74c9ab5520af32444b555b80b3126ee7
+      internalID: -1670772986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-epic_6
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61ad784015fe8084ca0d695e02a7e964
+      internalID: -1587509309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-epic_7
+      rect:
+        serializedVersion: 2
+        x: 2100
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cfb14edc945d2a46acabd8e829a5349
+      internalID: 1429843263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-epic_8
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a722957d43f95347a95192c4bf9df15
+      internalID: 1776215252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-epic_9
+      rect:
+        serializedVersion: 2
+        x: 2700
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08c4456961ccdf34e82697e4c618f0bc
+      internalID: -330234436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-epic_10
+      rect:
+        serializedVersion: 2
+        x: 3000
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6d8e49cb71c9b74c86a4ab1a1972ec0
+      internalID: 1195473967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-epic_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1245
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bc7560ba666bd344843723c2bef0fa2
+      internalID: 1059370791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-epic_12
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 1245
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2a751da576419c49919aaf1befcfc79
+      internalID: 1422430052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-epic_13
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1245
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf1d0453bf8b4274b894cd9abad2d26f
+      internalID: 1687535960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-epic_14
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 1245
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 280d7c761afc11c4bbefeb2d79404818
+      internalID: 391712355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-epic_15
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 1245
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55fe7bfd0d6f3ca4e8fd8cc822cadc4e
+      internalID: -387819899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-epic_16
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 1245
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ed1625d9897d844e880cd7d50d21fad
+      internalID: 1563646606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-epic_17
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 1245
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bf90d2a32f303340b99fb0e324d74d2
+      internalID: 1845673181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      card-epic_17: 1845673181
+      card-epic_32: 2012692553
+      card-epic_9: -330234436
+      card-epic_6: -1587509309
+      card-epic_5: -1670772986
+      card-epic_13: 1687535960
+      card-epic_7: 1429843263
+      card-epic_24: 1831453196
+      card-epic_0: -1132588056
+      card-epic_11: 1059370791
+      card-epic_33: -1599726632
+      card-epic_3: 570349351
+      card-epic_12: 1422430052
+      card-epic_10: 1195473967
+      card-epic_27: -881317326
+      card-epic_19: 1911493495
+      card-epic_35: 447483968
+      card-epic_38: 837304152
+      card-epic_8: 1776215252
+      card-epic_40: 1411340077
+      card-epic_2: -1405642463
+      card-epic_42: -194049272
+      card-epic_4: 1238200203
+      card-epic_34: -1835814073
+      card-epic_18: -1596201778
+      card-epic_31: -1121700332
+      card-epic_37: 1020930050
+      card-epic_16: 1563646606
+      card-epic_21: -187143043
+      card-epic_25: -1598030850
+      card-epic_15: -387819899
+      card-epic_39: 88746844
+      card-epic_26: 193335630
+      card-epic_23: -904840656
+      card-epic_22: -942329668
+      card-epic_14: 391712355
+      card-epic_30: 362173850
+      card-epic_43: -2123155147
+      card-epic_20: 1993346805
+      card-epic_36: -50749917
+      card-epic_41: -1014053828
+      card-epic_1: 755376852
+      card-epic_29: -821435970
+      card-epic_28: -1490617172
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

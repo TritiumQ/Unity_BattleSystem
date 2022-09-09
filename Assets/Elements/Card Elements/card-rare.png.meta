@@ -1,0 +1,775 @@
+fileFormatVersion: 2
+guid: 71eaa34fb1175304487d67eb0170f6ae
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: card-rare_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1037af6d73c639d4d9a7ce1b7562e877
+      internalID: 1050033908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_1
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1aad22bc21c8f9443b87e33a4ebdbf9d
+      internalID: -1571037596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_2
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f0b5e93933a9d745bda8957dae1a723
+      internalID: 117232852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_3
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f09b0013b58522047b037318a2294085
+      internalID: -133201687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_4
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 811bca6e699627d469e2e665718c1158
+      internalID: -929209001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_5
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd23f4c9656e9654c9ab3973bd0d59f0
+      internalID: -65533106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_6
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 716ef7e29b3a9b34ea6805aefec5c2aa
+      internalID: -1793348453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_7
+      rect:
+        serializedVersion: 2
+        x: 2100
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d26d10187d95a546853476654ed855a
+      internalID: -938235705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_8
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a64ae9c8ceed054290e20d44185db1c
+      internalID: -134444430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_9
+      rect:
+        serializedVersion: 2
+        x: 2700
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbf0cf77c9b0164469ec477d919a1f54
+      internalID: -425786904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_10
+      rect:
+        serializedVersion: 2
+        x: 3000
+        y: 1745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebdac20575f33b646ab3b85c0e43867d
+      internalID: -233637057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1245
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e931127166270c4288a60277165e6c9
+      internalID: 1511291964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_12
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 1245
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81f7948aa2e438249b41ed3986b5871b
+      internalID: 846582495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_13
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1245
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0547155c20a69e443853986f51f19bfd
+      internalID: -1952303680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_14
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 1245
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 619a2ec8a98c060459a73f7f464e1908
+      internalID: -319827895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_15
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 1245
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22cb1d4ca6113d24f929cb6c52ca7a67
+      internalID: -1223054234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_16
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 1245
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b24c99e7e968cd479571ac54f98dcf8
+      internalID: 7235698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_17
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 1245
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe3969b62658d0f45920fa24467ba556
+      internalID: -1259988836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_18
+      rect:
+        serializedVersion: 2
+        x: 2100
+        y: 1245
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f3b4ab22a1334440a1093865083ba65
+      internalID: 1912584269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_19
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 1245
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94889e4c4e747e94bb96e339fa1945c6
+      internalID: 1791842753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_20
+      rect:
+        serializedVersion: 2
+        x: 2700
+        y: 1245
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b659bc5d6c3e9a44cad6d4f0d8b25728
+      internalID: -1079960856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_21
+      rect:
+        serializedVersion: 2
+        x: 3000
+        y: 1245
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 479945c1a4e1e1140bc98d7e5e3b2cc1
+      internalID: 1716497099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb60888d294ab7045bf95e53b27ecc8e
+      internalID: -454044141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_23
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c197349b3cfb9914f87b1a169fe923fd
+      internalID: -11915259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_24
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48871193c5914384ebbfb2d149538cf6
+      internalID: -1336737686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_25
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d43e8d72203a9f6448889e9d39b2be71
+      internalID: 1581164668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_26
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2c01d64abc401d439f0ad419edcdcce
+      internalID: 1680640464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_27
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39ad546ba94a6fb498eeb59ee49b5d98
+      internalID: -1293092914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: card-rare_28
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 745
+        width: 300
+        height: 500
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd5347884b3c03840a75d53a3ed15246
+      internalID: -1069892970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      card-rare_38: 1262776797
+      card-rare_2: 117232852
+      card-rare_5: -65533106
+      card-rare_42: 508466504
+      card-rare_28: -1069892970
+      card-rare_19: 1791842753
+      card-rare_30: 917586337
+      card-rare_24: -1336737686
+      card-rare_31: 2004779552
+      card-rare_6: -1793348453
+      card-rare_41: 692277936
+      card-rare_8: -134444430
+      card-rare_33: -209148529
+      card-rare_0: 1050033908
+      card-rare_11: 1511291964
+      card-rare_25: 1581164668
+      card-rare_23: -11915259
+      card-rare_34: 213983393
+      card-rare_36: 1084042920
+      card-rare_1: -1571037596
+      card-rare_37: 1963862806
+      card-rare_21: 1716497099
+      card-rare_35: -790272984
+      card-rare_39: -1541608387
+      card-rare_14: -319827895
+      card-rare_10: -233637057
+      card-rare_7: -938235705
+      card-rare_27: -1293092914
+      card-rare_17: -1259988836
+      card-rare_4: -929209001
+      card-rare_26: 1680640464
+      card-rare_13: -1952303680
+      card-rare_3: -133201687
+      card-rare_18: 1912584269
+      card-rare_29: -1629727622
+      card-rare_43: -275631570
+      card-rare_12: 846582495
+      card-rare_20: -1079960856
+      card-rare_32: 99204053
+      card-rare_22: -454044141
+      card-rare_40: 1982248201
+      card-rare_15: -1223054234
+      card-rare_16: 7235698
+      card-rare_9: -425786904
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

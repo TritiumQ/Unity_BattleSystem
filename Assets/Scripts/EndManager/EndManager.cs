@@ -11,6 +11,9 @@ public class EndManager : MonoBehaviour
 
     public GameObject displayBox_1;
     public GameObject displayBox_2;
+
+    public GameObject victoryImage;
+    public GameObject failImage;
     void Awake()
     {
         InitData();
@@ -24,6 +27,7 @@ public class EndManager : MonoBehaviour
             step = _object.step;
             level= _object.level;
             result= _object.result;
+            SetResult();
             _object.InitGameEvent();
             GameProcessSave.GameSaveSet(1, _object, true);
             SetDisplayBox(1, step);
@@ -45,6 +49,18 @@ public class EndManager : MonoBehaviour
         else if (_key == 2)
         {
             displayBox_2.GetComponent<DisplayBoxUI>().InitSet("ªÒµ√√ÿ“¯:", value*2);
+        }
+    }
+
+    public void SetResult()
+    {
+        if(result==0)
+        {
+            failImage.SetActive(true);
+        }
+        else if(result==1)
+        {
+            victoryImage.SetActive(true);
         }
     }
 }

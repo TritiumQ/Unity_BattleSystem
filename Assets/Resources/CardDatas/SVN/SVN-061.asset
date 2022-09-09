@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardID: 61
   CardName: "\u96C7\u4F63\u5175"
-  CardDescription: "*\u5632\u8BBD*\uFF0C*\u4EA1\u8BED*\uFF1A\u5BF9\u654C\u65B9\u5168\u4F53\u9020\u62103\u70B9\u4F24\u5BB3"
+  CardDescription: "*\u5632\u8BBD*,*\u4EA1\u8BED*:\u5BF9\u654C\u65B9\u5168\u4F53\u9020\u62103\u70B9\u4F24\u5BB3"
   CardRarity: 1
   CardType: 1
   CardCamp: 3
   Cost: 4
-  CardImage: {fileID: 21300000, guid: eebc8b4394935fc4d84d060254dbafa6, type: 3}
+  CardImage: {fileID: 1511291964, guid: 71eaa34fb1175304487d67eb0170f6ae, type: 3}
   RarityImage: {fileID: 21300000, guid: 1cccf424955f79b4599d71bb3e3a8397, type: 3}
-  MaxHP: 3
-  Atk: 5
+  MaxHP: 5
+  Atk: 3
   IsDoubleHit: 0
   IsTank: 1
   IsRaid: 0

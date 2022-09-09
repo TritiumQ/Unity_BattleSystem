@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainSceneManager : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class MainSceneManager : MonoBehaviour
             StartButton.SetActive(false);
             ContinueButton.SetActive(true);
         }
-        
+        //SceneManager.LoadScene("GameProcess");
     }
 
 }

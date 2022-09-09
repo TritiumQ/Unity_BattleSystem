@@ -10,7 +10,7 @@ public class TurnScenes : MonoBehaviour
     {
         if (Player.Instance != null)
             ArchiveManager.SavePlayerData(1);
-        SceneManager.LoadScene("CardHub");
+        SceneManager.LoadScene("CardHubBeforeStart");
     }
     
     public void ContinueGame()
@@ -50,6 +50,7 @@ public class TurnScenes : MonoBehaviour
         GameObject _obj = GameObject.Find("GameProcess");
         if(_obj!=null)
         {
+            ArchiveManager.SavePlayerData(1);
             PlayerDataTF.EventContinue();
             SceneManager.LoadScene("GameProcess");
         }

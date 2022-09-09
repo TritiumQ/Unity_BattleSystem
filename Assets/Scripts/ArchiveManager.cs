@@ -63,14 +63,22 @@ public static class ArchiveManager
 		return asset;
 	}
 
-	public static void ResetPlayerDataFile()
+
+	public static GoodsSOAsset LoadGoodsAsset(int _id)
+	{
+		GoodsSOAsset asset = null;
+		asset = Resources.Load<GoodsSOAsset>(Const.GOODS_DATA_PATH(_id));
+		return asset;
+	}
+
+	public static void ResetPlayerDataFile(string code)
 	{
 		Debug.Log("≥ı ºªØ¥Êµµ");
-		SerializablePlayerData prePlayer = new SerializablePlayerData(Const.InitialCode);
+		SerializablePlayerData prePlayer = new SerializablePlayerData(code);
 		string json = JsonUtility.ToJson(prePlayer);
 		for(int i = 1; i <= Const.MaxSaveCount; i++)
 		{
-			string path = Application.dataPath + "/PlayerDatas/Save" + i.ToString("D2") + ".json";
+			string path = Application.streamingAssetsPath + "/PlayerDatas/Save" + i.ToString("D2") + ".json";
 			FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
 			StreamWriter sw = new StreamWriter(fs);
 			sw.Write(json);

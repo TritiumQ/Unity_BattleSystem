@@ -3,7 +3,8 @@
 /// </summary>
 /// <returns></returns>
 public static class Const
-{
+{   
+
     //偷懒
     /// <summary>
     /// 范围判断，左闭右闭
@@ -44,8 +45,15 @@ public static class Const
     }
     public static string PLAYER_DATA_PATH(int _id)
     {
-        return UnityEngine.Application.dataPath + "/PlayerDatas/Save" + _id.ToString("D2") + ".json";
+        // return UnityEngine.Application.dataPath + "/PlayerDatas/Save" + _id.ToString("D2") + ".json";
+        return UnityEngine.Application.streamingAssetsPath + "/PlayerDatas/Save" + _id.ToString("D2") + ".json";
     }
+
+
+    public static string GOODS_DATA_PATH(int _id)
+	{
+        return "Goods/GOODS-" + _id.ToString("D3");
+	}
 
     public static int INF = 0x3f3f3f3f;
     public static int MaxSaveCount = 10;
@@ -56,5 +64,7 @@ public static class Const
     public static int RareCardPrice = 10;
     public static int EpicCardPrice = 16;
     public static int LegendCardPrice = 20;
+
+    public static int DefaultSaveID = 1; 
 
 }

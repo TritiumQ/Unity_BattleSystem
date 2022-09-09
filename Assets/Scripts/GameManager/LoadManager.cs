@@ -14,6 +14,7 @@ public class LoadManager : MonoBehaviour
     public TextMeshProUGUI text;
     public string scene;
     public GameManager gameManager;
+    public LoadTool loadTool;
 
     
     public void LoadNextLevel()
@@ -53,20 +54,20 @@ public class LoadManager : MonoBehaviour
                 int level = obj.GetComponent<GameManager>().level;
                 int step = obj.GetComponent<GameManager>().step;
                 int enemy = GetRandom.GetRandomEnemy(level, step);
-                Debug.Log(enemy);
+                //Debug.Log(enemy);
                 GameObject _battle = GameObject.Find("BattleSystem");
                 if (_battle != null)
                 {
-                    Debug.Log("find");
+                    //Debug.Log("find");
                     _battle.GetComponent<BattleSystem>().LoadBossInformation(enemy);
                     Debug.Log("敌人信息载入成功");
                 }
             }
-            else if(scene=="CardSelect")
-            {
-                CardSelectSystem obj = GameObject.Find("CardSelectSystem").GetComponent<CardSelectSystem>();
-                obj.Initialized("GameProcess", GetRandom.GetRandomCard(), GetRandom.GetRandomCard(), GetRandom.GetRandomCard());
-            }
+            //else if(scene=="CardSelect")
+            //{
+            //    CardSelectSystem obj = GameObject.Find("CardSelectSystem").GetComponent<CardSelectSystem>();
+            //    obj.Initialized("GameProcess", GetRandom.GetRandomCard(), GetRandom.GetRandomCard(), GetRandom.GetRandomCard());
+            //}
             GameObject _obj = GameObject.Find("Panel");
             _obj.SetActive(false);
         }
@@ -83,18 +84,7 @@ public class LoadManager : MonoBehaviour
             {
                 if (operation.progress >= 0.9F)
                 {
-                    GameObject obj = GameObject.Find("GameManager");
-                    int level = obj.GetComponent<GameManager>().level;
-                    int step = obj.GetComponent<GameManager>().step;
-                    int enemy = GetRandom.GetRandomEnemy(level, step,true);
-                    Debug.Log(enemy);
-                    GameObject _battle = GameObject.Find("BattleSystem");
-                    if (_battle != null)
-                    {
-                        Debug.Log("find");
-                        _battle.GetComponent<BattleSystem>().LoadBossInformation(enemy);
-                        Debug.Log("敌人信息载入成功");
-                    }
+                    LoadTool.allowLoadFight = true;
                     operation.allowSceneActivation = true;
                 }
 
@@ -131,7 +121,7 @@ public class LoadManager : MonoBehaviour
                         if (pos == 1)
                             scene = "CardSelect";
                         else if (pos == 2)
-                            scene = "Select";
+                            scene = "Choice";
                         else scene = null;
                     }
                 }

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e017dedad9b46c4c9fdfd01c7578d11, type: 3}
   m_Name: GOODS-003
   m_EditorClassIdentifier: 
-  GoodsName: 
-  GoodsDescription: 
-  GoodsEffectName: 
-  GoodsRnak: 0
-  GoodsPrice: 0
-  GoodsImage: {fileID: 0}
+  GoodsName: "\u661F\u4E4B\u5F69"
+  GoodsDescription: "\uFF1F\uFF1F\uFF1F"
+  GoodsEffectName: GetCurse
+  GoodsRnak: 1
+  GoodsPrice: 50
+  GoodsImage: {fileID: -1944570115, guid: e4e4829a5905ded46b090b7481dbe26e, type: 3}

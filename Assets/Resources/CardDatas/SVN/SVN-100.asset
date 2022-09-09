@@ -13,32 +13,21 @@ MonoBehaviour:
   m_Name: SVN-100
   m_EditorClassIdentifier: 
   CardID: 100
-  CardName: 
+  CardName: "\u533B\u62A4\u5148\u950B"
   CardDescription: "\u6BCF\u5F531\u4E2A\u89D2\u8272\u53D7\u5230\u751F\u547D\u503C\u63D0\u5347\u6548\u679C\u65F6\u83B7\u5F97+2/+0"
   CardRarity: 2
   CardType: 1
   CardCamp: 0
   Cost: 4
-  CardImage: {fileID: 21300000, guid: eebc8b4394935fc4d84d060254dbafa6, type: 3}
-  RarityImage: {fileID: 21300000, guid: 1cccf424955f79b4599d71bb3e3a8397, type: 3}
+  CardImage: {fileID: -1132588056, guid: 2c93956df02cd0245a8752bd99142785, type: 3}
+  RarityImage: {fileID: 21300000, guid: d045c3e1ae5ff55469e7cc94951ba23c, type: 3}
   MaxHP: 5
   Atk: 3
   IsDoubleHit: 0
   IsTank: 0
   IsRaid: 0
   IsVampire: 0
-  SpecialAbilityList:
-  - SkillType: 1
-    Package:
-      EffectType: 12
-      IsInfinityEffect: 0
-      EffectValue1: 4
-      EffectValue2: 0
-      EffectValue3: 0
-      SpecialEffectScriptName: 
-      Target: 10
-      SingleTargetOption: 5
-      TargetCount: 0
+  SpecialAbilityList: []
   IsCopidedEffect: 0
   IsCopied: 0
   SpellEffect:

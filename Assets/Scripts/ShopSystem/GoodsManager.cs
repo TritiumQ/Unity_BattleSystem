@@ -12,15 +12,16 @@ public class GoodsManager : MonoBehaviour
 	public TextMeshProUGUI DescriptionText;
 	public TextMeshProUGUI PriceText;
 	public Image GoodsImage;
-	int GoodsCount;
+	public int GoodsCount;
 	public TextMeshProUGUI CountText;
 	private void Update()
 	{
 		Refresh();
 	}
-	public void Initialized(GoodsSOAsset _asset)
+	public void Initialized(GoodsSOAsset _asset, ShopType type)
 	{
 		asset = _asset;
+		GoodsType = type;
 	}
 	public void Refresh()
 	{

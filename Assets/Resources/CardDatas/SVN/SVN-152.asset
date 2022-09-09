@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: SVN-152
   m_EditorClassIdentifier: 
   CardID: 152
-  CardName: 
+  CardName: "\u53CC\u86C7\u6756"
   CardDescription: "*\u56DE\u5408\u5F00\u59CB\u65F6*\u4F7F\u968F\u673A\u4E00\u540D\u53CB\u65B9\u968F\u4ECE\u83B7\u5F97+0/+3"
   CardRarity: 3
   CardType: 1
   CardCamp: 0
   Cost: 5
-  CardImage: {fileID: 21300000, guid: eebc8b4394935fc4d84d060254dbafa6, type: 3}
-  RarityImage: {fileID: 21300000, guid: 1cccf424955f79b4599d71bb3e3a8397, type: 3}
+  CardImage: {fileID: 984512426, guid: 0aabb39e8878b374187a524284226913, type: 3}
+  RarityImage: {fileID: 21300000, guid: d352133a8c1e1924f97cae3f2a11a737, type: 3}
   MaxHP: 5
   Atk: 5
   IsDoubleHit: 0
@@ -28,16 +28,16 @@ MonoBehaviour:
   IsRaid: 0
   IsVampire: 0
   SpecialAbilityList:
-  - SkillType: 1
+  - SkillType: 2
     Package:
-      EffectType: 12
+      EffectType: 7
       IsInfinityEffect: 0
-      EffectValue1: 4
-      EffectValue2: 0
+      EffectValue1: 0
+      EffectValue2: 3
       EffectValue3: 0
       SpecialEffectScriptName: 
-      Target: 10
-      SingleTargetOption: 5
+      Target: 9
+      SingleTargetOption: 0
       TargetCount: 0
   IsCopidedEffect: 0
   IsCopied: 0

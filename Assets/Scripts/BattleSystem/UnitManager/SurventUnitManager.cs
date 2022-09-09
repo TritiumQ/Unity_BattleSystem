@@ -9,7 +9,7 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
 
     BattleSystem system;
     public SurventInBattle survent { get; private set; }
-    public bool isActive { get; private set; }
+    public bool isActive { get; set; }
 
     [Header("卡牌信息")]
     public TextMeshProUGUI atkText;
@@ -167,6 +167,16 @@ public class SurventUnitManager : MonoBehaviour, IUnitRunner, IEffectRunner, IAb
             case EffectType.Inspire:
 				{
                     survent.SetInspire(effect);
+				}
+                break;
+            case EffectType.SetVampire:
+				{
+                    survent.SetVmapire(effect.IsInfinityEffect ? Const.INF : effect.EffectValue1);
+				}
+                break;
+            case EffectType.SetDoubleHit:
+				{
+                    survent.SetDoubleHit(effect.IsInfinityEffect ? Const.INF : effect.EffectValue1);
 				}
                 break;
             default:

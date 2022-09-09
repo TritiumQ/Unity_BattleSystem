@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
 public class CardHubSystem : MonoBehaviour
 {
@@ -32,6 +33,10 @@ public class CardHubSystem : MonoBehaviour
 		ArchiveManager.LoadPlayerData();
 		LoadInformation();
 	}
+	private void Update()
+	{
+		GameObject.Find("CardCount").GetComponent<TextMeshProUGUI>().text = Count.ToString();
+	}
 	void LoadInformation()
 	{
 		if(Player.Instance != null)
@@ -55,7 +60,7 @@ public class CardHubSystem : MonoBehaviour
 				}
 			}
 			CardHub = new List<GameObject>();
-			for(int i = 0; i < Player.Instance.Unlocked.Length; i++)
+			for(int i = 1; i < Player.Instance.Unlocked.Length; i++)
 			{
 				var asset = Resources.Load<CardSOAsset>(Const.CARD_DATA_PATH(i));
 				if(asset != null)
@@ -82,6 +87,7 @@ public class CardHubSystem : MonoBehaviour
 				}
 			}
 			Player.Instance.SetCardSet(CardSet);
+			ArchiveManager.SavePlayerData(1);
 		}
 	}
 	
@@ -91,14 +97,14 @@ public class CardHubSystem : MonoBehaviour
 	/// <param name="card">¿¨ÅÆID</param>
 	public void SelectCardCommit(GameObject card)
 	{
-		if(card != null && Count < 12)
+		if(card != null)
 		{
-			if(card.GetComponent<CardInDeckManager>() != null)
+			if(card.GetComponent<CardInDeckManager>() != null && Count > 0)
 			{
 				Debug.Log("delete card");
 				DeleteCardInDeck(card.GetComponent<CardInDeckManager>().Asset.CardID);
 			}
-			else if(card.GetComponent<CardManager>() != null && card.GetComponent<CardManager>().IsActive)
+			else if(card.GetComponent<CardManager>() != null && card.GetComponent<CardManager>().IsActive && Count < 12)
 			{
 				Debug.Log("add card");
 				AddCardToDeck(card.GetComponent<CardManager>().Asset.CardID);
@@ -122,6 +128,7 @@ public class CardHubSystem : MonoBehaviour
 			newCard.GetComponent<CardInDeckManager>().Initialized(ArchiveManager.LoadCardAsset(_ID));
 			CardCount.Add(_ID, 1);
 			CardObejcts.Add(_ID, newCard);
+			Count++;
 		}
 	}
 	void DeleteCardInDeck(int _ID)
